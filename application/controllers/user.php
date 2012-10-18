@@ -1,9 +1,7 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 /**
  * Description of user
@@ -33,7 +31,7 @@ class User extends CI_Controller {
 
             /* try to login using user credentials */
             $user = $this->users_m->login($user_credentials);
-            print_r($user); exit;
+            
             if (count($user_obj) == 0) {
                 $this->session->set_userdata(array(
                     'username' => $user_obj['username'],
@@ -46,8 +44,8 @@ class User extends CI_Controller {
         /* on login fail display login form */
         $this->load->view('forms/login_v');
     }
-    
-    public function loginAjax(){
+
+    public function loginAJAX() {
         /* try validating users credentials */
         if ($this->form_validation->run('login') == TRUE) {
             /* user credentials array */
@@ -58,7 +56,8 @@ class User extends CI_Controller {
 
             /* try to login using user credentials */
             $user = $this->users_m->login($user_credentials);
-            print_r($user); exit;
+            print_r($user);
+            exit;
             if (count($user_obj) == 0) {
                 $this->session->set_userdata(array(
                     'username' => $user_obj['username'],
@@ -72,11 +71,9 @@ class User extends CI_Controller {
         $this->load->view('forms/login_v');
     }
 
-    public function signin() {
+    public function register() {
         $this->users_m->signin();
     }
-    
-    
 
 }
 
