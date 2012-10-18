@@ -1,46 +1,32 @@
  $(function() {
      
-    window.CredentialsModel = Backbone.Model.extend({});
+    var Credentials = Backbone.Model.extend({
+    });
     
-    window.LoginView = Backbone.Model.extend({
+    var Login = Backbone.View.extend({
         el: $('#login-form'),
         
         events: {
-            "submit": "loginSubmit",
-            "change #email": "emailChange",
-            "change #pass": "passChange"
+            'submit' : 'submitCredentials'
         },
-            
-        initialize: function () {
-            _.bindAll(this, 'emailChange', 'passChange', 'loginSubmit');
+        
+        initialize: function(){
+            _.bindAll(this, 'submitCredentials');
         },
-
-        emailChange: function(event) {
-            this.model.set({
-                email: $(event.currentTarget).val()
-            });
-        },
-
-        passChange: function(event) {
-            this.model.set({
-                pass: $(event.currentTarget).val()
-            });
-        },
-
-        loginSubmit: function(event) {
-            alert("You have logged in as '" + this.model.get('email') + "' and a password of '" + this.model.get('pass') + "'");
+        
+        submitCredentials: function(event){
+            this.model.set({email: $('#email').val(), pass: $('pass').val()});
+            alert(this.model.email);
             return false;
         }
-            
     });
     
-    var credentials = new CredentialsModel({
-        email: '',
-        pass: ''
+    var credentials = new Credentials({
     });
-
-    var login = new LoginView({
+    
+    var login = new Login({
         model: credentials
-    });
-
+    })
+    
+    
 });
