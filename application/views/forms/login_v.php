@@ -1,7 +1,5 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<form method="post">
+    <input type="text" placeholder="Email" name="email"/>
+    <input type="text" placeholder="Password" name="pass"/>
+    <input type="submit" value="login"/>
+</form>
