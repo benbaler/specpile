@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of users_m
  *
@@ -51,6 +45,10 @@ class Users_m extends CI_Model {
                 'email' => $p_email,
                 'pass' => $this->_salt($p_pass)));
 
+            /*
+             * TODO: user have to validate email
+             */
+            
             return TRUE;
         }
 
@@ -63,8 +61,7 @@ class Users_m extends CI_Model {
      * @return boolean
      */
     public function check_if_email_exists($p_email) {
-        $exists = $this->_get($p_email, 'email');
-        return empty($exists) ? FALSE : TRUE;
+        return $this->_exists($p_email, 'email');
     }
 
     /**
@@ -73,8 +70,7 @@ class Users_m extends CI_Model {
      * @return boolean
      */
     public function check_id_username_exists($p_username) {
-        $exists = $this->_get($p_username, 'username');
-        return empty($exists) ? FALSE : TRUE;
+        return $this->_exists($p_username, 'username');
     }
 
     /**
@@ -92,8 +88,9 @@ class Users_m extends CI_Model {
                         ->get($this->users_collection);
     }
 
-    private function _set($p_values) {
-        return $this->mongo_db->insert($this->users_collection, $p_values);
+    private function _set($p_values, $p_key) {
+            return $this->mongo_db->insert($this->users_collection, 
+                    is_array($p_values) ? $p_values : array($p_key => $p_values));
     }
 
     /**
@@ -118,6 +115,11 @@ class Users_m extends CI_Model {
         return FALSE;
     }
 
+    /**
+     * salting password and return its md5
+     * @param string $p_pass
+     * @return string
+     */
     private function _salt($p_pass) {
         return md5($p_pass . 'salt');
     }

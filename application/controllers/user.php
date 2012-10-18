@@ -46,10 +46,37 @@ class User extends CI_Controller {
         /* on login fail display login form */
         $this->load->view('forms/login_v');
     }
+    
+    public function loginAjax(){
+        /* try validating users credentials */
+        if ($this->form_validation->run('login') == TRUE) {
+            /* user credentials array */
+            $user_credentials = array(
+                'email' => $this->input->post('email'),
+                'pass' => $this->input->post('pass')
+            );
+
+            /* try to login using user credentials */
+            $user = $this->users_m->login($user_credentials);
+            print_r($user); exit;
+            if (count($user_obj) == 0) {
+                $this->session->set_userdata(array(
+                    'username' => $user_obj['username'],
+                    'logged_in' => TRUE));
+
+                echo "true";
+                //redirect('home');
+            }
+        }
+        /* on login fail display login form */
+        $this->load->view('forms/login_v');
+    }
 
     public function signin() {
         $this->users_m->signin();
     }
+    
+    
 
 }
 
