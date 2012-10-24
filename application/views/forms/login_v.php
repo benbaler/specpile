@@ -1,25 +1,19 @@
-<form id="login-form" action="" method="post">
+<form class="collapse" id="login-form" method="post">
     <div class="row">
         <div class="four mobile-four columns">
-            <input type="text" placeholder="Email" name="email" id="email"/>
+            <input type="text" placeholder="Email" name="email"/>
         </div>
     </div>
     <div class="row">
         <div class="four mobile-four columns">
             <div class="row collapse">
-                <div class="nine mobile-three columns">
-                    <input type="password" placeholder="Password" name="pass" id="pass"/>
+                <div class="eight mobile-three columns">
+                    <input type="password" placeholder="Password" name="pass"/>
                 </div>
-                <div class="three mobile-one columns">
-                    <input class="submit" name="submit" type="submit" value="Submit"/>
-                    <!-- <a href="#" class="postfix button expand">Login</a> -->
+                <div class="four mobile-one columns">
+                    <input class="postfix button expand" type="submit" value="Login"/>
                 </div>
             </div>
         </div>
     </div>
-
 </form>
-
-<div id="test">
-    <button id="ben">SUBMIT</button>
-</div>

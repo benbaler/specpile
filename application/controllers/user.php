@@ -8,6 +8,8 @@ if (!defined('BASEPATH'))
  *
  * @author Ben
  */
+
+
 class User extends CI_Controller {
 
     public function __construct() {
@@ -21,8 +23,11 @@ class User extends CI_Controller {
     }
 
     public function login() {
+
         /* try validating users credentials */
         if ($this->form_validation->run('login') == TRUE) {
+
+            die('success');
             /* user credentials array */
             $user_credentials = array(
                 'email' => $this->input->post('email'),
@@ -31,11 +36,11 @@ class User extends CI_Controller {
 
             /* try to login using user credentials */
             $user = $this->users_m->login($user_credentials);
-            
+
             if (count($user_obj) == 0) {
                 $this->session->set_userdata(array(
-                    'username' => $user_obj['username'],
-                    'logged_in' => TRUE));
+                        'username' => $user_obj['username'],
+                        'logged_in' => TRUE));
 
                 echo "true";
                 //redirect('home');
@@ -60,8 +65,8 @@ class User extends CI_Controller {
             exit;
             if (count($user_obj) == 0) {
                 $this->session->set_userdata(array(
-                    'username' => $user_obj['username'],
-                    'logged_in' => TRUE));
+                        'username' => $user_obj['username'],
+                        'logged_in' => TRUE));
 
                 echo "true";
                 //redirect('home');
