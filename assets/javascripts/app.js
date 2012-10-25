@@ -17,7 +17,7 @@
                  required: true,
                  rangeLength: [4, 12]
              }
-         }
+         }  
      });
 
      var RegisterCredentials = Backbone.Model.extend({
@@ -186,5 +186,7 @@
      var register = new Register({
          model: registerCredentials
      });
+
+     $(document).foundationCustomForms();
 
  });

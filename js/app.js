@@ -1,8 +1,8 @@
 // Filename: app.js
 define([
-  'jquery',
-  'underscore',
-  'backbone',
+  'jquery.min',
+  'underscore.min',
+  'backbone.min',
   'router', // Request router.js
 ], function($, _, Backbone, Router){
   var initialize = function(){
