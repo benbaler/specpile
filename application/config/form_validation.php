@@ -8,25 +8,25 @@ $config = array(
         ),
         array(
             'field' => 'pass',
-            'rules' => 'required|min_length[6]|max_length[20]'
+            'rules' => 'required|min_length[4]|max_length[12]'
         )
     ),
-    'signup' => array(
+    'register' => array(
         array(
-            'field' => 'username',
-            'rules' => 'required'
+            'field' => 'first',
+            'rules' => 'required|min_length[2]|max_length[20]'
         ),
         array(
-            'field' => 'password',
-            'rules' => 'required'
-        ),
-        array(
-            'field' => 'passconf',
-            'rules' => 'required'
+            'field' => 'last',
+            'rules' => 'required|min_length[2]|max_length[20]'
         ),
         array(
             'field' => 'email',
-            'rules' => 'required'
+            'rules' => 'required|valid_email|max_length[100]'
+        ),
+        array(
+            'field' => 'pass',
+            'rules' => 'required|min_length[4]|max_length[12]'
         )
     )
 );

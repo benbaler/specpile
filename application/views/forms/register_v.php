@@ -15,11 +15,11 @@
     <div class="row">
         <div class="four mobile-four columns">
             <div class="row collapse">
-                <div class="nine mobile-three columns">
+                <div class="eight mobile-three columns">
                     <input type="password" placeholder="Password" name="pass"/>
                 </div>
-                <div class="three mobile-one columns">
-                    <a href="#" class="postfix button expand">Register</a>
+                <div class="four mobile-one columns">
+                    <input class="postfix button expand" type="submit" value="Register"/>
                 </div>
             </div>
         </div>

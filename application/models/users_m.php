@@ -12,8 +12,6 @@ class Users_m extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-
-        $this->load->library('Mongo_db');
     }
 
     /**
@@ -23,10 +21,10 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return array
      */
-    public function login($p_email, $p_pass) {
+    public function login($data) {
         return $this->_get(array(
-                'email' => $p_email,
-                'pass' => $this->_salt($p_pass)
+                'email' => $data['email'],
+                'pass' => $this->_salt($data['pass'])
             ));
     }
 
@@ -38,101 +36,79 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return boolean
      */
-    public function register($p_username, $p_email, $p_pass) {
+    public function register($data) {
         /* check if username or email already exists */
-        if ($this->_exists(array(
-                    'username' => $p_username,
-                    'email' => $p_email)) == FALSE) {
+        if ($this->_exists($data['email'], 'email') == FALSE) {
 
-            /* create new user */
-            $this->_set(array(
-                    'username' => $p_username,
-                    'email' => $p_email,
-                    'pass' => $this->_salt($p_pass)));
+        /* create new user */
+        $this->_set(array(
+                'first' => $data['first'],
+                'last' => $data['last'],
+                'email' => $data['email'],
+                'pass' => $this->_salt($data['pass']),
+                'role' => 'regular'));
 
-            /*
+        /*
              * TODO: user have to validate email
              */
 
-            return TRUE;
-        }
-
-        return FALSE;
+        return TRUE;
     }
 
-    /**
-     * check if email exists
-     *
-     * @param string  $p_email
-     * @return boolean
-     */
-    public function check_if_email_exists($p_email) {
-        return $this->_exists($p_email, 'email');
-    }
+    return FALSE;
+}
 
-    /**
-     * check if username exists
-     *
-     * @param string  $p_username
-     * @return boolean
-     */
-    public function check_id_username_exists($p_username) {
-        return $this->_exists($p_username, 'username');
-    }
+/**
+ * check if email exists
+ *
+ * @param string  $p_email
+ * @return boolean
+ */
+public function check_if_email_exists($p_email) {
+    return $this->_exists($p_email, 'email');
+}
 
-    /**
-     * retrive user object from users collection with specific values or key, value pair
-     *
-     * @param array   $p_values
-     * @param string  $p_key
-     * @return array
-     */
-    private function _get($p_values /* can be an array or a string */, $p_key = '_id') {
-        if (is_array($p_values)) {
-            return $this->mongo_db->where($p_values)
-            ->get($this->users_collection);
-        }
-        return $this->mongo_db->where($p_key, $p_values)
+/**
+ * retrive user object from users collection with specific values or key, value pair
+ *
+ * @param array   $p_values
+ * @param string  $p_key
+ * @return array
+ */
+private function _get($p_values, $p_key = '_id') {
+    if (is_array($p_values)) {
+        return $this->mongo_db->where($p_values)
         ->get($this->users_collection);
     }
+    return $this->mongo_db->where($p_key, $p_values)
+    ->get($this->users_collection);
+}
 
-    private function _set($p_values, $p_key) {
-        return $this->mongo_db->insert($this->users_collection,
-            is_array($p_values) ? $p_values : array($p_key => $p_values));
-    }
+private function _set($p_values, $p_key = NULL) {
+    return $this->mongo_db->insert($this->users_collection,
+        is_array($p_values) ? $p_values : array($p_key => $p_values));
+}
 
-    /**
-     * check if values or key, value pair exists in users collection
-     *
-     * @param array   $p_values
-     * @param string  $p_key
-     * @return boolean
-     */
-    private function _exists($p_values, $p_key) {
-        if (is_array($p_values)) {
-            foreach ($p_values as $key => $value) {
-                /* check if value was found */
-                if (count($this->_get($value, $key) == 0) == FALSE) {
-                    return TRUE;
-                }
-            }
-        } else {
-            /* check if value was found */
-            return count($this->_get($p_values, $p_key)) == 0 ? FALSE : TRUE;
-        }
+/**
+ * check if values or key, value pair exists in users collection
+ *
+ * @param string   $p_values
+ * @param string  $p_key
+ * @return boolean
+ */
+private function _exists($p_values, $p_key = '_id') {
+    return count($this->_get($p_values, $p_key)) == 0 ? FALSE : TRUE;
+}
 
-        return FALSE;
-    }
-
-    /**
-     * salting password and return its md5
-     *
-     * @param string  $p_pass
-     * @return string
-     */
-    private function _salt($p_pass) {
-        return md5($p_pass . 'salt');
-    }
+/**
+ * salting password and return its md5
+ *
+ * @param string  $p_pass
+ * @return string
+ */
+private function _salt($p_pass) {
+    return md5($p_pass . 'salt');
+}
 
 }
 

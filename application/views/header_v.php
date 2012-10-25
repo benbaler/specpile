@@ -10,7 +10,6 @@
             {underscore: "/assets/javascripts/underscore.min.js"},
             {backbone: "/assets/javascripts/backbone.min.js"},
             {backbone_validation: "/assets/javascripts/backbone-validation.js"},
-            {backbone_validation: "/assets/javascripts/jquery.foundation.topbar.js"},
             {app: "/assets/javascripts/app.js"}
         );
         </script>
