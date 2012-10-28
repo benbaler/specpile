@@ -37,7 +37,7 @@ class User extends CI_Controller {
                     'email' => $row['email'],
                     'role' => $row['role'],
                     'logged_in' => TRUE
-                );
+                    );
 
                 $this->session->set_userdata($data);
                 $this->rest_server->success($data);
@@ -50,8 +50,8 @@ class User extends CI_Controller {
                         'message' => 'email and password combination are not match',
                         'type' => 'login',
                         'code' => '1'
-                    )
-                );
+                        )
+                    );
 
                 $this->rest_server->fail($data);
 
@@ -64,8 +64,8 @@ class User extends CI_Controller {
                 'message' => 'email or password are not valid',
                 'type' => 'login',
                 'code' => '2'
-            )
-        );
+                )
+            );
 
         $this->rest_server->fail($data);
     }
@@ -90,31 +90,39 @@ class User extends CI_Controller {
                         'message' => 'email is already exists',
                         'type' => 'register',
                         'code' => '1'
-                    )
-                );
+                        )
+                    );
 
                 $this->rest_server->fail($data);
 
                 return;
             }
 
-            $data = array(
-                'error' => array(
-                    'message' => 'fields are not valid',
-                    'type' => 'register',
-                    'code' => '2'
+        }
+        $data = array(
+            'error' => array(
+                'message' => 'fields are not valid',
+                'type' => 'register',
+                'code' => '2'
                 )
             );
 
-            $this->rest_server->fail($data);
-        }
+        $this->rest_server->fail($data);
     }
 
-    public function checkEmail(){
-        $this->rest_server->success();        
+    public function checkEmail() {
+        $this->rest_server->success();
     }
 
+    public function facebook()
+    {
+        $config = array(
+            'appId' => '',
+            'secret' => ''
+            );
 
+        $this->load->library('facebook', $config);
+    }
 
 }
 

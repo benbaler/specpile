@@ -1,7 +1,7 @@
  $(function() {
 
      var LoginCredentials = Backbone.Model.extend({
-         url: 'index.php/user/login',
+         url: '/index.php/user/login',
 
          defaults: {
              'email': '',
@@ -17,11 +17,11 @@
                  required: true,
                  rangeLength: [4, 12]
              }
-         }  
+         }
      });
 
      var RegisterCredentials = Backbone.Model.extend({
-         url: 'index.php/user/register',
+         url: '/index.php/user/register',
 
          defaults: {
              'first': '',
@@ -100,12 +100,14 @@
 
 
              if(this.model.isValid()) {
-                this.model.save({}, {
+                 this.model.save({}, {
                      success: function(model, response) {
-                         console.log(response);
+                         location.reload();
                      },
                      error: function(model, response) {
-                         console.log(response);
+                         data = JSON.parse(response.responseText);
+                         $(self.el).prev('.alert').remove();
+                         $(self.el).before('<div class="alert-box alert"> Error: ' + data.error.message + '<a href="#" class="close">&times;</a></div>');
                      }
                  });
              }
@@ -165,10 +167,12 @@
              if(this.model.isValid()) {
                  this.model.save({}, {
                      success: function(model, response) {
-                         console.log(response);
+                         location.reload();
                      },
                      error: function(model, response) {
-                         console.log(response);
+                         data = JSON.parse(response.responseText);
+                         $(self.el).prev('.alert').remove();
+                         $(self.el).before('<div class="alert-box alert"> Error: ' + data.error.message + '<a href="#" class="close">&times;</a></div>');
                      }
                  });
              }

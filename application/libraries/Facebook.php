@@ -15,7 +15,7 @@
  * under the License.
  */
 
-require_once APPDATA."libraries/Base_facebook.php";
+require_once APPPATH."libraries/Base_facebook.php";
 
 /**
  * Extends the BaseFacebook class with the intent of using
