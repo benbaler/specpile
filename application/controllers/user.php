@@ -36,6 +36,7 @@ class User extends CI_Controller {
                     'last' => $row['last'],
                     'email' => $row['email'],
                     'role' => $row['role'],
+                    'picture_url' => $row['picture_url'],
                     'logged_in' => TRUE
                     );
 

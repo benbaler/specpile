@@ -1,6 +1,11 @@
 <form class="collapse" id="login-form" method="post">
     <div class="row">
         <div class="four mobile-four columns">
+            <h2>Login</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="four mobile-four columns">
             <input type="text" placeholder="Email" name="email"/>
         </div>
     </div>

@@ -1,4 +1,81 @@
  $(function() {
+    /*
+     var SearchEngine = Backbone.Model.extend({
+         url: '/index.php/search/product',
+
+         defaults: {
+             'term': ''
+         },
+
+         validation: {
+             term: {
+                 required: true,
+                 rangeLength: [1, 100]
+             }
+         }
+
+     });
+
+     var SearchPreview = Backbone.Model.extend({
+
+     });
+
+     var SearchPreviewList = Backbone.Collection.extend({
+
+     });
+
+     var Search = Backbone.View.extend({
+         el: $('#search-form'),
+
+         events: {
+             'keyup input': 'previewProducts'
+         },
+
+         initialize: function() {
+             _.bindAll(this, 'previewProducts');
+             Backbone.Validation.bind(this, {
+                 selector: 'name',
+                 forceUpdate: true
+             });
+         },
+
+         previewProducts: function(event) {
+             element = $(event.target);
+             error = this.model.preValidate(element.attr('name'), element.val());
+
+             if(error) {
+                 console.log(error);
+             } else {
+                 this.autoComplete(this.getInputByName('term').val());
+             }
+         },
+
+         getInputByName: function(name) {
+             return $('input[name="' + name + '"]', this.el);
+         },
+
+         autoComplete: function(term) {
+             console.log(term);
+         }
+     });
+
+     var Preview = Backbone.View.extend({
+         el: $('#preview-div')
+     });
+
+     var searchEngine = new SearchEngine({});
+
+     var search = new Search({
+         model: searchEngine
+     });
+
+     var searchPreviewList = new SearchPreviewList({});
+
+     var preview = new Preview({
+         collection: searchPreviewList
+     });
+
+     */
 
      var LoginCredentials = Backbone.Model.extend({
          url: '/index.php/user/login',
@@ -41,7 +118,10 @@
              },
              email: {
                  required: true,
-                 pattern: 'email'
+                 pattern: 'email',
+                 fn: function(value, attr, computedState){
+                    // check if email already exists
+                 }
              },
              pass: {
                  required: true,
@@ -190,7 +270,5 @@
      var register = new Register({
          model: registerCredentials
      });
-
-     $(document).foundationCustomForms();
 
  });

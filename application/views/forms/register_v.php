@@ -1,5 +1,10 @@
 <form id="register-form">
     <div class="row">
+        <div class="four mobile-four columns">
+            <h2>Register</h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="two mobile-two columns">
             <input type="text" placeholder="First Name" name="first"/>
         </div>
