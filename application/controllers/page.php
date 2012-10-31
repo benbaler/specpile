@@ -27,6 +27,7 @@ public function __construct(){
 		$this->load->view('header_v');
 		$this->load->view('topbar_v', $this->data);
 		$this->load->view('forms/search_v');
+		$this->load->view('elements/searchPreview_v');
 		$this->load->view('footer_v');
 	}
 

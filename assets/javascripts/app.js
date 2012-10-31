@@ -1,5 +1,5 @@
  $(function() {
-    /*
+
      var SearchEngine = Backbone.Model.extend({
          url: '/index.php/search/product',
 
@@ -16,27 +16,35 @@
 
      });
 
-     var SearchPreview = Backbone.Model.extend({
-
-     });
-
-     var SearchPreviewList = Backbone.Collection.extend({
-
-     });
-
      var Search = Backbone.View.extend({
          el: $('#search-form'),
 
          events: {
-             'keyup input': 'previewProducts'
+             'keyup input': 'previewProducts',
+             'submit': 'getPreviewProducts'
          },
 
          initialize: function() {
-             _.bindAll(this, 'previewProducts');
+             _.bindAll(this, 'previewProducts', 'getPreviewProducts');
              Backbone.Validation.bind(this, {
                  selector: 'name',
                  forceUpdate: true
              });
+         },
+
+         getPreviewProducts: function(event) {
+             event.preventDefault();
+
+             this.displayError(this.getInputByName('term'));
+             this.model.set('term', this.getInputByName('term').val());
+
+
+             if(this.model.isValid()) {
+                 alert(this.model.get('term'));
+             } else {
+                 alert(this.displayError(this.getInputByName('term')));
+             }
+
          },
 
          previewProducts: function(event) {
@@ -44,7 +52,7 @@
              error = this.model.preValidate(element.attr('name'), element.val());
 
              if(error) {
-                 console.log(error);
+                 this.displayError(element);
              } else {
                  this.autoComplete(this.getInputByName('term').val());
              }
@@ -54,14 +62,41 @@
              return $('input[name="' + name + '"]', this.el);
          },
 
-         autoComplete: function(term) {
-             console.log(term);
+         autoComplete: function(value) {
+             console.log(value);
+         },
+
+         displayError: function(element, error) {
+             next = new String(element.next().prop("tagName")).toLowerCase() == "small" ? element.next() : element.after('<small class="hide"></small>').next();
+
+             error = this.model.preValidate(element.attr('name'), element.val());
+
+             if(error) {
+                 element.addClass('error');
+                 next.removeClass('hide').addClass('error').html(error);
+             } else {
+                 element.removeClass('error');
+                 next.removeClass('error').addClass('hide');
+             }
          }
      });
 
-     var Preview = Backbone.View.extend({
-         el: $('#preview-div')
+
+
+     var SearchResults = Backbone.Model.extend({
+        url: "/index.php/search"
      });
+
+     var SearchPreviewList = Backbone.Collection.extend({
+        
+     });
+
+
+     var Results = Backbone.View.extend({
+         el: $('#results-template')
+     });
+
+
 
      var searchEngine = new SearchEngine({});
 
@@ -69,13 +104,19 @@
          model: searchEngine
      });
 
-     var searchPreviewList = new SearchPreviewList({});
+
+
+     var searchPreview = new SearchPreview({});
+
+     var searchPreviewList = new SearchPreviewList({
+         model: searchPreview
+     });
 
      var preview = new Preview({
          collection: searchPreviewList
      });
 
-     */
+
 
      var LoginCredentials = Backbone.Model.extend({
          url: '/index.php/user/login',
@@ -119,8 +160,8 @@
              email: {
                  required: true,
                  pattern: 'email',
-                 fn: function(value, attr, computedState){
-                    // check if email already exists
+                 fn: function(value, attr, computedState) {
+                     // check if email already exists
                  }
              },
              pass: {
