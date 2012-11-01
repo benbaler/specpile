@@ -14,20 +14,21 @@ class Page extends CI_Controller {
 
 	private $data;
 
-public function __construct(){
-	parent::__construct();
-	$this->data = array(
+	public function __construct(){
+		parent::__construct();
+		$this->data = array(
 			'id' => $this->session->userdata('id'),
 			'first' => $this->session->userdata('first'),
 			'picture_url' => 'https://graph.facebook.com/benbaler/picture', //$this->session->userdata('picture_url'),
 			'logged_in' => $this->session->userdata('logged_in')
-		);
-}
+			);
+	}
+	
 	public function index() {
 		$this->load->view('header_v');
 		$this->load->view('topbar_v', $this->data);
 		$this->load->view('forms/search_v');
-		$this->load->view('elements/searchPreview_v');
+		$this->load->view('elements/results_v');
 		$this->load->view('footer_v');
 	}
 

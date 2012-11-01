@@ -13,7 +13,6 @@
                  rangeLength: [1, 100]
              }
          }
-
      });
 
      var Search = Backbone.View.extend({
@@ -81,23 +80,6 @@
          }
      });
 
-
-
-     var SearchResults = Backbone.Model.extend({
-        url: "/index.php/search"
-     });
-
-     var SearchPreviewList = Backbone.Collection.extend({
-        
-     });
-
-
-     var Results = Backbone.View.extend({
-         el: $('#results-template')
-     });
-
-
-
      var searchEngine = new SearchEngine({});
 
      var search = new Search({
@@ -105,18 +87,95 @@
      });
 
 
-
-     var searchPreview = new SearchPreview({});
-
-     var searchPreviewList = new SearchPreviewList({
-         model: searchPreview
+     // var ProductModel = Backbone.Model.extend({
+     //     defaults: {
+     //         name: '16GB Black'
+     //     }
+     // });
+     // var productModel = new ProductModel({});
+     // var ProductModels = Backbone.Collection.extend({
+     //     model: ProductModel
+     // });
+     // var productModels = new ProductModels(productModel);
+     var Product = Backbone.Model.extend({
+         defaults: {
+             id: '1',
+             product: 'iPhone 4S',
+             model: '16GB Black',
+             picture: 'http://www.techspot.com/images/products/smartphones/org/851731035_1314324409_o.jpg'
+         }
      });
 
-     var preview = new Preview({
-         collection: searchPreviewList
+     var product = new Product({});
+
+     var Products = Backbone.Collection.extend({});
+
+     var products = new Products([JSON.stringify(product), JSON.stringify(product), JSON.stringify(product)]);
+
+     console.log(JSON.stringify(product));
+
+
+     var Results = Backbone.View.extend({
+         el: $('#results-panel'),
+
+         template: _.template($('#results-template').html()),
+
+         initialize: function() {
+             self = this;
+
+             _.each(this.collection.models, function(product) {
+                 console.log(product.toJSON());
+                 $(self.el).html(self.template(product.toJSON()));
+             });
+         }
+     });
+
+     var results = new Results({
+         collection: products
      });
 
 
+
+     /*
+     var ProductModels = new Backbone.Collection.extend({
+     });
+
+     var productModels = new ProductModels({
+         model: productModel
+     });
+
+     var Product = new Backbone.Model.extend({
+         defaults: {
+             name: 'iPhone 4S'
+         }
+     });
+
+     var product = new Product({
+         collection: productModels
+     });
+
+     var Products = new Backbone.Collection.extend({});
+
+     var products = new Products({
+         model: product
+     });
+
+
+     var Results = Backbone.View.extend({
+         el: $('#results-panel'),
+
+         template: 'Name: <%= name %>',
+
+         initialize: function() {
+            $(this.el).html(this.template({name: "Ben"}));
+         }  
+     });
+
+     var results = new Results({
+        collection: products
+     });
+
+*/
 
      var LoginCredentials = Backbone.Model.extend({
          url: '/index.php/user/login',
