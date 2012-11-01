@@ -9,7 +9,7 @@
         <script type="text/javascript">
             head.js(
             {jquery: "/assets/javascripts/jquery.min.js"},
-            //{json2: "/assets/javascripts/json2.js"},
+            {json2: "/assets/javascripts/json2.js"},
             {underscore: "/assets/javascripts/underscore.min.js"},
             {backbone: "/assets/javascripts/backbone.min.js"},
             {backbone_validation: "/assets/javascripts/backbone-validation.js"},

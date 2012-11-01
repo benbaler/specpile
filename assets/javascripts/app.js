@@ -108,13 +108,19 @@
 
      var product = new Product({});
 
-     var Products = Backbone.Collection.extend({});
+     var Products = Backbone.Collection.extend({
+        url: '/index.php/search',
+        collection: Product
+     });
 
-     var products = new Products([JSON.stringify(product), JSON.stringify(product), JSON.stringify(product)]);
+     // var products = new Products([JSON.stringify(product).replace(/\"([^(\")"]+)\":/g,"$1:"), JSON.stringify(product).replace(/\"([^(\")"]+)\":/g,"$1:"), JSON.stringify(product).replace(/\"([^(\")"]+)\":/g,"$1:")]);
+     //p = "'"+JSON.stringify(product).replace(/\"([^(\")"]+)\":/g, "$1:")+"'";
+     //console.log(p);
 
-     console.log(JSON.stringify(product));
+     var products = new Products(product);
 
-
+     // console.log(JSON.parse(JSON.stringify(product)));
+     // console.log(String(JSON.stringify(product).replace(/\"([^(\")"]+)\":/g,"$1:")));
      var Results = Backbone.View.extend({
          el: $('#results-panel'),
 
@@ -122,7 +128,7 @@
 
          initialize: function() {
              self = this;
-
+             this.collection.fetch();
              _.each(this.collection.models, function(product) {
                  console.log(product.toJSON());
                  $(self.el).html(self.template(product.toJSON()));
