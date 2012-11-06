@@ -38,7 +38,22 @@ class Page extends CI_Controller {
 
 		$this->load->library('Facebook');
 
-		$this->load->view('header_v');
+		$user = $this->facebook->getUser();
+
+		if ($user) {
+			$logoutUrl = $this->facebook->getLogoutUrl();
+			echo '<a href="'.$logoutUrl.'">Logout</a>';
+		} else {
+			$loginUrl = $this->facebook->getLoginUrl(array('redirect_uri' => 'http://specpile.com'));
+			echo '<a href="'.$loginUrl.'">Login</a>';
+
+		}
+
+		$data = array(
+			'js' => 'main'
+			);
+
+		$this->load->view('header_v', $data);
 		$this->load->view('topbar_v', $this->data);
 		$this->load->view('forms/login_v');
 		$this->load->view('footer_v');

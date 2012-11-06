@@ -4,6 +4,7 @@
         <link href="/assets/stylesheets/foundation.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 
+        
         <script src="/assets/javascripts/head.load.min.js" type="text/javascript"></script>
 
         <script type="text/javascript">
@@ -14,9 +15,8 @@
             {backbone: "/assets/javascripts/backbone.min.js"},
             {backbone_validation: "/assets/javascripts/backbone-validation.js"},
             {foundation_form: "/assets/javascripts/jquery.foundation.forms.js"},
-            {app: "/assets/javascripts/app.js"}
+            {app: "/assets/javascripts/app2.js"}
         );
         </script>
-
     </head>
     <body>
