@@ -486,9 +486,9 @@ abstract class BaseFacebook
       if (isset($_REQUEST['signed_request'])) {
         $this->signedRequest = $this->parseSignedRequest(
           $_REQUEST['signed_request']);
-      } else if (isset($_COOKIE[$this->getSignedRequestCookieName()])) {
+      } else if (get_cookie($this->getSignedRequestCookieName())) {
         $this->signedRequest = $this->parseSignedRequest(
-          $_COOKIE[$this->getSignedRequestCookieName()]);
+          get_cookie($this->getSignedRequestCookieName()));
       }
     }
     return $this->signedRequest;
@@ -1314,11 +1314,11 @@ abstract class BaseFacebook
     // Javascript sets a cookie that will be used in getSignedRequest that we
     // need to clear if we can
     $cookie_name = $this->getSignedRequestCookieName();
-    if (array_key_exists($cookie_name, $_COOKIE)) {
-      unset($_COOKIE[$cookie_name]);
+    if (get_cookie($cookie_name)) {
+      delete_cookie($cookie_name);
       if (!headers_sent()) {
         $base_domain = $this->getBaseDomain();
-        setcookie($cookie_name, '', 1, '/', '.'.$base_domain);
+        set_cookie($cookie_name, '', 1, '/', '.'.$base_domain);
       } else {
         // @codeCoverageIgnoreStart
         self::errorLog(
@@ -1338,12 +1338,12 @@ abstract class BaseFacebook
    */
   protected function getMetadataCookie() {
     $cookie_name = $this->getMetadataCookieName();
-    if (!array_key_exists($cookie_name, $_COOKIE)) {
+    if (!get_cookie($cookie_name)) {
       return array();
     }
 
     // The cookie value can be wrapped in "-characters so remove them
-    $cookie_value = trim($_COOKIE[$cookie_name], '"');
+    $cookie_value = trim(get_cookie($cookie_name), '"');
 
     if (empty($cookie_value)) {
       return array();

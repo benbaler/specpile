@@ -23,7 +23,7 @@ class Page extends CI_Controller {
 			'logged_in' => $this->session->userdata('logged_in')
 			);
 	}
-	
+
 	public function index() {
 		$this->load->view('header_v');
 		$this->load->view('topbar_v', $this->data);
@@ -35,6 +35,8 @@ class Page extends CI_Controller {
 	public function login() {
 		if ($this->session->userdata('logged_in') == TRUE)
 			redirect('page/index');
+
+		$this->load->library('Facebook');
 
 		$this->load->view('header_v');
 		$this->load->view('topbar_v', $this->data);

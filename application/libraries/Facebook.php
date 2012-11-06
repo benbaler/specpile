@@ -23,6 +23,7 @@ require_once APPPATH."libraries/Base_facebook.php";
  */
 class Facebook extends BaseFacebook
 {
+  private $CI;
   const FBSS_COOKIE_NAME = 'fbss';
 
   // We can set this to a high number because the main session
@@ -44,10 +45,12 @@ class Facebook extends BaseFacebook
    * shares the domain with other apps).
    * @see BaseFacebook::__construct in facebook.php
    */
-  public function __construct($config) {
-    if (!session_id()) {
-      session_start();
-    }
+  public function __construct($config = array(
+      'appId' => '192299124240358',
+      'secret' => 'e695c1214c52b47c81f6c366453b6a48'
+      )) {
+    
+    $this->CI =& get_instance();
     parent::__construct($config);
     if (!empty($config['sharedSession'])) {
       $this->initSharedSession();
@@ -59,8 +62,8 @@ class Facebook extends BaseFacebook
 
   protected function initSharedSession() {
     $cookie_name = $this->getSharedSessionCookieName();
-    if (isset($_COOKIE[$cookie_name])) {
-      $data = $this->parseSignedRequest($_COOKIE[$cookie_name]);
+    if (get_cookie($cookie_name)) {
+      $data = $this->parseSignedRequest(get_cookie($cookie_name));
       if ($data && !empty($data['domain']) &&
           self::isAllowedDomain($this->getHttpHost(), $data['domain'])) {
         // good case
@@ -78,10 +81,10 @@ class Facebook extends BaseFacebook
         'id' => $this->sharedSessionID,
       )
     );
-    $_COOKIE[$cookie_name] = $cookie_value;
+    set_cookie($cookie_name, $cookie_value);
     if (!headers_sent()) {
       $expire = time() + self::FBSS_COOKIE_EXPIRE;
-      setcookie($cookie_name, $cookie_value, $expire, '/', '.'.$base_domain);
+      set_cookie($cookie_name, $cookie_value, $expire, '/', '.'.$base_domain);
     } else {
       // @codeCoverageIgnoreStart
       self::errorLog(
@@ -106,7 +109,7 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    $_SESSION[$session_var_name] = $value;
+    $this->CI->session->set_userdata($session_var_name, $value);
   }
 
   protected function getPersistentData($key, $default = false) {
@@ -116,8 +119,8 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    return isset($_SESSION[$session_var_name]) ?
-      $_SESSION[$session_var_name] : $default;
+    return ($this->CI->session->userdata($session_var_name)) ?
+      $this->CI->session->userdata($session_var_name) : $default;
   }
 
   protected function clearPersistentData($key) {
@@ -127,7 +130,7 @@ class Facebook extends BaseFacebook
     }
 
     $session_var_name = $this->constructSessionVariableName($key);
-    unset($_SESSION[$session_var_name]);
+    $this->CI->session->unset_userdata($session_var_name);
   }
 
   protected function clearAllPersistentData() {
@@ -141,9 +144,10 @@ class Facebook extends BaseFacebook
 
   protected function deleteSharedSessionCookie() {
     $cookie_name = $this->getSharedSessionCookieName();
-    unset($_COOKIE[$cookie_name]);
+    //unset($_COOKIE[$cookie_name]);
+    delete_cookie($cookie_name);
     $base_domain = $this->getBaseDomain();
-    setcookie($cookie_name, '', 1, '/', '.'.$base_domain);
+    set_cookie($cookie_name, '', 1, '/', '.'.$base_domain);
   }
 
   protected function getSharedSessionCookieName() {

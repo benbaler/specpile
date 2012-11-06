@@ -136,6 +136,7 @@
          }
      });
 
+
      var results = new Results({
          collection: products
      });

@@ -13,6 +13,7 @@
             {underscore: "/assets/javascripts/underscore.min.js"},
             {backbone: "/assets/javascripts/backbone.min.js"},
             {backbone_validation: "/assets/javascripts/backbone-validation.js"},
+            {foundation_form: "/assets/javascripts/jquery.foundation.forms.js"},
             {app: "/assets/javascripts/app.js"}
         );
         </script>
