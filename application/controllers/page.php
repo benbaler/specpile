@@ -14,18 +14,22 @@ class Page extends CI_Controller {
 
 	private $data;
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct();
 		$this->data = array(
 			'id' => $this->session->userdata('id'),
 			'first' => $this->session->userdata('first'),
 			'picture_url' => 'https://graph.facebook.com/benbaler/picture', //$this->session->userdata('picture_url'),
 			'logged_in' => $this->session->userdata('logged_in')
-			);
+		);
 	}
 
 	public function index() {
-		$this->load->view('header_v');
+		$data = array(
+			'js' => 'home'
+		);
+
+		$this->load->view('header_v', $data);
 		$this->load->view('topbar_v', $this->data);
 		$this->load->view('forms/search_v');
 		$this->load->view('elements/results_v');
@@ -46,12 +50,11 @@ class Page extends CI_Controller {
 		} else {
 			$loginUrl = $this->facebook->getLoginUrl(array('redirect_uri' => 'http://specpile.com'));
 			echo '<a href="'.$loginUrl.'">Login</a>';
-
 		}
 
 		$data = array(
-			'js' => 'main'
-			);
+			'js' => 'login'
+		);
 
 		$this->load->view('header_v', $data);
 		$this->load->view('topbar_v', $this->data);
@@ -63,7 +66,11 @@ class Page extends CI_Controller {
 		if ($this->session->userdata('logged_in') == TRUE)
 			redirect('page/login');
 
-		$this->load->view('header_v');
+		$data = array(
+			'js' => 'register'
+		);
+
+		$this->load->view('header_v', $data);
 		$this->load->view('topbar_v', $this->data);
 		$this->load->view('forms/register_v');
 		$this->load->view('footer_v');
