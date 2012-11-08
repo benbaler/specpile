@@ -19,7 +19,7 @@ class Page extends CI_Controller {
 		$this->data = array(
 			'id' => $this->session->userdata('id'),
 			'first' => $this->session->userdata('first'),
-			'picture_url' => 'https://graph.facebook.com/benbaler/picture', //$this->session->userdata('picture_url'),
+			'picture_url' => $this->session->userdata('picture_url'),
 			'logged_in' => $this->session->userdata('logged_in')
 		);
 	}

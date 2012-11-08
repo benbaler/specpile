@@ -1,15 +1,24 @@
-<form class="collapse" id="search-form">
+<form class="custom collapse" id="search-form">
   <div class="row">
     <div class="twelve columns">
       <div class="row collapse">
-        <div class="two mobile-three columns">
-        <select id="customDropdown">
-          <option SELECTED>Category</option>
+        <select style="display:none;" id="customDropdown">
+          <option SELECTED>This is a dropdown</option>
           <option>This is another option</option>
           <option>Look, a third option</option>
         </select>
-      </div>
-        <div class="eight mobile-three columns">
+        <div class="three mobile-one columns custom dropdown">
+          <a href="#" class="current">
+            Category
+          </a>
+          <a href="#" class="selector"></a>
+          <ul>
+            <li>This is a dropdown</li>
+            <li>This is another option</li>
+            <li>Look, a third option</li>
+          </ul>
+        </div>
+        <div class="seven mobile-three columns">
           <input type="text" name="term" placeholder="Search for products"/>
         </div>
         <div class="two mobile-one columns">

@@ -46,7 +46,6 @@ var Login = Backbone.View.extend({
             self.model.set(key, self.getInputByName(key).val());
         });
 
-
         if(this.model.isValid()) {
             this.model.save({}, {
                 success: function(model, response) {

@@ -1,4 +1,5 @@
 head.ready(function() {
+    $("#customDropdown").foundationCustomForms();
 
     var currentPage = function(str) {
             var path = document.location.pathname;

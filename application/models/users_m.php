@@ -47,7 +47,7 @@ class Users_m extends CI_Model {
                 'email' => $data['email'],
                 'pass' => $this->_salt($data['pass']),
                 'role' => 'regular',
-                'picture_url' => 'https://graph.facebook.com/benbaler/picture',
+                'picture_url' => $this->get_gravatar($data['email'], 30),
                 ));
 
             /*
@@ -110,6 +110,11 @@ class Users_m extends CI_Model {
      */
     private function _salt($p_pass) {
         return md5($p_pass . 'salt');
+    }
+
+    public function get_gravatar($mail, $size){
+        $default = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
+        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
     }
 
 }
