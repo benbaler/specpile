@@ -110,7 +110,7 @@ class Users_m extends CI_Model {
      */
     private function _salt($p_pass) {
         return md5($p_pass . 'salt');
-    }
+    }           
 
     public function get_gravatar($mail, $size){
         $default = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';

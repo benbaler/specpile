@@ -12,11 +12,11 @@ if (!defined('BASEPATH'))
 
 class Page extends CI_Controller {
 
-	private $data;
+	private $user;
 
 	public function __construct() {
 		parent::__construct();
-		$this->data = array(
+		$this->user = array(
 			'id' => $this->session->userdata('id'),
 			'first' => $this->session->userdata('first'),
 			'picture_url' => $this->session->userdata('picture_url'),
@@ -25,12 +25,16 @@ class Page extends CI_Controller {
 	}
 
 	public function index() {
+		$this->load->model('categories_m');
+
 		$data = array(
-			'js' => 'home'
+			'app' => 'home',
+			'categories' => $this->categories_m->get_all()
 		);
 
 		$this->load->view('header_v', $data);
-		$this->load->view('topbar_v', $this->data);
+		$this->load->view('topbar_v', $this->user);
+		$this->load->view('elements/categories_v', $data);
 		$this->load->view('forms/search_v');
 		$this->load->view('elements/results_v');
 		$this->load->view('footer_v');
@@ -44,20 +48,20 @@ class Page extends CI_Controller {
 
 		$user = $this->facebook->getUser();
 
-		if ($user) {
-			$logoutUrl = $this->facebook->getLogoutUrl();
-			echo '<a href="'.$logoutUrl.'">Logout</a>';
-		} else {
-			$loginUrl = $this->facebook->getLoginUrl(array('redirect_uri' => 'http://specpile.com'));
-			echo '<a href="'.$loginUrl.'">Login</a>';
-		}
+		// if ($user) {
+		// 	$logoutUrl = $this->facebook->getLogoutUrl();
+		// 	echo '<a href="'.$logoutUrl.'">Logout</a>';
+		// } else {
+		// 	$loginUrl = $this->facebook->getLoginUrl(array('redirect_uri' => 'http://specpile.com'));
+		// 	echo '<a href="'.$loginUrl.'">Login</a>';
+		// }
 
 		$data = array(
-			'js' => 'login'
+			'app' => 'login'
 		);
 
 		$this->load->view('header_v', $data);
-		$this->load->view('topbar_v', $this->data);
+		$this->load->view('topbar_v', $this->user);
 		$this->load->view('forms/login_v');
 		$this->load->view('footer_v');
 	}
@@ -67,12 +71,26 @@ class Page extends CI_Controller {
 			redirect('page/login');
 
 		$data = array(
-			'js' => 'register'
+			'app' => 'register'
 		);
 
 		$this->load->view('header_v', $data);
-		$this->load->view('topbar_v', $this->data);
+		$this->load->view('topbar_v', $this->user);
 		$this->load->view('forms/register_v');
+		$this->load->view('footer_v');
+	}
+
+	public function template() {
+		if ($this->session->userdata('logged_in') != TRUE)
+			redirect('page/login');
+
+		$data = array(
+			'app' => 'template'
+		);
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $this->user);
+		$this->load->view('forms/template_v');
 		$this->load->view('footer_v');
 	}
 

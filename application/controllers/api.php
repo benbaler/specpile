@@ -4,8 +4,6 @@ require(APPPATH.'libraries/REST_Controller.php');
 class Api extends REST_Controller {  
 	function user_get()  
 	{
-        $this->response(array('id' => 2, 'name' => 'ben'), 200);
-        return;
 		if(!$this->get('id'))  
 		{  
 			$this->response(NULL, 400);  
@@ -46,7 +44,20 @@ class Api extends REST_Controller {
     	{  
     		$this->response(NULL, 404);  
     	}  
-    }  
+    } 
+
+    public function categories_get(){
+        $this->load->model('categories_m');
+        $categories = $this->categories_m->get_all(); 
+        if($categories)  
+        {  
+            $this->response($categories, 200);  
+        }  
+        else  
+        {  
+            $this->response(NULL, 404);  
+        }  
+    } 
 }
 
 ?>

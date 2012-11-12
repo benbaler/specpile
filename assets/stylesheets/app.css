@@ -12,15 +12,22 @@
 /* -----------------------------------------
    Shared Styles
    ----------------------------------------- */
-   body {
-   	/*background-color: whitesmoke;*/
-   }
+/*   body {
+   	background-color: whitesmoke;
+   }*/
 
  /*  #customDropdown{
    	height:32px;
    	line-height:32px;
    	background-repeat:no-repeat;
    }*/
+  .columns{
+      /*border: 1px gray solid;*/
+   }
+
+   .row{
+      /*background-color: whitesmoke;*/
+   }
 
 
 /* -----------------------------------------
