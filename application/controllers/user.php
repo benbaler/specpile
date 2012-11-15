@@ -125,6 +125,8 @@ class User extends CI_Controller {
         $this->load->library('facebook', $config);
     }
 
+    
+
 }
 
 ?>

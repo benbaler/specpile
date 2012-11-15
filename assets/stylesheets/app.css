@@ -13,21 +13,33 @@
    Shared Styles
    ----------------------------------------- */
 /*   body {
-   	background-color: whitesmoke;
-   }*/
+   	background-color: Azure;
+      }*/
 
  /*  #customDropdown{
    	height:32px;
    	line-height:32px;
    	background-repeat:no-repeat;
-   }*/
-  .columns{
-      /*border: 1px gray solid;*/
-   }
+      }*/
+      .columns{
+         /*border: 1px gray solid;*/
+      }
 
-   .row{
-      /*background-color: whitesmoke;*/
-   }
+      .row{
+         /*background-color: whitesmoke;*/
+      }
+      li{
+         /*border: 1px gray solid;*/
+      }
+ /*  .search-result{
+      border: 1px gray solid;
+      padding: 20px;
+      }*/
+
+      select{
+         background: transparent;
+         height: 32px;
+      }
 
 
 /* -----------------------------------------

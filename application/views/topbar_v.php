@@ -1,22 +1,29 @@
-<div class="row"ד>
-	<div class="four mobile-two columns">
+<div class="row">
+	<div class="four mobile-two columns	">
 		<h1><a href="/">Specpile</a></h1>
 	</div>
 	<?php if($logged_in == TRUE): ?>
-	<div class="one mobile-one columns offset-by-six">
-		<img src="<?= $picture_url ?>"/>
+	<div class="one mobile-one columns offset-by-three">
+		<a href="/index.php/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>"/></a>
 	</div>
 	<div class="one mobile-one columns">
 		<h5><a href="/index.php/user/profile/<?= $id ?>"><?= $first ?></a></h5>
-	</div>	
+	</div>
+	<div class="one mobile-one columns">
+		<h5><a href="/index.php/page/logout">Logout</a></h5>
+	</div>
+
 <?php else: ?>
-	<div class="one mobile-one columns offset-by-six">
-		<h5 style="vertical-align:middle;"><a href="/index.php/page/register">Register</a></h5>
+	<div class="one mobile-one columns offset-by-four">
+		<h5><a href="/index.php/page/register">Register</a></h5>
 	</div>
 	<div class="one mobile-one columns">
 		<h5><a href="/index.php/page/login">Login</a></h5>
 	</div>
 <?php endif; ?>
+<div class="two mobile-one columns">
+		<h5><a href="/index.php/page/addProduct">Add Product</a></h5>
+	</div>
 </div>
 
 <!--

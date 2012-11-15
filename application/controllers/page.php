@@ -66,6 +66,11 @@ class Page extends CI_Controller {
 		$this->load->view('footer_v');
 	}
 
+	public function logout(){
+        $this->session->sess_destroy();
+        redirect('page');   
+    }
+
 	public function register() {
 		if ($this->session->userdata('logged_in') == TRUE)
 			redirect('page/login');
@@ -91,6 +96,21 @@ class Page extends CI_Controller {
 		$this->load->view('header_v', $data);
 		$this->load->view('topbar_v', $this->user);
 		$this->load->view('forms/template_v');
+		$this->load->view('footer_v');
+	}
+
+	public function addProduct(){
+		$this->load->model(array('categories_m', 'brands_m'));
+		
+		$data = array(
+			'app' => 'addProduct',
+			'categories' => $this->categories_m->get_all(),
+			'brands' => $this->brands_m->get_all()
+		);
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $this->user);
+		$this->load->view('forms/addProduct_v', $data);
 		$this->load->view('footer_v');
 	}
 

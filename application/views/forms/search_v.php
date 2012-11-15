@@ -1,3 +1,8 @@
+<div class="row">
+  <div class="two columns">
+    <h4>Search</h4>
+  </div>
+</div>
 <form class="custom collapse" id="search-form">
 
   <div class="row">
@@ -6,24 +11,24 @@
       <div class="row">
         <div class="twelve columns">
 
-        <select style="display:none;" id="customDropdown">
-          <option SELECTED>Category</option>
-          <?php foreach($categories as $category) : ?>
-          <option><?= ucwords($category['name']) ?></option>
-        <?php endforeach; ?>
-      </select>
+          <select style="display:none;" id="customDropdown">
+            <option SELECTED>Category</option>
+            <?php foreach($categories as $category) : ?>
+            <option><?= ucwords($category['name']) ?></option>
+          <?php endforeach; ?>
+        </select>
 
-      <div class="custom dropdown">
-        <a href="#" class="current">
-          Category
-        </a>
-        <a href="#" class="selector"></a>
-        <ul>
-          <?php foreach($categories as $category) : ?>
-          <li><?= ucwords($category['name']) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
+        <div class="custom dropdown">
+          <a href="#" class="current">
+            Category
+          </a>
+          <a href="#" class="selector"></a>
+          <ul>
+            <?php foreach($categories as $category) : ?>
+            <li><?= ucwords($category['name']) ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
     </div>
 
   </div>

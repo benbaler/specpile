@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Products_m extends CI_Controller{
-	function get_all_companies(){
+class Products_m extends CI_Model{
+	function get_all_products(){
 		return array();
 	}
 }

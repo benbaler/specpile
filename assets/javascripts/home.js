@@ -9,8 +9,13 @@ head.js('/assets/javascripts/libs/jquery.js','/assets/javascripts/libs/foundatio
         });
 
         var product = new Product({});  
+        var product2 = new Product({id:"2"});  
+        var prod = [product.toJSON(),product2.toJSON()];
 
-        var products = new Products(product);
+        console.log("-----",prod,"-----");
+
+        var products = new Products(prod);
+        console.log(products.models);
 
         var results = new Results({
             collection: products
