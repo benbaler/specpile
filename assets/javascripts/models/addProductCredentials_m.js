@@ -1,10 +1,10 @@
 var AddProductCredentials = Backbone.Model.extend({
-    url: '/index.php/product/add',
+    url: '/index.php/api/product',
 
     defaults: {
-        'category': '',
-        'brand': '',
-        'model': ''
+        'category': null,
+        'brand': null,
+        'model': null
     },
 
     validation: {

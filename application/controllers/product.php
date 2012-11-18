@@ -1,14 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Product extends CI_Controller {
+require(APPPATH.'libraries/REST_Controller.php');  
+
+class Product extends REST_Controller {
 
 	public function __construct(){
 		parent::__construct();
 
-		$this->load->library('REST_server');
+		//$this->load->library('REST_server');
+		$this->load->library('form_validation');
+        $this->load->model('products_m');
 	}
 
-	public function add(){
+	public function product_add(){
+		die('ok');
 		if ($this->form_validation->run('addProduct') == TRUE) {
 
 			$product = $this->products_m->add($this->input->post());

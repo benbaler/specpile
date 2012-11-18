@@ -114,6 +114,30 @@ class Page extends CI_Controller {
 		$this->load->view('footer_v');
 	}
 
+	public function editProduct($p_id) {
+		$this->load->model(array('categories_m', 'brands_m', 'products_m'));
+		
+		$product = current($this->products_m->getProduct($p_id));
+
+		$category = current($this->categories_m->getCategory($product['category_id']));
+
+		// var_dump($category);
+		
+		$brand = current($this->brands_m->getBrand($product['brand_id']));
+
+		$data = array(
+			'app' => 'editProduct',
+			'category' => $category,
+			'brand' => $brand,
+			'product' => $product
+		);
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $this->user);
+		$this->load->view('forms/editProduct_v', $data);
+		$this->load->view('footer_v');
+	}
+
 }
 
 /* End of file page.php */

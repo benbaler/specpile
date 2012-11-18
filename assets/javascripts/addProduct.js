@@ -11,9 +11,6 @@ head.js('/assets/javascripts/libs/jquery.js',
             length: 'Select {0}'
         });
 
-        // $("#categoryDropdown").foundationCustomForms();
-        // $("#brandDropdown").foundationCustomForms();
-
         var addProductCredentials = new AddProductCredentials({});
         var addProduct = new AddProductView({
             model: addProductCredentials

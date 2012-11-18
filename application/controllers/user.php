@@ -95,7 +95,7 @@ class User extends CI_Controller {
                     );
 
                 $this->rest_server->fail($data);
-
+    
                 return;
             }
 

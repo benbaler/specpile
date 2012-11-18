@@ -19,7 +19,7 @@ var AddProductView = Backbone.View.extend({
         this.displayError($(event.target));
     },
 
-    displayError: function(element, error) {
+    displayError: function(element) {
         next = String(element.next().prop("tagName")).toLowerCase() == "small" ? element.next() : element.after('<small class="hide"></small>').next();
 
         switch(element.prop("tagName")){
@@ -34,7 +34,6 @@ var AddProductView = Backbone.View.extend({
         if(error) {
             element.addClass('error');
             next.removeClass('hide').addClass('error').html(error);
-            console.log();
         } else {
             element.removeClass('error');
             next.removeClass('error').addClass('hide');
@@ -58,7 +57,7 @@ var AddProductView = Backbone.View.extend({
         if(this.model.isValid()) {
             this.model.save({}, {
                 success: function(model, response) {
-                    location.reload();
+                    location.href = 'editProduct/'+response.id;
                 },
                 error: function(model, response) {
                     data = JSON.parse(response.responseText);

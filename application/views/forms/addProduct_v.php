@@ -33,7 +33,7 @@
           <option value="<?= $brand['_id'] ?>"><?= ucwords($brand['name']) ?></option>
         <?php endforeach; ?>
       </select>
-      
+
     </div>
   </div>
 </div>
@@ -44,7 +44,7 @@
   <div class="row collapse">
 
     <div class="eight mobile-three columns">
-      <input type="text" name="model" placeholder="Model Example: iPhone 5"/>
+      <input type="text" name="model" placeholder="Example: iPhone 5"/>
     </div>
 
     <div class="four mobile-one columns">

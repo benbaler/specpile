@@ -8,11 +8,7 @@
 
 class Users_m extends CI_Model {
 
-    private $users_collection = 'users';
-
-    public function __construct() {
-        parent::__construct();
-    }
+    private $collection = 'users';
 
     /**
      * login user
@@ -21,10 +17,10 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return array
      */
-    public function login($data) {
+    public function login($p_data) {
         return $this->_get(array(
-            'email' => $data['email'],
-            'pass' => $this->_salt($data['pass'])
+            'email' => $p_data['email'],
+            'pass' => $this->_salt($p_data['pass'])
             ));
     }
 
@@ -36,18 +32,18 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return boolean
      */
-    public function register($data) {
+    public function register($p_data) {
         /* check if username or email already exists */
-        if ($this->_exists($data['email'], 'email') == FALSE) {
+        if ($this->_exists($p_data['email'], 'email') == FALSE) {
 
             /* create new user */
             $this->_set(array(
-                'first' => $data['first'],
-                'last' => $data['last'],
-                'email' => $data['email'],
-                'pass' => $this->_salt($data['pass']),
+                'first' => $p_data['first'],
+                'last' => $p_data['last'],
+                'email' => $p_data['email'],
+                'pass' => $this->_salt($p_data['pass']),
                 'role' => 'regular',
-                'picture_url' => $this->get_gravatar($data['email'], 30),
+                'picture_url' => $this->get_gravatar($p_data['email'], 30),
                 ));
 
             /*
@@ -80,14 +76,14 @@ class Users_m extends CI_Model {
     private function _get($p_values, $p_key = '_id') {
         if (is_array($p_values)) {
             return $this->mongo_db->where($p_values)
-            ->get($this->users_collection);
+            ->get($this->collection);
         }
         return $this->mongo_db->where($p_key, $p_values)
-        ->get($this->users_collection);
+        ->get($this->collection);
     }
 
     private function _set($p_values, $p_key = NULL) {
-        return $this->mongo_db->insert($this->users_collection,
+        return $this->mongo_db->insert($this->collection,
             is_array($p_values) ? $p_values : array($p_key => $p_values));
     }
 
@@ -112,9 +108,9 @@ class Users_m extends CI_Model {
         return md5($p_pass . 'salt');
     }           
 
-    public function get_gravatar($mail, $size){
+    public function get_gravatar($p_email, $p_size){
         $default = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
-        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $p_email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $p_size;
     }
 
 }
