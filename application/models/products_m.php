@@ -6,18 +6,21 @@ class Products_m extends CI_Model{
 
 	public function addProduct($p_data) {
 		if ($this->_exists(array(
-					'category_id' => $p_data['category'],
-					'brand_id' => $p_data['brand'],
+					'category_id' => new MongoId($p_data['category']),
+					'brand_id' => new MongoId($p_data['brand']),
 					'name' => trim($p_data['model'])
 				)) == FALSE) {
 
 			$id = $this->_set(array(
-					'category_id' => $p_data['category'],
-					'brand_id' => $p_data['brand'],
+					'category_id' => MongoDBRef::create('categories', new MongoId($p_data['category'])),
+					'brand_id' => new MongoId($p_data['brand']),
 					'name' => trim($p_data['model']),
 					'creator_id' => $this->session->userdata('id') ? $this->session->userdata('id') : $this->session->userdata('session_id'),
 					'date_time' => $this->mongo_db->date()
 				));
+
+			//$ref = $this->mongo_db->create_dbref('categories', new MongoId($p_data['category']));
+			//var_dump($this->mongo_db->get_dbref($ref));
 
 			return $id->__toString();
 		}
@@ -26,6 +29,14 @@ class Products_m extends CI_Model{
 
 	public function getProduct($p_id) {
 		return $this->_get($p_id);
+	}
+
+	public function getProducts($p_query) {
+		return $this->mongo_db->where(array('name' => array('$regex' => $p_query)))->get($this->collection);
+	}
+
+	public function get_all() {
+		return $this->mongo_db->get($this->collection);
 	}
 
 	/**

@@ -17,14 +17,16 @@ var Search = Backbone.View.extend({
     getPreviewProducts: function(event) {
         event.preventDefault();
 
-        this.displayError(this.getInputByName('term'));
-        this.model.set('term', this.getInputByName('term').val());
+        this.displayError(this.getInputByName('query'));
+        this.model.set('query', this.getInputByName('query').val());
 
 
         if(this.model.isValid()) {
-            alert(this.model.get('term'));
+            //alert(this.model.get('query'));
+            window.results.render(this.model.get('query'));
         } else {
-            alert(this.displayError(this.getInputByName('term')));
+            //alert(this.displayError(this.getInputByName('query')));
+            window.results.render(this.model.get('query'));
         }
 
     },
@@ -36,7 +38,7 @@ var Search = Backbone.View.extend({
         if(error) {
             this.displayError(element);
         } else {
-            this.autoComplete(this.getInputByName('term').val());
+            this.autoComplete(this.getInputByName('query').val());
         }
     },
 
@@ -45,7 +47,7 @@ var Search = Backbone.View.extend({
     },
 
     autoComplete: function(value) {
-        console.log(value);
+        //console.log(value);
     },
 
     displayError: function(element, error) {

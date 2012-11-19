@@ -109,7 +109,7 @@ class Users_m extends CI_Model {
     }           
 
     public function get_gravatar($p_email, $p_size){
-        $default = 'https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v2/yL/r/HsTZSDw4avx.gif';
+        $default = 'http://www.smore.com/s/images/default-profile-large.jpg';
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $p_email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $p_size;
     }
 

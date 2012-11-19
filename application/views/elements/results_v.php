@@ -14,16 +14,16 @@
 <script type="text/template" id="results-template">
 <div class="row search-result">
 <div class="three columns">
-<%= id %>
+<%= _id %>
 </div>
 <div class="three columns">
-<%= product %>
+<%= name %>
 </div>
 <div class="three columns">
-<%= model %>
+<%= category_id %>
 </div>
 <div class="three columns">
-<img src="<%= picture %>"/>
+<%= brand_id %>
 </div>
 </div>
 </script>

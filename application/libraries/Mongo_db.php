@@ -91,7 +91,7 @@ class Mongo_db {
 			show_error("Unable to switch Mongo Databases: {$e->getMessage()}", 500);
 		}
 	}
-		
+	
 	/**
 	*	--------------------------------------------------------------------------------
 	*	//! Drop database
@@ -121,7 +121,7 @@ class Mongo_db {
 			
 		}
 	}
-		
+	
 	/**
 	*	--------------------------------------------------------------------------------
 	*	//! Drop collection
@@ -136,7 +136,7 @@ class Mongo_db {
 		{
 			show_error('Failed to drop MongoDB collection because database name is empty', 500);
 		}
-	
+		
 		if (empty($col))
 		{
 			show_error('Failed to drop MongoDB collection because collection name is empty', 500);
@@ -173,31 +173,31 @@ class Mongo_db {
 	
 	public function select($includes = array(), $excludes = array())
 	{
-	 	if ( ! is_array($includes))
-	 	{
-	 		$includes = array();
-	 	}
-	 	
-	 	if ( ! is_array($excludes))
-	 	{
-	 		$excludes = array();
-	 	}
-	 	
-	 	if ( ! empty($includes))
-	 	{
-	 		foreach ($includes as $col)
-	 		{
-	 			$this->selects[$col] = 1;
-	 		}
-	 	}
-	 	else
-	 	{
-	 		foreach ($excludes as $col)
-	 		{
-	 			$this->selects[$col] = 0;
-	 		}
-	 	}
-	 	return ($this);
+		if ( ! is_array($includes))
+		{
+			$includes = array();
+		}
+		
+		if ( ! is_array($excludes))
+		{
+			$excludes = array();
+		}
+		
+		if ( ! empty($includes))
+		{
+			foreach ($includes as $col)
+			{
+				$this->selects[$col] = 1;
+			}
+		}
+		else
+		{
+			foreach ($excludes as $col)
+			{
+				$this->selects[$col] = 0;
+			}
+		}
+		return ($this);
 	}
 	
 	/**
@@ -477,26 +477,26 @@ class Mongo_db {
 	*/
 	
 	public function like($field = "", $value = "", $flags = "i", $enable_start_wildcard = TRUE, $enable_end_wildcard = TRUE)
-	 {
-	 	$field = (string) trim($field);
-	 	$this->_where_init($field);
-	 	$value = (string) trim($value);
-	 	$value = quotemeta($value);
-	 	
-	 	if ($enable_start_wildcard !== TRUE)
-	 	{
-	 		$value = "^" . $value;
-	 	}
-	 	
-	 	if ($enable_end_wildcard !== TRUE)
-	 	{
-	 		$value .= "$";
-	 	}
-	 	
-	 	$regex = "/$value/$flags";
-	 	$this->wheres[$field] = new MongoRegex($regex);
-	 	return ($this);
-	 }
+	{
+		$field = (string) trim($field);
+		$this->_where_init($field);
+		$value = (string) trim($value);
+		$value = quotemeta($value);
+		
+		if ($enable_start_wildcard !== TRUE)
+		{
+			$value = "^" . $value;
+		}
+		
+		if ($enable_end_wildcard !== TRUE)
+		{
+			$value .= "$";
+		}
+		
+		$regex = "/$value/$flags";
+		$this->wheres[$field] = new MongoRegex($regex);
+		return ($this);
+	}
 	
 	/**
 	*	--------------------------------------------------------------------------------
@@ -589,21 +589,21 @@ class Mongo_db {
 	*	@usage : $this->mongo_db->get('foo');
 	*/
 	
-	 public function get($collection = "")
-	 {
-	 	if (empty($collection))
-	 	{
-	 		show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
-	 	}
-	 		 	
-	 	$documents = $this->db->{$collection}->find($this->wheres, $this->selects)->limit((int) $this->limit)->skip((int) $this->offset)->sort($this->sorts);
-	 	
+	public function get($collection = "")
+	{
+		if (empty($collection))
+		{
+			show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
+		}
+		
+		$documents = $this->db->{$collection}->find($this->wheres, $this->selects)->limit((int) $this->limit)->skip((int) $this->offset)->sort($this->sorts);
+		
 	 	// Clear
-	 	$this->_clear();
-	 	
-	 	$returns = array();
-	 	
-	 	while ($documents->hasNext())
+		$this->_clear();
+		
+		$returns = array();
+		
+		while ($documents->hasNext())
 		{
 			if ($this->CI->config->item('mongo_return') == 'object')
 			{
@@ -614,8 +614,8 @@ class Mongo_db {
 				$returns[] = (array) $documents->getNext();
 			}
 		}
-	 	
-	 	if ($this->CI->config->item('mongo_return') == 'object')
+		
+		if ($this->CI->config->item('mongo_return') == 'object')
 		{
 			return (object)$returns;
 		}
@@ -625,7 +625,7 @@ class Mongo_db {
 			return $returns;
 		}
 
-	 }
+	}
 	
 	/**
 	*	--------------------------------------------------------------------------------
@@ -687,7 +687,7 @@ class Mongo_db {
 			show_error("Insert of data into MongoDB failed: {$e->getMessage()}", 500);
 		}
 	}
-    
+	
     /**
     * --------------------------------------------------------------------------------
     * Batch Insert
@@ -699,35 +699,35 @@ class Mongo_db {
     */
     public function batch_insert($collection = "", $insert = array())
     {
-            if (empty($collection))
-            {
-                    show_error("No Mongo collection selected to insert into", 500);
-            }
+    	if (empty($collection))
+    	{
+    		show_error("No Mongo collection selected to insert into", 500);
+    	}
 
-            if (count($insert) == 0 || !is_array($insert))
-            {
-                    show_error("Nothing to insert into Mongo collection or insert is not an array", 500);
-            }
+    	if (count($insert) == 0 || !is_array($insert))
+    	{
+    		show_error("Nothing to insert into Mongo collection or insert is not an array", 500);
+    	}
 
-            try
-            {
-                    $this->db->{$collection}->batchInsert($insert, array($this->query_safety => TRUE));
-                    if (isset($insert['_id']))
-                    {
-                            return ($insert['_id']);
-                    }
-                    else
-                    {
-                            return (FALSE);
-                    }
-            }
-            catch (MongoCursorException $e)
-            {
-                    show_error("Insert of data into MongoDB failed: {$e->getMessage()}", 500);
-            }
+    	try
+    	{
+    		$this->db->{$collection}->batchInsert($insert, array($this->query_safety => TRUE));
+    		if (isset($insert['_id']))
+    		{
+    			return ($insert['_id']);
+    		}
+    		else
+    		{
+    			return (FALSE);
+    		}
+    	}
+    	catch (MongoCursorException $e)
+    	{
+    		show_error("Insert of data into MongoDB failed: {$e->getMessage()}", 500);
+    	}
     }
-	
-	
+    
+    
 	/**
 	*	--------------------------------------------------------------------------------
 	*	//! Update
@@ -754,7 +754,7 @@ class Mongo_db {
 		{
 			show_error("Nothing to update in Mongo collection or update is not an array", 500);	
 		}
-				
+		
 		try
 		{
 			$options = array_merge($options, array($this->query_safety => TRUE, 'multiple' => FALSE));
@@ -795,7 +795,7 @@ class Mongo_db {
 		{
 			show_error("Nothing to update in Mongo collection or update is not an array", 500);	
 		}
-				
+		
 		try
 		{
 			$options = array_merge($options, array($this->query_safety => TRUE, 'multiple' => TRUE));
@@ -970,26 +970,26 @@ class Mongo_db {
 	*	@usage: $this->mongo_db->where(array('blog_id'=>123))->push(array('comments' => array('text'=>'Hello world')), 'viewed_by' => array('Alex')->update('blog_posts');
 	*/
 
-	public function push($fields, $value = array())
-	{
-		$this->_update_init('$push');
-		
-		if (is_string($fields))
+		public function push($fields, $value = array())
 		{
-			$this->updates['$push'][$fields] = $value;
-		}
-		
-		elseif (is_array($fields))
-		{
-			foreach ($fields as $field => $value)
+			$this->_update_init('$push');
+			
+			if (is_string($fields))
 			{
-				$this->updates['$push'][$field] = $value;
+				$this->updates['$push'][$fields] = $value;
 			}
+			
+			elseif (is_array($fields))
+			{
+				foreach ($fields as $field => $value)
+				{
+					$this->updates['$push'][$field] = $value;
+				}
+			}
+			
+			return $this;
 		}
 		
-		return $this;
-	}
-	
 	/*public function push_all($fields, $value = array())
 	{
 		$this->_update_init('$pushAll');
@@ -1054,7 +1054,7 @@ class Mongo_db {
 	public function pull($field = "", $value = array())
 	{
 		$this->_update_init('$pull');
-	
+		
 		$this->updates['$pull'] = array($field => $value);
 		
 		return $this;
@@ -1082,12 +1082,12 @@ class Mongo_db {
 	public function rename_field($old, $new)
 	{
 		$this->_update_init('$rename');
-	
+		
 		$this->updates['$rename'][] = array($old => $new);
 		
 		return $this;
 	}
-		
+	
 	/**
 	*	--------------------------------------------------------------------------------
 	*	//! Delete
@@ -1128,14 +1128,14 @@ class Mongo_db {
 	*	@usage : $this->mongo_db->delete_all('foo', $data = array());
 	*/
 	
-	 public function delete_all($collection = "")
-	 {
+	public function delete_all($collection = "")
+	{
 		if (empty($collection))
 		{
 			show_error("No Mongo collection selected to delete from", 500);
 		}
 		
-	 	if (isset($this->wheres['_id']) and ! ($this->wheres['_id'] instanceof MongoId))
+		if (isset($this->wheres['_id']) and ! ($this->wheres['_id'] instanceof MongoId))
 		{
 			$this->wheres['_id'] = new MongoId($this->wheres['_id']);
 		}
@@ -1301,7 +1301,7 @@ class Mongo_db {
 		
 		return ($this->db->{$collection}->getIndexInfo());
 	}
-    
+	
     /**
      *	--------------------------------------------------------------------------------
 	 *	Mongo Date
@@ -1314,12 +1314,12 @@ class Mongo_db {
      */
     public function date($stamp = FALSE)
     {
-            if ( $stamp == FALSE )
-            {   
-                    return new MongoDate();
-            }
-            
-            return new MongoDate($stamp);            
+    	if ( $stamp == FALSE )
+    	{   
+    		return new MongoDate();
+    	}
+    	
+    	return new MongoDate($stamp);            
     }
     
     /**
@@ -1333,19 +1333,19 @@ class Mongo_db {
      */    
     public function get_dbref($obj)
     {
-        if (empty($obj) OR !isset($obj))
-        {
-                show_error('To use MongoDBRef::get() ala get_dbref() you must pass a valid reference object', 500);
-        }
+    	if (empty($obj) OR !isset($obj))
+    	{
+    		show_error('To use MongoDBRef::get() ala get_dbref() you must pass a valid reference object', 500);
+    	}
 
-        if ($this->CI->config->item('mongo_return') == 'object')
-        {
-                return (object) MongoDBRef::get($this->db, $obj);
-        }
-        else
-        {
-                return (array) MongoDBRef::get($this->db, $obj);
-        }                
+    	if ($this->CI->config->item('mongo_return') == 'object')
+    	{
+    		return (object) MongoDBRef::get($this->db, $obj);
+    	}
+    	else
+    	{
+    		return (array) MongoDBRef::get($this->db, $obj);
+    	}                
     }
 
     /**
@@ -1359,29 +1359,29 @@ class Mongo_db {
      */    
     public function create_dbref($collection = "", $id = "", $database = FALSE )
     {
-        if (empty($collection))
-        {
-            show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
-        }
+    	if (empty($collection))
+    	{
+    		show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
+    	}
 
-        if (empty($id) OR !isset($id))
-        {
-                show_error('To use MongoDBRef::create() ala create_dbref() you must pass a valid id field of the object which to link', 500);
-        }
+    	if (empty($id) OR !isset($id))
+    	{
+    		show_error('To use MongoDBRef::create() ala create_dbref() you must pass a valid id field of the object which to link', 500);
+    	}
 
-        $db = $database ? $database : $this->db;
+    	$db = $database ? $database : $this->db;
 
-        if ($this->CI->config->item('mongo_return') == 'object')
-        {
-                return (object) MongoDBRef::create($collection, $id, $db);
-        }
+    	if ($this->CI->config->item('mongo_return') == 'object')
+    	{
+    		return (object) MongoDBRef::create($collection, $id, $db);
+    	}
 
-        else
-        {
-                return (array) MongoDBRef::get($this->db, $obj);
-        }                
+    	else
+    	{
+    		return (array) MongoDBRef::create($collection, $id, $db);
+    	}                
     }
-	
+    
 
 	/**
 	*	--------------------------------------------------------------------------------

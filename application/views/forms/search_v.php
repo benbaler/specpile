@@ -40,7 +40,7 @@
   <div class="row collapse">
 
     <div class="ten mobile-three columns">
-      <input type="text" name="term" placeholder="Search for products"/>
+      <input type="text" name="query" placeholder="Search for products"/>
     </div>
 
     <div class="two mobile-one columns">

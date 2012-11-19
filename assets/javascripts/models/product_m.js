@@ -1,8 +1,19 @@
 var Product = Backbone.Model.extend({
+	url: function(){
+		return '/index.php/api/search/product/' + this.id
+	},
+
 	defaults: {
-		id: '1',
-		product: 'iPhone 4S',
-		model: '16GB Black',
-		picture: 'http://www.techspot.com/images/products/smartphones/org/851731035_1314324409_o.jpg'
+		_id: null,
+		name: null,
+		category_id: null,
+		brand_id: null
+	},
+
+	idAttribute: '_id',
+
+	parse: function(response) {
+		response._id = response._id['$id'];
+		return response;
 	}
 });

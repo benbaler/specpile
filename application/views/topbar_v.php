@@ -1,13 +1,13 @@
 <div class="row">
-	<div class="four mobile-two columns	">
+	<div class="four mobile-two columns" id="logo">
 		<h1><a href="/">Specpile</a></h1>
 	</div>
 	<?php if($logged_in == TRUE): ?>
 	<div class="one mobile-one columns offset-by-three">
-		<a href="/index.php/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>"/></a>
+		<a href="/index.php/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
 	</div>
 	<div class="one mobile-one columns">
-		<h5><a href="/index.php/user/profile/<?= $id ?>"><?= $first ?></a></h5>
+		<h5><a href="/index.php/user/profile/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
 	</div>
 	<div class="one mobile-one columns">
 		<h5><a href="/index.php/page/logout">Logout</a></h5>

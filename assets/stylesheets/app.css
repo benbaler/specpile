@@ -40,6 +40,9 @@
          background: transparent;
          height: 32px;
       }
+      #thumb{
+         border: 5px #2BA6CB solid;
+      }
 
 
 /* -----------------------------------------

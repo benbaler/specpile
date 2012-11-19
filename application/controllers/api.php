@@ -98,6 +98,58 @@ class Api extends REST_Controller {
 
         $this->response($data, 404);
     }
+
+    public function products_get() {
+        $this->load->model('products_m');
+
+        $products = $this->products_m->get_all();
+
+        if ($products) {
+            $this->response($products, 200);
+        }
+        else {
+            $this->response(NULL, 404);
+        }
+    }
+
+    public function search_get() {
+        $this->load->model('products_m');
+        if ($this->get('query')) {
+            $results = $this->products_m->getProducts($this->get('query'));
+            // foreach ($results as $i => &$arr) {
+            //     foreach ($arr as $j => &$value) {
+            //         if ($j == '_id') {
+            //             $arr['id'] = (string)$value;
+            //         }
+            //     }
+            // }
+            //$results = array(array('id' => 1, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1),array('id' => 2, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1));
+            if (is_array($results)) {
+                $this->response($results, 200);
+            }
+            else {
+                $data = array(
+                    'error' => array(
+                        'message' => 'no results for your query',
+                        'type' => 'search',
+                        'code' => '1'
+                    )
+                );
+
+                $this->response($data, 404);
+            }
+        } else {
+            $data = array(
+                'error' => array(
+                    'message' => 'query is not valid',
+                    'type' => 'search',
+                    'code' => '2'
+                )
+            );
+
+            $this->response($data, 404);
+        }
+    }
 }
 
 ?>
