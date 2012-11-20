@@ -66,6 +66,10 @@ class Users_m extends CI_Model {
         return $this->_exists($p_email, 'email');
     }
 
+    public function getUser($p_id){
+        return $this->_get($p_id);
+    }
+
     /**
      * retrive user object from users collection with specific values or key, value pair
      *
@@ -78,7 +82,7 @@ class Users_m extends CI_Model {
             return $this->mongo_db->where($p_values)
             ->get($this->collection);
         }
-        return $this->mongo_db->where($p_key, $p_values)
+        return $this->mongo_db->where($p_key, new MongoId($p_values))
         ->get($this->collection);
     }
 

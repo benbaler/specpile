@@ -1,22 +1,26 @@
 var Results = Backbone.View.extend({
     el: $('#results-panel'),
-    template: _.template($('#results-template').html()),
 
     initialize: function() {
+        var self = this;
+
+        this.collection.on("add", function(model) {
+            var productView = new Product({model: model});
+            self.$el.append(productView.render().$el);
+        }, this);
     },
 
     render: function(query) {
-        var self = this;
+        this.$el.html('');
+
+        this.collection.reset();
+        this.collection.query = query;
 
         this.collection.fetch({
-            add: true,
-            url: this.collection.url+query
+            add: true
+            // ,query: query
+            // ,url: this.collection.url+query
         });
 
-        this.$el.html('');
-        
-        this.collection.on("add", function(model) {
-            self.$el.append(self.template(model.toJSON()));
-        });
     }
 });

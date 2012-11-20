@@ -138,6 +138,20 @@ class Page extends CI_Controller {
 		$this->load->view('footer_v');
 	}
 
+	public function profile($p_id){
+		$this->load->model('users_m');
+
+		$data = array(
+			'app' => 'viewProfile',
+			'user' => $this->users_m->getUser($p_id)
+		);
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $this->user);
+		$this->load->view('viewProfile_v', $data);
+		$this->load->view('footer_v');
+	}
+
 }
 
 /* End of file page.php */

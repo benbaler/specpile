@@ -13,7 +13,7 @@
         <div class="twelve columns">
 
           <select id="categoryDropdown" name="category">
-            <option value="" SELECTED>Category</option>
+            <option value="" SELECTED>Select Category</option>
             <?php foreach($categories as $category) : ?>
             <option value="<?= $category['_id'] ?>"><?= ucwords($category['name']) ?></option>
           <?php endforeach; ?>

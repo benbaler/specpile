@@ -32,7 +32,7 @@ class Products_m extends CI_Model{
 	}
 
 	public function getProducts($p_query) {
-		return $this->mongo_db->where(array('name' => array('$regex' => $p_query)))->get($this->collection);
+		return $this->mongo_db->where(array('name' => array('$regex' => $p_query, '$options' => 'i')))->get($this->collection);
 	}
 
 	public function get_all() {

@@ -49,7 +49,7 @@ var Login = Backbone.View.extend({
         if(this.model.isValid()) {
             this.model.save({}, {
                 success: function(model, response) {
-                    location.reload();
+                    location.href = "/";
                 },
                 error: function(model, response) {
                     data = JSON.parse(response.responseText);

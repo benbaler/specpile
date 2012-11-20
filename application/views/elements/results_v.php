@@ -11,7 +11,7 @@
 	</div>
 </div>
 
-<script type="text/template" id="results-template">
+<script type="text/template" id="product-template">
 <div class="row search-result">
 <div class="three columns">
 <%= _id %>

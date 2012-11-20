@@ -13,7 +13,6 @@ class Product extends REST_Controller {
 	}
 
 	public function product_add(){
-		die('ok');
 		if ($this->form_validation->run('addProduct') == TRUE) {
 
 			$product = $this->products_m->add($this->input->post());

@@ -12,6 +12,10 @@ var Search = Backbone.View.extend({
             selector: 'name',
             forceUpdate: true
         });
+        
+        this.resultsView = new Results({
+            collection: new Products()
+        });
     },
 
     getPreviewProducts: function(event) {
@@ -23,10 +27,10 @@ var Search = Backbone.View.extend({
 
         if(this.model.isValid()) {
             //alert(this.model.get('query'));
-            window.results.render(this.model.get('query'));
+            this.resultsView.render(this.model.get('query'));
         } else {
             //alert(this.displayError(this.getInputByName('query')));
-            window.results.render(this.model.get('query'));
+            this.resultsView.render(this.model.get('query'));
         }
 
     },
@@ -48,6 +52,7 @@ var Search = Backbone.View.extend({
 
     autoComplete: function(value) {
         //console.log(value);
+        this.resultsView.render(value);
     },
 
     displayError: function(element, error) {
