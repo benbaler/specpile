@@ -115,7 +115,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model('products_m');
         if ($this->get('query')) {
-            $results = $this->products_m->getProducts($this->get('query'));
+            $results = $this->products_m->getProductsByQuery($this->get('query'));
             // foreach ($results as $i => &$arr) {
             //     foreach ($arr as $j => &$value) {
             //         if ($j == '_id') {

@@ -115,20 +115,12 @@ class Page extends CI_Controller {
 	}
 
 	public function editProduct($p_id) {
-		$this->load->model(array('categories_m', 'brands_m', 'products_m'));
+		$this->load->model('products_m');
 		
-		$product = current($this->products_m->getProduct($p_id));
-
-		$category = current($this->categories_m->getCategory($product['category_id']));
-
-		// var_dump($category);
-		
-		$brand = current($this->brands_m->getBrand($product['brand_id']));
+		$product = $this->products_m->getProductById($p_id);
 
 		$data = array(
 			'app' => 'editProduct',
-			'category' => $category,
-			'brand' => $brand,
 			'product' => $product
 		);
 

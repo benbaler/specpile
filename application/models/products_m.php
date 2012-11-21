@@ -6,16 +6,16 @@ class Products_m extends CI_Model{
 
 	public function addProduct($p_data) {
 		if ($this->_exists(array(
-					'category_id' => new MongoId($p_data['category']),
-					'brand_id' => new MongoId($p_data['brand']),
+					'category_id' => MongoDBRef::create('categories', new MongoId($p_data['category'])),
+					'brand_id' => MongoDBRef::create('brands', new MongoId($p_data['brand'])),
 					'name' => trim($p_data['model'])
 				)) == FALSE) {
 
 			$id = $this->_set(array(
 					'category_id' => MongoDBRef::create('categories', new MongoId($p_data['category'])),
-					'brand_id' => new MongoId($p_data['brand']),
+					'brand_id' => MongoDBRef::create('brands', new MongoId($p_data['brand'])),
 					'name' => trim($p_data['model']),
-					'creator_id' => $this->session->userdata('id') ? $this->session->userdata('id') : $this->session->userdata('session_id'),
+					'creator_id' => MongoDBRef::create('users', new MongoId($this->session->userdata('id'))),
 					'date_time' => $this->mongo_db->date()
 				));
 
@@ -27,11 +27,19 @@ class Products_m extends CI_Model{
 		return FALSE;
 	}
 
-	public function getProduct($p_id) {
-		return $this->_get($p_id);
+	public function getProductById($p_id) {
+		$product = current($this->_get($p_id));
+
+		if (count($product) > 0) {
+			$product['category_id'] = $this->mongo_db->get_dbref($product['category_id']);
+			$product['brand_id'] = $this->mongo_db->get_dbref($product['brand_id']);
+			$product['creator_id'] = $this->mongo_db->get_dbref($product['creator_id']);
+		}
+
+		return $product;
 	}
 
-	public function getProducts($p_query) {
+	public function getProductsByQuery($p_query) {
 		return $this->mongo_db->where(array('name' => array('$regex' => $p_query, '$options' => 'i')))->get($this->collection);
 	}
 

@@ -1,4 +1,5 @@
-head.js('/assets/javascripts/libs/jquery.js',
+head.js(
+    '/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/libs/foundation.min.js', 
     '/assets/javascripts/libs/underscore.js', 
     '/assets/javascripts/libs/backbone.js',
@@ -7,9 +8,9 @@ head.js('/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/models/editProductCredentials_m.js',
 
     function() {
-        var editProductCredentials = new EditProductCredentials(window.productData);
+       var editProductCredentials = new EditProductCredentials(window.productData);
 
-        var editProductView = new EditProductView({
-            model: editProductCredentials
-        })
-    });
+       var editProductView = new EditProductView({
+        model: editProductCredentials
+    })
+   });
