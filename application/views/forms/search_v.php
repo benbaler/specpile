@@ -7,9 +7,9 @@
 
   <div class="row">
 
-    <div class="two columns">
+    <div class="two mobile-one columns">
       <div class="row">
-        <div class="twelve columns">
+        <div class="twelve mobile-four columns">
 
           <select id="categoryDropdown" name="category">
             <option value="" SELECTED>Select Category</option>
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="ten columns">
+  <div class="ten mobile-three columns">
     <div class="row collapse">
 
       <div class="ten mobile-three columns">

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="three columns">
+  <div class="three  mobile-four columns">
     <h4>Add Product</h4>
   </div>
 </div>
@@ -8,9 +8,9 @@
 
   <div class="row">
 
-    <div class="two columns">
+    <div class="two mobile-one columns">
       <div class="row">
-        <div class="twelve columns">
+        <div class="twelve mobile-four columns">
 
           <select id="categoryDropdown" name="category">
             <option value="" SELECTED>Select Category</option>
@@ -23,9 +23,9 @@
     </div>
   </div>
 
-  <div class="two columns">
+  <div class="two mobile-one columns">
     <div class="row">
-      <div class="twelve columns">
+      <div class="twelve mobile-four columns">
 
         <select id="brandDropdown" name="brand">
           <option value="" SELECTED>Brand</option>
@@ -39,15 +39,15 @@
 </div>
 
 
-<div class="eight columns">
+<div class="eight mobile-two columns">
 
   <div class="row collapse">
 
-    <div class="eight mobile-three columns">
+    <div class="eight mobile-two columns">
       <input type="text" name="model" placeholder="Example: iPhone 5"/>
     </div>
 
-    <div class="four mobile-one columns">
+    <div class="four mobile-two columns">
       <input class="postfix button expand" type="submit" value="Add Product"/>
     </div>
 
