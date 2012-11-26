@@ -4,19 +4,19 @@ var AddProductCredentials = Backbone.Model.extend({
     defaults: {
         'category': null,
         'brand': null,
-        'model': null
+        'product': null
     },
 
     validation: {
         category: {
             required: true,
-            length: 24
+            rangeLength: [1, 50]
         },
         brand: {
             required: true,
-            length: 24
+            rangeLength: [1, 50]
         },
-        model: {
+        product: {
             required: true,
             rangeLength: [1, 50]
         },

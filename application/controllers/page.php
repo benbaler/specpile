@@ -104,8 +104,8 @@ class Page extends CI_Controller {
 		
 		$data = array(
 			'app' => 'addProduct',
-			'categories' => $this->categories_m->get_all(),
-			'brands' => $this->brands_m->get_all()
+			'categories' => $this->categories_m->getListOfValues(),
+			'brands' => $this->brands_m->getListOfValues()
 		);
 
 		$this->load->view('header_v', $data);

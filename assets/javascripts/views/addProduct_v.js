@@ -1,7 +1,7 @@
 var AddProductView = Backbone.View.extend({
-	el: $('#addProduct-form'),
+    el: $('#addProduct-form'),
 
-	events: {
+    events: {
         'submit': 'submitCredentials',
         'keyup input': 'validateField',
         'change select': 'validateField'
@@ -13,6 +13,30 @@ var AddProductView = Backbone.View.extend({
             selector: 'name',
             forceUpdate: true
         });
+
+        $("#categories").autocomplete({
+            source: window.categories,
+            minLength: 0,
+            open: function(event, ui) {
+                //$(".ui-autocomplete").sortable();
+                //$(".ui-autocomplete").disableSelection();
+            }
+        }).focus(function() {
+            //Use the below line instead of triggering keydown
+            $(this).data("autocomplete").search($(this).val());
+        });
+
+        $("#brands").autocomplete({
+            source: window.brands,
+            minLength: 0,
+            open: function(event, ui) {
+                //$(".ui-autocomplete").sortable();
+                //$(".ui-autocomplete").disableSelection();
+            }
+        }).focus(function() {
+            //Use the below line instead of triggering keydown
+            $(this).data("autocomplete").search($(this).val());
+        });
     },
 
     validateField: function(event) {
@@ -22,10 +46,12 @@ var AddProductView = Backbone.View.extend({
     displayError: function(element) {
         next = String(element.next().prop("tagName")).toLowerCase() == "small" ? element.next() : element.after('<small class="hide"></small>').next();
 
-        switch(element.prop("tagName")){
-            case "SELECT" : val = $('option:selected',element).val();
+        switch(element.prop("tagName")) {
+        case "SELECT":
+            val = $('option:selected', element).val();
             break;
-            case "INPUT" : val = element.val();
+        case "INPUT":
+            val = element.val();
             break;
         }
 
@@ -57,12 +83,12 @@ var AddProductView = Backbone.View.extend({
         if(this.model.isValid()) {
             this.model.save({}, {
                 success: function(model, response) {
-                    location.href = 'editProduct/'+response.id;
+                    location.href = 'editProduct/' + response.id;
                 },
                 error: function(model, response) {
                     data = JSON.parse(response.responseText);
                     $(self.el).prev('.alert').remove();
-                    $(self.el).before('<div class="alert-box alert"> Error: ' + data.error.message + '<a href="#" class="close">&times;</a></div>');
+                    $(self.el).before('<div class="row alert-box alert"> Error: ' + data.error.message + '<a href="#" onclick="$(this).parent().remove()" class="close">&times;</a></div>');
                 }
             });
         }

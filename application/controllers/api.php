@@ -62,8 +62,18 @@ class Api extends REST_Controller {
 
         if ($this->form_validation->run('addProduct') == TRUE) {
 
-            $this->load->model('products_m');
-            $id = $this->products_m->addProduct($this->post());
+            $this->load->model(array('categories_m', 'brands_m', 'products_m'));
+            
+            $category = $this->categories_m->getCategoryByName($this->post('category'));
+
+            /* for unauthorized users */
+            if(count($category) == 0){
+                $this->response($this->error('Select Category from the provided list'), 404);
+            }
+
+            $brand = $this->brands_m->addBrand($this->post('brand'), $this->session->userdata('id'));
+
+            $id = $this->products_m->addProduct($this->post('product'), $category, $brand);
 
             if ($id == TRUE) {
                 $data = array(
@@ -71,8 +81,6 @@ class Api extends REST_Controller {
                 );
 
                 $this->response($data, 200);
-                return;
-
             } else {
                 $data = array(
                     'error' => array(
@@ -83,7 +91,6 @@ class Api extends REST_Controller {
                 );
 
                 $this->response($data, 404);
-                return;
             }
 
         }
@@ -124,6 +131,7 @@ class Api extends REST_Controller {
             //     }
             // }
             //$results = array(array('id' => 1, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1),array('id' => 2, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1));
+            
             if (is_array($results)) {
                 $this->response($results, 200);
             }
@@ -149,6 +157,14 @@ class Api extends REST_Controller {
 
             $this->response($data, 404);
         }
+    }
+
+    private function error($p_msg){
+        return array(
+            'error' => array(
+                'message' => $p_msg
+                )
+            );
     }
 }
 

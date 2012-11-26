@@ -31,12 +31,12 @@ $config = array(
     ),
     'addProduct' => array(
         array('field' => 'category',
-              'rules' => 'required|min_length[24]|max_length[24]'
+              'rules' => 'required|min_length[1]|max_length[50]'
         ),
         array('field' => 'brand',
-              'rules' => 'required|min_length[24]|max_length[24]'
+              'rules' => 'required|min_length[1]|max_length[50]'
         ),
-        array('field' => 'model',
+        array('field' => 'product',
               'rules' => 'required|min_length[1]|max_length[50]'
         )
     )

@@ -4,25 +4,43 @@ class Products_m extends CI_Model{
 
 	private $collection = 'products';
 
-	public function addProduct($p_data) {
-		if ($this->_exists(array(
-					'category_id' => MongoDBRef::create('categories', new MongoId($p_data['category'])),
-					'brand_id' => MongoDBRef::create('brands', new MongoId($p_data['brand'])),
-					'name' => trim($p_data['model'])
-				)) == FALSE) {
+	public function addProduct($p_productName, $p_categoryId, $p_brandId, $p_userId) {
+		$categoryRef = $this->mongo_db->create_dbref('categories', new MongoId($p_categoryId));
+		$brandRef = $this->mongo_db->create_dbref('brands', new MongoId($p_brandId));
+		$userRef = $this->mongo_db->create_dbref('users', new MongoId($p_userId));
 
-			$id = $this->_set(array(
-					'category_id' => MongoDBRef::create('categories', new MongoId($p_data['category'])),
-					'brand_id' => MongoDBRef::create('brands', new MongoId($p_data['brand'])),
-					'name' => trim($p_data['model']),
-					'creator_id' => MongoDBRef::create('users', new MongoId($this->session->userdata('id'))),
-					'date_time' => $this->mongo_db->date()
-				));
+		$datetime = $this->mongo_db->date();
 
-			//$ref = $this->mongo_db->create_dbref('categories', new MongoId($p_data['category']));
-			//var_dump($this->mongo_db->get_dbref($ref));
+		$productSearch = array(
+			'name' => $p_productName,
+			'category_id' => $categoryRef,
+			'brand_id' => $brandRef
+		);
 
-			return $id->__toString();
+		if ($this->_exists($productSearch) == FALSE) {
+
+			$product = array(
+				'name' => $p_productName,
+				'category_id' => $categoryRef,
+				'brand_id' => $brandRef,
+				'user_id' => $userRef,
+				'active' => true,
+
+				'version' => $datetime,
+				'history' => array(
+					array(
+						'name' => $p_productName,
+						'category_id' => $categoryRef,
+						'brand_id' => $brandRef,
+						'user_id' => $userRef,
+						'active' => true
+					)
+				)
+			);
+
+			$productId = $this->_set($product);
+
+			return $productId->__toString();
 		}
 		return FALSE;
 	}

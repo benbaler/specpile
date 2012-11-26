@@ -1,3 +1,8 @@
+<script>
+window.categories = <?= json_encode($categories); ?>;
+window.brands = <?= json_encode($brands); ?>;
+</script>
+
 <div class="row">
   <div class="three  mobile-four columns">
     <h4>Add Product</h4>
@@ -12,12 +17,7 @@
       <div class="row">
         <div class="twelve mobile-four columns">
 
-          <select id="categoryDropdown" name="category">
-            <option value="" SELECTED>Select Category</option>
-            <?php foreach($categories as $category) : ?>
-            <option value="<?= $category['_id'] ?>"><?= ucwords($category['name']) ?></option>
-          <?php endforeach; ?>
-        </select>
+        <input type="text" name="category" id="categories" placeholder="Select Category"/>
 
       </div>
     </div>
@@ -27,15 +27,10 @@
     <div class="row">
       <div class="twelve mobile-four columns">
 
-        <select id="brandDropdown" name="brand">
-          <option value="" SELECTED>Brand</option>
-          <?php foreach($brands as $brand) : ?>
-          <option value="<?= $brand['_id'] ?>"><?= ucwords($brand['name']) ?></option>
-        <?php endforeach; ?>
-      </select>
+    <input type="text" name="brand" id="brands" placeholder="Select Brand"/>
 
-    </div>
   </div>
+</div>
 </div>
 
 
@@ -43,11 +38,11 @@
 
   <div class="row collapse">
 
-    <div class="eight mobile-two columns">
-      <input type="text" name="model" placeholder="Example: iPhone 5"/>
+    <div class="nine mobile-two columns">
+      <input type="text" name="product" placeholder="Type Product Here"/>
     </div>
 
-    <div class="four mobile-two columns">
+    <div class="three mobile-two columns">
       <input class="postfix button expand" type="submit" value="Add Product"/>
     </div>
 
