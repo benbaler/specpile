@@ -1,6 +1,6 @@
 var Product = Backbone.Model.extend({
 	url: function(){
-		return '/index.php/api/search/product/' + this.id
+		return '/api/search/product/' + this.id
 	},
 
 	defaults: {

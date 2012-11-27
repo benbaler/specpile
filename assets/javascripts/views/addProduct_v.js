@@ -83,7 +83,7 @@ var AddProductView = Backbone.View.extend({
         if(this.model.isValid()) {
             this.model.save({}, {
                 success: function(model, response) {
-                    location.href = 'editProduct/' + response.id;
+                    location.href = 'edit/' + response.id;
                 },
                 error: function(model, response) {
                     data = JSON.parse(response.responseText);

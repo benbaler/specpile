@@ -1,5 +1,5 @@
  var RegisterCredentials = Backbone.Model.extend({
-     url: '/index.php/user/register',
+     url: '/user/register',
 
      defaults: {
          'first': '',

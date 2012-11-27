@@ -11,34 +11,46 @@ class Brands_m extends CI_Model{
 		return $this->_get($p_id);
 	}
 
-	public function addBrand($p_name, $p_userId) {
+	public function getBrandIdByName($p_name) {
+		$regex = new MongoRegex('/^'.$p_name.'$/i');
+		$brand = current($this->_get(array('name' => $regex)));
+		return isset($brand['_id']) ? $brand['_id']->__toString() : FALSE;
+	}
+
+	public function addBrandByName($p_name, $p_userId) {
 		$datetime = $this->mongo_db->date();
-		$user_ref = $this->mongo_db->create_dbref('users', new MongoId($p_userId));
+		$userId = new MongoId($p_userId);
 
-		$brand = array(
-			'name' => $p_name,
-			'user_id' => $user_ref,
-			'active' => true,
+		$brandId = $this->getBrandIdByName($p_name);
 
-			/* history */
-			'version' => $datetime,
-			'history' => array(
-				array(
-					'version' => $datetime,
-					'name'=> $p_name,
-					'user_id'=> $user_ref,
-					'active' => true
+		if ($brandId == FALSE) {
+			$brand = array(
+				'name' => $p_name,
+				'user_id' => $userId,
+				'active' => true,
+
+				/* history */
+				'version' => $datetime,
+				'history' => array(
+					array(
+						'version' => $datetime,
+						'name'=> $p_name,
+						'user_id'=> $userId,
+						'active' => true
+					)
 				)
-			)
-		);
+			);
 
-		return $this->_set($brand);
+			return $this->_set($brand)->__toString();
+		}
+
+		return $brandId;
 	}
 
 	private function _get($p_values, $p_key = '_id') {
 		if (is_array($p_values)) {
 			return $this->mongo_db->where($p_values)
-			->get($this->users_collection);
+			->get($this->collection);
 		}
 		return $this->mongo_db->where($p_key, new MongoId($p_values))
 		->get($this->collection);
@@ -49,13 +61,13 @@ class Brands_m extends CI_Model{
 			is_array($p_values) ? $p_values : array($p_key => $p_values));
 	}
 
-	public function getListOfValues() {
-		$brands = $this->mongo_db->get('brands');
-		$values = array();
+	public function getListOfNames() {
+		$brands = $this->mongo_db->get($this->collection);
+		$names = array();
 		foreach ($brands as $brand) {
-			$values[] = $brand['name'];
+			$names[] = $brand['name'];
 		}
-		return $values;
+		return $names;
 	}
 }
 

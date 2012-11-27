@@ -1,5 +1,5 @@
 var LoginCredentials = Backbone.Model.extend({
-    url: '/index.php/user/login',
+    url: '/user/login',
 
     defaults: {
         'email': '',

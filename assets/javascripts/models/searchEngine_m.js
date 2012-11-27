@@ -1,5 +1,5 @@
 var SearchEngine = Backbone.Model.extend({
-    url: '/index.php/search/product',
+    url: '/search/product',
 
     defaults: {
         'term': ''

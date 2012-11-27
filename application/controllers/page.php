@@ -104,8 +104,8 @@ class Page extends CI_Controller {
 		
 		$data = array(
 			'app' => 'addProduct',
-			'categories' => $this->categories_m->getListOfValues(),
-			'brands' => $this->brands_m->getListOfValues()
+			'categories' => $this->categories_m->getListOfNames(),
+			'brands' => $this->brands_m->getListOfNames()
 		);
 
 		$this->load->view('header_v', $data);
@@ -115,9 +115,20 @@ class Page extends CI_Controller {
 	}
 
 	public function editProduct($p_id) {
-		$this->load->model('products_m');
+		$this->load->model(array('categories_m','products_m'));
 		
 		$product = $this->products_m->getProductById($p_id);
+		echo "<br/><br/><pre>";
+		var_dump($product);
+		echo "<br/><br/><pre>";
+		$category = $this->categories_m->getCategoryById($product['category_id']->__toString());
+		var_dump($category);
+		echo '</pre>';
+
+		die;
+		// $categoryId = $this->categories_m->getCa
+		// $this->templates_m->getTemplateSpecsByCategoryId()
+		die;
 
 		$data = array(
 			'app' => 'editProduct',

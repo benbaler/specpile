@@ -1,49 +1,6 @@
 
 <script>
-window.productData = {
-  id: '<?= (string)$product['_id'] ?>',
-  name: '<?= ucfirst($product['name']) ?>',
-  category_id: '<?= (string)$product['category_id']['_id'] ?>',
-  brand_id: '<?= (string)$product['brand_id']['_id'] ?>',
-  specs: [
-    {
-      name: "Resolution", value: "1920x1080", options: ["1920x1080", "1024x768", "600x800"]
-    },
-    {
-      name: "Memory", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "OS", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "CPU", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "Width", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "Height", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "Weight", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "Color", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    },
-    {
-      name: "Core", value: "16GB", options: ["16GB", "8GB", "32GB"]
-    }
-  ]
-}
-</script>
-
-<script type="text/template" id="spec-template">
-<select id="" name="">
-<option value="" SELECTED>Select an Option</option>
-<% _.each(options, function(value,key) { %> 
-  <option value=""></option>
-  <% }); %>
-</select>
+window.productData = '<?= json_encode($product) ?>';
 </script>
 
 <script type="text/template" id="specs-template">
@@ -98,7 +55,7 @@ window.productData = {
 
 <div class="row">
   <div class="twelve columns">
-    <h5><?= ucfirst($product['category_id']['name']) ?> &rsaquo; <?= ucfirst($product['brand_id']['name']) ?> &rsaquo; <?= ucfirst($product['name']) ?></h5>
+    <h5><?= ucfirst($product['category_name']) ?> &rsaquo; <?= ucfirst($product['brand_name']) ?> &rsaquo; <?= ucfirst($product['name']) ?></h5>
   </div>
 </div>
 

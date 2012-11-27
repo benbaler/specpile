@@ -4,25 +4,25 @@
 	</div>
 	<?php if($logged_in == TRUE): ?>
 	<div class="one mobile-one columns offset-by-three">
-		<a href="/index.php/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
+		<a href="/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
 	</div>
 	<div class="one mobile-one columns">
-		<h5><a href="/index.php/page/profile/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
+		<h5><a href="/page/profile/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
 	</div>
 	<div class="one mobile-one columns">
-		<h5><a href="/index.php/page/logout">Logout</a></h5>
+		<h5><a href="/page/logout">Logout</a></h5>
 	</div>
 
 <?php else: ?>
 	<div class="one mobile-one columns offset-by-four">
-		<h5><a href="/index.php/page/register">Register</a></h5>
+		<h5><a href="/user/signup">Signup</a></h5>
 	</div>
 	<div class="one mobile-one columns">
-		<h5><a href="/index.php/page/login">Login</a></h5>
+		<h5><a href="/user/login">Login</a></h5>
 	</div>
 <?php endif; ?>
 <div class="two mobile-one columns">
-		<h5><a href="/index.php/page/addProduct">Add Product</a></h5>
+		<h5><a href="/product/add">Add Product</a></h5>
 	</div>
 </div>
 

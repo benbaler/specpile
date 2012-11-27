@@ -11,6 +11,12 @@ if (count($_POST) == 0 && count($post) > 0) {
 }
 
 class Api extends REST_Controller {
+    public function brand_get(){
+        var_dump($this->get('name'));
+        $this->load->model('brands_m');
+        $brand = $this->brands_m->getBrandIdByName($this->get('name'));
+        var_dump($brand);
+    }
 
     public function user_get() {
         if (!$this->get('id')) {
@@ -58,52 +64,24 @@ class Api extends REST_Controller {
     }
 
     public function product_post() {
+        // TODO: user must be logged in to add a product
+        // TODO: user authorizations for adding categories, brands etc.
+        
         $this->load->library('form_validation');
 
         if ($this->form_validation->run('addProduct') == TRUE) {
 
             $this->load->model(array('categories_m', 'brands_m', 'products_m'));
+            $userId = $this->session->userdata('id');
             
-            $category = $this->categories_m->getCategoryByName($this->post('category'));
+            $categoryId = $this->categories_m->addCategoryByName(trim($this->post('category')), $userId);
+            $brandId = $this->brands_m->addBrandByName(trim($this->post('brand')), $userId);
+            $productId = $this->products_m->addProductByName(trim($this->post('product')), $categoryId, $brandId, $userId);
 
-            /* for unauthorized users */
-            if(count($category) == 0){
-                $this->response($this->error('Select Category from the provided list'), 404);
-            }
-
-            $brand = $this->brands_m->addBrand($this->post('brand'), $this->session->userdata('id'));
-
-            $id = $this->products_m->addProduct($this->post('product'), $category, $brand);
-
-            if ($id == TRUE) {
-                $data = array(
-                    'id' => $id
-                );
-
-                $this->response($data, 200);
-            } else {
-                $data = array(
-                    'error' => array(
-                        'message' => 'product is already exists',
-                        'type' => 'product',
-                        'code' => '1'
-                    )
-                );
-
-                $this->response($data, 404);
-            }
-
+            $this->response(array('id' => $productId), 200);
         }
 
-        $data = array(
-            'error' => array(
-                'message' => 'fields are not valid',
-                'type' => 'product',
-                'code' => '2'
-            )
-        );
-
-        $this->response($data, 404);
+        $this->response($this->error('Fields are not valid'), 404);
     }
 
     public function products_get() {

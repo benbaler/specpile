@@ -1,49 +1,60 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require(APPPATH.'libraries/REST_Controller.php');  
+class Product extends CI_Controller {
 
-class Product extends REST_Controller {
-
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-
-		//$this->load->library('REST_server');
-		$this->load->library('form_validation');
-        $this->load->model('products_m');
 	}
 
-	public function product_add(){
-		if ($this->form_validation->run('addProduct') == TRUE) {
+	public function index($p_id)
+	{
+		echo $p_id;
+	}
 
-			$product = $this->products_m->add($this->input->post());
-
-			if ($product == TRUE) {
-				$this->rest_server->success($product);
-				return;
-
-			} else {
-				$data = array(
-					'error' => array(
-						'message' => 'email is already exists',
-						'type' => 'register',
-						'code' => '1'
-						)
-					);
-
-				$this->rest_server->fail($data);
-				return;
-			}
-
-		}
+	public function add(){
+		$this->load->model(array('categories_m', 'brands_m'));
+		
 		$data = array(
-			'error' => array(
-				'message' => 'fields are not valid',
-				'type' => 'register',
-				'code' => '2'
-				)
-			);
+			'app' => 'addProduct',
+			'categories' => $this->categories_m->getListOfNames(),
+			'brands' => $this->brands_m->getListOfNames()
+		);
 
-		$this->rest_server->fail($data);
+		$user = $this->_user();
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $user);
+		$this->load->view('forms/addProduct_v', $data);
+		$this->load->view('footer_v');
+	}
+
+	public function edit($p_id)
+	{
+		$this->load->model(array('categories_m','products_m'));
+		
+		$product = $this->products_m->getProductViewById($p_id);
+
+		$data = array(
+			'app' => 'editProduct',
+			'product' => $product
+		);
+
+		$user = $this->_user();
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $user);
+		$this->load->view('forms/editProduct_v', $data);
+		$this->load->view('footer_v');
+	}
+
+	private function _user(){
+		return array(
+			'id' => $this->session->userdata('id'),
+			'first' => $this->session->userdata('first'),
+			'picture_url' => $this->session->userdata('picture_url'),
+			'logged_in' => $this->session->userdata('logged_in')
+		);
 	}
 
 }
