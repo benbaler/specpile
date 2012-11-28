@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width" />
 	
     <link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
-    <link href="/assets/stylesheets/jquery.ui.css" rel="stylesheet" type="text/css">
+    <link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
     <link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 
     <script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>

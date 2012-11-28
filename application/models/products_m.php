@@ -61,39 +61,146 @@ class Products_m extends CI_Model{
 		return $this->mongo_db->where(array('name' => array('$regex' => $p_query, '$options' => 'i')))->get($this->collection);
 	}
 
-	public function getProductViewById($p_id)
-	{
+	public function getProductViewById($p_id) {
 		$product = current($this->_get($p_id));
-		
+
 		$productView = array();
 
-		if(count($product) > 0){
+		if (count($product) > 0) {
 			$this->load->model(array('categories_m', 'brands_m', 'specs_m', 'options_m'));
 
-			$productView['_id'] = $product['_id']->__toString();
-			$productView['name'] = $product['name']->__toString();
-			$productView['category_id'] = $product['category_id']->__toString();
-			$productView['brand_id'] = $product['brand_id']->__toString();
-			
-			$productView['category_name'] = $this->categories_m->getCategoryNameById($product['category_id']->__toString());
-			$productView['brand_name'] = $this->brands_m->getBrandNameById($product['brand_id']->__toString());
+			$productId = $product['_id']->__toString();
+			$categoryId = $product['category_id']->__toString();
+			$brandId = $product['brand_id']->__toString();
 
-			$productView['specs'] = array();
+			$category = $this->categories_m->getCategoryById($categoryId);
+			$brand = $this->brands_m->getBrandById($brandId);
 
-			$category = $this->categories_m->getCategoryNameById($product['category_id']->__toString());
-			
-			foreach ($category['specs'] as $specId) {
-				$spec = $this->getSpecById($specId->__toString());
-				$options = $this->getOptionsBySpecId($specId->__toString());
-				
+
+			// TODO: get specView by spec ids??? should be in specs model
+			$specsView = array();
+
+			foreach ($category['specs'] as $spec_id) {
+				$specId = $spec_id->__toString();
+				$spec = $this->specs_m->getSpecById($specId);
+				$options = $this->options_m->getOptionsBySpecId($specId);
+
+				$optionsView = array();
+
+				foreach ($options as $option) {
+					$optionSeleced = FALSE;
+					$optionId = $option['_id']->__toString();
+
+					if (in_array($optionId, $product['options'])) {
+						$optionSeleced = TRUE;
+					}
+
+					$optionsView[] = array(
+						'_id' => $optionId,
+						'name' => $option['name'],
+						'selected' => $optionSeleced
+					);
+				}
+
+				$specsView[] = array(
+					'_id' => $specId,
+					'name' => $spec['name'],
+					'options' =>  $optionsView
+				);
+
 			}
 
-			foreach ($product['options'] as $option) {
-				
-			}
+
+			// fake specs for testing
+			$specsFake = array(
+				array(
+					'_id' => '1',
+					'name' => 'Resolution',
+					'options' => array(
+						array(
+							'_id' => '1',
+							'name' => '1920x1080',
+							'selected' => false,
+							'product_id' => '1'
+						),
+						array(
+							'_id' => '2',
+							'name' => '1024x768',
+							'selected' => true,
+							'product_id' => '1'
+						),
+						array(
+							'_id' => '3',
+							'name' => '800x600',
+							'selected' => false,
+							'product_id' => '1'
+						),
+						array(
+							'_id' => '4',
+							'name' => '300x200',
+							'selected' => false,
+							'product_id' => '1'
+						)
+					)
+				),
+				array(
+					'_id' => '2',
+					'name' => 'CPU',
+					'options' => array(
+						array(
+							'_id' => '1',
+							'name' => 'A4',
+							'selected' => false
+						),
+						array(
+							'_id' => '2',
+							'name' => 'A5',
+							'selected' => true
+						),
+						array(
+							'_id' => '3',
+							'name' => 'A6',
+							'selected' => false
+						)
+					)
+				),
+				array(
+					'_id' => '3',
+					'name' => 'Memory',
+					'options' => array(
+						array(
+							'_id' => '1',
+							'name' => '1GB',
+							'selected' => false
+						),
+						array(
+							'_id' => '2',
+							'name' => '2GB',
+							'selected' => true
+						),
+						array(
+							'_id' => '3',
+							'name' => '4GB',
+							'selected' => false)
+					)
+				)
+			);
+
+			$productView = array(
+				'_id' => $productId,
+				'name' => $product['name'],
+				'category_id' => $categoryId,
+				'category_name' => $category['name'],
+				'brand_id' => $brandId,
+				'brand_name' => $brand['name'],
+
+				'specs' => $specsFake//$specsView
+			);
+
+
 		}
 
-		var_dump($product);
+		return $productView;
 	}
 
 	public function get_all() {

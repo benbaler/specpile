@@ -8,7 +8,7 @@ class Brands_m extends CI_Model{
 	}
 
 	public function getBrandById($p_id) {
-		return $this->_get($p_id);
+		return current($this->_get($p_id));
 	}
 
 	public function getBrandIdByName($p_name) {
@@ -29,7 +29,6 @@ class Brands_m extends CI_Model{
 				'user_id' => $userId,
 				'active' => true,
 
-				/* history */
 				'version' => $datetime,
 				'history' => array(
 					array(

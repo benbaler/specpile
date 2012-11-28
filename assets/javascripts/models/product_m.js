@@ -7,10 +7,18 @@ var Product = Backbone.Model.extend({
 		_id: null,
 		name: null,
 		category_id: null,
-		brand_id: null
+		category_name: null,
+		brand_id: null,
+		brand_name: null
 	},
 
+	specs: null,
+
 	idAttribute: '_id',
+
+	initialize: function(options){
+		this.specs = new Specs(options.specs);
+	},
 
 	parse: function(response) {
 		response._id = response._id['$id'];

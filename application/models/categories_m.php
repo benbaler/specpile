@@ -4,7 +4,7 @@ class Categories_m extends CI_Model{
 	private $collection = 'categories';
 
 	public function getCategoryById($p_id) {
-		return $this->_get($p_id);
+		return current($this->_get($p_id));
 	}
 
 	public function getCategoryIdByName($p_name) {
