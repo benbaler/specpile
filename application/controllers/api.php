@@ -11,14 +11,24 @@ if (count($_POST) == 0 && count($post) > 0) {
 }
 
 class Api extends REST_Controller {
-    public function brand_get(){
-        var_dump($this->get('name'));
-        $this->load->model('brands_m');
-        $brand = $this->brands_m->getBrandIdByName($this->get('name'));
-        var_dump($brand);
-    }
+
+    /**
+     * [user_get description]
+     *
+     * @return [type] [description]
+     */
+
 
     public function user_get() {
+        var_dump('get');
+        var_dump(apache_request_headers());
+        var_dump($this->put());
+        var_dump($this->get());
+        var_dump($this->input->post());
+        var_dump($this->post());
+        var_dump($this->delete());
+        die();
+
         if (!$this->get('id')) {
             $this->response(NULL, 400);
         }
@@ -30,18 +40,66 @@ class Api extends REST_Controller {
             $this->response(NULL, 404);
         }
     }
-    public function user_post() {
-        $result = $this->user_model->update( $this->post('id'), array(
-                'name' => $this->post('name'),
-                'email' => $this->post('email')
-            ));
-        if ($result === FALSE) {
-            $this->response(array('status' => 'failed'));
+
+    /**
+     * [user_post description]
+     *
+     * @return [type] [description]
+     */
+    public function user_post($action) {
+        $this->load->model(array('users_m'));
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run('register') == TRUE) {
+            $first = trim(ucfirst($this->post('first')));
+            $last = trim(ucfirst($this->post('last')));
+            $email = trim(strtolower($this->post('email')));
+            $pass = $this->post('pass');
+
+            $success = $this->users_m->register($first, $last, $email, $pass);
+
+            if ($success) {
+                $this->response(array('success' => true), 200);
+
+            } else {
+                $this->response($this->error('Email is already exists'), 404);
+            }
         }
-        else {
-            $this->response(array('status' => 'success'));
-        }
+
+        $this->response($this->error('Fields are not valid'), 404);
     }
+
+    public function user_put(){
+        var_dump('put');
+        var_dump($this->input->post());
+        var_dump($this->put());
+        var_dump($this->get());
+        var_dump($this->post());
+        var_dump($this->delete());
+        die();
+
+        $this->load->model(array('users_m'));
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run('register') == TRUE) {
+            $first = trim(ucfirst($this->post('first')));
+            $last = trim(ucfirst($this->post('last')));
+            $email = trim(strtolower($this->post('email')));
+            $pass = $this->post('pass');
+
+            $success = $this->users_m->register($first, $last, $email, $pass);
+
+            if ($success) {
+                $this->response(array('success' => true), 200);
+
+            } else {
+                $this->response($this->error('Email is already exists'), 404);
+            }
+        }
+
+        $this->response($this->error('Fields are not valid'), 404);
+    }
+
     public function users_get() {
         $users = $this->user_model->get_all();
         if ($users) {
@@ -66,14 +124,14 @@ class Api extends REST_Controller {
     public function product_post() {
         // TODO: user must be logged in to add a product
         // TODO: user authorizations for adding categories, brands etc.
-        
+
         $this->load->library('form_validation');
 
         if ($this->form_validation->run('addProduct') == TRUE) {
 
             $this->load->model(array('categories_m', 'brands_m', 'products_m'));
             $userId = $this->session->userdata('id');
-            
+
             $categoryId = $this->categories_m->addCategoryByName(trim($this->post('category')), $userId);
             $brandId = $this->brands_m->addBrandByName(trim($this->post('brand')), $userId);
             $productId = $this->products_m->addProductByName(trim($this->post('product')), $categoryId, $brandId, $userId);
@@ -109,7 +167,7 @@ class Api extends REST_Controller {
             //     }
             // }
             //$results = array(array('id' => 1, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1),array('id' => 2, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1));
-            
+
             if (is_array($results)) {
                 $this->response($results, 200);
             }
@@ -137,12 +195,44 @@ class Api extends REST_Controller {
         }
     }
 
-    private function error($p_msg){
+    private function error($p_msg) {
         return array(
             'error' => array(
                 'message' => $p_msg
-                )
-            );
+            )
+        );
+    }
+
+    private function userLogin() {
+        $this->load->model(array('users_m'));
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run('login') == TRUE) {
+            $email = trim(strtolower($this->post('email')));
+            $pass = $this->post('pass');
+
+            $user = $this->users_m->login($email, $pass);
+
+            if ($user) {
+                $data = array(
+                    'id' => (string)$user['_id'],
+                    'first' => $user['first'],
+                    'last' => $user['last'],
+                    'email' => $user['email'],
+                    'role' => $user['role'],
+                    'picture_url' => $user['picture_url'],
+                    'logged_in' => TRUE
+                );
+
+                $this->session->set_userdata($data);
+                $this->response($data, 200);
+
+            } else {
+                $this->response($this->error('Email and password combination are not match'), 404);
+            }
+        }
+
+        $this->response($this->error('Fields are not valid'), 404);
     }
 }
 

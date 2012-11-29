@@ -4,7 +4,7 @@ window.brands = <?= json_encode($brands); ?>;
 </script>
 
 <div class="row">
-  <div class="three  mobile-four columns">
+  <div class="three mobile-four columns">
     <h4>Add Product</h4>
   </div>
 </div>
@@ -13,7 +13,7 @@ window.brands = <?= json_encode($brands); ?>;
 
   <div class="row">
 
-    <div class="two mobile-one columns">
+    <div class="two mobile-four columns">
       <div class="row">
         <div class="twelve mobile-four columns">
 
@@ -23,7 +23,7 @@ window.brands = <?= json_encode($brands); ?>;
     </div>
   </div>
 
-  <div class="two mobile-one columns">
+  <div class="two mobile-four columns">
     <div class="row">
       <div class="twelve mobile-four columns">
 
@@ -34,7 +34,7 @@ window.brands = <?= json_encode($brands); ?>;
 </div>
 
 
-<div class="eight mobile-two columns">
+<div class="eight mobile-four columns">
 
   <div class="row collapse">
 

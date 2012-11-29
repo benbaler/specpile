@@ -1,29 +1,43 @@
 <div class="row">
-	<div class="four mobile-two columns" id="logo">
+	<div class="four mobile-four columns" id="logo">
 		<h1><a href="/">Specpile</a></h1>
 	</div>
+
 	<?php if($logged_in == TRUE): ?>
+
 	<div class="one mobile-one columns offset-by-three">
 		<a href="/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
 	</div>
+
 	<div class="one mobile-one columns">
 		<h5><a href="/page/profile/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
 	</div>
+
 	<div class="one mobile-one columns">
 		<h5><a href="/page/logout">Logout</a></h5>
 	</div>
 
-<?php else: ?>
-	<div class="one mobile-one columns offset-by-four">
+	<div class="two mobile-one columns">
+		<h5><a href="/product/add">Add Product</a></h5>
+	</div>
+
+	<?php else: ?>
+
+	<div class="one mobile-one columns offset-by-six">
 		<h5><a href="/user/signup">Signup</a></h5>
 	</div>
+
 	<div class="one mobile-one columns">
 		<h5><a href="/user/login">Login</a></h5>
 	</div>
-<?php endif; ?>
-<div class="two mobile-one columns">
-		<h5><a href="/product/add">Add Product</a></h5>
+
+	<div class="one mobile-two columns">
 	</div>
+
+
+
+	<?php endif; ?>
+
 </div>
 
 <!--

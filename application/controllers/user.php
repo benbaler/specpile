@@ -12,65 +12,6 @@ if (!defined('BASEPATH'))
 
 class User extends CI_Controller {
 
-    public function __construct() {
-        parent::__construct();
-
-        $this->load->library('REST_server');
-        $this->load->library('form_validation');
-        $this->load->model('users_m');
-    }
-
-    /**
-     * login user
-     *
-     * @return bool login
-     */
-    public function login() {
-        if ($this->form_validation->run('login') == TRUE) {
-            $user = $this->users_m->login($this->input->post());
-
-            if (count($user) > 0 && $row = current($user)) {
-                $data = array(
-                    'id' => (string)$row['_id'],
-                    'first' => $row['first'],
-                    'last' => $row['last'],
-                    'email' => $row['email'],
-                    'role' => $row['role'],
-                    'picture_url' => $row['picture_url'],
-                    'logged_in' => TRUE
-                    );
-
-                $this->session->set_userdata($data);
-                $this->rest_server->success($data);
-
-                return;
-
-            } else {
-                $data = array(
-                    'error' => array(
-                        'message' => 'email and password combination are not match',
-                        'type' => 'login',
-                        'code' => '1'
-                        )
-                    );
-
-                $this->rest_server->fail($data);
-
-                return;
-            }
-
-        }
-        $data = array(
-            'error' => array(
-                'message' => 'email or password are not valid',
-                'type' => 'login',
-                'code' => '2'
-                )
-            );
-
-        $this->rest_server->fail($data);
-    }
-
     /**
      * register user
      *
@@ -125,6 +66,55 @@ class User extends CI_Controller {
         $this->load->library('facebook', $config);
     }
 
+    public function login()
+    {
+        if ($this->session->userdata('logged_in') == TRUE)
+            redirect('/');
+
+        // $this->load->library('Facebook');
+
+        // $user = $this->facebook->getUser();
+
+        // if ($user) {
+        //  $logoutUrl = $this->facebook->getLogoutUrl();
+        //  echo '<a href="'.$logoutUrl.'">Logout</a>';
+        // } else {
+        //  $loginUrl = $this->facebook->getLoginUrl(array('redirect_uri' => 'http://specpile.com'));
+        //  echo '<a href="'.$loginUrl.'">Login</a>';
+        // }
+
+        $data = array(
+            'app' => 'login'
+        );
+
+        $this->load->view('header_v', $data);
+        $this->load->view('topbar_v', $this->_user());
+        $this->load->view('forms/login_v');
+        $this->load->view('footer_v');
+    }
+
+    public function signup() {
+        if ($this->session->userdata('logged_in') == TRUE)
+            redirect('user/login');
+
+        $data = array(
+            'app' => 'register'
+        );
+
+        $this->load->view('header_v', $data);
+        $this->load->view('topbar_v', $this->_user());
+        $this->load->view('forms/register_v');
+        $this->load->view('footer_v');
+    }
+
+    private function _user(){
+        return array(
+            'id' => $this->session->userdata('id'),
+            'first' => $this->session->userdata('first'),
+            'picture_url' => $this->session->userdata('picture_url'),
+            'logged_in' => $this->session->userdata('logged_in')
+        );
+    }
     
 
 }

@@ -1,12 +1,15 @@
  var RegisterCredentials = Backbone.Model.extend({
-     url: '/user/register',
+     url: '/api/user/signup',
 
      defaults: {
-         'first': '',
-         'last': '',
-         'email': '',
-         'pass': ''
+        '_id' : null,
+         'first': null,
+         'last': null,
+         'email': null,
+         'pass': null
      },
+
+     idAttribute: '_id',
 
      validation: {
          first: {

@@ -42,6 +42,7 @@ var Register = Backbone.View.extend({
         self = this;
 
         $.each(this.model.defaults, function(key, value) {
+            if(key == '_id') return;
             self.displayError(self.getInputByName(key));
             self.model.set(key, self.getInputByName(key).val());
         });

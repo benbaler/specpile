@@ -47,7 +47,7 @@ var Login = Backbone.View.extend({
         });
 
         if(this.model.isValid()) {
-            this.model.save({}, {
+            this.model.fetch({data: this.model.toJSON(), type: 'POST'} , {
                 success: function(model, response) {
                     location.href = "/";
                 },

@@ -17,11 +17,11 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return array
      */
-    public function login($p_data) {
-        return $this->_get(array(
-            'email' => $p_data['email'],
-            'pass' => $this->_salt($p_data['pass'])
-            ));
+    public function login($p_email, $p_pass) {
+        return current($this->_get(array(
+                    'email' => $p_email,
+                    'pass' => $this->_salt($p_pass)
+                )));
     }
 
     /**
@@ -32,18 +32,39 @@ class Users_m extends CI_Model {
      * @param string  $p_pass
      * @return boolean
      */
-    public function register($p_data) {
-        /* check if username or email already exists */
-        if ($this->_exists($p_data['email'], 'email') == FALSE) {
+    public function register($p_first, $p_last, $p_email, $p_pass) {
+        if ($this->getUserByEmail($p_email)) {
+            return FALSE;
+        } else {
+            $datetime = $this->mongo_db->date();
 
             /* create new user */
             $this->_set(array(
-                'first' => $p_data['first'],
-                'last' => $p_data['last'],
-                'email' => $p_data['email'],
-                'pass' => $this->_salt($p_data['pass']),
-                'role' => 'regular',
-                'picture_url' => $this->get_gravatar($p_data['email'], 30),
+                    'first' => $p_first,
+                    'last' => $p_last,
+                    'email' => $p_email,
+                    'pass' => $this->_salt($p_pass),
+                    'role' => 'regular',
+                    'picture_url' => $this->getGravatar($p_email, 30),
+                    'active' => true,
+                    'validated' => false,
+
+                    'version' => $datetime,
+                    'history' => array(
+                        array(
+                            'version' => $datetime,
+                            'first' => $p_first,
+                            'last' => $p_last,
+                            'email' => $p_email,
+                            'pass' => $this->_salt($p_pass),
+                            'role' => 'regular',
+                            'picture_url' => $this->getGravatar($p_email, 30),
+                            'active' => true,
+                            'validated' => false
+                        )
+                    )
+
+
                 ));
 
             /*
@@ -52,22 +73,14 @@ class Users_m extends CI_Model {
 
             return TRUE;
         }
-
-        return FALSE;
     }
 
-    /**
-     * check if email exists
-     *
-     * @param string  $p_email
-     * @return boolean
-     */
-    public function check_if_email_exists($p_email) {
-        return $this->_exists($p_email, 'email');
-    }
-
-    public function getUser($p_id){
+    public function getUser($p_id) {
         return $this->_get($p_id);
+    }
+
+    public function getUserByEmail($p_email) {
+        return current($this->_get(array('email' => $p_email)));
     }
 
     /**
@@ -110,9 +123,9 @@ class Users_m extends CI_Model {
      */
     private function _salt($p_pass) {
         return md5($p_pass . 'salt');
-    }           
+    }
 
-    public function get_gravatar($p_email, $p_size){
+    public function getGravatar($p_email, $p_size) {
         $default = 'http://www.smore.com/s/images/default-profile-large.jpg';
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $p_email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $p_size;
     }

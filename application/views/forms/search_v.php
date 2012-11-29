@@ -7,26 +7,21 @@
 
   <div class="row">
 
-    <div class="two mobile-one columns">
+    <div class="two mobile-four columns">
       <div class="row">
         <div class="twelve mobile-four columns">
 
-          <select id="categoryDropdown" name="category">
-            <option value="" SELECTED>Select Category</option>
-            <?php foreach($categories as $category) : ?>
-            <option value="<?= $category['_id'] ?>"><?= ucwords($category['name']) ?></option>
-          <?php endforeach; ?>
-        </select>
+        <input type="text" name="category" id="categories" placeholder="Select Category"/>
 
       </div>
     </div>
   </div>
 
-  <div class="ten mobile-three columns">
+  <div class="ten mobile-four columns">
     <div class="row collapse">
 
       <div class="ten mobile-three columns">
-        <input type="text" name="query" placeholder="Search for products"/>
+        <input type="text" name="query" placeholder="Search Product"/>
       </div>
 
       <div class="two mobile-one columns">
