@@ -4,7 +4,7 @@ class Github extends CI_Controller {
 
 	public function pull()
 	{
-		`git pull`;
+		`sudo git pull`;
 	}
 
 }
