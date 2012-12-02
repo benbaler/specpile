@@ -13,8 +13,6 @@ if (!defined('BASEPATH'))
 class Page extends CI_Controller {
 
 	public function index() {
-		echo "pull works :)";
-
 		$this->load->model('categories_m');
 
 		$data = array(
