@@ -2,7 +2,7 @@
 
 class Github extends CI_Controller {
 
-	public function index()
+	public function pull()
 	{
 		`git pull`;
 	}
