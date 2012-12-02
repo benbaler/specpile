@@ -75,8 +75,8 @@ class Users_m extends CI_Model {
         }
     }
 
-    public function getUser($p_id) {
-        return $this->_get($p_id);
+    public function getUserById($p_id) {
+        return current($this->_get($p_id));
     }
 
     public function getUserByEmail($p_email) {
@@ -130,6 +130,22 @@ class Users_m extends CI_Model {
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $p_email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $p_size;
     }
 
+    public function setSession($p_userData) {
+        $data = array(
+            'id' => $p_userData['_id'],
+            'first' => $p_userData['first'],
+            'last' => $p_userData['last'],
+            'email' => $p_userData['email'],
+            'role' => $p_userData['role'],
+            'picture_url' => $p_userData['picture_url'],
+            'logged_in' => TRUE,
+            'active' => $p_userData['active'],
+            'validated' => $p_userData['validated']
+        );
+
+        $this->session->set_userdata($data);
+
+    }
 }
 
 ?>

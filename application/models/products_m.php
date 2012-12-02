@@ -150,17 +150,20 @@ class Products_m extends CI_Model{
 						array(
 							'_id' => '1',
 							'name' => 'A4',
-							'selected' => false
+							'selected' => false,
+							'product_id' => '1'
 						),
 						array(
 							'_id' => '2',
 							'name' => 'A5',
-							'selected' => true
+							'selected' => true,
+							'product_id' => '1'
 						),
 						array(
 							'_id' => '3',
 							'name' => 'A6',
-							'selected' => false
+							'selected' => false,
+							'product_id' => '1'
 						)
 					)
 				),
@@ -171,17 +174,21 @@ class Products_m extends CI_Model{
 						array(
 							'_id' => '1',
 							'name' => '1GB',
-							'selected' => false
+							'selected' => false,
+							'product_id' => '1'
 						),
 						array(
 							'_id' => '2',
 							'name' => '2GB',
-							'selected' => true
+							'selected' => true,
+							'product_id' => '1'
 						),
 						array(
 							'_id' => '3',
 							'name' => '4GB',
-							'selected' => false)
+							'selected' => false,
+							'product_id' => '1'
+						)
 					)
 				)
 			);

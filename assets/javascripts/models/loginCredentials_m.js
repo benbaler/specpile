@@ -1,5 +1,5 @@
 var LoginCredentials = Backbone.Model.extend({
-    url: '/api/user',
+    url: '/api/user/login',
 
     defaults: {
         '_id': null,
@@ -9,10 +9,10 @@ var LoginCredentials = Backbone.Model.extend({
 
     idAttribute: '_id',
 
-    parse: function(response) {
-        response._id = response._id['$id'];
-        return response;
-    },
+    // parse: function(response) {
+    //     response._id = response._id['$id'];
+    //     return response;
+    // },
 
     validation: {
         email: {

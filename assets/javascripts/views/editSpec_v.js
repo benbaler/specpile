@@ -5,6 +5,11 @@ var EditSpecView = Backbone.View.extend({
 
 	events: {
 		'keyup .spec': 'showSaveButton',
+		'keydown .spec': 'showSaveButton',
+		'change .spec': 'showSaveButton',
+		'blur .spec': 'showSaveButton',
+		'focus .spec': 'showSaveButton',
+		'click .spec': 'showSaveButton',
 		'click button': 'saveOption'
 	},
 
@@ -20,10 +25,14 @@ var EditSpecView = Backbone.View.extend({
 	autoComplete: function(){
 		var id = this.model.get('_id');
 		var options = this.getOptionsList();
+		var self = this;
 
 		$('.spec[data-id="'+id+'"]').autocomplete({
 			source: options,
-			minLength: 0
+			minLength: 0,
+			select: function(){
+				$(this).trigger('click');
+			}
 		}).focus(function() {
 			$(this).data("autocomplete").search($(this).val());
 		});

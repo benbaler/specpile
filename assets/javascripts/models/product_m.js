@@ -17,7 +17,8 @@ var Product = Backbone.Model.extend({
 	idAttribute: '_id',
 
 	initialize: function(options){
-		this.specs = new Specs(options.specs);
+		if(options.specs !== undefined)
+			this.specs = new Specs(options.specs);
 	},
 
 	parse: function(response) {

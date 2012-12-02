@@ -8,13 +8,30 @@ var Search = Backbone.View.extend({
 
     initialize: function() {
         _.bindAll(this, 'previewProducts', 'getPreviewProducts');
+
         Backbone.Validation.bind(this, {
             selector: 'name',
             forceUpdate: true
         });
-        
+
         this.resultsView = new Results({
             collection: new Products()
+        });
+
+        this.render(window.categories);
+    },
+
+    render: function(categories){
+        $("#categories").autocomplete({
+            source: categories,
+            minLength: 0,
+            open: function(event, ui) {
+                //$(".ui-autocomplete").sortable();
+                //$(".ui-autocomplete").disableSelection();
+            }
+        }).focus(function() {
+            //Use the below line instead of triggering keydown
+            $(this).data("autocomplete").search($(this).val());
         });
     },
 

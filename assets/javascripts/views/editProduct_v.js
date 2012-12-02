@@ -2,10 +2,11 @@ var EditProductView = Backbone.View.extend({
 	el: $('#editProduct-form'),
 
 	events: {
-
+		'click #addNewSpecField button': 'addNewSpecField'
 	},
 
 	initialize: function() {
+		_.bindAll(this, 'addNewSpecField');
 		this.render();
 	},
 
@@ -35,6 +36,7 @@ var EditProductView = Backbone.View.extend({
 		//this.model.collection = new Specs(this.model.get('specs'));
 		//this.collection = new Specs(this.model.get('specs'));
 		var self = this;
+
 		_.each(this.model.specs.models, function(spec, i) {
 			var editSpecView = new EditSpecView({
 				model: spec
@@ -44,5 +46,24 @@ var EditProductView = Backbone.View.extend({
 			editSpecView.autoComplete();
 			// editSpecView.delegateEvents();
 		}, this);
+
+		// this.$el.append('<div class="row" id="addNewSpecField">'
+		//   					+'<div class="six mobile-four columns offset-by-one">'
+		//     					+'<button id="addNewSpecField" class="button expand">Add Spec Field</button>'
+		//   					+'</div>'
+		// 						+'</div>');
+	},
+
+	addNewSpecField: function(event) {
+		var editSpecView = new EditSpecView({
+			model: new Spec({
+				name: 'temp',
+				options: []
+			})
+		});
+
+		$(editSpecView.render().$el).insertBefore('#addNewSpecField', this.$el);
+		// this.$el.append(editSpecView.render().$el);
+		editSpecView.autoComplete();
 	}
 });

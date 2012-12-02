@@ -1,3 +1,7 @@
+<script>
+window.categories = <?= json_encode($categories); ?>;
+</script>
+
 <div class="row">
   <div class="two columns">
     <h4>Search</h4>
@@ -21,7 +25,7 @@
     <div class="row collapse">
 
       <div class="ten mobile-three columns">
-        <input type="text" name="query" placeholder="Search Product"/>
+        <input type="text" name="query" id="query" placeholder="Search Product"/>
       </div>
 
       <div class="two mobile-one columns">

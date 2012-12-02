@@ -1,7 +1,7 @@
 <form id="register-form">
     <div class="row">
         <div class="four mobile-four columns centered">
-            <h2>Register</h2>
+            <h2>Sign Up</h2>
         </div>
     </div>
     <div class="row">

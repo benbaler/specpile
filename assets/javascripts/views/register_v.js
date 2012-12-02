@@ -56,7 +56,7 @@ var Register = Backbone.View.extend({
                 error: function(model, response) {
                     data = JSON.parse(response.responseText);
                     $(self.el).prev('.alert').remove();
-                    $(self.el).before('<div class="alert-box alert"> Error: ' + data.error.message + '<a href="#" class="close">&times;</a></div>');
+                    $(self.el).before('<div class="row alert-box alert">Error: ' + data.error.message + '<a href="#" class="close" onclick="$(this).parent().fadeOut(500, function() { $(this).remove(); });">&times;</a></div>');
                 }
             });
         }

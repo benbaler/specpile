@@ -1,6 +1,6 @@
 var Specs = Backbone.Collection.extend({
 	url: function(){
-		return 'api/specs';
+		return '/api/specs';
 	},
 
 	model: Spec

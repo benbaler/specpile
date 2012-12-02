@@ -7,7 +7,7 @@
 	<div class="twelve columns">
 <ul class="block-grid five-up">
 	<?php foreach($categories as $category) : ?>
-	<li><h5><a href=""><?= ucfirst($category['name']) ?></a></h5></li>
+	<li><h5><a href=""><?= ucfirst($category) ?></a></h5></li>
 <?php endforeach; ?>
 </ul>
 </div></div>

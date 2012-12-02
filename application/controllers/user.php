@@ -12,62 +12,22 @@ if (!defined('BASEPATH'))
 
 class User extends CI_Controller {
 
-    /**
-     * register user
-     *
-     * @return bool register success
-     */
-    public function register() {
-        if ($this->form_validation->run('register') == TRUE) {
-            $register = $this->users_m->register($this->input->post());
+    public function id($p_id){
+        $this->load->model('users_m');
 
-            if ($register == TRUE) {
-                $this->rest_server->success();
-
-                return;
-
-            } else {
-                $data = array(
-                    'error' => array(
-                        'message' => 'email is already exists',
-                        'type' => 'register',
-                        'code' => '1'
-                        )
-                    );
-
-                $this->rest_server->fail($data);
-    
-                return;
-            }
-
-        }
         $data = array(
-            'error' => array(
-                'message' => 'fields are not valid',
-                'type' => 'register',
-                'code' => '2'
-                )
-            );
+            'app' => 'viewProfile',
+            'user' => $p_id ? $this->users_m->getUserById($p_id) : NULL
+        );
 
-        $this->rest_server->fail($data);
+        $this->load->view('header_v', $data);
+        $this->load->view('topbar_v', $this->_user());
+        $this->load->view('viewProfile_v', $data);
+        $this->load->view('footer_v');
+
     }
 
-    public function checkEmail() {
-        $this->rest_server->success();
-    }
-
-    public function facebook()
-    {
-        $config = array(
-            'appId' => '',
-            'secret' => ''
-            );
-
-        $this->load->library('facebook', $config);
-    }
-
-    public function login()
-    {
+    public function login() {
         if ($this->session->userdata('logged_in') == TRUE)
             redirect('/');
 
@@ -107,7 +67,12 @@ class User extends CI_Controller {
         $this->load->view('footer_v');
     }
 
-    private function _user(){
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect('/');   
+    }
+
+    private function _user() {
         return array(
             'id' => $this->session->userdata('id'),
             'first' => $this->session->userdata('first'),
@@ -115,7 +80,7 @@ class User extends CI_Controller {
             'logged_in' => $this->session->userdata('logged_in')
         );
     }
-    
+
 
 }
 

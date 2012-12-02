@@ -1,6 +1,6 @@
 var Spec = Backbone.Model.extend({
-	url: function(){
-		return 'api/spec/id' + this._id;
+	url: function() {
+		return '/api/spec/id' + this._id;
 	},
 
 	defaults: {
@@ -10,8 +10,10 @@ var Spec = Backbone.Model.extend({
 
 	options: null,
 
-	initialize: function(options){
-		this._id = options._id;
-		this.options = new Options(options.options);
+	initialize: function(options) {
+		if(options !== undefined) {
+			this._id = options._id;
+			this.options = new Options(options.options);
+		}
 	}
 });

@@ -6,15 +6,15 @@
 	<?php if($logged_in == TRUE): ?>
 
 	<div class="one mobile-one columns offset-by-three">
-		<a href="/user/profile/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
+		<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" id="thumb"/></a>
 	</div>
 
 	<div class="one mobile-one columns">
-		<h5><a href="/page/profile/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
+		<h5><a href="/user/id/<?= $id ?>"><?= ucfirst($first) ?></a></h5>
 	</div>
 
 	<div class="one mobile-one columns">
-		<h5><a href="/page/logout">Logout</a></h5>
+		<h5><a href="/user/logout">Logout</a></h5>
 	</div>
 
 	<div class="two mobile-one columns">

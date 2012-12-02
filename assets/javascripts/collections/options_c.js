@@ -1,6 +1,6 @@
 var Options = Backbone.Collection.extend({
 	url: function(){
-		return 'api/options';
+		return '/api/options';
 	},
 
 	model: Option
