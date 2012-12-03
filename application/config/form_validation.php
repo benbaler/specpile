@@ -39,6 +39,25 @@ $config = array(
         array('field' => 'product',
               'rules' => 'required|min_length[1]|max_length[50]'
         )
+    ),
+    'addSpec' => array(
+        array('field' => 'name',
+              'rules' => 'required|min_length[1]|max_length[50]'
+        ),
+        array('field' => 'category_id',
+              'rules' => 'required|length[24]'
+        )
+    ),
+    'addOptionProduct' => array(
+        array('field' => 'name',
+              'rules' => 'required|min_length[1]|max_length[50]'
+        ),
+        array('field' => 'spec_id',
+              'rules' => 'required|length[24]'
+        ),
+        array('field' => 'product_id',
+              'rules' => 'required|length[24]'
+        )
     )
 );
 ?>

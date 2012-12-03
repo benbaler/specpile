@@ -17,7 +17,7 @@ class Products_m extends CI_Model{
 
 		$datetime = $this->mongo_db->date();
 
-		$productId = $this->getProductIdByNameAndbrandId($p_productName, $p_brandId);
+		$productId = $this->getProductIdByNameAndBrandId($p_productName, $p_brandId);
 
 		if ($productId == FALSE) {
 
@@ -78,6 +78,7 @@ class Products_m extends CI_Model{
 
 
 			// TODO: get specView by spec ids??? should be in specs model
+			
 			$specsView = array();
 
 			foreach ($category['specs'] as $spec_id) {
@@ -97,6 +98,8 @@ class Products_m extends CI_Model{
 
 					$optionsView[] = array(
 						'_id' => $optionId,
+						'product_id' => $productId,
+						'spec_id' => $specId,
 						'name' => $option['name'],
 						'selected' => $optionSeleced
 					);
@@ -104,94 +107,13 @@ class Products_m extends CI_Model{
 
 				$specsView[] = array(
 					'_id' => $specId,
+					'category_id' => $categoryId,
+					'product_id' => $productId,
 					'name' => $spec['name'],
 					'options' =>  $optionsView
 				);
 
 			}
-
-
-			// fake specs for testing
-			$specsFake = array(
-				array(
-					'_id' => '1',
-					'name' => 'Resolution',
-					'options' => array(
-						array(
-							'_id' => '1',
-							'name' => '1920x1080',
-							'selected' => false,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '2',
-							'name' => '1024x768',
-							'selected' => true,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '3',
-							'name' => '800x600',
-							'selected' => false,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '4',
-							'name' => '300x200',
-							'selected' => false,
-							'product_id' => '1'
-						)
-					)
-				),
-				array(
-					'_id' => '2',
-					'name' => 'CPU',
-					'options' => array(
-						array(
-							'_id' => '1',
-							'name' => 'A4',
-							'selected' => false,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '2',
-							'name' => 'A5',
-							'selected' => true,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '3',
-							'name' => 'A6',
-							'selected' => false,
-							'product_id' => '1'
-						)
-					)
-				),
-				array(
-					'_id' => '3',
-					'name' => 'Memory',
-					'options' => array(
-						array(
-							'_id' => '1',
-							'name' => '1GB',
-							'selected' => false,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '2',
-							'name' => '2GB',
-							'selected' => true,
-							'product_id' => '1'
-						),
-						array(
-							'_id' => '3',
-							'name' => '4GB',
-							'selected' => false,
-							'product_id' => '1'
-						)
-					)
-				)
-			);
 
 			$productView = array(
 				'_id' => $productId,
@@ -200,14 +122,51 @@ class Products_m extends CI_Model{
 				'category_name' => $category['name'],
 				'brand_id' => $brandId,
 				'brand_name' => $brand['name'],
-
-				'specs' => $specsFake//$specsView
+				'specs' => $specsView
 			);
 
 
 		}
 
 		return $productView;
+	}
+
+	public function addOptionById($p_optionId, $p_productId, $p_userId) {
+		$datetime = $this->mongo_db->date();
+
+		$optionId = new MongoId($p_optionId);
+		$userId = new MongoId($p_userId);
+		$productId = new MongoId($p_productId);
+
+		$exists = $this->_exists(array('_id' => $productId , 'options' => $optionId));
+
+		$product = $exists ? FALSE : current($this->_get($p_productId));
+
+		if ($product) {
+			$this->load->model('options_m');
+			$options = $this->options_m->addOptionToArrayOfOptions($product['options'], $p_optionId);
+
+			$set = array(
+				'user_id' => $userId,
+				'version' => $datetime,
+				'options' => $options
+			);
+
+			$push = array(
+				'history' => array(
+					'version' => $datetime,
+					'name' => $product['name'],
+					'category_id' => $product['category_id'],
+					'brand_id' => $product['brand_id'],
+					'user_id' => $userId,
+					'options' => $options,
+					'images' => $product['images'],
+					'active' =>  $product['active']
+				),
+			);
+
+			$this->mongo_db->where(array('_id' => $productId))->push($push)->set($set)->update($this->collection);
+		}
 	}
 
 	public function get_all() {

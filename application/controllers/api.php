@@ -40,10 +40,10 @@ class Api extends REST_Controller {
      * @return [type] [description]
      */
     public function user_post($p_action) {
-        switch($p_action){
-            case 'login' :  $this->_userLogin(); 
+        switch ($p_action) {
+        case 'login' :  $this->_userLogin();
             break;
-            case 'signup' :  $this->_userSignup(); 
+        case 'signup' :  $this->_userSignup();
             break;
         }
 
@@ -74,7 +74,7 @@ class Api extends REST_Controller {
         }
     }
 
-// add product
+    // add product
     public function product_post() {
         // TODO: user must be logged in to add a product
         // TODO: user authorizations for adding categories, brands etc.
@@ -149,18 +149,82 @@ class Api extends REST_Controller {
         }
     }
 
-    public function option_post()
-    {
-        $this->response($this->post(),200);
+    public function option_post() {
+        if ($this->get('action') == 'product') {
+            $this->load->library('form_validation');
+
+            if ($this->form_validation->run('addOptionProduct') == TRUE) {
+                $this->load->model(array('products_m', 'options_m'));
+
+                $userId = $this->session->userdata('id');
+
+                $specId = $this->post('spec_id');
+                $productId = $this->post('product_id');
+
+                $product = $this->products_m->getProductById($productId);
+
+                if (!$product) {
+                    $this->response($this->_error('Product is not valid'), 404);
+                }
+
+                $optionId = $this->options_m->addOptionByName(trim($this->post('name')), $specId, $userId);
+
+                $this->products_m->addOptionById($optionId, $productId, $userId);
+
+                $this->response(array('_id' => $optionId), 200);
+            }
+
+            $this->response($this->_error('Fields are not valid'), 404);
+        }
+
+        if ($this->get('action') == 'spec') {
+            $this->response('success', 200);
+        }
+
+        $this->response($this->_error('Action is not valid'), 404);
+
     }
 
-    public function option_put()
-    {
-        switch($this->get('action')){
-            case 'product' : $this->_productNewOption(); 
-            break;
-            case 'spec' : $this->specNewOption();
-            break;
+
+
+
+    public function option_put() {
+        if ($this->get('action') == 'product') {
+            // TODO: fix put!!!
+
+            $this->load->library('form_validation');
+
+            if ($this->form_validation->run('addOptionProduct') == TRUE) {
+                $this->load->model(array('products_m', 'options_m'));
+
+                $userId = $this->session->userdata('id');
+
+                $specId = $this->input->post('spec_id');
+                $productId = $this->input->post('product_id');
+                $optionId = $this->get('id');
+
+                $product = $this->products_m->getProductById($productId);
+
+                if (!$product) {
+                    $this->response($this->_error('Product is not valid'), 404);
+                }
+
+                $option = $this->options_m->getOptionById($optionId);
+
+                if (!$option) {
+                    $this->response($this->_error('Option is not valid'), 404);
+                }
+
+                $this->products_m->addOptionById($optionId, $productId, $userId);
+
+                $this->response(array('_id' => $optionId), 200);
+            }
+
+            $this->response($this->_error('Fields are not valid'), 404);
+        }
+
+        if ($this->get('action') == 'spec') {
+            $this->response('success', 200);
         }
 
         $this->response($this->_error('Action is not valid'), 404);
@@ -168,6 +232,30 @@ class Api extends REST_Controller {
 
 
 
+    public function spec_post() {
+        $this->load->library('form_validation');
+
+        if ($this->form_validation->run('addSpec') == TRUE) {
+            $this->load->model(array('specs_m', 'categories_m'));
+
+            $userId = $this->session->userdata('id');
+            $categoryId = $this->post('category_id');
+
+            $category = $this->categories_m->getCategoryById($categoryId);
+
+            if (!$category) {
+                $this->response($this->_error('Category is not valid'), 404);
+            }
+
+            $specId = $this->specs_m->addSpecByName(trim($this->post('name')), $categoryId, $userId);
+
+            $this->categories_m->addSpecById($specId, $categoryId, $userId);
+
+            $this->response(array('_id' => $specId), 200);
+        }
+
+        $this->response($this->_error('Fields are not valid'), 404);
+    }
 
 
 
@@ -177,7 +265,10 @@ class Api extends REST_Controller {
 
 
 
-    private function _productNewOption(){
+
+
+
+    private function _productNewOption() {
         $this->response('success', 200);
     }
 
@@ -213,7 +304,7 @@ class Api extends REST_Controller {
         $this->response($this->_error('Field are not valid'), 404);
     }
 
-    private function _userSignup(){
+    private function _userSignup() {
         $this->load->model(array('users_m'));
         $this->load->library('form_validation');
 

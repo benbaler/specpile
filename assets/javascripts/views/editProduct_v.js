@@ -47,17 +47,18 @@ var EditProductView = Backbone.View.extend({
 			// editSpecView.delegateEvents();
 		}, this);
 
-		// this.$el.append('<div class="row" id="addNewSpecField">'
-		//   					+'<div class="six mobile-four columns offset-by-one">'
-		//     					+'<button id="addNewSpecField" class="button expand">Add Spec Field</button>'
-		//   					+'</div>'
-		// 						+'</div>');
+		this.$el.append('<div class="row" id="addNewSpecField">'
+		  				+'<div class="six mobile-four columns offset-by-one">'
+		    			+'<button id="addNewSpecField" class="button expand">Add New Fields</button>'
+		  				+'</div>'
+						+'</div>');
 	},
 
 	addNewSpecField: function(event) {
 		var editSpecView = new EditSpecView({
 			model: new Spec({
-				name: 'temp',
+				category_id: this.model.get('category_id'),
+				name: '',
 				options: []
 			})
 		});

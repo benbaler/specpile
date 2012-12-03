@@ -3,7 +3,7 @@ var Option = Backbone.Model.extend({
 		if(this._id !== null) {
 			return '/api/option/id/' + this._id + '/action/product';
 		} else {
-			return '/api/option/action/product/';
+			return '/api/option/action/product';
 		}
 	},
 
@@ -11,7 +11,8 @@ var Option = Backbone.Model.extend({
 		_id: null,
 		name: null,
 		selected: null,
-		product_id: null
+		product_id: null,
+		spec_id: null
 	},
 
 	idAttribute: '_id',
