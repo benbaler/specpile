@@ -4,7 +4,8 @@ class Github extends CI_Controller {
 
 	public function pull()
 	{
-		`git pull`;
+		echo exec('whoami');
+		echo exec('git pull');
 	}
 
 }
