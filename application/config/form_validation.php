@@ -58,6 +58,17 @@ $config = array(
         array('field' => 'product_id',
               'rules' => 'required|length[24]'
         )
+    ),
+    'updateSpecProduct' => array(
+        array('field' => 'name',
+              'rules' => 'required|min_length[1]|max_length[50]'
+        ),
+        array('field' => 'category_id',
+              'rules' => 'required|length[24]'
+        ),
+        array('field' => 'product_id',
+              'rules' => 'required|length[24]'
+        )
     )
 );
 ?>

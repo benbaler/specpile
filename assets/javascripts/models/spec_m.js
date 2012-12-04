@@ -1,7 +1,7 @@
 var Spec = Backbone.Model.extend({
 	url: function() {
 		if(this._id !== null) {
-			return '/api/spec/id/' + this._id;
+			return '/api/spec/id/' + this._id + '/action/product';
 		} else {
 			return '/api/spec';
 		}
@@ -17,11 +17,6 @@ var Spec = Backbone.Model.extend({
 	options: null,
 
 	idAttribute: '_id',
-
-	parse: function(response) {
-		response._id = response._id['$id'];
-		return response;
-	},
 
 	initialize: function(options) {
 		if(options !== undefined) {

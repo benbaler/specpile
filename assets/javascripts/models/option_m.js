@@ -17,11 +17,6 @@ var Option = Backbone.Model.extend({
 
 	idAttribute: '_id',
 
-	parse: function(response) {
-		response._id = response._id['$id'];
-		return response;
-	},
-
 	initialize: function(options) {
 		this._id = options._id;
 		this.product_id = options.product_id;

@@ -11,7 +11,7 @@ var EditSpecView = Backbone.View.extend({
 		// 'blur .spec': 'showSaveButton',
 		// 'focus .spec': 'showSaveButton',
 		// 'click .spec': 'showSaveButton',
-		'click button': 'saveSpecAndOption'
+		'click button': 'saveSpec'
 	},
 
 	initialize: function() {
@@ -24,18 +24,19 @@ var EditSpecView = Backbone.View.extend({
 	},
 
 	autoComplete: function() {
-		var id = this.model.get('_id');
-		var options = this.getOptionsList();
 		var self = this;
 
-		$('.spec[data-id="' + id + '"]').autocomplete({
-			source: options,
+		$('.spec', this.$el).autocomplete({
+			source: self.getOptionsList(),
 			minLength: 0,
-			select: function() {
-				//$(this).trigger('keyup');
+			select: function(a, b) {
+				// a autocomplete object, b input object
+				$(a.target).val(b.item.value);
+				$('.spec', self.$el).trigger('keyup');
 			}
-		}).focus(function() {
-			$(this).data("autocomplete").search($(this).val());
+		}).bind('focus click keyup', function(event) {
+			if(event.which == 38 || event.which == 40) return;
+			$(this).data("autocomplete").search(''); //$(this).val());
 		});
 	},
 
@@ -54,15 +55,22 @@ var EditSpecView = Backbone.View.extend({
 		var field = $('.field', this.$el).val();
 		var option = this.getSelectedOption();
 
+		// console.log(value, field,'----', option.toJSON(), this.model.toJSON());
 		if(option !== undefined) {
 			if($.trim(value).toLowerCase() == option.get('name').toLowerCase() && $.trim(field).toLowerCase() == this.model.get('name').toLowerCase()) {
 				button.addClass('hide');
 			} else {
 				button.removeClass('hide');
+				if(event.which == 13) {
+        			button.trigger('click');
+    			}
 			}
 		} else {
 			if(value && field) {
 				button.removeClass('hide');
+				if(event.which == 13) {
+        			button.trigger('click');
+    			}
 			} else {
 				button.addClass('hide');
 			}
@@ -78,44 +86,78 @@ var EditSpecView = Backbone.View.extend({
 	},
 
 	setSelectedOption: function(id) {
-		_.each(this.model.options.models, function(model){
-			if(model.get('_id') == id){
+		_.each(this.model.options.models, function(model) {
+			if(model.get('_id') == id) {
 				model.set('selected', true);
-			} else{
+			} else {
 				model.set('selected', false);
 			}
 		}, this);
 	},
 
-	saveSpecAndOption: function(event) {
+	saveSpec: function(event) {
+		var self = this;
 		var option = $('.spec', this.$el).val();
 		var spec = $('.field', this.$el).val();
 
-		// TODO: must add spec before add option because need id
-		
+		if(this.model.get('_id') !== null) {
+			if(this.model.get('name') != spec) {
+				this.model.save({
+					name: spec
+				}, {
+					wait: true,
+					success: function(model, response) {
+						self.saveOption();
+					},
+					error: function(model, response) {
+						data = JSON.parse(response.responseText);
+						$(self.el).prev('.alert').remove();
+						$(self.el).before('<div class="row alert-box alert"> Error: ' + data.error.message + '<a href="#" onclick="$(this).parent().remove()" class="close">&times;</a></div>');
+					}
+				});
+			} else {
+				self.saveOption();
+			}
+		} else {
+			this.model.save({
+				name: spec
+			}, {
+				wait: true,
+				success: function(model, response) {
+					self.saveOption();
+				},
+				error: function(model, response) {
+					data = JSON.parse(response.responseText);
+					$(self.el).prev('.alert').remove();
+					$(self.el).before('<div class="row alert-box alert"> Error: ' + data.error.message + '<a href="#" onclick="$(this).parent().remove()" class="close">&times;</a></div>');
+				}
+			});
+		}
 
-		// save spec
 
+	},
 
-		// option save
-		console.log(this.getOptionsList());
+	saveOption: function() {
+		var self = this;
+		var option = $('.spec', this.$el).val();
+		var spec = $('.field', this.$el).val();
+
 		var match = _.find(this.getOptionsList(), function(val) {
 			return val.toLowerCase() == $.trim(option).toLowerCase();
 		});
 
 		if(match) {
-			console.log('exists');
 			var options = this.model.options.where({
 				name: match
 			});
 
-			console.log(options[0].toJSON());
-			var self = this;
 			options[0].save({}, {
 				success: function(model, response) {
-					console.log(response);
-					data = JSON.parse(response.responseText);
-					self.setSelectedOption(data._id);
+					self.setSelectedOption(response._id);
+					self.showSaveButton();
+					$('.spec', self.$el).focus().autocomplete("option", {
+						source: self.getOptionsList()
+					}).data("autocomplete").search('');
 				},
 				error: function(model, response) {
 					data = JSON.parse(response.responseText);
@@ -124,19 +166,23 @@ var EditSpecView = Backbone.View.extend({
 				}
 			});
 		} else {
-			console.log('new');
 			var o = new Option({
-				name: option, 
-				selected: false, 
+				name: option,
+				selected: false,
 				product_id: this.model.get('product_id'),
 				spec_id: this.model.get('_id')
-			});	
+			});
 
-			this.model.options.add(o.toJSON());
-			var self = this;
+			this.model.options.add(o);
+
 			o.save({}, {
 				success: function(model, response) {
-					console.log(response.responseText);
+					self.setSelectedOption(response._id);
+					self.showSaveButton();
+					$('.spec', self.$el).focus().autocomplete("option", {
+						source: self.getOptionsList()
+					}).data("autocomplete").search('');
+					//$('.spec', self.$el).trigger('keyup');
 				},
 				error: function(model, response) {
 					data = JSON.parse(response.responseText);
@@ -144,32 +190,6 @@ var EditSpecView = Backbone.View.extend({
 					$(self.el).before('<div class="row alert-box alert"> Error: ' + data.error.message + '<a href="#" onclick="$(this).parent().remove()" class="close">&times;</a></div>');
 				}
 			});
-		}
-
-		return;
-
-		// save exist option
-		if(options.length && field == this.model.get('name')) {
-			console.log('exists');
-			this.model.save();
-			options[0].save();
-		}
-		// save new option
-		else {
-			this.model.set({
-				name: field
-			});
-			this.model.save({}, {
-				success: function(model, response) {
-					console.log(JSON.parse(response.responseText));
-				},
-				error: function(model, response) {
-					data = JSON.parse(response.responseText);
-					$(self.el).prev('.alert').remove();
-					$(self.el).before('<div class="row alert-box alert"> Error: ' + data.error.message + '<a href="#" onclick="$(this).parent().remove()" class="close">&times;</a></div>');
-				}
-			});
-			//options[0].save();
 		}
 	}
 });

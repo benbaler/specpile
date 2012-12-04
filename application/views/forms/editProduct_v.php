@@ -7,19 +7,19 @@ window.productData = <?= json_encode($product) ?>;
 <script type="text/template" id="spec-template">
 <div class="row">
 
-<div class="two mobile-one columns offset-by-one">
+<div class="two mobile-two columns offset-by-one">
 <input type="text" class="field" data-id="<%= _id %>" placeholder="Add Field" value="<%= name %>"/>
 <!--<label class="inline"><%= name %></label>-->
 </div>
 
-<div class="four mobile-three columns pull-five">
+<div class="four mobile-two columns pull-five">
 <div class="row collapse">
 
-<div class="eight mobile-two columns">
+<div class="eight mobile-three columns">
 <input type="text" class="spec" data-id="<%= _id %>" placeholder="<%= (name != '') ? 'Select ' + name : 'Add Option' %>" value="<% _.each(options, function(option,i) { if(option.selected == true){ %><%= option.name %><% } }); %>"/>
 </div>
 
-<div class="four mobile-two columns">
+<div class="four mobile-one columns">
 <button class="postfix button expand hide">Save</button>
 </div>
 
@@ -42,7 +42,7 @@ window.productData = <?= json_encode($product) ?>;
 
 <div class="row">
   <div class="twelve columns">
-    <h5><?= ucfirst($product['category_name']) ?> &rsaquo; <?= ucfirst($product['brand_name']) ?> &rsaquo; <?= ucfirst($product['name']) ?></h5>
+    <h5><?= $product['category_name'] ?> &rsaquo; <?= $product['brand_name'] ?> &rsaquo; <?= $product['name'] ?></h5>
   </div>
 </div>
 

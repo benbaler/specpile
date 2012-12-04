@@ -49,7 +49,7 @@ var EditProductView = Backbone.View.extend({
 
 		this.$el.append('<div class="row" id="addNewSpecField">'
 		  				+'<div class="six mobile-four columns offset-by-one">'
-		    			+'<button id="addNewSpecField" class="button expand">Add New Fields</button>'
+		    			+'<button id="addNewSpecField" class="button expand">Add New Field</button>'
 		  				+'</div>'
 						+'</div>');
 	},
@@ -58,6 +58,7 @@ var EditProductView = Backbone.View.extend({
 		var editSpecView = new EditSpecView({
 			model: new Spec({
 				category_id: this.model.get('category_id'),
+				product_id: this.model.get('_id'),
 				name: '',
 				options: []
 			})

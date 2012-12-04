@@ -232,6 +232,13 @@ class Api extends REST_Controller {
 
 
 
+
+
+
+
+
+
+
     public function spec_post() {
         $this->load->library('form_validation');
 
@@ -255,8 +262,48 @@ class Api extends REST_Controller {
         }
 
         $this->response($this->_error('Fields are not valid'), 404);
+
     }
 
+
+
+
+
+
+
+    public function spec_put() {
+        if ($this->get('action') == 'product') {
+            $this->load->library('form_validation');
+
+            if ($this->form_validation->run('updateSpecProduct') == TRUE) {
+                $this->load->model(array('specs_m', 'categories_m'));
+
+                $userId = $this->session->userdata('id');
+                $categoryId = $this->input->post('category_id');
+                $specId = $this->get('id');
+
+                $category = $this->categories_m->getCategoryById($categoryId);
+
+                if (!$category) {
+                    $this->response($this->_error('Category is not valid'), 404);
+                }
+
+                $spec = $this->specs_m->getSpecByIdAndCategoryId($specId, $categoryId);
+
+                if (!$spec) {
+                    $this->response($this->_error('Specification is not valid'), 404);
+                }
+
+                $this->specs_m->updateSpecName(trim($this->input->post('name')), $specId, $userId);
+
+                $this->response(array('_id' => $specId), 200);
+            }
+
+            $this->response($this->_error('Fields are not valid'), 404);
+        }
+
+        $this->response($this->_error('Action is not valid'), 404);
+    }
 
 
 
