@@ -92,5 +92,6 @@ var AddProductView = Backbone.View.extend({
                 }
             });
         }
+        return false;
     }
 });
