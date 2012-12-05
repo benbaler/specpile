@@ -47,7 +47,8 @@
          border: 3px #2BA6CB solid;
       }*/
       .search-result:hover{
-         background-color: yellow;
+         background-color: #2BA6CB;
+         color: white;
       }
 
 

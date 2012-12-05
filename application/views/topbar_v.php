@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="two mobile-one columns">
-		<h5><a href="/product/add">Add Product</a></h5>
+		<h5><a href="/product/add" class="button small">Add Product</a></h5>
 	</div>
 
 	<?php else: ?>

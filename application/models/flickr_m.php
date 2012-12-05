@@ -27,8 +27,8 @@ class Flickr_m extends CI_Model {
 				'content_type' => 1,
 				'sort' => 'relevance',
 
-				'tags' => $p_text,
-				'tag_mode' => 'all',
+				'tags' => str_replace(' ',',',$p_text),
+				'tag_mode' => 'any',
 			));
 
 		$urls = array();
