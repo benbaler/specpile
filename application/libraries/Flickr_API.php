@@ -24,7 +24,7 @@
  * @author		LMB^Box (Thomas Montague)
  * @link		http://codeigniter.lmbbox.com/user_guide/libraries/flickr_api.html
  */
-class CI_Flickr_API {
+class Flickr_API {
 	
 	const VERSION						= '0.4.0';
 	const API_AUTH_URL					= 'http://www.flickr.com/services/auth/';
@@ -83,7 +83,7 @@ class CI_Flickr_API {
 		// Initialize Parameters
 		$this->initialize($params);
 		
-		log_message('debug', 'CI_Flickr_API Class Initialized');
+		log_message('debug', 'Flickr_API Class Initialized');
 	}
 	
 	// --------------------------------------------------------------------
