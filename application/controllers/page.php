@@ -37,6 +37,32 @@ class Page extends CI_Controller {
 		);
 	}
 
+	public function test() {
+		$this->load->library('flickr_api');
+		// Create config array
+		$flickr_api_config = array(
+			'request_format'    => 'rest',
+			'response_format'   => 'php_serial',
+			'api_key'           => 'cacbb5c6035ec546a8a8755e8e585801',
+			'secret'            => 'cbc54fafd28e4591',
+			//'cache_use_db'      => TRUE,
+			//'cache_expiration'  => 600,
+			//'cache_max_rows'    => 1000,
+		);
+
+		// Initialize library with config
+		$this->flickr_api->initialize($flickr_api_config);
+
+		// Send authentication request for user account access
+		$this->flickr_api->authenticate('read');
+
+		// Get frob from call back from Flickr
+		$this->flickr_api->auth_getToken($_GET['frob']);
+
+		// Search for some photos
+		$photos = $this->flickr_api->photos_search();
+	}
+
 }
 
 /* End of file page.php */
