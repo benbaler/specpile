@@ -54,13 +54,14 @@ class Page extends CI_Controller {
 		$this->flickr_api->initialize($flickr_api_config);
 
 		// Send authentication request for user account access
-		$this->flickr_api->authenticate('read');
+		//$this->flickr_api->authenticate('read');
 
 		// Get frob from call back from Flickr
-		$this->flickr_api->auth_getToken($_GET['frob']);
+		//$this->flickr_api->auth_getToken($_GET['frob']);
 
 		// Search for some photos
 		$photos = $this->flickr_api->photos_search();
+		var_dump($photos);
 	}
 
 }
