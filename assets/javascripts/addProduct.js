@@ -8,6 +8,7 @@ head.js('/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/models/addProductCredentials_m.js',
 
     function() {
+        $(document).ready(function(){
         _.extend(Backbone.Validation.messages, {
             length: 'Select {0}'
         });
@@ -15,5 +16,6 @@ head.js('/assets/javascripts/libs/jquery.js',
         var addProductCredentials = new AddProductCredentials({});
         var addProduct = new AddProductView({
             model: addProductCredentials
+        });
         });
     });
