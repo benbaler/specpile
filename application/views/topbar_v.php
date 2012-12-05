@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" id="topbar">
 	<div class="four mobile-four columns" id="logo">
 		<h1><a href="/">Specpile</a></h1>
 	</div>
@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="two mobile-one columns">
-		<h5><a href="/product/add" class="button small">Add Product</a></h5>
+		<h5><a href="/product/add" class="button">Add Product</a></h5>
 	</div>
 
 	<?php else: ?>

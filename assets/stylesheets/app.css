@@ -51,6 +51,21 @@
          color: white;
       }
 
+      .viewSpec{
+         padding: 20px;
+         /*margin:20px;*/
+      }
+
+      .viewSpec span{
+         padding: 10px;
+         margin: 10px;
+         background: whitesmoke;
+      }
+
+      #topbar{
+         background: whitesmoke;
+      }
+
 
 /* -----------------------------------------
    Page Name 1

@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="twelve columns">
 		<div id="results-panel" class="panel radius">
-			Search to Get Results
+			Search to get results
 		</div>
 	</div>
 </div>
