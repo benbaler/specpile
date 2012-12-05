@@ -24,13 +24,13 @@ window.categories = <?= json_encode($categories); ?>;
   <div class="twelve mobile-four columns">
     <div class="row collapse">
 
-      <div class="ten mobile-three columns">
+      <div class="twelve mobile-four columns">
         <input type="text" name="term" id="term" placeholder="Search Product Eg: iPhone 5"/>
       </div>
 
-      <div class="two mobile-one columns">
+      <!-- <div class="two mobile-one columns">
         <input class="postfix button expand" type="submit" value="Search"/>
-      </div>
+      </div> -->
 
     </div>
   </div>
