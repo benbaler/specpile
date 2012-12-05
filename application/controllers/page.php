@@ -38,7 +38,7 @@ class Page extends CI_Controller {
 	}
 
 	public function test() {
-		$this->load->library('flickr_api');
+		$this->load->library('Flickr_API');
 		// Create config array
 		$flickr_api_config = array(
 			'request_format'    => 'rest',
