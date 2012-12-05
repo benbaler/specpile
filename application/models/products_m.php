@@ -67,7 +67,7 @@ class Products_m extends CI_Model{
 		$productView = array();
 
 		if (count($product) > 0) {
-			$this->load->model(array('categories_m', 'brands_m', 'specs_m', 'options_m'));
+			$this->load->model(array('categories_m', 'brands_m', 'specs_m', 'options_m', 'flickr_m'));
 
 			$productId = $product['_id']->__toString();
 			$categoryId = $product['category_id']->__toString();
@@ -115,6 +115,9 @@ class Products_m extends CI_Model{
 
 			}
 
+			// TODO: cache flickr photosearch
+			$urls = $this->flickr_m->getPhotosByText($brand['name'].' '.$product['name']);
+
 			$productView = array(
 				'_id' => $productId,
 				'name' => $product['name'],
@@ -122,9 +125,9 @@ class Products_m extends CI_Model{
 				'category_name' => $category['name'],
 				'brand_id' => $brandId,
 				'brand_name' => $brand['name'],
-				'specs' => $specsView
+				'specs' => $specsView,
+				'images' => $urls
 			);
-
 
 		}
 

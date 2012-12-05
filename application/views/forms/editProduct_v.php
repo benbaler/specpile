@@ -47,6 +47,16 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 
 <div class="row">
+  <div class="eleven mobile-four columns offset-by-one">
+    <ul class="inline-list">
+      <?php foreach($product['images'] as $url): ?>
+        <li><img src="<?= $url ?>" /></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
   <div class="three columns">
     <h4>Specification</h4>
   </div>

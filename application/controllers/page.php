@@ -60,8 +60,22 @@ class Page extends CI_Controller {
 		//$this->flickr_api->auth_getToken($_GET['frob']);
 
 		// Search for some photos
-		$photos = $this->flickr_api->photos_search();
-		var_dump($photos);
+		$photos = $this->flickr_api->photos_search(array(
+			'text' => 'apple iphone 5',
+			'tags' => 'apple iphone 5',
+			'per_page' => 5,
+			'tag_mode' => 'all',
+			'privacy_filter' => 1,
+			'content_type' => 1,
+			'sort' => 'relevance'
+			));
+		foreach ($photos['photos']['photo'] as $key => $value) {
+			echo '<div class="flickr-thumb">
+    			<a rel="nofollow" target="_blank" href="http://farm'.$value['farm'].'.static.flickr.com/'.$value['server'].'/'.$value['id'].'_'.$value['secret'].'.jpg" title="'.$value['title'].'">
+    			<img src="http://farm'.$value['farm'].'.static.flickr.com/'.$value['server'].'/'.$value['id'].'_'.$value['secret'].'_s.jpg" alt="'.$value['title'].'"></a>
+    		</div>';
+			// echo "<pre>"; var_dump($value); echo "</pre>";
+		}
 	}
 
 }
