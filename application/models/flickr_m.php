@@ -19,10 +19,10 @@ class Flickr_m extends CI_Model {
 		$this->flickr_api->initialize($flickr_api_config);
 	}
 
-	public function getPhotosByText($p_text) {
+	public function getPhotosByText($p_text, $p_limit = 1) {
 		$result = $this->flickr_api->photos_search(array(
 				'text' => $p_text,
-				'per_page' => 3,
+				'per_page' => $p_limit,
 				'privacy_filter' => 1,
 				'content_type' => 1,
 				'sort' => 'relevance',

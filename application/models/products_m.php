@@ -58,7 +58,35 @@ class Products_m extends CI_Model{
 	}
 
 	public function getProductsByQuery($p_query) {
-		return $this->mongo_db->where(array('name' => array('$regex' => $p_query, '$options' => 'i')))->get($this->collection);
+		$this->load->model(array('categories_m', 'brands_m', 'specs_m', 'options_m', 'flickr_m'));
+
+		$products = $this->_get(array('name' => array('$regex' => $p_query, '$options' => 'i')));
+
+		$productView = array();
+		foreach ($products as $product) {
+			// code...
+			$productId = $product['_id']->__toString();
+			$categoryId = $product['category_id']->__toString();
+			$brandId = $product['brand_id']->__toString();
+
+			$category = $this->categories_m->getCategoryById($categoryId);
+			$brand = $this->brands_m->getBrandById($brandId);
+
+			$urls = current($this->flickr_m->getPhotosByText($brand['name'].' '.$product['name']));
+
+			$productView[] = array(
+				'_id' => $productId,
+				'name' => $product['name'],
+				'category_id' => $categoryId,
+				'category_name' => $category['name'],
+				'brand_id' => $brandId,
+				'brand_name' => $brand['name'],
+				'image' => $urls
+			);
+
+		}
+
+		return $productView;
 	}
 
 	public function getProductViewById($p_id) {
@@ -78,7 +106,7 @@ class Products_m extends CI_Model{
 
 
 			// TODO: get specView by spec ids??? should be in specs model
-			
+
 			$specsView = array();
 
 			foreach ($category['specs'] as $spec_id) {
@@ -116,7 +144,7 @@ class Products_m extends CI_Model{
 			}
 
 			// TODO: cache flickr photosearch
-			$urls = $this->flickr_m->getPhotosByText($brand['name'].' '.$product['name']);
+			$urls = $this->flickr_m->getPhotosByText($brand['name'].' '.$product['name'], 5);
 
 			$productView = array(
 				'_id' => $productId,

@@ -7,7 +7,7 @@ class Product extends CI_Controller {
 		parent::__construct();
 	}
 
-	public function index($p_id)
+	public function view($p_id)
 	{
 		echo $p_id;
 	}

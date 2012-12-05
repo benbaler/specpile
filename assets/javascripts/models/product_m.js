@@ -9,7 +9,8 @@ var Product = Backbone.Model.extend({
 		category_id: null,
 		category_name: null,
 		brand_id: null,
-		brand_name: null
+		brand_name: null,
+		image: null
 	},
 
 	specs: null,
@@ -19,10 +20,5 @@ var Product = Backbone.Model.extend({
 	initialize: function(options){
 		if(options.specs !== undefined)
 			this.specs = new Specs(options.specs);
-	},
-
-	parse: function(response) {
-		response._id = response._id['$id'];
-		return response;
 	}
 });

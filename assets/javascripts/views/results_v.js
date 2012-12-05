@@ -13,18 +13,23 @@ var Results = Backbone.View.extend({
     },
 
     render: function(query) {
-        this.$el.html("Searching for '" + query + "'");
+        var self = this;
+        //this.$el.html("Searching for '" + query + "'");
+        this.$el.html("");
 
         this.collection.reset();
         this.collection.query = query;
 
         this.collection.fetch({
             add: true,
+            abortPending: true,
             success: function(collection, response, options) {
-                console.log(collection, response, options);
-                // if(this.collection.models.length == 0) {
-                //     this.$el.html("No Results for '" + query + "'")
-                // }
+                if(collection.length == 0) {
+                    self.$el.html("No Results for '" + query + "'");
+                }
+            },
+            error: function(collection, response, options){
+                self.$el.html("Error from Server, Try Again");
             }
             // ,query: query
             // ,url: this.collection.url+query
