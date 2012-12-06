@@ -7,9 +7,23 @@ class Product extends CI_Controller {
 		parent::__construct();
 	}
 
-	public function index($p_id)
+	public function view($p_id)
 	{
-		echo $p_id;
+		$this->load->model(array('categories_m','products_m'));
+		
+		$product = $this->products_m->getProductViewById($p_id);
+
+		$data = array(
+			'app' => 'editProduct',
+			'product' => $product
+		);
+
+		$user = $this->_user();
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $user);
+		$this->load->view('viewProduct_v', $data);
+		$this->load->view('footer_v');
 	}
 
 	public function add(){

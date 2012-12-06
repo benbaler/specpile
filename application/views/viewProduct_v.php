@@ -1,3 +1,9 @@
+<style>
+#addNewSpecField{
+	display: none;
+}
+</style>
+
 
 <script>
 window.productData = <?= json_encode($product) ?>;
@@ -5,18 +11,19 @@ window.productData = <?= json_encode($product) ?>;
 
 
 <script type="text/template" id="spec-template">
-<div class="row">
+<div class="row viewSpec">
 
 <div class="two mobile-two columns offset-by-one">
-<input type="text" class="field" data-id="<%= _id %>" placeholder="Add Field" value="<%= name %>"/>
-<!--<label class="inline"><%= name %></label>-->
+<span class="inline"><b><%= name %></b></span>
 </div>
 
 <div class="four mobile-two columns pull-five">
 <div class="row collapse">
 
 <div class="eight mobile-three columns">
-<input type="text" class="spec" data-id="<%= _id %>" placeholder="<%= (name != '') ? 'Select ' + name : 'Add Option' %>" value="<% _.each(options, function(option,i) { if(option.selected == true){ %><%= option.name %><% } }); %>"/>
+<span>
+<% _.each(options, function(option,i) { if(option.selected == true){ %><%= option.name %><% } }); %>
+</span>
 </div>
 
 <div class="four mobile-one columns">
@@ -32,11 +39,11 @@ window.productData = <?= json_encode($product) ?>;
 
 <div class="row">
   <div class="three mobile-two columns">
-    <h4>Edit Product</h4>
+    <h4>Product</h4>
   </div>
 
   <div class="three mobile-two columns offset-by-six">
-    <!-- <button class="button expend right">Edit Template</button> -->
+    <!-- <button class="button expend right">Edit Specs</button> -->
   </div>
 </div>
 
@@ -62,7 +69,7 @@ window.productData = <?= json_encode($product) ?>;
   </div>
 
   <div class="three mobile-two columns offset-by-six">
-    <a href="/product/view/<?= $product['_id'] ?>" class="button expend right">View Specs</a>
+    <a href="/product/edit/<?= $product['_id'] ?>" class="button expend right">Edit Specs</a>
   </div>
 </div>
 

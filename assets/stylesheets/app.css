@@ -46,6 +46,30 @@
       .specBorder{
          border: 3px #2BA6CB solid;
       }*/
+      .search-result:hover{
+         background-color: #2BA6CB;
+         color: white;
+      }
+
+      .viewSpec{
+         padding: 20px;
+         /*margin:20px;*/
+      }
+
+      .viewSpec span{
+         padding: 10px;
+         margin: 10px;
+         background: whitesmoke;
+      }
+
+      #topbar{
+         /*background: whitesmoke;*/
+      }
+
+      .productImg{
+         max-width: 100px;
+         max-height: 100px; 
+      }
 
 
 /* -----------------------------------------

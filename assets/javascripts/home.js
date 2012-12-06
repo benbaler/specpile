@@ -11,6 +11,7 @@ head.js('/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/views/results_v.js', 
     '/assets/javascripts/views/product_v.js', 
     function() {
+        $(document).ready(function(){
         // $("#customDropdown").foundationCustomForms();
 
         //Backbone.Model.prototype.idAttribute = "_id";
@@ -23,5 +24,5 @@ head.js('/assets/javascripts/libs/jquery.js',
         //     collection: new Products()
         // });
 
-
+        });
     });

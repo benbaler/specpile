@@ -21,6 +21,7 @@ head.js(
     //'/assets/javascripts/models/editProductCredentials_m.js',
 
     function() {
+        $(document).ready(function(){
         //$("#sortable").sortable();
         //$("#sortable").disableSelection();
 
@@ -32,5 +33,6 @@ head.js(
 
         var editProductView = new EditProductView({
             model: product
+        });
         });
    });
