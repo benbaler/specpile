@@ -2,7 +2,7 @@ var Search = Backbone.View.extend({
     el: $('#search-form'),
 
     events: {
-        'keyup input': 'previewProducts',
+        // 'keyup input': 'previewProducts',
         'submit': 'getPreviewProducts'
     },
 
@@ -47,7 +47,7 @@ var Search = Backbone.View.extend({
             this.resultsView.render(this.model.get('term'));
         } else {
             //alert(this.displayError(this.getInputByName('term')));
-            this.resultsView.render(this.model.get('term'));
+            //this.resultsView.render(this.model.get('term'));
         }
 
     },
