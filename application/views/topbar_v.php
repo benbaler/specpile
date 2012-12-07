@@ -1,10 +1,6 @@
 <div class="row" id="topbar">
-	<div class="three mobile-three columns" id="logo">
-		<h1><a href="/">Specpile</a></h1>
-	</div>
-
-	<div class="one mobile-one columns">
-		<h5>alpha</h5>
+	<div class="four mobile-four columns" id="logo">
+		<h1><a href="/">Specpile <small>alpha</small></a></h1>
 	</div>
 
 	<?php if($logged_in == TRUE): ?>
@@ -22,7 +18,7 @@
 	</div>
 
 	<div class="two mobile-one columns">
-		<h5><a href="/product/add" class="button">Add Product</a></h5>
+		<h4><a href="/product/add" class="">Add Product</a></h4>
 	</div>
 
 	<?php else: ?>
