@@ -29,7 +29,7 @@ class User extends CI_Controller {
 
     public function login() {
         if ($this->session->userdata('logged_in') == TRUE)
-            redirect('home');
+            redirect('/');
 
         // $this->load->library('Facebook');
 
@@ -69,7 +69,7 @@ class User extends CI_Controller {
 
     public function logout(){
         $this->session->sess_destroy();
-        redirect('home');   
+        redirect('/');   
     }
 
     private function _user() {
