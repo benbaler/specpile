@@ -202,7 +202,7 @@ class Products_m extends CI_Model{
 		}
 	}
 
-	public function get_all() {
+	public function getAll() {
 		return $this->mongo_db->get($this->collection);
 	}
 

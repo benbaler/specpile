@@ -100,7 +100,7 @@ class Api extends REST_Controller {
     public function products_get() {
         $this->load->model('products_m');
 
-        $products = $this->products_m->get_all();
+        $products = $this->products_m->getAll();
 
         if ($products) {
             $this->response($products, 200);
