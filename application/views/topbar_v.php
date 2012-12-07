@@ -1,6 +1,10 @@
 <div class="row" id="topbar">
-	<div class="four mobile-four columns" id="logo">
+	<div class="three mobile-three columns" id="logo">
 		<h1><a href="/">Specpile</a></h1>
+	</div>
+
+	<div class="one mobile-one columns">
+		<h5>alpha</h5>
 	</div>
 
 	<?php if($logged_in == TRUE): ?>

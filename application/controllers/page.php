@@ -22,7 +22,8 @@ class Page extends CI_Controller {
 
 		$this->load->view( 'header_v', $data );
 		$this->load->view( 'topbar_v', $this->_user() );
-		$this->load->view( 'elements/categories_v', $data );
+		//$this->load->view( 'elements/categories_v', $data );
+		$this->load->view( 'elements/welcomeMsg_v');
 		$this->load->view( 'forms/search_v' );
 		$this->load->view( 'elements/results_v' );
 		$this->load->view( 'footer_v' );
