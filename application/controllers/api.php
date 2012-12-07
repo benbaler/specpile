@@ -22,7 +22,7 @@ class Api extends REST_Controller {
 
     public function user_get() {
         if (!$this->get('id')) {
-            $this->response($this->_error('User ID is not valid'), 400);
+            $this->response($this->_error('User is not valid'), 400);
         }
         $this->load->model('users_m');
         $user = $this->users_m->getUserById( $this->get('id') );
@@ -30,7 +30,7 @@ class Api extends REST_Controller {
             $this->response($user, 200); // 200 being the HTTP response code
         }
         else {
-            $this->response($this->_error('User ID not exists'), 404);
+            $this->response($this->_error('User not exists'), 404);
         }
     }
 
@@ -54,7 +54,8 @@ class Api extends REST_Controller {
     }
 
     public function users_get() {
-        $users = $this->user_model->get_all();
+        $this->load->model('users_m');
+        $users = $this->users_m->getAll();
         if ($users) {
             $this->response($users, 200);
         }

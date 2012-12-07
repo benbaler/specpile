@@ -83,6 +83,10 @@ class Users_m extends CI_Model {
         return current($this->_get(array('email' => $p_email)));
     }
 
+    public function getALL(){
+        return $this->mongo_db->get($this->collection);
+    }
+
     /**
      * retrive user object from users collection with specific values or key, value pair
      *
