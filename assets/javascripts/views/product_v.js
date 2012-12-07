@@ -1,5 +1,5 @@
 var Product = Backbone.View.extend({
-	tagName: 'div',
+	tagName: 'li',
 	className: 'product-div',
 	template: _.template($('#product-template').html()),
 

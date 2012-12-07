@@ -46,9 +46,9 @@
       .specBorder{
          border: 3px #2BA6CB solid;
       }*/
-      .search-result:hover{
-         background-color: #2BA6CB;
-         color: white;
+      .product-div:hover{
+         background-color: #B8B8B8;
+         color: black;
       }
 
       .viewSpec{
@@ -63,7 +63,7 @@
       }
 
       #topbar{
-         /*background: whitesmoke;*/
+         /*background-color: black;*/
       }
 
       .productImg{

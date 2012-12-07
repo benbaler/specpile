@@ -6,13 +6,16 @@
 
 <div class="row">
 	<div class="twelve columns">
-		<div id="results-panel" class="panel radius">
-			Search to get results
+		<div class="panel radius">
+			<ul id="results-panel" class="block-grid four-up mobile">
+				Search to get results
+			</ul>
 		</div>
 	</div>
 </div>
 
 <script type="text/template" id="product-template">
+<a href="/product/view/<%= _id %>">
 <div class="row search-result">
 <div class="twelve mobile-four columns">
 <div class="row">
@@ -22,9 +25,10 @@
 </div>
 <div class="row">
 <div class="twelve mobile-four columns">
-<a href="/product/view/<%= _id %>"><img src="<%= image %>" class="productImg"/></a>
+<img src="<%= image %>" class="productImg"/>
 </div>
 </div>
 </div>
 </div>
+</a>
 </script>

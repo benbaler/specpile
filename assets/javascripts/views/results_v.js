@@ -14,8 +14,8 @@ var Results = Backbone.View.extend({
 
     render: function(query) {
         var self = this;
-        this.$el.html("Searching for '<b>" + query + "</b>'<br/><br/>");
-        //this.$el.html("");
+        //this.$el.html("Searching for '<b>" + query + "</b>'<br/><br/>");
+        this.$el.html("");
 
         this.collection.reset();
         this.collection.query = query;
