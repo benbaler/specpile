@@ -45,31 +45,36 @@
       }
       .specBorder{
          border: 3px #2BA6CB solid;
-      }*/
-      .product-div:hover{
-         background-color: #B8B8B8;
-         color: black;
-      }
+         }*/
+         .product-div:hover{
+            background-color: #B8B8B8;
+            color: black;
+         }
 
-      .viewSpec{
-         padding: 20px;
-         /*margin:20px;*/
-      }
+         .viewSpec{
+            padding: 20px;
+            /*margin:20px;*/
+         }
 
-      .viewSpec span{
-         padding: 10px;
-         margin: 10px;
-         background: whitesmoke;
-      }
+         .viewSpec span{
+            padding: 10px;
+            margin: 10px;
+            background: whitesmoke;
+         }
 
-      #topbar{
-         /*background-color: black;*/
-      }
+         #topbar{
+            /*background-color: black;*/
+         }
 
-      .productImg{
-         max-width: 100px;
-         max-height: 100px; 
-      }
+         .productImg{
+            max-width: 100px;
+            max-height: 100px; 
+         }
+
+         .profile-thumb{
+            position: relative;
+            top: 8px;
+         }
 
 
 /* -----------------------------------------

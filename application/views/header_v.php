@@ -12,10 +12,15 @@
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 
+	<script src="/assets/javascripts/libs/foundation.min.js" type="text/javascript"></script>
 	<script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>
 	<script src="/assets/javascripts/<?= $app ?>.js" type="text/javascript"></script>
 </head>
 <body>
+	<script type="text/javascript">
+		$(document).foundationTopBar();
+	</script>
+
 	<script type="text/javascript">
 
 	var _gaq = _gaq || [];

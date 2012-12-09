@@ -1,4 +1,51 @@
-<div class="row" id="topbar">
+<!-- Basic Needs -->
+<div class=" contain-to-grid">
+	<nav class="top-bar">
+		<ul>
+			<li class="name"><h1><a href="/">Specpile <small>Alpha</small></a></h1></li>
+			<li class="toggle-topbar"><a href="#"></a></li>
+		</ul>
+		<section>
+			<ul class="right">
+
+				<?php if($logged_in == TRUE): ?>
+
+				<li><a href="/product/add" class="">Add Product</a></li>
+
+				<li class="divider"></li>
+
+				<li>
+					<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" class="profile-thumb"/></a>
+				</li>
+				<li class="has-dropdown">
+					<a href="/user/id/<?= $id ?>"><?= ucfirst($first) ?></a>
+					<ul class="dropdown">
+						<li><a href="/user/logout">Logout</a></li>
+					</ul>
+				</li>
+
+			<?php else: ?>
+
+			<li class="has-dropdown">
+				<a href="#">Guest</a>
+				<ul class="dropdown">			
+					<li><a href="/user/signup">Signup</a></li>
+					<li><a href="/user/login">Login</a></li>
+				</ul>
+			</li>
+
+		<?php endif; ?>
+
+	</ul>
+</section>
+</nav>
+</div>
+
+
+
+
+
+<!-- <div class="row" id="topbar">
 	<div class="four mobile-four columns" id="logo">
 		<h1><a href="/">Specpile <small>alpha</small></a></h1>
 	</div>
@@ -21,7 +68,7 @@
 		<h4><a href="/product/add" class="">Add Product</a></h4>
 	</div>
 
-	<?php else: ?>
+<?php else: ?>
 
 	<div class="one mobile-one columns offset-by-six">
 		<h5><a href="/user/signup">Signup</a></h5>
@@ -36,9 +83,9 @@
 
 
 
-	<?php endif; ?>
+<?php endif; ?>
 
-</div>
+</div> -->
 
 <!--
 <div class="row">
