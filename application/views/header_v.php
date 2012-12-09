@@ -19,6 +19,10 @@
 <body>
 	<script type="text/javascript">
 		$(document).foundationTopBar();
+		$(document).foundationButtons();
+		$(document).foundationAccordion();
+		$(document).foundationNavigation();
+		$(document).foundationTabs();
 	</script>
 
 	<script type="text/javascript">
