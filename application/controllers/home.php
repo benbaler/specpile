@@ -160,7 +160,7 @@ class Home extends CI_Controller {
 		var_dump( $this->bing_m->getPhotosByText( 'iphone 5' ) );
 	}
 
-	public function test4(){
+	public function test4() {
 		echo $this->_getICEcatProductSpecs('8808993518876', 1, 1);
 	}
 
@@ -279,6 +279,35 @@ class Home extends CI_Controller {
 		else {
 			return 0;
 		}
+	}
+
+	public function test5() {
+		$ch = curl_init();
+		$headers = array
+		(
+			'Host' => 'icecat.biz',
+			'Connection' => 'keep-alive',
+			'User-Agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15',
+			'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+			'Referer' => 'http://icecat.biz',
+			'Accept-Encoding' => 'gzip,deflate,sdch',
+			'Accept-Language' => 'en-US,en;q=0.8',
+			'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+		);
+
+		curl_setopt($ch, CURLOPT_URL, "http://icecat.biz/index.cgi?search=1;language=en;search=1;start_row=25;");
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers );
+		curl_setopt($ch, CURLOPT_AUTOREFERER, 1); 
+	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
+	    curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookies.txt'); 
+	    curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookies.txt'); 
+	    curl_setopt($ch, CURLOPT_MAXREDIRS, 5); 
+		$result = curl_exec( $ch );
+		curl_close($ch);
+
+		echo $result;
 	}
 
 }
