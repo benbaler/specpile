@@ -114,7 +114,7 @@ class Example extends CI_Controller {
 				CURLOPT_MAXREDIRS =>  5
 			);
 
-			$this->mcurl->add_call("get", "http://icecat.biz/index.cgi?search=1;language=en;search=1;start_row=1550;", array(), $options);
+			$this->mcurl->add_call("get", "http://icecat.biz/index.cgi?search=1;language=en;search=1;start_row=25;", array(), $options);
 
 			$this->more = FALSE;
 		}
