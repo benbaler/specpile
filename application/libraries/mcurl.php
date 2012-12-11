@@ -101,7 +101,7 @@ class Mcurl {
 			break;
 
 		case "GET":
-			curl_setopt($this->calls[$key]["curl"], CURLOPT_URL, $url."?".$params);
+			curl_setopt($this->calls[$key]["curl"], CURLOPT_URL, $url);
 			break;
 
 		default:
