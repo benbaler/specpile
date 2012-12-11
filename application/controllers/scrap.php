@@ -25,11 +25,10 @@ class Scrap extends CI_Controller {
 					'Host' => 'icecat.biz',
 					'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11'
 				),
-				CURLOPT_AUTOREFERER =>  TRUE,
+				CURLOPT_AUTOREFERER =>  FALSE,
 				CURLOPT_FOLLOWLOCATION =>  TRUE,
 				CURLOPT_COOKIEJAR =>  getcwd().'/cookies.txt',
-				CURLOPT_COOKIEFILE =>  getcwd().'/cookies.txt',
-				CURLOPT_MAXREDIRS =>  5
+				CURLOPT_COOKIEFILE =>  getcwd().'/cookies.txt'
 			);
 		}
 	}
@@ -280,17 +279,6 @@ class Scrap extends CI_Controller {
 	public function test5() {
 		echo getcwd();
 		$ch = curl_init();
-		$headers = array
-		(
-			'Host' => 'icecat.biz',
-			'Connection' => 'keep-alive',
-			'User-Agent' => 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.15 (KHTML, like Gecko) Chrome/24.0.1295.0 Safari/537.15',
-			'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-			'Referer' => 'http://icecat.biz',
-			'Accept-Encoding' => 'gzip,deflate,sdch',
-			'Accept-Language' => 'en-US,en;q=0.8',
-			'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-		);
 
 		$headers = array(
 			'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
