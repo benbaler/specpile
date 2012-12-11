@@ -15,19 +15,20 @@ class Scrap extends CI_Controller {
 				CURLOPT_SSL_VERIFYPEER =>  FALSE,
 				CURLOPT_RETURNTRANSFER =>  TRUE,
 				CURLOPT_HTTPHEADER =>  array(
-					'Host' => 'icecat.biz',
-					'Connection' => 'keep-alive',
-					'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11',
 					'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-					'Referer' => 'http://icecat.biz/index.cgi?search=1;language=en;search=1;start_row=0;',
+					'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
 					'Accept-Encoding' => 'gzip,deflate,sdch',
 					'Accept-Language' => 'en-US,en;q=0.8',
-					'Accept-Charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+					'Cache-Control' => 'max-age=0',
+					'Connection' => 'keep-alive',
+					// 'Cookie' => 'PHPSESSID=2i9qjo04tfkopqdce1jnj3bj85; icecat_bizlookup_text=iphone%204; __atuvc=49%7C50; icecat_bizlimit=; icecat_bizULocation=109%7CIL%7CIsrael%7C20.00%7CILS%7C1%7CIsrael.jpg; icecat_bizsearch_query=z97AZcP3Co2HefVbSXoCdn7aiYRna7exd2kazmoTtfcCmu4y',
+					'Host' => 'icecat.biz',
+					'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11'
 				),
 				CURLOPT_AUTOREFERER =>  TRUE,
 				CURLOPT_FOLLOWLOCATION =>  TRUE,
-				CURLOPT_COOKIEJAR =>  'cookies.txt',
-				CURLOPT_COOKIEFILE =>  'cookies.txt',
+				CURLOPT_COOKIEJAR =>  getcwd().'/cookies.txt',
+				CURLOPT_COOKIEFILE =>  echo getcwd().'/cookies.txt',
 				CURLOPT_MAXREDIRS =>  5
 			);
 		}
@@ -311,8 +312,8 @@ class Scrap extends CI_Controller {
 		curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers );
 		curl_setopt( $ch, CURLOPT_AUTOREFERER, FALSE );
 		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
-		curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
+		curl_setopt( $ch, CURLOPT_COOKIEJAR, getcwd().'/cookies.txt' );
+		curl_setopt( $ch, CURLOPT_COOKIEFILE, getcwd().'/cookies.txt' );
 		//curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
 		// curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_port);
 		// curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTPS');
@@ -345,7 +346,7 @@ class Scrap extends CI_Controller {
 
 		// cameras
 		//$url = 'http://icecat.biz/index.cgi?price=&limit_value_1=&feature_id_1=8053&limit_value_2=&feature_id_2=7570&limit_value_3=&feature_id_3=1618&limit_value_4=&feature_id_4=1574&limit_value_5=&feature_id_5=63&limit_value_6=&feature_id_6=74&limit_value_7=&feature_id_7=48&limit_value_8=&feature_id_8=7514&limit_value_9=&feature_id_9=2397&feature_id_10=1766&stock=-2&7=7&52=52&1482=1482&868=868&4645=4645&57=57&5040=5040&4445=4445&10=10&285=285&11=11&45=45&865=865&2451=2451&2440=2440&5113=5113&13=13&75=75&15=15&959=959&3542=3542&358=358&704=704&169=169&1=1&237=237&4908=4908&756=756&88=88&22=22&3173=3173&562=562&90=90&91=91&571=571&4973=4973&281=281&3438=3438&106=106&1841=1841&265=265&263=263&708=708&261=261&25=25&1131=1131&4836=4836&610=610&4995=4995&393=393&4752=4752&3891=3891&26=26&757=757&3513=3513&184=184&5=5&5240=5240&2729=2729&2768=2768&2=2&244=244&2895=2895&2252=2252&1826=1826&4805=4805&2788=2788&language=en&rows=10&uncatid=45121504&new_search=1';
-		
+
 		// tablets
 		$url = 'http://icecat.biz/index.cgi?price=&limit_value_1=&feature_id_1=8053&limit_value_2=&feature_id_2=7570&limit_value_3=&feature_id_3=1618&limit_value_4=&feature_id_4=1574&limit_value_5=&feature_id_5=63&limit_value_6=&feature_id_6=74&limit_value_7=&feature_id_7=48&limit_value_8=&feature_id_8=7514&limit_value_9=&feature_id_9=2397&feature_id_10=1766&stock=-2&7=7&52=52&1482=1482&868=868&4645=4645&57=57&5040=5040&4445=4445&10=10&285=285&11=11&45=45&865=865&2451=2451&2440=2440&5113=5113&13=13&75=75&15=15&959=959&3542=3542&358=358&704=704&169=169&1=1&237=237&4908=4908&756=756&88=88&22=22&3173=3173&562=562&90=90&91=91&571=571&4973=4973&281=281&3438=3438&106=106&1841=1841&265=265&263=263&708=708&261=261&25=25&1131=1131&4836=4836&610=610&4995=4995&393=393&4752=4752&3891=3891&26=26&757=757&3513=3513&184=184&5=5&5240=5240&2729=2729&2768=2768&2=2&244=244&2895=2895&2252=2252&1826=1826&4805=4805&2788=2788&language=en&rows=10&uncatid=45121504&new_search=1';
 
@@ -371,7 +372,7 @@ class Scrap extends CI_Controller {
 		//$this->load->model('mongo_db');
 
 		$html = $call['response'];
-		var_dump($html);
+		var_dump( $html );
 
 		preg_match( '/=([0-9]+);$/', $call['url'], $matches );
 
