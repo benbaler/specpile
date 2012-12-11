@@ -448,10 +448,10 @@ class Scrap extends CI_Controller {
 					$html = file_get_contents( 'temp/'.$folder.'/'. $entry );
 					//echo $html;
 					$products = $this->scrap_m->products( $html );
-					$products['category'] = $folder;
 					//echo $html;
 					//var_dump($products);
 					foreach ( $products as $product ) {
+						$product['category'] = $folder;
 						$p = current( $this->mongo_db->where( array( 'icecat_id' => $product['icecat_id'] ) )->get( 'icecat_products' ) );
 						if ( !$p ) {
 							$this->mongo_db->insert( 'icecat_products', $product );
@@ -492,8 +492,9 @@ class Scrap extends CI_Controller {
 					}
 				} else {
 					$features = $this->scrap_m->feature( $html );
-					if ( count( $features ) < 5 ) {
-						var_dump( $id, $features, $html );
+					if ( count( $features ) < 1 ) {
+						var_dump( $id, $features);
+						echo $html;
 						die();
 					}
 					//var_dump($features);
