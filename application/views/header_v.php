@@ -10,6 +10,11 @@
 	
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
+
+	<link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
 	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 
 	<script src="/assets/javascripts/libs/foundation.min.js" type="text/javascript"></script>
@@ -19,10 +24,6 @@
 <body>
 	<script type="text/javascript">
 		$(document).foundationTopBar();
-		$(document).foundationButtons();
-		$(document).foundationAccordion();
-		$(document).foundationNavigation();
-		$(document).foundationTabs();
 	</script>
 
 	<script type="text/javascript">

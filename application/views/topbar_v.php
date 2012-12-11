@@ -1,8 +1,7 @@
- <!-- Basic Needs -->
-<!-- <div class=" contain-to-grid">
+<div class=" contain-to-grid">
 	<nav class="top-bar">
 		<ul>
-			<li class="name"><h1><a href="/">Specpile <small>Alpha</small></a></h1></li>
+			<li class="name"><a href="/" class="logo">Specpile</a></li>
 			<li class="toggle-topbar"><a href="#"></a></li>
 		</ul>
 		<section>
@@ -40,12 +39,12 @@
 </section>
 </nav>
 </div>
- -->
 
 
 
 
-<div class="row" id="topbar">
+
+<!-- <div class="row" id="topbar">
 	<div class="four mobile-four columns" id="logo">
 		<h1><a href="/">Specpile <small>alpha</small></a></h1>
 	</div>
@@ -85,7 +84,7 @@
 
 <?php endif; ?>
 
-</div>
+</div> -->
 
 <!--
 <div class="row">
@@ -108,3 +107,4 @@
 		</ul>
 	</section>
 </div>
+-->

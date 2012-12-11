@@ -36,6 +36,11 @@ class Scrap_m extends CI_Model {
 							break;
 
 						case 5:
+							$as = $tds->item($i)->getElementsByTagName('a');
+							$code = "";
+							foreach ($as as $a) {
+								$code = $a->nodeValue;
+							}
 							break;
 
 						case 6:
@@ -76,7 +81,11 @@ class Scrap_m extends CI_Model {
 							break;
 
 						case 3:
-							
+							$as = $tds->item($i)->getElementsByTagName('a');
+							$code = "";
+							foreach ($as as $a) {
+								$code = $a->nodeValue;
+							}
 							break;
 
 						case 4:
@@ -120,11 +129,13 @@ class Scrap_m extends CI_Model {
 				$id = $matches[1];
 
 				$products[] = array(
-					'id' => $id,
+					'icecat_id' => $id,
+					'code' => $code,
 					'name' => trim(strtolower($name)),
 					'company' => trim(strtolower($company)),
 					'link' => $link,
-					'image' => $image
+					'image' => $image,
+					'scan' => 'pending'
 				);
 			}
 		}
@@ -146,11 +157,11 @@ class Scrap_m extends CI_Model {
 		if (!is_null($features)) {
 			foreach ($features as $feature) {
 				if ($feature->getAttribute('class') == 'ds_bold_header') {
-					$spec = trim(strtolower($feature->nodeValue));
+					$spec = trim(strtolower(str_replace(array('.','$'),array('_',''),$feature->nodeValue)));
 				}
 				if ($feature->getAttribute('class') == 'ds_label') {
 					$pair = explode('*', $feature->nodeValue);
-					$sub_spec = trim(strtolower($pair[0]));
+					$sub_spec = trim(strtolower(str_replace(array('.','$'),array('_',''),$pair[0])));
 					//var_dump($pair[0]);
 				}
 				if ($feature->getAttribute('class') == 'ds_data') {
@@ -273,7 +284,7 @@ class Scrap_m extends CI_Model {
 
 		$doc = new DOMDocument();
 		$doc->recover = TRUE;
-		$dom->strictErrorChecking = FALSE;
+		$doc->strictErrorChecking = FALSE;
 		$doc->loadHTML($html);
 
 		return new DOMXpath($doc);
