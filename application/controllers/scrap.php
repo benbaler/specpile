@@ -378,7 +378,7 @@ class Scrap extends CI_Controller {
 		$a = $this->scrap_m->search( $html );
 
 		if(count($a) == 0){
-		var_dump( count( $a ), $name );
+		var_dump( count( $a ), $name, $html );
 		die();
 		}
 		// if(count($a) == 0){
