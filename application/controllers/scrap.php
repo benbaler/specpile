@@ -336,7 +336,7 @@ class Scrap extends CI_Controller {
 
 	}
 
-	public function test7( $i = 0, $j = 25, $l = 2 ) {
+	public function test7( $i = 0, $j = 25, $l = 3 ) {
 		$this->j = $j;
 		$this->load->library( 'mcurl' );
 
@@ -371,6 +371,7 @@ class Scrap extends CI_Controller {
 		//$this->load->model('mongo_db');
 
 		$html = $call['response'];
+		var_dump($html);
 
 		preg_match( '/=([0-9]+);$/', $call['url'], $matches );
 
