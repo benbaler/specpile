@@ -28,7 +28,7 @@ class Scrap extends CI_Controller {
 				CURLOPT_AUTOREFERER =>  TRUE,
 				CURLOPT_FOLLOWLOCATION =>  TRUE,
 				CURLOPT_COOKIEJAR =>  getcwd().'/cookies.txt',
-				CURLOPT_COOKIEFILE =>  echo getcwd().'/cookies.txt',
+				CURLOPT_COOKIEFILE =>  getcwd().'/cookies.txt',
 				CURLOPT_MAXREDIRS =>  5
 			);
 		}
