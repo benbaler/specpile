@@ -278,6 +278,7 @@ class Scrap extends CI_Controller {
 	}
 
 	public function test5() {
+		echo getcwd();
 		$ch = curl_init();
 		$headers = array
 		(
