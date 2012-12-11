@@ -439,15 +439,16 @@ class Scrap extends CI_Controller {
 		echo "</pre>";
 	}
 
-	public function test12() {
+	public function test12($folder = 'smartphones') {
 		$flag = 0;
 		$this->load->model( 'scrap_m' );
-		if ( $handle = opendir( 'temp/smartphones' ) ) {
+		if ( $handle = opendir( 'temp/'.$folder ) ) {
 			while ( false !== ( $entry = readdir( $handle ) ) ) {
 				if ( $entry != "." && $entry != ".." ) {
-					$html = file_get_contents( 'temp/smartphones/'. $entry );
+					$html = file_get_contents( 'temp/'.$folder.'/'. $entry );
 					//echo $html;
 					$products = $this->scrap_m->products( $html );
+					$products['category'] = $folder;
 					//echo $html;
 					//var_dump($products);
 					foreach ( $products as $product ) {
