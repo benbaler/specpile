@@ -190,7 +190,7 @@ class Scrap_m extends CI_Model {
 
 		if (!is_null($elements)) {
 			foreach ($elements as $element) {
-				if (preg_match('/^\/p\//', $element->getAttribute('href'))) {
+				if (preg_match('/^\/en\/p\//', $element->getAttribute('href'))) {
 					$a[] = $element->getAttribute('href');
 				}
 			}
