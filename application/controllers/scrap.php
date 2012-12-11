@@ -361,7 +361,7 @@ class Scrap extends CI_Controller {
 		//$this->load->model('mongo_db');
 
 		$html = $call['response'];
-		var_dump( $html );
+		//var_dump( $html );
 
 		preg_match( '/=([0-9]+);$/', $call['url'], $matches );
 
@@ -377,7 +377,7 @@ class Scrap extends CI_Controller {
 
 		$a = $this->scrap_m->search( $html );
 
-		var_dump( count( $a ) );
+		var_dump( count( $a ), $name );
 
 		// if(count($a) == 0){
 		//  echo "<br/>ERROR: ".(!isset($matches[1])) ? '0' : $matches[1] ."<br/>";
