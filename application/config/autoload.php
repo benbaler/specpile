@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session','Mongo_db');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','cookie');
+$autoload['helper'] = array('url','cookie','text');
 
 
 /*

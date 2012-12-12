@@ -49,7 +49,7 @@ window.productData = <?= json_encode($product) ?>;
 
 <div class="row">
   <div class="twelve columns">
-    <h5><?= $product['category'] ?> &rsaquo; <?= $product['company'] ?> &rsaquo; <?= $product['name'] ?></h5>
+    <h5><?= ucwords($product['category']) ?> &rsaquo; <?= ucwords($product['company']) ?> &rsaquo; <?= ucwords(character_limiter($product['name'],50)) ?></h5>
   </div>
 </div>
 
@@ -79,17 +79,17 @@ window.productData = <?= json_encode($product) ?>;
     <?php foreach (isset($product['features']) ? $product['features'] : array() as $feature => $specs) : ?>
     <div class="row specs-feature">
       <div class="twelve mobile-four columns">
-        <h5><?= $feature; ?></h5>
+        <h5><?= ucwords($feature); ?></h5>
       </div>
     </div>
     <?php foreach ($specs as $spec => $option) : ?>
 
     <div class="row specs-option">
       <div class="five mobile-two columns offset-by-two">
-        <b><?= $spec ?></b> 
+        <b><?= ucwords($spec) ?></b> 
       </div>
       <div class="four mobile-two columns pull-two">
-        <?= $option === TRUE ? 'yes' : ($option === FALSE ? 'no' : $option) ?>
+        <?= $option === TRUE ? 'Yes' : ($option === FALSE ? 'No' : ucwords($option)) ?>
       </div>
     </div>
   <?php endforeach; ?>
