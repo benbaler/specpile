@@ -30,13 +30,7 @@
 	<script type="text/javascript">
 	$(document).foundationTopBar();
 	</script>
-
-	<div id="getsat-widget-3225"></div>
-	<script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
-	<script type="text/javascript">
-	if (typeof GSFN !== "undefined") { GSFN.loadWidget(3225,{"containerId":"getsat-widget-3225"}); }
-	</script>
-
+	
 	<script type="text/javascript">
 
 	var _gaq = _gaq || [];
