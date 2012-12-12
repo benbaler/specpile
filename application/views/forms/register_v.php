@@ -1,6 +1,6 @@
     <div class="row">
         <div class="twelve mobile-four columns">
-            <form id="register-form">
+            <form id="register-form" onsubmit="return false;">
                 <div class="row">
                     <div class="four mobile-four columns centered">
                         <h2>Sign Up</h2>

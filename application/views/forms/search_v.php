@@ -10,7 +10,7 @@ window.categories = <?= json_encode($categories); ?>;
 
 <div class="row">
   <div class="twelve mobile-four columns">
-    <form class="custom collapse" id="search-form">
+    <form class="custom collapse" id="search-form" onsubmit="return false;">
       <div class="row collapse">
 
     <!-- <div class="two mobile-four columns">

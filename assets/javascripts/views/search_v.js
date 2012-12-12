@@ -43,6 +43,7 @@ var Search = Backbone.View.extend({
             //alert(this.displayError(this.getInputByName('term')));
             //this.resultsView.render(this.model.get('term'));
         }
+        return false;
 
     },
 

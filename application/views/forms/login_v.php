@@ -1,6 +1,6 @@
 <div class="row">
     <div class="twelve columns">
-        <form class="collapse" id="login-form" method="post">
+        <form class="collapse" id="login-form" method="post" onsubmit="return false;">
             <div class="row">
                 <div class="four mobile-four columns centered">
                     <h2>Login</h2>
