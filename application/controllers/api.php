@@ -127,6 +127,7 @@ class Api extends REST_Controller {
 
     public function search_get() {
         $this->load->model( 'icecat_m' );
+        $this->load->helper('text');
 
         $products = $this->icecat_m->getProductsByQueryAndLimit( $this->get( 'query' ), 4*20 );
 
@@ -145,9 +146,9 @@ class Api extends REST_Controller {
                 if( $flag == false ) {
                     $results[] = array(
                         '_id' => $product['_id']->__toString(),
-                        'name' => $product['name'],
-                        'category_name' => $product['category'],
-                        'brand_name' => $product['company'],
+                        'name' => ucwords(character_limiter($product['name'],10)),
+                        'category_name' => ucwords($product['category']),
+                        'brand_name' => ucwords($product['company']),
                         'image' => $product['image']
                     );
                 

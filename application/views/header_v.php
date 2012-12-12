@@ -19,6 +19,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 
 	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 

@@ -14,19 +14,25 @@
 
 <script type="text/template" id="product-template">
 <a href="/product/view/<%= _id %>">
+
 <div class="row search-result">
 <div class="twelve mobile-four columns product-result">
+
 <div class="row">
-<div class="twelve mobile-four columns">
-<%= category_name %> &rsaquo; <%= brand_name %><br/><b><%= name %><b/>
+<div class="twelve mobile-four columns result-img">
+<img src="<% if(image != '') { %> <%= image %> <% } else { %> assets/images/unknown.png  <% } %>" class="productImg"/>
 </div>
 </div>
+
 <div class="row">
-<div class="twelve mobile-four columns">
-<img src="<%= image %>" class="productImg"/>
+<div class="twelve mobile-four columns result-name">
+<%= brand_name %><br/><b><%= name %><b/>
 </div>
 </div>
+
+
 </div>
 </div>
+
 </a>
 </script>
