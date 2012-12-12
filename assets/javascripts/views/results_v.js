@@ -25,11 +25,11 @@ var Results = Backbone.View.extend({
             abortPending: true,
             success: function(collection, response, options) {
                 if(collection.length == 0) {
-                    self.$el.html("No Results for '" + query + "'");
+                    self.$el.html("<li>No Results for '" + query + "'</li>");
                 }
             },
             error: function(collection, response, options){
-                self.$el.html("Error from Server, Try Again");
+                self.$el.html("<li>Error from Server, Try Again</li>");
             }
             // ,query: query
             // ,url: this.collection.url+query

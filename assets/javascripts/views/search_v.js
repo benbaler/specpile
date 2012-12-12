@@ -2,12 +2,12 @@ var Search = Backbone.View.extend({
     el: $('#search-form'),
 
     events: {
-        // 'keyup input': 'previewProducts',
-        'submit': 'getPreviewProducts'
+        'keyup input': 'getProductsNames',
+        'submit': 'getProductsResults'
     },
 
     initialize: function() {
-        _.bindAll(this, 'previewProducts', 'getPreviewProducts');
+        _.bindAll(this, 'getProductsNames', 'getProductsResults');
 
         Backbone.Validation.bind(this, {
             selector: 'name',
@@ -18,24 +18,18 @@ var Search = Backbone.View.extend({
             collection: new Products()
         });
 
-        //this.render(window.categories);
+        this.render();
     },
 
-    render: function(categories){
-        $("#categories").autocomplete({
-            source: categories,
-            minLength: 0,
-            open: function(event, ui) {
-                //$(".ui-autocomplete").sortable();
-                //$(".ui-autocomplete").disableSelection();
-            }
-        }).focus(function() {
-            //Use the below line instead of triggering keydown
-            $(this).data("autocomplete").search($(this).val());
+    render: function(){
+        var self = this;
+        $('#term', this.$el).autocomplete({
+            source: [],
+            minLength: 1
         });
     },
 
-    getPreviewProducts: function(event) {
+    getProductsResults: function(event) {
         event.preventDefault();
 
         this.displayError(this.getInputByName('term'));
@@ -52,7 +46,7 @@ var Search = Backbone.View.extend({
 
     },
 
-    previewProducts: function(event) {
+    getProductsNames: function(event) {
         element = $(event.target);
         error = this.model.preValidate(element.attr('name'), element.val());
 
@@ -60,7 +54,8 @@ var Search = Backbone.View.extend({
         
         if(error) {
         } else {
-            this.autoComplete(this.getInputByName('term').val());
+            this.autoComplete(element.val());
+            //this.autoComplete(this.getInputByName('term').val());
         }
     },
 
@@ -69,8 +64,14 @@ var Search = Backbone.View.extend({
     },
 
     autoComplete: function(value) {
-        //console.log(value);
-        this.resultsView.render(value);
+        $.get('api/products/term/'+value, function(data) {
+            results = [];
+            $.each(data, function(i,val){
+                results.push(val);
+            });
+            console.log(results);
+            $("#term", this.$el).autocomplete("option", "source", results);
+        });
     },
 
     displayError: function(element, error) {

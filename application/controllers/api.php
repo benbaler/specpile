@@ -98,56 +98,92 @@ class Api extends REST_Controller {
     }
 
     public function products_get() {
-        $this->load->model('products_m');
+        $this->load->model('icecat_m');
 
-        $products = $this->products_m->getAll();
+        $products = $this->icecat_m->getProductsByQueryAndLimit($this->get('term'));
 
         if ($products) {
-            $this->response($products, 200);
+            $names = array();
+            foreach ($products as $product) {
+                $names[] = $product['name'];
+            }
+            $this->response(array_unique($names), 200);
         }
         else {
-            $this->response(NULL, 404);
+            $this->response($this->_error('No results'), 404);
         }
+
+        // $this->load->model('products_m');
+
+        // $products = $this->products_m->getAll();
+
+        // if ($products) {
+        //     $this->response($products, 200);
+        // }
+        // else {
+        //     $this->response(NULL, 404);
+        // }
     }
 
     public function search_get() {
-        $this->load->model('products_m');
-        if ($this->get('query')) {
-            $results = $this->products_m->getProductsByQuery($this->get('query'));
-            // foreach ($results as $i => &$arr) {
-            //     foreach ($arr as $j => &$value) {
-            //         if ($j == '_id') {
-            //             $arr['id'] = (string)$value;
-            //         }
-            //     }
-            // }
-            //$results = array(array('id' => 1, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1),array('id' => 2, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1));
+        $this->load->model('icecat_m');
 
-            if (is_array($results)) {
-                $this->response($results, 200);
-            }
-            else {
-                $data = array(
-                    'error' => array(
-                        'message' => 'no results for your query',
-                        'type' => 'search',
-                        'code' => '1'
-                    )
+        $products = $this->icecat_m->getProductsByQueryAndLimit($this->get('query'), 4*20);
+
+        if($products){
+            $results = array();
+             foreach ($products as $product) {
+
+                $results[] = array(
+                '_id' => $product['_id']->__toString(),
+                'name' => $product['name'],
+                'category_name' => $product['category'],
+                'brand_name' => $product['company'],
+                'image' => $product['image']
                 );
-
-                $this->response($data, 404);
             }
-        } else {
-            $data = array(
-                'error' => array(
-                    'message' => 'query is not valid',
-                    'type' => 'search',
-                    'code' => '2'
-                )
-            );
-
-            $this->response($data, 404);
+            $this->response($results, 200);
+        } else{
+            $this->response($this->_error('No results'), 404);
         }
+
+        // $this->load->model('products_m');
+        // if ($this->get('query')) {
+        //     $results = $this->products_m->getProductsByQuery($this->get('query'));
+        //     // foreach ($results as $i => &$arr) {
+        //     //     foreach ($arr as $j => &$value) {
+        //     //         if ($j == '_id') {
+        //     //             $arr['id'] = (string)$value;
+        //     //         }
+        //     //     }
+        //     // }
+        //     //$results = array(array('id' => 1, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1),array('id' => 2, 'name' => 'iPhone', 'category_id' => 1, 'brand_id' => 1));
+
+        //     if (is_array($results)) {
+        //         $this->response($results, 200);
+        //     }
+        //     else {
+        //         $data = array(
+        //             'error' => array(
+        //                 'message' => 'no results for your query',
+        //                 'type' => 'search',
+        //                 'code' => '1'
+        //             )
+        //         );
+
+        //         $this->response($data, 404);
+        //     }
+        // } else {
+        //     $data = array(
+        //         'error' => array(
+        //             'message' => 'query is not valid',
+        //             'type' => 'search',
+        //             'code' => '2'
+        //         )
+        //     );
+
+        //     $this->response($data, 404);
+        // }
     }
 
     public function option_post() {

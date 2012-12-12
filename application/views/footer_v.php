@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="twelve columns">
+	<div class="twelve columns last-column">
 		<hr>
 		<ul class="inline-list">
 			<li><a href="#">About</a></li>
