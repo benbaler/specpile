@@ -11,24 +11,26 @@ class Specs_m extends CI_Model {
 		return current($this->_get(array('_id' => new MongoId($p_id), 'category_id' => new MongoId($p_categoryId))));
 	}
 
-	public function getSpecIdByNameAndCategoryId($p_specName, $p_categoryId) {
+	public function getSpecIdByNameAndCategoryId($p_specName, $p_titleId, $p_categoryId) {
 		$regex = new MongoRegex('/^'.$p_specName.'$/i');
-		$spec = current($this->_get(array('name' => $regex, 'category_id' => new MongoId($p_categoryId))));
+		$spec = current($this->_get(array('name' => $regex, 'title_id' => new MongoId($p_titleId), 'category_id' => new MongoId($p_categoryId))));
 		return isset($spec['_id']) ? $spec['_id']->__toString() : FALSE;
 	}
 
-	public function addSpecByName($p_specName, $p_categoryId, $p_userId) {
+	public function addSpecByName($p_specName, $p_titleId, $p_categoryId, $p_userId) {
+		$titleId = new MongoId($p_titleId);
 		$categoryId = new MongoId($p_categoryId);
 		$userId = new MongoId($p_userId);
 
 		$datetime = $this->mongo_db->date();
 
-		$specId = $this->getSpecIdByNameAndCategoryId($p_specName, $p_categoryId);
+		$specId = $this->getSpecIdByNameAndCategoryId($p_specName, $p_titleId, $p_categoryId);
 
 		if ($specId == FALSE) {
 
 			$spec = array(
 				'name' => $p_specName,
+				'title_id' => $titleId,
 				'category_id' => $categoryId,
 				'user_id' => $userId,
 				'active' => true,
@@ -38,6 +40,7 @@ class Specs_m extends CI_Model {
 					array(
 						'version' => $datetime,
 						'name' => $p_specName,
+						'title_id' => $titleId,
 						'category_id' => $categoryId,
 						'user_id' => $userId,
 						'active' => true

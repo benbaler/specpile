@@ -168,8 +168,12 @@ class Scrap_m extends CI_Model {
 					$val = trim($feature->nodeValue);
 					if ($val == "") {
 						$items = $feature->getElementsByTagName('img');
-						$src = $items->item(0)->getAttribute('src');
-						$arr[$spec][$sub_spec] = strpos($src, 'yes') !== FALSE ? TRUE : FALSE;
+						if($items->length == 0){
+							$rr[$spec][$sub_spec] = FALSE;
+						} else{
+							$src = $items->item(0)->getAttribute('src');
+							$arr[$spec][$sub_spec] = strpos($src, 'yes') !== FALSE ? TRUE : FALSE;
+						}
 					} else {
 						$arr[$spec][$sub_spec] = trim(strtolower($val));
 					}

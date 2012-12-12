@@ -27,24 +27,26 @@ class Options_m extends CI_Model {
 		return $options;
 	}
 
-	public function getOptionByNameAndSpecId($p_optionName, $p_specId){
+	public function getOptionByNameAndSpecId($p_optionName, $p_titleId, $p_specId){
 		$regex = new MongoRegex('/^'.$p_optionName.'$/i');
-		$option = current($this->_get(array('name' => $regex, 'spec_id' => new MongoId($p_specId))));
+		$option = current($this->_get(array('name' => $regex, 'title_id' => new MongoId($p_titleId), 'spec_id' => new MongoId($p_specId))));
 		return isset($option['_id']) ? $option['_id']->__toString() : FALSE;
 	}
 
-	public function addOptionByName($p_optionName, $p_specId, $p_userId){
+	public function addOptionByName($p_optionName, $p_titleId, $p_specId, $p_userId){
+		$titleId = new MongoId($p_titleId);
 		$specId = new MongoId($p_specId);
 		$userId = new MongoId($p_userId);
 
 		$datetime = $this->mongo_db->date();
 
-		$optionId = $this->getOptionByNameAndSpecId($p_optionName, $p_specId);
+		$optionId = $this->getOptionByNameAndSpecId($p_optionName, $p_titleId, $p_specId);
 
 		if ($optionId == FALSE) {
 
 			$option = array(
 				'name' => $p_optionName,
+				'title_id' => $titleId,
 				'spec_id' => $specId,
 				'user_id' => $userId,
 				'active' => true,
@@ -54,6 +56,7 @@ class Options_m extends CI_Model {
 					array(
 						'version' => $datetime,
 						'name' => $p_optionName,
+						'title_id' => $titleId,
 						'spec_id' => $specId,
 						'user_id' => $userId,
 						'active' => true

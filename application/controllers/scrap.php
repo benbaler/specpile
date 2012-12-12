@@ -377,9 +377,9 @@ class Scrap extends CI_Controller {
 
 		$a = $this->scrap_m->search( $html );
 
-		if(count($a) == 0){
-		var_dump( count( $a ), $name, $html );
-		die();
+		if ( count( $a ) == 0 ) {
+			var_dump( count( $a ), $name, $html );
+			die();
 		}
 		// if(count($a) == 0){
 		//  echo "<br/>ERROR: ".(!isset($matches[1])) ? '0' : $matches[1] ."<br/>";
@@ -439,7 +439,7 @@ class Scrap extends CI_Controller {
 		echo "</pre>";
 	}
 
-	public function test12($folder = 'smartphones') {
+	public function test12( $folder = 'smartphones' ) {
 		$flag = 0;
 		$this->load->model( 'scrap_m' );
 		if ( $handle = opendir( 'temp/'.$folder ) ) {
@@ -465,7 +465,7 @@ class Scrap extends CI_Controller {
 		}
 	}
 
-	public function test13( $i = 0, $j = 10, $l = 3 ) {
+	public function test13( $i = 0, $j = 10, $l = 3, $c = "tablets" ) {
 		set_time_limit( 0 );
 		// error: 0 = not scanned, 1 = scanned, 2 = some error
 		// $this->mongo_db->set(array('error' => 0))->update('icecat_products2');
@@ -477,7 +477,7 @@ class Scrap extends CI_Controller {
 		$this->j = $j;
 
 		for ( $i = 0; $i < $j; $i++ ) {
-			$product = current( $this->mongo_db->where( array( 'scan' => 'pending' ) )->get( 'icecat_products' ) );
+			$product = current( $this->mongo_db->where( array( 'scan' => 'pending', 'category' => $c ) )->get( 'icecat_products' ) );
 			// var_dump($product); die();
 			if ( $product ) {
 				$id = $product['icecat_id'];
@@ -493,7 +493,7 @@ class Scrap extends CI_Controller {
 				} else {
 					$features = $this->scrap_m->feature( $html );
 					if ( count( $features ) < 1 ) {
-						var_dump( $id, $features);
+						var_dump( $id, $features );
 						echo $html;
 						die();
 					}
@@ -503,8 +503,11 @@ class Scrap extends CI_Controller {
 				}
 
 				//$this->mcurl->add_call("get", "http://icecat.biz/index.cgi?ajax=productPage;product_id=".$product['id'].";language=en;request=feature", array(), $this->options);
+			} else {
+				var_dump( "no product to scan" );
+				die();
 			}
-			//sleep(1);
+			sleep( 1 );
 			//$this->i++;
 		}
 
@@ -544,6 +547,53 @@ class Scrap extends CI_Controller {
 			$this->i++;
 		}
 
+	}
+
+	public function test14($limit = 500) {
+		//ini_set('memory_limit', '4096M');
+		$this->load->model( array( 'categories_m', 'brands_m', 'products_m', 'titles_m' , 'specs_m', 'options_m' ) );
+		$products = $this->mongo_db->where( array('scan' => 'scanned', 'category' => 'smartphones') )->limit($limit)->get( 'icecat_products' );
+		$id = '50be62369aa8df0c0a000000';
+
+		$categoryId = $this->categories_m->addCategoryByName( 'smartphones', $id );
+
+		$i = 0;
+		foreach ( $products as $product ) {
+			if($i == $limit) die("limit reached ".$limit);
+
+			$brandId = $this->brands_m->addBrandByName( $product['company'], $id );
+
+			$ops = array();
+			foreach ( $product['features'] as $title => $specs ) {
+				$titleId = $this->titles_m->addTitleByName( $title, $categoryId, $id );
+				foreach ( $specs as $spec => $option ) {
+					$specId = $this->specs_m->addSpecByName( $spec, $titleId, $categoryId, $id );
+					$this->categories_m->addSpecById($specId, $categoryId, $id);
+					if($option === TRUE){
+						$option = 'yes';
+					}
+
+					if($option === FALSE){
+						$option = 'no';
+					}
+
+					$optionNew = str_replace( ';', ',', $option );
+					$options = explode( ',', $optionNew );
+					foreach ( $options as $op ) {
+						if($op == ""){
+							continue;
+						}
+
+						$optionId = $this->options_m->addOptionByName( $op, $titleId, $specId, $id );
+						$ops[] = $optionId;
+					}
+				}
+			}
+
+			$this->products_m->addProductByName($product['name'], $categoryId, $brandId, $id, $ops, $product['image'] ,$product['link'], $product['code'], $product['icecat_id']);
+			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('scan' => 'done'))->update('icecat_products');
+			$i++;
+		}
 	}
 
 

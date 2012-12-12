@@ -87,8 +87,8 @@
             top: 5px;
             font-size: 55px !important;
             /*font-family: 'Damion', cursive;*/
-            /*font-family: 'Grand Hotel', cursive;*/
-            font-family: 'Lobster', cursive;
+            font-family: 'Grand Hotel', cursive;
+            /*font-family: 'Lobster', cursive;*/
             transform: rotate(0deg);
             -ms-transform: rotate(0deg); /* IE 9 */
             -webkit-transform: rotate(0deg); /* Safari and Chrome */
@@ -99,15 +99,16 @@
              /*color: #333 !important;*/
             /*text-transform: uppercase;*/
             /*text-shadow: #555 0px 2px 3px;*/
-            text-shadow: 2px 2px 0 #ffd217, 4px 4px 0 #5ac7ff, 6px 6px 0 #ffd217, 8px 8px 0 #5ac7ff;
+            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #fff, 6px 6px 0 #fff, 8px 8px 0 #000;
+            color: #2BA6CB !important;
          }
 
          body{
-            background: gray;
+            /*background: gray;*/
          }
 
          .row{
-            background: white;
+            /*background: white;*/
          }
 
 

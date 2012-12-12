@@ -10,10 +10,15 @@ class Products_m extends CI_Model{
 		return isset($product['_id']) ? $product['_id']->__toString() : FALSE;
 	}
 
-	public function addProductByName($p_productName, $p_categoryId, $p_brandId, $p_userId) {
+	public function addProductByName($p_productName, $p_categoryId, $p_brandId, $p_userId, $p_optionsIds = array(), $p_image = "", $p_link = "" , $p_code = "", $p_icecat = "") {
 		$categoryId = new MongoId($p_categoryId);
 		$brandId = new MongoId($p_brandId);
 		$userId = new MongoId($p_userId);
+
+		$optionsIds = array();
+		foreach ($p_optionsIds as $id) {
+			$optionsIds[] = new MongoId($id);
+		}
 
 		$datetime = $this->mongo_db->date();
 
@@ -26,8 +31,11 @@ class Products_m extends CI_Model{
 				'category_id' => $categoryId,
 				'brand_id' => $brandId,
 				'user_id' => $userId,
-				'options' => array(),
-				'images' => array(),
+				'options' => $optionsIds,
+				'image' => $p_image,
+				'link' => $p_link,
+				'code' => $p_code,
+				'icecat_id' => $p_icecat,
 				'active' => true,
 
 				'version' => $datetime,
@@ -38,8 +46,11 @@ class Products_m extends CI_Model{
 						'category_id' => $categoryId,
 						'brand_id' => $brandId,
 						'user_id' => $userId,
-						'options' => array(),
-						'images' => array(),
+						'options' => $optionsIds,
+						'image' => $p_image,
+						'link' => $p_link,
+						'code' => $p_code,
+						'icecat_id' => $p_icecat,
 						'active' => true
 					)
 				)

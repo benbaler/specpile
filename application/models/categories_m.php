@@ -66,14 +66,15 @@ class Categories_m extends CI_Model{
 			);
 
 			$push = array(
-				'specs' => $specId,
-				'history' => array(
-					'version' => $datetime,
-					'name' => $category['name'],
-					'user_id' => $userId,
-					'specs' => $category['specs'],
-					'active' =>  $category['active']
-				),
+				'specs' => $specId
+				//,
+				// 'history' => array(
+				// 	'version' => $datetime,
+				// 	'name' => $category['name'],
+				// 	'user_id' => $userId,
+				// 	'specs' => $category['specs'],
+				// 	'active' =>  $category['active']
+				// ),
 			);
 
 			// var_dump($set, $push);
