@@ -26,7 +26,7 @@
 
 <div class="row">
 <div class="twelve mobile-four columns result-name">
-<%= brand_name %><br/><b><%= name %><b/>
+<%= category_name %> &rsaquo; <%= brand_name %><br/><b><%= name %><b/>
 </div>
 </div>
 
