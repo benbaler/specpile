@@ -127,7 +127,6 @@ class Api extends REST_Controller {
 
     public function search_get() {
         $this->load->model( 'icecat_m' );
-        $this->load->helper('text');
 
         $products = $this->icecat_m->getProductsByQueryAndLimit( $this->get( 'query' ), 4*20 );
 
