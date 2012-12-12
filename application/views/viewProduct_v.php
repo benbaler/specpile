@@ -13,11 +13,11 @@ window.productData = <?= json_encode($product) ?>;
 <script type="text/template" id="spec-template">
 <div class="row viewSpec">
 
-<div class="two mobile-two columns offset-by-one">
+<div class="six mobile-two columns offset-by-one">
 <span class="inline"><b><%= name %></b></span>
 </div>
 
-<div class="four mobile-two columns pull-five">
+<div class="five mobile-two columns pull-five">
 <div class="row collapse">
 
 <div class="eight mobile-three columns">
@@ -38,25 +38,25 @@ window.productData = <?= json_encode($product) ?>;
 
 
 <div class="row">
-  <div class="three mobile-two columns">
+  <div class="twelve mobile-four columns">
     <h4>Product</h4>
   </div>
 
-  <div class="three mobile-two columns offset-by-six">
-    <!-- <button class="button expend right">Edit Specs</button> -->
-  </div>
+  <!-- <div class="three mobile-two columns offset-by-six">
+    <button class="button expend right">Edit Specs</button>
+  </div> -->
 </div>
 
 <div class="row">
   <div class="twelve columns">
-    <h5><?= $product['category_name'] ?> &rsaquo; <?= $product['brand_name'] ?> &rsaquo; <?= $product['name'] ?></h5>
+    <h5><?= $product['category'] ?> &rsaquo; <?= $product['company'] ?> &rsaquo; <?= $product['name'] ?></h5>
   </div>
 </div>
 
 <div class="row">
-  <div class="eleven mobile-four columns offset-by-one">
+  <div class="twelve mobile-four columns">
     <ul class="inline-list">
-      <?php foreach($product['images'] as $url): ?>
+      <?php foreach(array($product['image']) as $url): ?>
         <li><img src="<?= $url ?>" class="productImg"/></li>
       <?php endforeach; ?>
     </ul>
@@ -64,14 +64,36 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 
 <div class="row">
-  <div class="three mobile-two columns">
+  <div class="twelve mobile-three columns">
     <h4>Specification</h4>
   </div>
 
-  <div class="three mobile-two columns offset-by-six">
+  <!-- <div class="two mobile-one columns offset-by-six">
     <a href="/product/edit/<?= $product['_id'] ?>" class="button expend right">Edit Specs</a>
-  </div>
+  </div> -->
 </div>
 
-<from class="custom collapse" id="editProduct-form">
-</from>
+
+<div class="row">
+<div class="twelve columns">
+    <?php foreach ($product['features'] as $feature => $specs) : ?>
+      <div class="row">
+  <div class="eleven columns offset-by-one">
+      <h5><?= $feature; ?></h5>
+  </div>
+  </div>
+      <?php foreach ($specs as $spec => $option) : ?>
+        
+        <div class="row">
+  <div class="five columns offset-by-two">
+      <h6><?= $spec ?></h6> 
+  </div>
+  <div class="five columns">
+      <h7><?= $option ?></h7>
+  </div>
+  </div>
+      <?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
+</div>
+

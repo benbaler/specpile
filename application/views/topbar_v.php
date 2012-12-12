@@ -9,7 +9,7 @@
 
 				<?php if($logged_in == TRUE): ?>
 
-				<li><a href="/product/add" class="">Add Product</a></li>
+				<!-- <li><a href="/product/add" class="">Add Product</a></li> -->
 
 				<li class="divider"></li>
 

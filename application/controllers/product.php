@@ -9,9 +9,9 @@ class Product extends CI_Controller {
 
 	public function view($p_id)
 	{
-		$this->load->model(array('categories_m','products_m'));
+		$this->load->model(array('icecat_m'));
 		
-		$product = $this->products_m->getProductViewById($p_id);
+		$product = $this->icecat_m->getProductViewById($p_id);
 
 		$data = array(
 			'app' => 'editProduct',
@@ -24,6 +24,22 @@ class Product extends CI_Controller {
 		$this->load->view('topbar_v', $user);
 		$this->load->view('viewProduct_v', $data);
 		$this->load->view('footer_v');
+
+		// $this->load->model(array('categories_m','products_m'));
+		
+		// $product = $this->products_m->getProductViewById($p_id);
+
+		// $data = array(
+		// 	'app' => 'editProduct',
+		// 	'product' => $product
+		// );
+
+		// $user = $this->_user();
+
+		// $this->load->view('header_v', $data);
+		// $this->load->view('topbar_v', $user);
+		// $this->load->view('viewProduct_v', $data);
+		// $this->load->view('footer_v');
 	}
 
 	public function add(){

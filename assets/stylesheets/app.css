@@ -70,7 +70,7 @@
          .product-div{
             /*border-bottom: 3px solid #E0E0E0;*/
          }
-         
+
          .productImg{
             max-width: 100px;
             max-height: 100px; 
@@ -96,7 +96,7 @@
          #results-panel{
             border: 1px solid #E0E0E0 !important;
             padding: 10px;
-            margin: 10px;
+            margin: 2px;
          }
 
          .contain-to-grid, .top-bar{
@@ -161,6 +161,9 @@
             border-bottom: 1px solid #E0E0E0 !important;
          }
 
+         .specs-view h6{
+            background-color: whitesmoke !important;
+         }
 
 
 

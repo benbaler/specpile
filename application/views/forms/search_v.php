@@ -8,10 +8,10 @@ window.categories = <?= json_encode($categories); ?>;
   </div>
 </div>
 
-  <div class="row">
-    <div class="twelve mobile-three columns">
-<form class="custom collapse" id="search-form">
-  <div class="row">
+<div class="row">
+  <div class="twelve mobile-four columns">
+    <form class="custom collapse" id="search-form">
+      <div class="row collapse">
 
     <!-- <div class="two mobile-four columns">
       <div class="row">
@@ -24,15 +24,15 @@ window.categories = <?= json_encode($categories); ?>;
   </div> -->
 
 
-      <div class="ten mobile-three columns">
-        <input type="text" name="term" id="term" placeholder="Search Product e.g. iPhone 5"/>
-      </div>
+  <div class="ten mobile-three columns">
+    <input type="text" name="term" id="term" placeholder="Search Product e.g. iPhone 5"/>
+  </div>
 
-      <div class="two mobile-one columns">
-        <input class="postfix button expand" type="submit" value="Search"/>
-      </div>
+  <div class="two mobile-one columns">
+    <input class="postfix button expand" type="submit" value="Search"/>
+  </div>
 
-    </div>
+</div>
 
 </div>
 </form>
