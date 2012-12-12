@@ -29,7 +29,7 @@ var Results = Backbone.View.extend({
                 }
             },
             error: function(collection, response, options){
-                self.$el.html("<li>Error from Server, Try Again</li>");
+                self.$el.html("<li>No Results for '" + query + "'</li>");
             }
             // ,query: query
             // ,url: this.collection.url+query

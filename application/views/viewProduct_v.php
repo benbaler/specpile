@@ -57,10 +57,10 @@ window.productData = <?= json_encode($product) ?>;
   <div class="twelve mobile-four columns">
     <ul class="inline-list">
       <?php foreach(array($product['image']) as $url): ?>
-        <li><img src="<?= $url ?>" class="productImg"/></li>
-      <?php endforeach; ?>
-    </ul>
-  </div>
+      <li><img src="<?= $url ?>" class="productImg"/></li>
+    <?php endforeach; ?>
+  </ul>
+</div>
 </div>
 
 <div class="row">
@@ -74,26 +74,27 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 
 
-<div class="row">
-<div class="twelve columns">
+<div class="row specs-view">
+  <div class="twelve columns">
     <?php foreach ($product['features'] as $feature => $specs) : ?>
-      <div class="row">
-  <div class="eleven columns offset-by-one">
-      <h5><?= $feature; ?></h5>
-  </div>
-  </div>
-      <?php foreach ($specs as $spec => $option) : ?>
-        
-        <div class="row">
-  <div class="five columns offset-by-two">
-      <h6><?= $spec ?></h6> 
-  </div>
-  <div class="five columns">
-      <h7><?= $option ?></h7>
-  </div>
-  </div>
-      <?php endforeach; ?>
-    <?php endforeach; ?>
+    <div class="row specs-feature">
+      <div class="twelve columns">
+        <h5><?= $feature; ?></h5>
+      </div>
+    </div>
+    <?php foreach ($specs as $spec => $option) : ?>
+
+    <div class="row specs-option">
+      <div class="five columns offset-by-two">
+        <b><?= $spec ?></b> 
+      </div>
+      <div class="four columns pull-two">
+        <?= $option === TRUE ? 'yes' : ($option === FALSE ? 'no' : $option) ?>
+      </div>
+    </div>
+  <?php endforeach; ?>
+  <br/>
+<?php endforeach; ?>
 </div>
 </div>
 

@@ -80,13 +80,22 @@
             border: 0px solid whitesmoke !important;
          }
 
+         .search-result{
+            /*background-color: #F8F8F8 !important;*/
+            /*border: 1px solid whitesmoke !important;*/
+         }
+
+         .product-result{
+            height: auto !important;
+         }
+
          .product-result:hover{
-            color: black;
-            transform:rotate(1deg) scale(0.9);
-            -ms-transform:rotate(1deg) scale(0.9); /* IE 9 */
-            -moz-transform:rotate(1deg) scale(0.9); /* Firefox */
-            -webkit-transform:rotate(1deg) scale(0.9); /* Safari and Chrome */
-            -o-transform:rotate(1deg) scale(0.9); /* Opera */
+            /*color: black;*/
+            transform:rotate(1deg) scale(0.8);
+            -ms-transform:rotate(1deg) scale(0.8); /* IE 9 */
+            -moz-transform:rotate(1deg) scale(0.8); /* Firefox */
+            -webkit-transform:rotate(1deg) scale(0.8); /* Safari and Chrome */
+            -o-transform:rotate(1deg) scale(0.8); /* Opera */
          }
 
          .productImg:hover{
@@ -139,9 +148,11 @@
             -o-transform:rotate(3deg) scale(0.9); /* Opera */
          }
 
-         body, h1, h2, h3, h4, h5{
+         body, h1, h2, h3, h4, h5, a{
             /*font-family: 'Kite One', sans-serif;*/
             font-family: 'Sanchez', serif;
+            /*font-family: 'Julius Sans One', sans-serif;*/
+            /*font-family: 'Trocchi', serif;*/
          }
 
          body{
@@ -161,8 +172,12 @@
             border-bottom: 1px solid #E0E0E0 !important;
          }
 
-         .specs-view h6{
+         .specs-option div:nth-child(n+1){
             background-color: whitesmoke !important;
+         }
+
+         .specs-feature div{
+            background-color: #FFFFCC !important;
          }
 
 
