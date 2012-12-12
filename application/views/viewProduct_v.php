@@ -76,7 +76,7 @@ window.productData = <?= json_encode($product) ?>;
 
 <div class="row specs-view">
   <div class="twelve columns">
-    <?php foreach ($product['features'] as $feature => $specs) : ?>
+    <?php foreach (isset($product['features']) ? $product['features'] : array() as $feature => $specs) : ?>
     <div class="row specs-feature">
       <div class="twelve mobile-four columns">
         <h5><?= $feature; ?></h5>
