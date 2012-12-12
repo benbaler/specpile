@@ -138,7 +138,7 @@ class Api extends REST_Controller {
                 $flag = false;
 
                 foreach ( $results as $p ) {
-                    if ( $p['name'] == $product['name'] ) {
+                    if ( $p['name'] == ucwords(character_limiter($product['name'],12) )) {
                         $flag = true;
                     }
                 }
@@ -146,7 +146,7 @@ class Api extends REST_Controller {
                 if( $flag == false ) {
                     $results[] = array(
                         '_id' => $product['_id']->__toString(),
-                        'name' => ucwords(character_limiter($product['name'],10)),
+                        'name' => ucwords(character_limiter($product['name'],12)),
                         'category_name' => ucwords($product['category']),
                         'brand_name' => ucwords($product['company']),
                         'image' => $product['image']

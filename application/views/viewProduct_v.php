@@ -64,7 +64,7 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 
 <div class="row">
-  <div class="twelve mobile-three columns">
+  <div class="twelve mobile-four columns">
     <h4>Specification</h4>
   </div>
 
@@ -78,17 +78,17 @@ window.productData = <?= json_encode($product) ?>;
   <div class="twelve columns">
     <?php foreach ($product['features'] as $feature => $specs) : ?>
     <div class="row specs-feature">
-      <div class="twelve columns">
+      <div class="twelve mobile-four columns">
         <h5><?= $feature; ?></h5>
       </div>
     </div>
     <?php foreach ($specs as $spec => $option) : ?>
 
     <div class="row specs-option">
-      <div class="five columns offset-by-two">
+      <div class="five mobile-two columns offset-by-two">
         <b><?= $spec ?></b> 
       </div>
-      <div class="four columns pull-two">
+      <div class="four mobile-two columns pull-two">
         <?= $option === TRUE ? 'yes' : ($option === FALSE ? 'no' : $option) ?>
       </div>
     </div>
