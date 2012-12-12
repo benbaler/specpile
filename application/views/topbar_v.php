@@ -1,4 +1,4 @@
-<div class=" contain-to-grid">
+<div class="fixed contain-to-grid">
 	<nav class="top-bar">
 		<ul>
 			<li class="name"><a href="/" class="logo">Specpile</a></li>
@@ -48,7 +48,7 @@
 
 <div class="row">
 <div class="twelve columns">
-&nbsp;
+<br/><br/><br/><br/>
 </div>
 </div>
 
