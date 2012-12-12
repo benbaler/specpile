@@ -14,7 +14,7 @@ class Product extends CI_Controller {
 		$product = $this->icecat_m->getProductViewById($p_id);
 
 		$data = array(
-			'app' => 'editProduct',
+			'app' => '',
 			'product' => $product
 		);
 
