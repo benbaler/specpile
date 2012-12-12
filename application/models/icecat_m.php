@@ -9,7 +9,7 @@ class Icecat_m extends CI_Model {
 	}
 
 	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10 ) {
-		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' )/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
+		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array('$exists' => true)/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
 
