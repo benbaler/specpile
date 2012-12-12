@@ -202,10 +202,11 @@
 
          .specs-option div:nth-child(n+1){
             background-color: whitesmoke !important;
+            line-height: 25px;
          }
 
          .specs-feature div{
-            background-color: #FFFFCC !important;
+            background-color: #E0E0E0 !important;
          }
 
 

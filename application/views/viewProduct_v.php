@@ -94,6 +94,7 @@ window.productData = <?= json_encode($product) ?>;
     </div>
   <?php endforeach; ?>
   <br/>
+  <br/>
 <?php endforeach; ?>
 </div>
 </div>
