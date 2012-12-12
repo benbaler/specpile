@@ -24,7 +24,7 @@
 				</li>
 
 			<?php else: ?>
-
+			<li class="divider"></li>
 			<li class="has-dropdown">
 				<a href="#">Guest</a>
 				<ul class="dropdown">			
@@ -39,7 +39,6 @@
 </section>
 </nav>
 </div>
-<br/>
 <br/>
 <br/>
 

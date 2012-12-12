@@ -84,26 +84,27 @@
 
          .logo{
             position: relative;
-            top: 5px;
+            top: 10px;
             font-size: 55px !important;
             /*font-family: 'Damion', cursive;*/
             font-family: 'Grand Hotel', cursive;
             /*font-family: 'Lobster', cursive;*/
-            transform: rotate(0deg);
-            -ms-transform: rotate(0deg); /* IE 9 */
-            -webkit-transform: rotate(0deg); /* Safari and Chrome */
-            -o-transform: rotate(0deg); /* Opera */
-            -moz-transform: rotate(0deg); /* Firefox */
+            transform: rotate(-5deg);
+            -ms-transform: rotate(-5deg); /* IE 9 */
+            -webkit-transform: rotate(-5deg); /* Safari and Chrome */
+            -o-transform: rotate(-5deg); /* Opera */
+            -moz-transform: rotate(-5deg); /* Firefox */
             letter-spacing:0px;
              text-align: center;
              /*color: #333 !important;*/
             /*text-transform: uppercase;*/
             /*text-shadow: #555 0px 2px 3px;*/
-            text-shadow: 2px 2px 0 #fff, 4px 4px 0 #fff, 6px 6px 0 #fff, 8px 8px 0 #000;
+            text-shadow: 2px 2px 0 #000;/*, 4px 4px 0 #333, 6px 6px 0 #333, 8px 8px 0 #333;*/
             color: #2BA6CB !important;
          }
 
-         body{
+         body, h1, h2, h3, h4, h5{
+            font-family: 'Damion', cursive;
             /*background: gray;*/
          }
 
