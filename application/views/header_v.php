@@ -28,7 +28,13 @@
 </head>
 <body>
 	<script type="text/javascript">
-		$(document).foundationTopBar();
+	$(document).foundationTopBar();
+	</script>
+
+	<div id="getsat-widget-3225"></div>
+	<script type="text/javascript" src="https://loader.engage.gsfn.us/loader.js"></script>
+	<script type="text/javascript">
+	if (typeof GSFN !== "undefined") { GSFN.loadWidget(3225,{"containerId":"getsat-widget-3225"}); }
 	</script>
 
 	<script type="text/javascript">
@@ -56,5 +62,5 @@
 		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
 		wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://ca350285') + '.luckyorange.com/w.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
-	  })();
+	})();
 	</script>      
