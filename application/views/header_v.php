@@ -51,6 +51,7 @@
 		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
 		wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://ca350285') + '.luckyorange.com/w.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+		$('#uvTab').addClass('hide-for-medium-down');
 	})();
-	
+
 	</script>      
