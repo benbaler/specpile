@@ -1,7 +1,8 @@
 <div class="fixed contain-to-grid">
 	<nav class="top-bar">
 		<ul>
-			<li class="name"><a href="/" class="logo">Specpile</a></li>
+			<li class="name hide-for-medium-down"><a href="/" class="logo">Specpile</a></li>
+			<li class="name show-for-medium-down"><h1><a href="/">Specpile</a></h1></li>
 			<li class="toggle-topbar"><a href="#"></a></li>
 		</ul>
 		<section>
@@ -48,7 +49,7 @@
 
 <div class="row">
 <div class="twelve columns">
-<br/><br/><br/><br/>
+<!-- <br/><br/><br/><br/> -->
 </div>
 </div>
 

@@ -11,26 +11,23 @@
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
 
-	<link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'> -->
 	<link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'> -->
 	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 
 	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 
-	<script src="/assets/javascripts/libs/foundation.min.js" type="text/javascript"></script>
+	<!-- <script src="/assets/javascripts/libs/foundation.min.js" type="text/javascript"></script> -->
 	<script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>
 	<script src="/assets/javascripts/<?= $app ?>.js" type="text/javascript"></script>
 </head>
 <body>
-	<script type="text/javascript">
-	$(document).foundationTopBar();
-	</script>
 
 	<script type="text/javascript">
 
@@ -45,9 +42,6 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 
-	</script>
-
-	<script type='text/javascript'>
 	var __wtw_lucky_ref_id = 1074448;
 	var __wtw_lucky_setup_key = {};
 	__wtw_lucky_setup_key.id = '10273';
@@ -58,4 +52,5 @@
 		wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://ca350285') + '.luckyorange.com/w.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
 	})();
+	
 	</script>      

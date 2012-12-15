@@ -1,5 +1,15 @@
-head.js('/assets/javascripts/libs/jquery.js', '/assets/javascripts/libs/underscore.js', '/assets/javascripts/libs/backbone.js', '/assets/javascripts/libs/backbone-validation.js', '/assets/javascripts/models/loginCredentials_m.js', '/assets/javascripts/views/login_v.js', function() {
+head.js('/assets/javascripts/libs/jquery.js', 
+	'/assets/javascripts/libs/jquery.foundation.topbar.js',
+    '/assets/javascripts/libs/modernizr.foundation.js',
+	'/assets/javascripts/libs/underscore.js', 
+	'/assets/javascripts/libs/backbone.js', 
+	'/assets/javascripts/libs/backbone-validation.js', 
+	'/assets/javascripts/models/loginCredentials_m.js', 
+	'/assets/javascripts/views/login_v.js', 
+	function() {
 	$(document).ready(function(){
+		$(document).foundationTopBar();
+		
 	var loginCredentials = new LoginCredentials({});
 
 	var login = new Login({

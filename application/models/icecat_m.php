@@ -9,7 +9,7 @@ class Icecat_m extends CI_Model {
 	}
 
 	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10 ) {
-		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array('$exists' => true)/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
+		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true )/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
 
@@ -58,9 +58,48 @@ class Icecat_m extends CI_Model {
 
 			return $productView;
 
-		} 
+		}
 
 		return array();
+	}
+
+	public function getTemplateByCategory( $category = 'smartphones' ) {
+		$products = $this->mongo_db->where( array( 'scan' => 'scanned', 'category' => $category ) )->get( 'icecat_products' );
+
+		$template = array();
+
+		$counter = 0;
+		foreach ( $products as $product ) {
+			$counter++;
+
+			foreach ( $product['features'] as $feature => $specs ) {
+				if ( !isset( $template[$feature] ) ) {
+					$template[$feature] = array();
+				}
+
+				foreach ( $specs as $spec => $option ) {
+					if ( !isset( $template[$feature][$spec] ) ) {
+						$template[$feature][$spec] = array();
+					}
+
+					if ( !in_array( $option, $template[$feature][$spec] ) ) {
+						$p = str_replace(array(', ','; ','/ '), array(',',',',','), $option);
+						$o = explode( ',', $p );
+						if ( is_array( $o ) ) {
+							foreach ( $o as $op ) {
+								$template[$feature][$spec][] = trim($op);
+							}
+						} else {
+							$template[$feature][$spec][] = $option;
+						}
+					}
+				}
+				$template[$feature][$spec] = array_unique($template[$feature][$spec]);
+			}
+
+		}
+
+		return $template;
 	}
 
 

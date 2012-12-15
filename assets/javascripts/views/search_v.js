@@ -22,7 +22,6 @@ var Search = Backbone.View.extend({
     },
 
     render: function(){
-        var self = this;
         $('#term', this.$el).autocomplete({
             source: [],
             minLength: 1

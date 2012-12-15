@@ -1,5 +1,7 @@
 head.js('/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/libs/jquery.ui.js', 
+    '/assets/javascripts/libs/jquery.foundation.topbar.js',
+    '/assets/javascripts/libs/modernizr.foundation.js',
     // '/assets/javascripts/libs/foundation.min.js', 
     '/assets/javascripts/libs/underscore.js', 
     '/assets/javascripts/libs/backbone.js',
@@ -9,6 +11,7 @@ head.js('/assets/javascripts/libs/jquery.js',
 
     function() {
         $(document).ready(function(){
+            $(document).foundationTopBar();
         _.extend(Backbone.Validation.messages, {
             length: 'Select {0}'
         });
