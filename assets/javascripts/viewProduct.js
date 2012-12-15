@@ -6,5 +6,6 @@ head.js(
     function() {
         $(document).ready(function(){
             $(document).foundationTopBar();
+            $('#uvTab').addClass('hide-for-medium-down');
         });
    });

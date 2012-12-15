@@ -9,7 +9,8 @@ head.js('/assets/javascripts/libs/jquery.js',
 	function() {
 	$(document).ready(function(){
 		$(document).foundationTopBar();
-		
+		$('#uvTab').addClass('hide-for-medium-down');
+
 	var loginCredentials = new LoginCredentials({});
 
 	var login = new Login({

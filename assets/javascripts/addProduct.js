@@ -12,6 +12,7 @@ head.js('/assets/javascripts/libs/jquery.js',
     function() {
         $(document).ready(function(){
             $(document).foundationTopBar();
+            $('#uvTab').addClass('hide-for-medium-down');
         _.extend(Backbone.Validation.messages, {
             length: 'Select {0}'
         });
