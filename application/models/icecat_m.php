@@ -12,8 +12,28 @@ class Icecat_m extends CI_Model {
 		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true )/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
+	public function getProductById( $p_id ) {
+		$product = current( $this->_get( $p_id ) );
+		$features = array();
+		foreach ( $product['features'] as $feature => $specs ) {
+			foreach ( $specs as $spec => $option ) {
+				$p = str_replace( array( ';', '/ ', '- ' ), array( ',', ',', ',' ), $option );
+				$o = explode( ',', $p );
+				if ( count( $o ) > 1 ) {
+					foreach ( $o as $op ) {
+						if ( trim( $op ) ) {
+							$features[$feature][$spec][] = trim( $op );
+						}
+					}
+				} else {
+					$features[$feature][$spec] = $option === TRUE ? 'yes' : ( $option === FALSE ? 'no' : $option );
+				}
+			}
+		}
 
-
+		$product['features'] = $features;
+		return $product;
+	}
 
 
 
@@ -83,20 +103,33 @@ class Icecat_m extends CI_Model {
 					}
 
 					if ( !in_array( $option, $template[$feature][$spec] ) ) {
-						$p = str_replace(array(', ','; ','/ '), array(',',',',','), $option);
+						$p = str_replace( array( ';', '/ ', '- ' ), array( ',', ',', ',' ), $option );
 						$o = explode( ',', $p );
-						if ( is_array( $o ) ) {
+						if ( count( $o ) > 1 ) {
 							foreach ( $o as $op ) {
-								$template[$feature][$spec][] = trim($op);
+								if ( trim( $op ) ) {
+									$template[$feature][$spec][] = trim( $op );
+								}
 							}
 						} else {
-							$template[$feature][$spec][] = $option;
+							if( gettype($option) == 'boolean' ){
+								$template[$feature][$spec][] = 'yes';
+								$template[$feature][$spec][] = 'no';
+							} else{
+								$template[$feature][$spec][] = $option;
+							}
 						}
 					}
 				}
-				$template[$feature][$spec] = array_unique($template[$feature][$spec]);
 			}
 
+		}
+
+		// unique
+		foreach ( $template as $f => $ss ) {
+			foreach ( $ss as $s => $os ) {
+				$template[$f][$s] = array_unique( $os );
+			}
 		}
 
 		return $template;

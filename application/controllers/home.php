@@ -117,6 +117,186 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function test4( $category = 'smartphones' ) {
+		$data = array(
+			'app' => ''
+		);
+
+		echo $this->load->view( 'header_v', $data, TRUE);
+		echo $this->load->view( 'topbar_v', $this->_user(), TRUE);
+
+		echo '<div class="row">';
+				echo '<div class="twelve columns">&nbsp;';
+				echo '</div>';
+				echo '</div>';
+				echo '<div class="row">';
+				echo '<div class="twelve columns">&nbsp;';
+				echo '</div>';
+				echo '</div>';
+
+
+		$this->load->model( 'icecat_m' );
+
+
+		if ( file_exists( 'temp/'.$category.'/template.html' ) ) {
+			$arr = unserialize( file_get_contents( 'temp/'.$category.'/template.html' ) );
+		}
+
+		if ( !isset( $arr ) ) {
+			$arr = $this->icecat_m->getTemplateByCategory( $category );
+			file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
+		}
+
+		$product1 = $this->icecat_m->getProductById( '50c7a3a79aa8dfec1d0017e9' );
+		$product2 = $this->icecat_m->getProductById( '50c7a3a69aa8dfec1d0016df' );
+
+		// var_dump('<pre>', $arr, '</pre>');
+		// var_dump('<pre>', $product1, '</pre>');
+		// var_dump('<pre>', $product2, '</pre>');
+
+		echo '<div class="row product-compare">';
+		echo '<div class="twelve columns">';
+
+		foreach ( $arr as $feature => $specs ) {
+			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
+				echo '<div class="row"><div class="twelve columns"><b>'.$feature.'</b></div></div>';
+			}
+
+			foreach ( $specs as $spec => $options ) {
+				//asort( $options );
+
+				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
+				echo '<div class="row">';
+				echo '<div class="twelve columns">';
+
+					echo '<div class="row">';
+					echo '<div class="two columns">'.$spec.'</div>';
+
+					if ( isset( $product1['features'][$feature][$spec] ) ) {
+						if ( !is_array( $product1['features'][$feature][$spec] ) ) {
+							echo '<div class="five columns" style="background-color:'.$this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ).';">'.$product1['features'][$feature][$spec].'</div>';
+						} else {
+							echo '<div class="five columns" style="background-color:'.$this->_color( count( $product1['features'][$feature][$spec] )-1, count( $options ) ).';">'.implode( ',', $product1['features'][$feature][$spec] ).'</div>';
+						}
+					} else {
+						echo '<div class="five columns">-</div>';
+					}
+
+					if ( isset( $product2['features'][$feature][$spec] ) ) {
+						if ( !is_array( $product2['features'][$feature][$spec] ) ) {
+							echo '<div class="five columns" style="background-color:'.$this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ).';">'.$product2['features'][$feature][$spec].'</div>';
+						} else {
+							echo '<div class="five columns" style="background-color:'.$this->_color( count( $product2['features'][$feature][$spec] )-1, count( $options ) ).';">'.implode( ',', $product2['features'][$feature][$spec] ).'</div>';
+						}
+					} else {
+						echo '<div class="five columns">-</div>';
+					}
+
+					echo '</div>';
+					echo '</div>';
+					echo '</div>';
+				}
+
+
+
+				// foreach ( $options as $option ) {
+
+				//  echo '<option>'.( $option === TRUE ? 'yes' : ( $option === FALSE ? 'no' : $option ) ) .'</option>';
+				// }
+			}
+
+			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
+				echo '<div class="row">';
+				echo '<div class="twelve columns">&nbsp;';
+				echo '</div>';
+				echo '</div>';
+
+				echo '<div class="row">';
+				echo '<div class="twelve columns">&nbsp;';
+				echo '</div>';
+				echo '</div>';
+			}
+
+		}
+
+		echo '</div>';
+		echo '</div>';
+
+		echo $this->load->view( 'footer_v' ,'', TRUE);
+	}
+
+	private function _color( $p_pos, $p_count ) {
+		$percentage = $p_pos * ( 1/( $p_count-1 ) );
+
+		// echo $percentage.'<br/>';
+
+		if ( $percentage < 0.5 ) {
+			// echo floor( 255 * $percentage * 2 ).'<br/>';
+			$color = 'rgb(255,'.floor( 255 * $percentage * 2 ).',0)';
+		}else {
+			// echo floor( 255 * ( $percentage * 2 - 1 ) ).'<br/>';
+			$color = 'rgb('.( 255 - floor( 255 * ( $percentage * 2 - 1 ) ) ).',255,0)';
+		}
+
+		return $color;
+	}
+
+	public function test5( $pos = 0, $count = 10 ) {
+		$color = $this->_color( $pos, $count );
+		echo '<span style="background-color: '.$color.';">'.$pos.' '.$count.'</span>';
+	}
+
+	public function test6( $category = 'smartphones' ) {
+		$this->load->model( 'icecat_m' );
+		$arr = $this->icecat_m->getTemplateByCategory( $category );
+
+		echo '$features = array(<br/>';
+
+		foreach ( $arr as $feature => $specs ) {
+			echo '"'.$feature.'" => array(<br/>';
+			foreach ( $specs as $spec => $options ) {
+				echo '"'.$spec.'" => array(<br/>';
+				asort( $options );
+				foreach ( $options as $option ) {
+					echo '"'.( $option === TRUE ? 'yes' : ( $option === FALSE ? 'no' : $option ) ) .'",<br/>';
+				}
+				echo '),<br/>';
+			}
+			echo '),<br/>';
+		}
+
+		echo ');';
+	}
+
+	public function test7() {
+		//$html = file_get_contents('http://www.gsmarena.com/makers.php3');
+		$html = file_get_contents( 'http://www.gsmarena.com/apple_iphone_5-4910.php' );
+		file_put_contents( 'gsmarena/specs.html', $html );
+	}
+
+	public function test8() {
+		$this->load->model( 'scrap_m' );
+
+		// $html = file_get_contents('gsmarena/brands.html');
+		// $data = $this->scrap_m->gsmBrands($html);
+
+		// $html = file_get_contents('gsmarena/phones.html');
+		// echo $html;
+		//$data = $this->scrap_m->gsmPhones($html);
+
+		// var_dump($data);
+
+		//$data = $this->scrap_m->gsmPhonesNav($html);
+		// var_dump($data);
+
+		$html = file_get_contents( 'gsmarena/specs.html' );
+
+		$data = $this->scrap_m->gsmSpecs( $html );
+		var_dump( $data );
+
+
+	}
+
 }
 
 /* End of file page.php */

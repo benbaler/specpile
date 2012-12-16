@@ -128,7 +128,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( $this->get( 'query' ), 4*20 );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( '^'.$this->get( 'query' ), 1000 );
 
         if ( $products ) {
             $results = array();
@@ -137,22 +137,24 @@ class Api extends REST_Controller {
                 $flag = false;
 
                 foreach ( $results as $p ) {
-                    if ( $p['name'] == ucwords(character_limiter($product['name'],15) )) {
+                    if ( $p['name'] == ucwords( character_limiter( $product['name'], 15 ) ) ) {
                         $flag = true;
                     }
                 }
 
-                if( $flag == false ) {
+                if ( $flag == false ) {
                     $results[] = array(
                         '_id' => $product['_id']->__toString(),
-                        'name' => ucwords(character_limiter($product['name'],15)),
-                        'category_name' => ucwords($product['category']),
-                        'brand_name' => ucwords($product['company']),
+                        'name' => ucwords( character_limiter( $product['name'], 15 ) ),
+                        'category_name' => ucwords( $product['category'] ),
+                        'brand_name' => ucwords( $product['company'] ),
                         'image' => $product['image']
                     );
-                
+                }
             }
-        }
+
+            $results = array_slice($results, 0, 100);
+
             $this->response( $results, 200 );
         } else {
             $this->response( $this->_error( 'No results' ), 404 );
