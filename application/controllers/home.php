@@ -119,21 +119,11 @@ class Home extends CI_Controller {
 
 	public function test4( $category = 'smartphones' ) {
 		$data = array(
-			'app' => ''
+			'app' => 'home'
 		);
 
 		echo $this->load->view( 'header_v', $data, TRUE);
 		echo $this->load->view( 'topbar_v', $this->_user(), TRUE);
-
-		echo '<div class="row">';
-				echo '<div class="twelve columns">&nbsp;';
-				echo '</div>';
-				echo '</div>';
-				echo '<div class="row">';
-				echo '<div class="twelve columns">&nbsp;';
-				echo '</div>';
-				echo '</div>';
-
 
 		$this->load->model( 'icecat_m' );
 
@@ -147,8 +137,10 @@ class Home extends CI_Controller {
 			file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
 		}
 
-		$product1 = $this->icecat_m->getProductById( '50c7a3a79aa8dfec1d0017e9' );
-		$product2 = $this->icecat_m->getProductById( '50c7a3a69aa8dfec1d0016df' );
+		$product1 = $this->icecat_m->getProductById( '50c74e0b9aa8df2839000b1a' );
+		$product2 = $this->icecat_m->getProductById( '50c74e109aa8df283900146f' );
+
+
 
 		// var_dump('<pre>', $arr, '</pre>');
 		// var_dump('<pre>', $product1, '</pre>');
@@ -157,44 +149,72 @@ class Home extends CI_Controller {
 		echo '<div class="row product-compare">';
 		echo '<div class="twelve columns">';
 
+		echo '<div class="row"><div class="four mobile-four columns feature-compare"><b>Compare '.ucwords($category).'</b></div></div>';
+
+		// company
+		echo '<div class="row">';
+		echo '<div class="four mobile-four columns">Brand</div>';
+
+		echo '<div class="four mobile-two columns">'.ucwords($product1['company']).'</div>';
+		echo '<div class="four mobile-two columns">'.ucwords($product2['company']).'</div>';
+		echo '</div>';
+
+		// model
+		echo '<div class="row">';
+		echo '<div class="four mobile-four columns">Model</div>';
+
+		echo '<div class="four mobile-two columns">'.ucwords($product1['name']).'</div>';
+		echo '<div class="four mobile-two columns">'.ucwords($product2['name']).'</div>';
+		echo '</div>';
+
+		// image
+		echo '<div class="row">';
+		echo '<div class="four mobile-four columns">Image</div>';
+
+		echo '<div class="four mobile-two columns"><img src="'.$product1['image'].'"/></div>';
+		echo '<div class="four mobile-two columns"><img src="'.$product2['image'].'"/></div>';
+		echo '</div>';
+
+		echo '<br/><br/>';
+
 		foreach ( $arr as $feature => $specs ) {
 			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
-				echo '<div class="row"><div class="twelve columns"><b>'.$feature.'</b></div></div>';
+				echo '<div class="row"><div class="four mobile-four columns feature-compare"><b>'.ucwords($feature).'</b></div></div>';
 			}
 
 			foreach ( $specs as $spec => $options ) {
 				//asort( $options );
 
 				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
-				echo '<div class="row">';
-				echo '<div class="twelve columns">';
+				// echo '<div class="row">';
+				// echo '<div class="twelve columns">';
 
 					echo '<div class="row">';
-					echo '<div class="two columns">'.$spec.'</div>';
+					echo '<div class="four mobile-four columns">'.ucwords($spec).'</div>';
 
 					if ( isset( $product1['features'][$feature][$spec] ) ) {
 						if ( !is_array( $product1['features'][$feature][$spec] ) ) {
-							echo '<div class="five columns" style="background-color:'.$this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ).';">'.$product1['features'][$feature][$spec].'</div>';
+							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ).';">'.ucwords($product1['features'][$feature][$spec]).'</div>';
 						} else {
-							echo '<div class="five columns" style="background-color:'.$this->_color( count( $product1['features'][$feature][$spec] )-1, count( $options ) ).';">'.implode( ',', $product1['features'][$feature][$spec] ).'</div>';
+							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product1['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product1['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
-						echo '<div class="five columns">-</div>';
+						echo '<div class="four mobile-two columns">-</div>';
 					}
 
 					if ( isset( $product2['features'][$feature][$spec] ) ) {
 						if ( !is_array( $product2['features'][$feature][$spec] ) ) {
-							echo '<div class="five columns" style="background-color:'.$this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ).';">'.$product2['features'][$feature][$spec].'</div>';
+							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ).';">'.ucwords($product2['features'][$feature][$spec]).'</div>';
 						} else {
-							echo '<div class="five columns" style="background-color:'.$this->_color( count( $product2['features'][$feature][$spec] )-1, count( $options ) ).';">'.implode( ',', $product2['features'][$feature][$spec] ).'</div>';
+							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product2['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product2['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
-						echo '<div class="five columns">-</div>';
+						echo '<div class="four mobile-two columns">-</div>';
 					}
 
 					echo '</div>';
-					echo '</div>';
-					echo '</div>';
+					// echo '</div>';
+					// echo '</div>';
 				}
 
 
@@ -206,15 +226,8 @@ class Home extends CI_Controller {
 			}
 
 			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
-				echo '<div class="row">';
-				echo '<div class="twelve columns">&nbsp;';
-				echo '</div>';
-				echo '</div>';
-
-				echo '<div class="row">';
-				echo '<div class="twelve columns">&nbsp;';
-				echo '</div>';
-				echo '</div>';
+				
+				echo '<br/><br/>';
 			}
 
 		}
