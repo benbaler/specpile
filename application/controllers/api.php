@@ -100,35 +100,42 @@ class Api extends REST_Controller {
     public function products_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( $this->get( 'term' ) );
+        $category = $this->get( 'category' ) ? array($this->get( 'category' )) : array('smartphones', 'tablets', 'cameras');
+
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode($this->get( 'term' )) , 50, $category);
 
         if ( $products ) {
             $names = array();
+
             foreach ( $products as $product ) {
-                $names[] = $product['name'];
+                $names[$product['_id']->__toString()] = $product['name'];
             }
-            $this->response( array_unique( $names ), 200 );
+        
+            $names = array_unique($names);
+            $keys = array_keys($names);
+
+            $results = array();
+
+            foreach ( $products as $product ) {
+                if(in_array($product['_id']->__toString(),$keys)){
+                    $results[] = array(
+                        'label' => $product['name'],
+                        'image' => $product['image']
+                    );
+                }
+            }
+
+            $this->response( array_slice($results,0,10), 200 );
         }
         else {
             $this->response( $this->_error( 'No results' ), 404 );
         }
-
-        // $this->load->model('products_m');
-
-        // $products = $this->products_m->getAll();
-
-        // if ($products) {
-        //     $this->response($products, 200);
-        // }
-        // else {
-        //     $this->response(NULL, 404);
-        // }
     }
 
     public function search_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( '^'.$this->get( 'query' ), 1000 );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( '^'.urldecode($this->get( 'query' )), 1000);
 
         if ( $products ) {
             $results = array();

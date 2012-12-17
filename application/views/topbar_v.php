@@ -6,14 +6,19 @@
 			<li class="toggle-topbar"><a href="#"></a></li>
 		</ul>
 		<section>
+
+			<ul class="left">
+				<!-- <li class="divider"></li> -->
+				<li><a href="/">Search</a></li>
+				<li><a href="/product/compare">Compare</a></li>
+
+			</ul>
+
 			<ul class="right">
 
 				<?php if($logged_in == TRUE): ?>
 
 				<!-- <li><a href="/product/add" class="">Add Product</a></li> -->
-
-				<li class="divider"></li>
-
 
 
 				<li>
@@ -25,9 +30,9 @@
 
 
 			<?php else: ?>
-			<li class="divider"></li>
 						
 			<li><a href="/user/signup">Signup</a></li>
+			<!-- <li class="divider"></li> -->
 			<li><a href="/user/login">Login</a></li>
 
 		</ul>

@@ -4,12 +4,16 @@ class Icecat_m extends CI_Model {
 
 	private $collection = 'icecat_products';
 
+	public function getProductByNameAndCategory( $p_name, $p_category ) {
+		return current($this->mongo_db->where( array( 'name' => array( '$regex' => $p_name, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->limit( 1 )->get( $this->collection ));
+	}
+
 	public function getProductsByQuery( $p_query ) {
 		return $this->_get( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ) ) );
 	}
 
-	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10 ) {
-		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true )/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
+	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10, $p_category = array('smartphones', 'tablets', 'cameras') ) {
+		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category)/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
 	public function getProductById( $p_id ) {

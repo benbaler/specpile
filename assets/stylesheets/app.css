@@ -263,6 +263,12 @@
             background-color: #E0E0E0 !important;
          }
 
+         select{
+         background: transparent;
+         height: 32px;
+         font-size: 14px;
+      }
+
 
 
 /* -----------------------------------------

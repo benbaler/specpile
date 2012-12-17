@@ -17,7 +17,8 @@ class Home extends CI_Controller {
 
 		$data = array(
 			'app' => 'home',
-			'categories' => $this->categories_m->getListOfNames()
+			'categories' => $this->categories_m->getListOfNames(),
+			'title' => 'Specpile | Home'
 		);
 
 		$this->load->view( 'header_v', $data );
@@ -120,12 +121,6 @@ class Home extends CI_Controller {
 	public function test4( $category = 'smartphones' ) {
 		ini_set('memory_limit','1024M');
 		
-		$data = array(
-			'app' => 'home'
-		);
-
-		echo $this->load->view( 'header_v', $data, TRUE);
-		echo $this->load->view( 'topbar_v', $this->_user(), TRUE);
 
 		$this->load->model( 'icecat_m' );
 
@@ -142,6 +137,13 @@ class Home extends CI_Controller {
 		$product1 = $this->icecat_m->getProductById( '50c7a3f89aa8dfec1d0038ee' );
 		$product2 = $this->icecat_m->getProductById( '50c7a3ed9aa8dfec1d003368' );
 
+		$data = array(
+			'app' => 'home',
+			'title' => 'Specpile | '. ucwords($product1['company']).' '.ucwords($product1['name']).' vs '.ucwords($product2['company']).' '.ucwords($product2['name'])
+		);
+
+		echo $this->load->view( 'header_v', $data, TRUE);
+		echo $this->load->view( 'topbar_v', $this->_user(), TRUE);
 
 
 		// var_dump('<pre>', $arr, '</pre>');

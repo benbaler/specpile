@@ -25,11 +25,11 @@ var Results = Backbone.View.extend({
             abortPending: true,
             success: function(collection, response, options) {
                 if(collection.length == 0) {
-                    self.$el.html("<li>No Results for '" + query + "'</li>");
+                    self.$el.html("<li>No Results for '" + decodeURIComponent(query) + "'</li>");
                 }
             },
             error: function(collection, response, options){
-                self.$el.html("<li>No Results for '" + query + "'</li>");
+                self.$el.html("<li>No Results for '" + decodeURIComponent(query) + "'</li>");
             }
             // ,query: query
             // ,url: this.collection.url+query

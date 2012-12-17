@@ -15,9 +15,12 @@ class User extends CI_Controller {
     public function id($p_id){
         $this->load->model('users_m');
 
+        $user = $this->users_m->getUserById($p_id);
+
         $data = array(
             'app' => 'viewProfile',
-            'user' => $p_id ? $this->users_m->getUserById($p_id) : NULL
+            'user' => $user,
+            'title' => 'Specpile | '. ucwords($user['first']).' '.ucwords($user['last'])
         );
 
         $this->load->view('header_v', $data);
@@ -44,7 +47,8 @@ class User extends CI_Controller {
         // }
 
         $data = array(
-            'app' => 'login'
+            'app' => 'login',
+            'title' => 'Specpile | Login'
         );
 
         $this->load->view('header_v', $data);
@@ -58,7 +62,8 @@ class User extends CI_Controller {
             redirect('user/login');
 
         $data = array(
-            'app' => 'register'
+            'app' => 'register',
+            'title' => 'Specpile | Signup'
         );
 
         $this->load->view('header_v', $data);

@@ -21,11 +21,17 @@ var Search = Backbone.View.extend({
         this.render();
     },
 
-    render: function(){
+    render: function() {
         $('#term', this.$el).autocomplete({
             source: [],
             minLength: 1
-        });
+        }).data("autocomplete")._renderItem = function(ul, item) {
+            var term = this.term.split(' ').join('|');
+            var re = new RegExp("(" + term + ")", "gi");
+            var t = item.label.replace(re, "<span style='font-weight:bold;'>$1</span>");
+            var inner_html = '<a><img style="vertical-align:middle;" width="30" src="' + item.image + '"/> ' + t + '</a>';
+            return $("<li></li>").data("item.autocomplete", item).append(inner_html).appendTo(ul);
+        };
     },
 
     getProductsResults: function(event) {
@@ -37,7 +43,7 @@ var Search = Backbone.View.extend({
 
         if(this.model.isValid()) {
             //alert(this.model.get('term'));
-            this.resultsView.render(this.model.get('term'));
+            this.resultsView.render(encodeURIComponent(this.model.get('term')));
         } else {
             //alert(this.displayError(this.getInputByName('term')));
             //this.resultsView.render(this.model.get('term'));
@@ -51,9 +57,8 @@ var Search = Backbone.View.extend({
         error = this.model.preValidate(element.attr('name'), element.val());
 
         this.displayError(element);
-        
-        if(error) {
-        } else {
+
+        if(error) {} else {
             this.autoComplete(element.val());
             //this.autoComplete(this.getInputByName('term').val());
         }
@@ -64,12 +69,12 @@ var Search = Backbone.View.extend({
     },
 
     autoComplete: function(value) {
-        $.get('api/products/term/'+value, function(data) {
+        $.get('api/products/term/' + encodeURIComponent(value), function(data) {
             results = [];
-            $.each(data, function(i,val){
+            $.each(data, function(i, val) {
                 results.push(val);
             });
-            console.log(results);
+            // console.log(results);
             $("#term", this.$el).autocomplete("option", "source", results);
         });
     },
