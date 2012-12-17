@@ -118,6 +118,8 @@ class Home extends CI_Controller {
 	}
 
 	public function test4( $category = 'smartphones' ) {
+		ini_set('memory_limit','1024M');
+		
 		$data = array(
 			'app' => 'home'
 		);
