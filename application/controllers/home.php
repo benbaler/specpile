@@ -137,8 +137,8 @@ class Home extends CI_Controller {
 			file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
 		}
 
-		$product1 = $this->icecat_m->getProductById( '50c74e0b9aa8df2839000b1a' );
-		$product2 = $this->icecat_m->getProductById( '50c74e109aa8df283900146f' );
+		$product1 = $this->icecat_m->getProductById( '50c7a3f89aa8dfec1d0038ee' );
+		$product2 = $this->icecat_m->getProductById( '50c7a3ed9aa8dfec1d003368' );
 
 
 
