@@ -138,6 +138,11 @@
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#333333'); /* for IE */
             background: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#333333)); /* for webkit browsers */
             background: -moz-linear-gradient(top,  #333333,  #333333); /* for firefox 3.6+ */
+
+            background: -webkit-linear-gradient(top, #434343 0%,#2F2F2F 70%);
+            background: -o-linear-gradient(top, #434343 0%,#2F2F2F 70%);
+            background: -ms-linear-gradient(top, #434343 0%,#2F2F2F 70%);
+            background: linear-gradient(top, #434343 0%,#2F2F2F 70%);
          }
 
          .profile-thumb{
@@ -212,6 +217,13 @@
          }
 
          .specs-feature div{
+            background: -webkit-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: -o-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: -ms-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            
+            border: 0px !important;
+
             background-color: #E0E0E0 !important;
          }
 
@@ -226,6 +238,13 @@
          } 
 
          .feature-compare{
+            background: -webkit-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: -o-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: -ms-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            background: linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+
+            border: 0px !important;
+
             background-color: #E0E0E0 !important;
          }
 
