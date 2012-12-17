@@ -89,7 +89,7 @@ window.productData = <?= json_encode($product) ?>;
         <b><?= ucwords($spec) ?></b> 
       </div>
       <div class="four mobile-two columns pull-two">
-        <?= $option === TRUE ? 'Yes' : ($option === FALSE ? 'No' : ucwords($option)) ?>
+        <?= $option === TRUE ? 'Yes' : ($option === FALSE ? 'No' : ucwords(str_replace(', ','<br/>',$option))) ?>
       </div>
     </div>
   <?php endforeach; ?>
