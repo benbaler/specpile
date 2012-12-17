@@ -14,6 +14,8 @@
 	<title><?= $title ?></title>
 
 	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
+	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
+
 	
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
