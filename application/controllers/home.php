@@ -146,40 +146,51 @@ class Home extends CI_Controller {
 		// var_dump('<pre>', $product1, '</pre>');
 		// var_dump('<pre>', $product2, '</pre>');
 
+		echo '<div class="row">';
+		echo '<div class="twelve columns">';
+		echo '<h4>Compare</h4>';
+		echo '</div>';
+		echo '</div>';
+
 		echo '<div class="row product-compare">';
 		echo '<div class="twelve columns">';
 
-		echo '<div class="row"><div class="four mobile-four columns feature-compare"><b>Compare '.ucwords($category).'</b></div></div>';
+		echo '<div class="row"><div class="twelve mobile-four columns feature-compare"><b>'.ucwords($category).'</b></div></div>';
+
+		echo '<div class="row">';
+		echo '<div class="eleven mobile-four columns offset-by-one">';
 
 		// company
 		echo '<div class="row">';
-		echo '<div class="four mobile-four columns">Brand</div>';
+		echo '<div class="four mobile-two columns">Brand</div>';
 
-		echo '<div class="four mobile-two columns">'.ucwords($product1['company']).'</div>';
-		echo '<div class="four mobile-two columns">'.ucwords($product2['company']).'</div>';
+		echo '<div class="four mobile-one columns">'.ucwords($product1['company']).'</div>';
+		echo '<div class="four mobile-one columns">'.ucwords($product2['company']).'</div>';
 		echo '</div>';
 
 		// model
 		echo '<div class="row">';
-		echo '<div class="four mobile-four columns">Model</div>';
+		echo '<div class="four mobile-two columns">Model</div>';
 
-		echo '<div class="four mobile-two columns">'.ucwords($product1['name']).'</div>';
-		echo '<div class="four mobile-two columns">'.ucwords($product2['name']).'</div>';
+		echo '<div class="four mobile-one columns">'.ucwords($product1['name']).'</div>';
+		echo '<div class="four mobile-one columns">'.ucwords($product2['name']).'</div>';
 		echo '</div>';
 
 		// image
 		echo '<div class="row">';
-		echo '<div class="four mobile-four columns">Image</div>';
+		echo '<div class="four mobile-two columns">Image</div>';
 
-		echo '<div class="four mobile-two columns"><img src="'.$product1['image'].'"/></div>';
-		echo '<div class="four mobile-two columns"><img src="'.$product2['image'].'"/></div>';
+		echo '<div class="four mobile-one columns"><img src="'.$product1['image'].'"/></div>';
+		echo '<div class="four mobile-one columns"><img src="'.$product2['image'].'"/></div>';
 		echo '</div>';
 
+		echo '</div>';
+		echo '</div>';
 		echo '<br/><br/>';
 
 		foreach ( $arr as $feature => $specs ) {
 			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
-				echo '<div class="row"><div class="four mobile-four columns feature-compare"><b>'.ucwords($feature).'</b></div></div>';
+				echo '<div class="row"><div class="twelve mobile-four columns feature-compare"><b>'.ucwords($feature).'</b></div></div>';
 			}
 
 			foreach ( $specs as $spec => $options ) {
@@ -188,6 +199,9 @@ class Home extends CI_Controller {
 				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
 				// echo '<div class="row">';
 				// echo '<div class="twelve columns">';
+
+					echo '<div class="row">';
+					echo '<div class="eleven mobile-four columns offset-by-one">';
 
 					echo '<div class="row">';
 					echo '<div class="four mobile-four columns">'.ucwords($spec).'</div>';
@@ -213,8 +227,8 @@ class Home extends CI_Controller {
 					}
 
 					echo '</div>';
-					// echo '</div>';
-					// echo '</div>';
+					echo '</div>';
+					echo '</div>';
 				}
 
 
