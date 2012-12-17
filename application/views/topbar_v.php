@@ -14,25 +14,23 @@
 
 				<li class="divider"></li>
 
+
+
 				<li>
-					<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" class="profile-thumb"/></a>
+					<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" class="profile-thumb"><span class="profile-name"><?= $first ?></span></a>
 				</li>
-				<li class="has-dropdown">
-					<a href="/user/id/<?= $id ?>"><?= ucfirst($first) ?></a>
-					<ul class="dropdown">
-						<li><a href="/user/logout">Logout</a></li>
-					</ul>
-				</li>
+
+				<li class="divider"></li>
+				<li><a href="/user/logout">Logout</a></li>
+
 
 			<?php else: ?>
 			<li class="divider"></li>
-			<li class="has-dropdown">
-				<a href="#">Guest</a>
-				<ul class="dropdown">			
-					<li><a href="/user/signup">Signup</a></li>
-					<li><a href="/user/login">Login</a></li>
-				</ul>
-			</li>
+						
+			<li><a href="/user/signup">Signup</a></li>
+			<li><a href="/user/login">Login</a></li>
+
+		</ul>
 
 		<?php endif; ?>
 
@@ -52,6 +50,7 @@
 <!-- <br/><br/><br/><br/> -->
 </div>
 </div>
+
 
 
 

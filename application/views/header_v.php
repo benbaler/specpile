@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width" />
 	
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
+	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
 
 	<!-- <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'> -->
