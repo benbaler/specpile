@@ -13,6 +13,7 @@
 
 	<title><?= $title ?></title>
 
+	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
 	
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
