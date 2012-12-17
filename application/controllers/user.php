@@ -20,7 +20,7 @@ class User extends CI_Controller {
         $data = array(
             'app' => 'viewProfile',
             'user' => $user,
-            'title' => 'Specpile | '. ucwords($user['first']).' '.ucwords($user['last'])
+            'title' => ucwords($user['first']).' '.ucwords($user['last'])
         );
 
         $this->load->view('header_v', $data);
@@ -48,7 +48,7 @@ class User extends CI_Controller {
 
         $data = array(
             'app' => 'login',
-            'title' => 'Specpile | Login'
+            'title' => 'Login'
         );
 
         $this->load->view('header_v', $data);
@@ -63,7 +63,7 @@ class User extends CI_Controller {
 
         $data = array(
             'app' => 'register',
-            'title' => 'Specpile | Signup'
+            'title' => 'Signup'
         );
 
         $this->load->view('header_v', $data);

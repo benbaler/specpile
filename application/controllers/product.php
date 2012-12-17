@@ -16,7 +16,7 @@ class Product extends CI_Controller {
 		$data = array(
 			'app' => 'viewProduct',
 			'product' => $product,
-			'title' => 'Specpile | '. ucwords($product['company']).' '.ucwords($product['name'])
+			'title' => ucwords($product['company']).' '.ucwords($product['name'])
 		);
 
 		$user = $this->_user();
@@ -50,7 +50,7 @@ class Product extends CI_Controller {
 			'app' => 'addProduct',
 			'categories' => $this->categories_m->getListOfNames(),
 			'brands' => $this->brands_m->getListOfNames(),
-			'title' => 'Specpile | '. ucwords($product['brand']).' '.ucwords($product['name'])
+			'title' => ucwords($product['brand']).' '.ucwords($product['name'])
 		);
 
 		$user = $this->_user();
@@ -70,7 +70,7 @@ class Product extends CI_Controller {
 		$data = array(
 			'app' => 'editProduct',
 			'product' => $product,
-			'title' => 'Specpile | '. ucwords($product['company']).' '.ucwords($product['name'])
+			'title' => ucwords($product['company']).' '.ucwords($product['name'])
 		);
 
 		$user = $this->_user();
@@ -97,7 +97,7 @@ class Product extends CI_Controller {
 		} else{
 			$data = array(
 				'app' => 'compareProducts',
-				'title' => 'Specpile | Compare'
+				'title' => 'Compare products'
 			);
 
 			$user = $this->_user();
@@ -140,7 +140,7 @@ class Product extends CI_Controller {
 
 		$data = array(
 			'app' => 'compareProducts',
-			'title' => 'Specpile | '. ucwords($product1['company']).' '.ucwords($product1['name']).' vs '.ucwords($product2['company']).' '.ucwords($product2['name'])
+			'title' => ucwords($product1['company']).' '.ucwords($product1['name']).' vs '.ucwords($product2['company']).' '.ucwords($product2['name'])
 		);
 
 		echo $this->load->view( 'header_v', $data, TRUE);

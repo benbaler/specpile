@@ -18,7 +18,7 @@ class Home extends CI_Controller {
 		$data = array(
 			'app' => 'home',
 			'categories' => $this->categories_m->getListOfNames(),
-			'title' => 'Specpile | Home'
+			'title' => 'Specpile'
 		);
 
 		$this->load->view( 'header_v', $data );

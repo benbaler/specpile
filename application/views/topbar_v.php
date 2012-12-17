@@ -25,7 +25,7 @@
 					<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" class="profile-thumb"><span class="profile-name"><?= $first ?></span></a>
 				</li>
 
-				<li class="divider"></li>
+				<!-- <li class="divider"></li> -->
 				<li><a href="/user/logout">Logout</a></li>
 
 
