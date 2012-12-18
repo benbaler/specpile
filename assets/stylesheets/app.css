@@ -187,11 +187,11 @@
            }
 
            25% {
-             -webkit-transform: rotate3d(0,0,0,5deg)
+             -webkit-transform: rotate3d(0,0,0,10deg)
            }
 
            75% {
-             -webkit-transform: rotate3d(0,0,0,-5deg)
+             -webkit-transform: rotate3d(0,0,0,-10deg)
            }
 
            100% {
@@ -205,11 +205,11 @@
            }
 
            25% {
-             -moz-transform: rotate(5deg)
+             -moz-transform: rotate(10deg)
            }
 
            75% {
-             -moz-transform: rotate(-5deg)
+             -moz-transform: rotate(-10deg)
            }
 
            100% {
@@ -218,9 +218,9 @@
          }
 
          .logo-png:hover {
-           -webkit-animation: wiggle .2s ease-in-out alternate;
-           -moz-animation: wiggle .2s ease-in-out alternate;
-           -ms-animation: wiggle .2s ease-in-out alternate
+           -webkit-animation: wiggle .5s ease-in-out alternate;
+           -moz-animation: wiggle .5s ease-in-out alternate;
+           -ms-animation: wiggle .5s ease-in-out alternate
          }
 
          .logo-png:hover{
@@ -253,8 +253,8 @@
          }
 
          body{
-            /*background: whitesmoke;*/
-            background: url('/assets/images/wall.jpg') no-repeat center center fixed; 
+            background: url('/assets/images/wall.png') no-repeat center center fixed; 
+            background-color: #333;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -316,12 +316,20 @@
             background-color: #E0E0E0 !important;
          }
 
-         select{
+        select{
          background: transparent;
          height: 32px;
          font-size: 14px;
-      }
+        }
 
+        iframe{
+            /*position: relative;
+            left: 225px;*/
+        }
+
+        .twelve{
+            border-left: 20px #2BA6CB solid!important;
+        }
       /*.wall{
          clear: both;
          position: absolute;
