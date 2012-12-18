@@ -91,6 +91,11 @@ class Product extends CI_Controller {
 			$p2 = $this->icecat_m->getProductByNameAndCategory(urldecode($this->uri->segment(5)),array($this->uri->segment(3)));
 
 			// var_dump($p1,$p2);
+			if(!$p1 || !$p2){
+				echo 'no products found please go back and try again!';
+				die();	
+			}
+
 
 			$this->_compare($p1['_id']->__toString(),$p2['_id']->__toString(),$this->uri->segment(3));
 
@@ -136,7 +141,7 @@ class Product extends CI_Controller {
 		}
 
 		$product1 = $this->icecat_m->getProductById( $p_id1/*'50c7a3f89aa8dfec1d0038ee'*/ );
-		$product2 = $this->icecat_m->getProductById( $p_id2/*'50c7a3ed9aa8dfec1d003368'*/ );	
+		$product2 = $this->icecat_m->getProductById( $p_id2/*'50c7a3ed9aa8dfec1d003368'*/ );
 
 		$data = array(
 			'app' => 'compareProducts',
@@ -165,9 +170,9 @@ class Product extends CI_Controller {
 
         <div class="two mobile-four columns">
           <select name="company" id="category">
-            <option value="smartphones" SELECTED>Smartphones</option>
-            <option value="tablets">Tablets</option>
-            <option value="cameras">Cameras</option>
+            <option value="smartphones" <?= $category == 'smartphones' ? 'SELECTED' : ''?>>Smartphones</option>
+            <option value="tablets" <?= $category == 'tablets' ? 'SELECTED' : ''?>>Tablets</option>
+            <option value="cameras" <?= $category == 'cameras' ? 'SELECTED' : ''?>>Cameras</option>
           </select>
         </div>
 
@@ -306,6 +311,7 @@ class Product extends CI_Controller {
 	}
 
 	private function _color( $p_pos, $p_count ) {
+		$p_count = $p_count == 1 ? 2 : $p_count;
 		$percentage = $p_pos * ( 1/( $p_count-1 ) );
 
 		// echo $percentage.'<br/>';
