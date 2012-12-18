@@ -30,6 +30,11 @@ class Home extends CI_Controller {
 		$this->load->view( 'footer_v' );
 	}
 
+	public function slide()
+	{
+		$this->load->view('elements/iphone_v');
+	}
+
 	private function _user() {
 		return array(
 			'id' => $this->session->userdata( 'id' ),
