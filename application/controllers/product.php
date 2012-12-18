@@ -252,6 +252,12 @@ class Product extends CI_Controller {
 
 			foreach ( $specs as $spec => $options ) {
 				usort($options, array($this,'_compareRef'));
+
+				// foreach($options as $option){
+				// 	echo $option.'<br/>';
+				// }
+				//die();
+				//natsort($options);
 				//asort( $options );
 
 				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
