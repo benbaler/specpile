@@ -246,6 +246,7 @@ class Product extends CI_Controller {
 			}
 
 			foreach ( $specs as $spec => $options ) {
+				usort($options, array($this,'_compareRef'));
 				//asort( $options );
 
 				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
@@ -318,6 +319,10 @@ class Product extends CI_Controller {
 		}
 
 		return $color;
+	}
+
+	private function _compareRef($a, $b){ 
+    	return strnatcmp($a,$b); 
 	}
 
 }
