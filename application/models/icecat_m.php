@@ -18,7 +18,7 @@ class Icecat_m extends CI_Model {
 
 	public function getProductsByCategory($p_category)
 	{
-		return $this->mongo_db->where( array( 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->get( $this->collection );
+		return $this->mongo_db->where( array( 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->limit(6000)->get( $this->collection );
 	}
 
 	public function getProductById( $p_id ) {
