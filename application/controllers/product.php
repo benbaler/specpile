@@ -219,7 +219,7 @@ class Product extends CI_Controller {
 
 		<div class="row">
   <div class="twelve mobile-four columns">
-    <h4>Compare</h4>
+    <h4>Compare <div class="fb-like" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></h4>
   </div>
 </div>
 
@@ -374,6 +374,14 @@ class Product extends CI_Controller {
 
 		echo '</div>';
 		echo '</div>';
+
+		?>
+		<div class="row">
+		<div class="twelve columns">
+		<div class="fb-comments" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="470" data-num-posts="5"></div>
+		</div>
+		</div>
+		<?php
 
 		echo $this->load->view( 'footer_v' ,'', TRUE);
 	}

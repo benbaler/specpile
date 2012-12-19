@@ -9,9 +9,7 @@
 
 			<ul class="left">
 				<!-- <li class="divider"></li> -->
-				<li><a href="/">Search</a></li>
-				<li><a href="/product/compare">Compare</a></li>
-
+				<li><div class="fb-like" data-href="http://specpile.com" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
 			</ul>
 
 			<ul class="right">
@@ -19,7 +17,8 @@
 				<?php if($logged_in == TRUE): ?>
 
 				<!-- <li><a href="/product/add" class="">Add Product</a></li> -->
-
+				<li><a href="/">Search</a></li>
+				<li><a href="/product/compare">Compare</a></li>
 
 				<li>
 					<a href="/user/id/<?= $id ?>"><img src="<?= $picture_url ?>" class="profile-thumb"><span class="profile-name"><?= $first ?></span></a>
@@ -30,30 +29,32 @@
 
 
 			<?php else: ?>
-						
+			<li><a href="/">Search</a></li>
+			<li><a href="/product/compare">Compare</a></li>
+			
 			<li><a href="/user/signup">Signup</a></li>
 			<!-- <li class="divider"></li> -->
 			<li><a href="/user/login">Login</a></li>
 
 		</ul>
 
-		<?php endif; ?>
+	<?php endif; ?>
 
-	</ul>
+</ul>
 </section>
 </nav>
 </div>
 
 <div class="row">
-<div class="twelve columns">
-&nbsp;
-</div>
+	<div class="twelve columns">
+		&nbsp;
+	</div>
 </div>
 
 <div class="row">
-<div class="twelve columns">
-<!-- <br/><br/><br/><br/> -->
-</div>
+	<div class="twelve columns">
+		<!-- <br/><br/><br/><br/> -->
+	</div>
 </div>
 
 

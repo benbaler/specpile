@@ -65,7 +65,7 @@ window.productData = <?= json_encode($product) ?>;
 
 <div class="row">
   <div class="twelve mobile-four columns">
-    <h4>Specification</h4>
+    <h4>Specification <div class="fb-like" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></h4>
   </div>
 
   <!-- <div class="two mobile-one columns offset-by-six">
@@ -99,3 +99,8 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 </div>
 
+<div class="row">
+  <div class="twelve columns">
+<div class="fb-comments" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="470" data-num-posts="5"></div>
+</div>
+</div>

@@ -1,3 +1,9 @@
+<!-- <div class="row">
+	<div class="twelve columns">
+<div class="fb-like" data-href="http://specpile.com" data-send="true" data-width="450" data-show-faces="true"></div>
+</div>
+</div> -->
+
 <div class="row">
 	<div class="twelve columns last-column">
 <div class="row">
@@ -14,6 +20,7 @@
 </div>	
 </div>
 </div>
+
 
 	<script type="text/javascript">
 	var uvOptions = {};

@@ -63,17 +63,27 @@
 	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
 	// })();
 
-	</script>   
+</script>   
 
-	<script type="text/javascript" id="inspectletjs">
-		var __insp = __insp || [];
-	__insp.push(['wid', 597502060]);
-	(function() {
-		function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://www.inspectlet.com/inspect/597502060.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
-		if (window.attachEvent){
-			window.attachEvent('onload', __ldinsp);
-		}else{
-			window.addEventListener('load', __ldinsp, false);
-		}
-	})();
-	</script>
+<script type="text/javascript" id="inspectletjs">
+var __insp = __insp || [];
+__insp.push(['wid', 597502060]);
+(function() {
+	function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://www.inspectlet.com/inspect/597502060.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
+	if (window.attachEvent){
+		window.attachEvent('onload', __ldinsp);
+	}else{
+		window.addEventListener('load', __ldinsp, false);
+	}
+})();
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=192299124240358";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
