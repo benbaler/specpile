@@ -9,7 +9,7 @@
 
 			<ul class="left">
 				<!-- <li class="divider"></li> -->
-				<li><div class="fb-like" data-href="http://specpile.com" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
+				<li><div class="fb-like" data-href="https://www.facebook.com/specpile" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
 			</ul>
 
 			<ul class="right">
