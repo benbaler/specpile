@@ -327,9 +327,10 @@
             left: 225px;*/
         }
 
-        .twelve{
+        .row:last-child{
             /*border-left: 20px #333 solid!important;*/
         }
+        
       /*.wall{
          clear: both;
          position: absolute;

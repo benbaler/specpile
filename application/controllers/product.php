@@ -7,6 +7,68 @@ class Product extends CI_Controller {
 		parent::__construct();
 	}
 
+	public function smartphones($offest = 0)
+	{
+		$this->_sitemap('smartphones', $offest);
+	}
+
+	public function tablets($offest = 0)
+	{
+		$this->_sitemap('tablets', $offest);
+	}
+
+	public function cameras($offest = 0)
+	{
+		ini_set('memory_limit', '1024M');
+		$this->_sitemap('cameras', $offest);
+	}
+
+	public function _sitemap($category, $offset)
+	{
+		$limit = 25;
+		
+		$this->load->model('icecat_m');
+
+		$products = $this->icecat_m->getProductsByCategory(array($category));
+		$total = count($products);
+
+		$items = array();
+
+		for($i = $offset; $i < $limit+$offset; $i++){
+			if(isset($products[$i])){	
+				$items[] = array(
+					'id' => $products[$i]['_id']->__toString(),
+					'name' => $products[$i]['name'],
+					'category' => $products[$i]['category'],
+					'company' => $products[$i]['company'],
+					'image' => $products[$i]['image']
+				);
+			}
+		}
+
+		$this->load->library('pagination');
+
+		$config['base_url'] = '/product/'.$category.'/';
+		$config['total_rows'] = $total;
+		$config['per_page'] = $limit;
+
+		$this->pagination->initialize($config);
+
+		$data = array(
+			'app' => 'login',
+			'products' => $items,
+			'title' => ucwords($category).' page '.($offset/$limit+1),
+			'pagination' => $this->pagination->create_links()
+		);
+
+		$user = $this->_user();
+
+		$this->load->view('header_v', $data);
+		$this->load->view('topbar_v', $user);
+		$this->load->view('elements/sitemap_v', $data);
+		$this->load->view('footer_v');
+	}
+
 	public function view($p_id)
 	{
 		$this->load->model(array('icecat_m'));

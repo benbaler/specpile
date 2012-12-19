@@ -16,6 +16,11 @@ class Icecat_m extends CI_Model {
 		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category)/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
+	public function getProductsByCategory($p_category)
+	{
+		return $this->mongo_db->where( array( 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->get( $this->collection );
+	}
+
 	public function getProductById( $p_id ) {
 		$product = current( $this->_get( $p_id ) );
 		$features = array();
