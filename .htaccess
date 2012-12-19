@@ -15,7 +15,7 @@ RewriteCond $1 ^(application|system|private|logs)
 RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]
 
 # Allow these directories and files to be displayed directly:
-RewriteCond $1 ^(phpsysinfo|phpmyadmin|rockmongo|index\.php|robots\.txt|opensearch\.xml|favicon\.ico|assets|forums)
+RewriteCond $1 ^(phpsysinfo|phpmyadmin|rockmongo|index\.php|sitemap\.xml|robots\.txt|opensearch\.xml|favicon\.ico|assets|forums)
 
 # No rewriting
 RewriteRule ^(.*)$ - [PT,L]
