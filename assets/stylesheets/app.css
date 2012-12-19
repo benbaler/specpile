@@ -330,7 +330,11 @@
         .row:last-child{
             /*border-left: 20px #333 solid!important;*/
         }
-        
+        .twitter{
+            position:relative;
+            top: 4px;
+            left:10px;
+        }
       /*.wall{
          clear: both;
          position: absolute;

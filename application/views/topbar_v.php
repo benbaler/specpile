@@ -10,6 +10,7 @@
 			<ul class="left">
 				<!-- <li class="divider"></li> -->
 				<li><div class="fb-like" data-href="https://www.facebook.com/specpile" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
+				<li><div class="twitter"><a href="https://twitter.com/specpile" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @specpile</a></div></li>
 			</ul>
 
 			<ul class="right">
@@ -31,7 +32,7 @@
 			<?php else: ?>
 			<li><a href="/">Search</a></li>
 			<li><a href="/product/compare">Compare</a></li>
-			
+
 			<li><a href="/user/signup">Signup</a></li>
 			<!-- <li class="divider"></li> -->
 			<li><a href="/user/login">Login</a></li>
