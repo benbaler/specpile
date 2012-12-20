@@ -10,8 +10,8 @@ $config['mongo_port'] = 27017;
 $config['mongo_db'] = "specpile";
 
 // Leave blank if Mongo is not running in auth mode
-$config['mongo_user'] = "";
-$config['mongo_pass'] = "";
+$config['mongo_user'] = "ben";
+$config['mongo_pass'] = "benb1234";
 
 // Persistant connections
 $config['mongo_persist'] = TRUE;
