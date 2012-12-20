@@ -41,7 +41,7 @@ class Product extends CI_Controller {
 					'name' => $products[$i]['name'],
 					'category' => $products[$i]['category'],
 					'company' => $products[$i]['company'],
-					'image' => $products[$i]['image']
+					'image' => $this->icecat_m->getImageByIdAndUrl($products[$i]['_id']->__toString(),$products[$i]['image'])
 				);
 			}
 		}
@@ -299,8 +299,8 @@ class Product extends CI_Controller {
 		echo '<div class="row">';
 		echo '<div class="four mobile-four columns">Image</div>';
 
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product1['image'].'"/></div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product2['image'].'"/></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$this->icecat_m->getImageByIdAndUrl($product1['_id']->__toString(),$product1['image']).'"/></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$this->icecat_m->getImageByIdAndUrl($product2['_id']->__toString(),$product2['image']).'"/></div>';
 		echo '</div>';
 
 		echo '</div>';

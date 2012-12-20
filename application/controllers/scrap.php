@@ -596,6 +596,21 @@ class Scrap extends CI_Controller {
 		}
 	}
 
+	public function test20()
+	{
+		$this->load->model('scrap_m');
+		if(!file_exists('temp/cameras/schema.html')){
+			// $html = file_get_contents('http://icecat.us/p/kodak/8218919/m-series-digital-cameras-0041778218914-easyshare-m1093-is-1686994.html');
+			$html = file_get_contents('http://icecat.us/p/apple/md239kn-a/smartphones-iphone-4s-16gb-11196352.html');
+			file_put_contents('temp/cameras/schema.html', $html);
+		} else{
+			$html = file_get_contents('temp/cameras/schema.html');
+		}
+
+		$product = $this->scrap_m->product($html);
+		var_dump($product);
+	}
+
 
 }
 

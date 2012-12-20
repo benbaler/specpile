@@ -318,7 +318,7 @@ class Scrap_m extends CI_Model {
 		$product['title'] = $this->text( $xpath, "//*[@id='product-title']" );
 
 		// images
-		$product['images'] = $this->productImages( $xpath );
+		//$product['images'] = $this->productImages( $xpath );
 
 		// desc
 		$product['desc'] = $this->text( $xpath, "//*[@id='product-description-wrap']" );
@@ -343,7 +343,17 @@ class Scrap_m extends CI_Model {
 					if ( !isset( $pair[0] ) || !isset( $pair[1] ) ) {
 						//var_dump('----', $info->nodeValue, '----');
 					} else {
-						$arr[trim( strtolower( $pair[0] ) )] = preg_replace( '!\s+!', ' ', trim( $pair[1] ) );
+						$spans = $info->getElementsByTagName('span');
+						$data = "";
+						if($spans->length){
+							foreach ($spans as $span) {
+								if($span->getAttribute('class') == 'data' || $span->getAttribute('class') == 'product_ean'){
+									$data = $span->nodeValue;
+									break;
+								}
+							}
+						}
+						$arr[trim( strtolower( $pair[0] ) )] = preg_replace( '!\s+!', ' ', trim( $data ) );
 					}
 				}
 			}
@@ -360,6 +370,7 @@ class Scrap_m extends CI_Model {
 
 		if ( !is_null( $links ) ) {
 			foreach ( $links as $link ) {
+				// var_dump($link->getAttribute('href')->nodeValue);
 				if ( preg_match( '/^http:\/\/images.icecat.biz\/img\/norm\/high/', $link->getAttribute( 'href' ) ) ) {
 					$arr['high'] = $link->getAttribute( 'href' );
 				}

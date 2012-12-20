@@ -5,20 +5,19 @@ class Icecat_m extends CI_Model {
 	private $collection = 'icecat_products';
 
 	public function getProductByNameAndCategory( $p_name, $p_category ) {
-		return current($this->mongo_db->where( array( 'name' => array( '$regex' => $p_name, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->limit( 1 )->get( $this->collection ));
+		return current( $this->mongo_db->where( array( 'name' => array( '$regex' => $p_name, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array( '$in' => $p_category ) ) )->limit( 1 )->get( $this->collection ) );
 	}
 
 	public function getProductsByQuery( $p_query ) {
 		return $this->_get( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ) ) );
 	}
 
-	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10, $p_category = array('smartphones', 'tablets', 'cameras') ) {
-		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category)/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
+	public function getProductsByQueryAndLimit( $p_query, $p_limit = 10, $p_category = array( 'smartphones', 'tablets', 'cameras' ) ) {
+		return $this->mongo_db->where( array( 'name' => array( '$regex' => $p_query, '$options' => 'i' ), 'features' => array( '$exists' => true ), 'category' => array( '$in' => $p_category )/*, 'category' => array( '$regex' => 'smartphones', '$options' => 'i' )*/ ) )->limit( $p_limit )->get( $this->collection );
 	}
 
-	public function getProductsByCategory($p_category)
-	{
-		return $this->mongo_db->where( array( 'features' => array( '$exists' => true ), 'category' => array('$in' => $p_category) ) )->limit(6000)->get( $this->collection );
+	public function getProductsByCategory( $p_category ) {
+		return $this->mongo_db->where( array( 'features' => array( '$exists' => true ), 'category' => array( '$in' => $p_category ) ) )->limit( 6000 )->get( $this->collection );
 	}
 
 	public function getProductById( $p_id ) {
@@ -121,10 +120,10 @@ class Icecat_m extends CI_Model {
 								}
 							}
 						} else {
-							if( gettype($option) == 'boolean' ){
+							if ( gettype( $option ) == 'boolean' ) {
 								$template[$feature][$spec][] = 'yes';
 								$template[$feature][$spec][] = 'no';
-							} else{
+							} else {
 								$template[$feature][$spec][] = $option;
 							}
 						}
@@ -144,10 +143,18 @@ class Icecat_m extends CI_Model {
 		return $template;
 	}
 
+	public function getImageByIdAndUrl( $p_id, $p_imgUrl ) {
+		$imgUrl = 'assets/images/thumbs/'.$p_id.'.jpg';
+		if ( !file_exists( $imgUrl ) ) {
+			$data = file_get_contents( $p_imgUrl );
+			
+			if(!$data || !file_put_contents( $imgUrl, $data )){
+				return $p_imgUrl;
+			}
+		}
 
-
-
-
+		return '/'.$imgUrl;
+	}
 
 
 	private function _get( $p_values, $p_key = '_id' ) {

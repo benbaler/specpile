@@ -120,7 +120,7 @@ class Api extends REST_Controller {
                 if(in_array($product['_id']->__toString(),$keys)){
                     $results[] = array(
                         'label' => $product['name'],
-                        'image' => $product['image']
+                        'image' => $this->icecat_m->getImageByIdAndUrl($product['_id']->__toString(),$product['image'])
                     );
                 }
             }
@@ -155,7 +155,7 @@ class Api extends REST_Controller {
                         'name' => ucwords( character_limiter( $product['name'], 15 ) ),
                         'category_name' => ucwords( $product['category'] ),
                         'brand_name' => ucwords( $product['company'] ),
-                        'image' => $product['image']
+                        'image' => $this->icecat_m->getImageByIdAndUrl($product['_id']->__toString(),$product['image'])
                     );
                 }
             }
