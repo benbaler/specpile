@@ -253,8 +253,8 @@
          }
 
          body{
-            background: url('/assets/images/wall.png') no-repeat center center fixed; 
-            background-color: #333;
+            /*background: url('/assets/images/wall.png') no-repeat center center fixed; */
+            background-color: #585858;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

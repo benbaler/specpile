@@ -80,6 +80,7 @@ class Home extends CI_Controller {
 		}
 	}
 
+
 	public function test2() {
 		$this->load->model( 'scrap_m' );
 
@@ -340,6 +341,11 @@ class Home extends CI_Controller {
 		var_dump( $data );
 
 
+	}
+
+	public function linkman()
+	{
+		//echo file_get_contents('http://www.hotbot.com/search/web?pn=1&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22');
 	}
 
 }
