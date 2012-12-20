@@ -144,6 +144,8 @@ class Icecat_m extends CI_Model {
 	}
 
 	public function getImageByIdAndUrl( $p_id, $p_imgUrl ) {
+		if($p_imgUrl == "") return $p_imgUrl;
+		
 		$imgUrl = 'assets/images/thumbs/'.$p_id.'.jpg';
 		if ( !file_exists( $imgUrl ) ) {
 			$data = file_get_contents( $p_imgUrl );
