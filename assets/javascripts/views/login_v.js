@@ -39,7 +39,7 @@ var Login = Backbone.View.extend({
     submitCredentials: function(event) {
         event.preventDefault();
 
-        self = this;
+        var self = this;
 
         $.each(this.model.defaults, function(key, value) {
             self.displayError(self.getInputByName(key));
