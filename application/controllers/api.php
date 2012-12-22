@@ -102,7 +102,7 @@ class Api extends REST_Controller {
 
         $category = $this->get( 'category' ) ? array($this->get( 'category' )) : array('smartphones', 'tablets', 'cameras');
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode($this->get( 'term' )) , 50, $category);
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode(str_replace('/\s+/', '.*', $this->get( 'term' ))) , 20, $category);
 
         if ( $products ) {
             $names = array();
@@ -135,7 +135,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( '^'.urldecode($this->get( 'query' )), 1000);
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode(str_replace('/\s+/', '.*', $this->get( 'query' ))), 5000);
 
         if ( $products ) {
             $results = array();

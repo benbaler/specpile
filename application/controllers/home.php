@@ -345,7 +345,64 @@ class Home extends CI_Controller {
 
 	public function linkman()
 	{
-		//echo file_get_contents('http://www.hotbot.com/search/web?pn=1&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22');
+		// <form method="post" action="addlink.php">
+
+  //   <table border="0">
+  //   <tr>
+  //   <td><b>Your name:</b></td>
+  //   <td><input type="text" name="name" size="40" maxlength="50"></td>
+  //   </tr>
+  //   <tr>
+  //   <td><b>E-mail:</b></td>
+  //   <td><input type="text" name="email" size="40" maxlength="50"></td>
+  //   </tr>
+  //   <tr>
+  //   <td><b>Website title:</b></td>
+  //   <td><input type="text" name="title" size="40" maxlength="50"></td>
+  //   </tr>
+  //   <tr>
+  //   <td><b>Website URL:</b></td>
+  //   <td><input type="text" name="url" maxlength="255" value="http://" size="40"></td>
+  //   </tr>
+  //   <tr>
+  //   <td><b>URL with reciprocal link:</b></td>
+  //   <td><input type="text" name="recurl" maxlength="255" value="http://" size="40"></td>
+  //   </tr>
+  //   </table>
+
+  //   <p><b>Website description:</b><br>
+  //   <input type="text" name="description" maxlength="200" size="60"></p>
+
+  //   <p><input type="submit" value="Add link"></p>
+
+		$this->load->model(array('scrap_m', 'icecat_m'));
+		$this->load->library('curl');
+
+		$post = array(
+			'name' => 'specpile',
+			'email' => 'team@specpile.com',
+			'title' => 'Specpile seach and compare products by specs',
+			'url' => 'http://specpile.com',
+			'recurl' => 'http://specpile.com/linkman',
+			'description' => 'Specpile is the place for searching and comparing products by specifications like smart phones, tablets and digital cameras'
+		);
+		
+		for($i=1;$i<=10;$i++){
+			$html = file_get_contents('http://www.hotbot.com/search/web?pn='.$i.'&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22');
+			//$html = file_get_contents('http://www.hotbot.com/search/web?pn='.$i.'&q="%2Faddlink.php"+linkman');
+			$links = $this->scrap_m->links($html);
+			foreach($link as $link){
+				$form = file_get_contents($link);
+				$fields = $this->scrap_m->form($form);
+				$this->curl->simple_post('http://specpile.com/linkman/affiliate', array('affiliate' => $fields['textarea']));
+				
+				$form = $this->curl->simple_post($fields['action'], $post);
+				$fields = $this->scrap_m->captcha($form);
+				$this->curl->simple_post($fields['action'], array('secnumber' => $fields['code']));
+			}
+			
+		}
+	
 	}
 
 }

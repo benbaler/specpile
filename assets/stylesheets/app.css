@@ -335,6 +335,13 @@
             top: 4px;
             left:10px;
         }
+
+        .ui-autocomplete{
+            z-index: 2;
+        }
+        .button{
+            z-index: 1;
+        }
       /*.wall{
          clear: both;
          position: absolute;

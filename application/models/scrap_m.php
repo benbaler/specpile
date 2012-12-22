@@ -1,6 +1,23 @@
 <?php if ( ! defined( 'BASEPATH' ) ) exit( 'No direct script access allowed' );
 
 class Scrap_m extends CI_Model {
+	public function links($p_html)
+	{
+		$xpath = $this->xpath($p_html);
+
+		$arr = array();
+		$lis = $xpath->query("//*[@class='result']");
+		if(!is_null($lis)){
+			foreach ($lis as $li) {
+				$a = $li->getElementsByTagName('a');
+				$href = $a->getAttribute('href');
+				$arr[] = $href;
+			}
+		}
+
+		return $href;
+
+	}
 
 	public function gsmSpecs($p_html)
 	{
