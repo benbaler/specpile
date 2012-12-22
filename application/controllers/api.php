@@ -75,6 +75,19 @@ class Api extends REST_Controller {
         }
     }
 
+    public function product_get() {
+        $this->load->model( 'icecat_m' );
+
+        $product = $this->icecat_m->getProductById( $this->get( 'id' ) );
+
+        if ( $product ) {
+            $this->response( $product, 200 );
+        }
+        else {
+            $this->response( $this->_error( 'No results' ), 404 );
+        }
+    }
+
     // add product
     public function product_post() {
         // TODO: user must be logged in to add a product
@@ -100,9 +113,9 @@ class Api extends REST_Controller {
     public function products_get() {
         $this->load->model( 'icecat_m' );
 
-        $category = $this->get( 'category' ) ? array($this->get( 'category' )) : array('smartphones', 'tablets', 'cameras');
+        $category = $this->get( 'category' ) ? array( $this->get( 'category' ) ) : array( 'smartphones', 'tablets', 'cameras' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode(str_replace('/\s+/', '.*', $this->get( 'term' ))) , 20, $category);
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'term' ) ) ) , 20, $category );
 
         if ( $products ) {
             $names = array();
@@ -110,22 +123,22 @@ class Api extends REST_Controller {
             foreach ( $products as $product ) {
                 $names[$product['_id']->__toString()] = $product['name'];
             }
-        
-            $names = array_unique($names);
-            $keys = array_keys($names);
+
+            $names = array_unique( $names );
+            $keys = array_keys( $names );
 
             $results = array();
 
             foreach ( $products as $product ) {
-                if(in_array($product['_id']->__toString(),$keys)){
+                if ( in_array( $product['_id']->__toString(), $keys ) ) {
                     $results[] = array(
                         'label' => $product['name'],
-                        'image' => $this->icecat_m->getImageByIdAndUrl($product['_id']->__toString(),$product['image'])
+                        'image' => $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] )
                     );
                 }
             }
 
-            $this->response( array_slice($results,0,10), 200 );
+            $this->response( array_slice( $results, 0, 10 ), 200 );
         }
         else {
             $this->response( $this->_error( 'No results' ), 404 );
@@ -135,7 +148,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode(str_replace('/\s+/', '.*', $this->get( 'query' ))), 5000);
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 5000 );
 
         if ( $products ) {
             $results = array();
@@ -155,12 +168,12 @@ class Api extends REST_Controller {
                         'name' => ucwords( character_limiter( $product['name'], 15 ) ),
                         'category_name' => ucwords( $product['category'] ),
                         'brand_name' => ucwords( $product['company'] ),
-                        'image' => $this->icecat_m->getImageByIdAndUrl($product['_id']->__toString(),$product['image'])
+                        'image' => $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] )
                     );
                 }
             }
 
-            $results = array_slice($results, 0, 100);
+            $results = array_slice( $results, 0, 100 );
 
             $this->response( $results, 200 );
         } else {
@@ -429,6 +442,201 @@ class Api extends REST_Controller {
         }
 
         $this->response( $this->_error( 'Fields are not valid' ), 404 );
+    }
+
+    public function schem_get() {
+        ini_set( 'memory_limit', '1024M' );
+
+        if ( in_array( $this->get( 'category' ), array( 'smartphones', 'tablets', 'cameras' ) ) ) {
+            $category = $this->get( 'category' );
+
+            $this->load->model( 'icecat_m' );
+
+
+            if ( file_exists( 'temp/'.$category.'/template.html' ) ) {
+                $arr = unserialize( file_get_contents( 'temp/'.$category.'/template.html' ) );
+            }
+
+            if ( !isset( $arr ) ) {
+                $arr = $this->icecat_m->getTemplateByCategory( $category );
+                file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
+            }
+
+            foreach ( $arr as &$specs ) {
+                foreach ( $specs as &$options ) {
+                    usort( $options, array( $this, '_compareRef' ) );
+                }
+            }
+
+            $this->response( $arr, 200 );
+
+
+        } else {
+
+        }
+        $this->response( $this->_error( 'No schem for this category' ), 404 );
+    }
+
+    private function _compareRef( $a, $b ) {
+        return strnatcmp( $a, $b );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function compare_get() {
+        $this->load->model( array( 'icecat_m' ) );
+
+        $p1 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->get( 'product1' ) ), array( $this->get( 'category' ) ) );
+        $p2 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->get( 'product2' ) ), array( $this->get( 'category' ) ) );
+
+        if ( $p1 && $p2 ) {
+            $arr = $this->_compare( $p1['_id']->__toString(), $p2['_id']->__toString(), $this->get( 'category' ) );
+            //$arr = array($p1,$p2);
+            $this->response( $arr, 200 );
+        } else {
+            $this->response( $this->_error( 'No products found to compare' ), 404 );
+        }
+    }
+
+    private function _compare( $id1, $id2, $category = 'smartphones' ) {
+        ini_set( 'memory_limit', '1024M' );
+
+
+        $this->load->model( 'icecat_m' );
+
+
+        if ( file_exists( 'temp/'.$category.'/template.html' ) ) {
+            $arr = unserialize( file_get_contents( 'temp/'.$category.'/template.html' ) );
+        }
+
+        if ( !isset( $arr ) ) {
+            $arr = $this->icecat_m->getTemplateByCategory( $category );
+            file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
+        }
+
+        $product1 = $this->icecat_m->getProductById($id1);
+        $product2 = $this->icecat_m->getProductById($id2);
+
+        $data = array(
+            'product1_id' => $product1['_id']->__toString(),
+            'product1_name' => $product1['name'],
+            'product1_category' => $product1['category'],
+            'product1_company' => $product1['company'],
+            'product1_image' => $this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] ),
+
+            'product2_id' => $product2['_id']->__toString(),
+            'product2_name' => $product2['name'],
+            'product2_category' => $product2['category'],
+            'product2_company' => $product2['company'],
+            'product2_image' => $this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] ),
+
+            'features' => array()
+        );
+
+
+        foreach ( $arr as $feature => $specs ) {
+            if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
+                $data['features'][$feature] = array();
+            }
+
+            foreach ( $specs as $spec => $options ) {
+                usort( $options, array( $this, '_compareRef' ) );
+
+
+                if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
+                    $data['features'][$feature][$spec] = array();
+
+                    $options1 = $options2 = array();
+
+                    if ( isset( $product1['features'][$feature][$spec] ) ) {
+                        if ( !is_array( $product1['features'][$feature][$spec] ) ) {
+                            $data['features'][$feature][$spec][] = array( 'option' => $product1['features'][$feature][$spec], 'color' => $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ) );
+                        } else {
+                            $options1 = $product1['features'][$feature][$spec];
+                        }
+                    } else {
+                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                    }
+
+                    if ( isset( $product2['features'][$feature][$spec] ) ) {
+                        if ( !is_array( $product2['features'][$feature][$spec] ) ) {
+                            $data['features'][$feature][$spec][] = array( 'option' => $product2['features'][$feature][$spec], 'color' => $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ) );
+                        } else {
+                            $options2 = $product2['features'][$feature][$spec];
+                        }
+                    } else {
+                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                    }
+
+                    $this->_options( $options, $options1, $options2, $data['features'][$feature][$spec] );
+
+                }
+
+            }
+        }
+
+        return $data;
+
+    }
+
+    private function _color( $p_pos, $p_count ) {
+        $p_count = $p_count == 1 ? 2 : $p_count;
+        $percentage = $p_pos * ( 1/( $p_count-1 ) );
+
+        // echo $percentage.'<br/>';
+
+        if ( $percentage < 0.5 ) {
+            // echo floor( 255 * $percentage * 2 ).'<br/>';
+            $color = 'rgb(255,'.floor( 255 * $percentage * 2 ).',0)';
+        }else {
+            // echo floor( 255 * ( $percentage * 2 - 1 ) ).'<br/>';
+            $color = 'rgb('.( 255 - floor( 255 * ( $percentage * 2 - 1 ) ) ).',255,0)';
+        }
+
+        return $color;
+    }
+
+    private function _options( $options, $options1, $options2, &$arr ) {
+        $o1 = $o2 = array();
+        foreach ( $options as $key => $option ) {
+            if ( in_array( $option, $options1 ) || in_array( $option, $options2 ) ) {
+                if ( in_array( $option, $options1 ) ) {
+                    $o1[] =  array( 'option' => $option, 'color' => $this->_color( count( $options1 )-1, count( $options ) ) );
+                } else {
+                    $o1[] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                }
+
+                if ( in_array( $option, $options2 ) ) {
+                    $o2[] =  array( 'option' => $option, 'color' => $this->_color( count( $options2 )-1, count( $options ) ) );
+                } else {
+                    $o2[] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                }
+            }
+        }
+        if ( count( $options1 ) > 0 )
+            $arr[] = $o1;
+        if ( count( $options2 ) > 0 )
+            $arr[] = $o2;
     }
 }
 
