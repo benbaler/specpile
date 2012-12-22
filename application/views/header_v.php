@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width" />
 	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
 
-	<meta name="description" content="Specpile is the place to search and compare gadgets by specification">
+	<meta name="description" content="Specpile is the place to search and compare products by specifications">
 	<meta name="keywords" content="specs, specifications, products specs, products details, products catalog, products compare, iphone vs android, iphone vs galaxy s3, smartphones specs, cell phones specs, cameras specs, tablets specs, specpile">
 
 	<title><?= $title ?></title>
