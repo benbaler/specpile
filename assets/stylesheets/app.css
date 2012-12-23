@@ -299,9 +299,14 @@
          .product-compare .four{
             border-bottom: 1px solid whitesmoke;
             margin:0px;
-            padding:5px;
+            padding:0px;
             text-align: center;
          }
+
+         .product-compare .four div{
+            padding:5px;
+         }
+
          /*div > .four{
             border-bottom: 1px solid whitesmoke;
             /*height: 100% !important;*/
