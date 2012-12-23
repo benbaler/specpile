@@ -348,7 +348,7 @@ class Product extends CI_Controller {
 							$color = $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) );
 							$rating = round($this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) )).'%';
 							// die($rating);
-							$o2 = '<div class="four mobile-two columns"><div style="width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product2['features'][$feature][$spec] ).'</div></div>';
+							$o2 = '<div class="four mobile-two columns"><div style="text-align:left;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product2['features'][$feature][$spec] ).'</div></div>';
 							// $options2 = array( $product2['features'][$feature][$spec] );
 						} else {
 							$options2 = $product2['features'][$feature][$spec];
@@ -494,7 +494,7 @@ class Product extends CI_Controller {
 				}
 			}
 			if ( count( $options1 ) > 0 ) echo '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$this->_rating( count( $options1 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options1 )-1, count( $options ) ).';">'.implode('',$o1).'</div></div>';
-			if ( count( $options2 ) > 0 ) echo '<div class="four mobile-two columns"><div style="width:'.$this->_rating( count( $options2 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options2 )-1, count( $options ) ).';">'.implode('',$o2).'</div></div>';
+			if ( count( $options2 ) > 0 ) echo '<div class="four mobile-two columns"><div style="text-align:left;width:'.$this->_rating( count( $options2 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options2 )-1, count( $options ) ).';">'.implode('',$o2).'</div></div>';
 		//}
 	}
 

@@ -297,9 +297,16 @@
          }
 
          .product-compare .four{
-            background-color: whitesmoke;
-            /*text-align: center;*/
+            border-bottom: 1px solid whitesmoke;
+            margin:0px;
+            padding:5px;
+            text-align: center;
          }
+         /*div > .four{
+            border-bottom: 1px solid whitesmoke;
+            /*height: 100% !important;*/
+            /*width: 100%;*/
+         }*/
 
          .product-compare .row .four:first-child{
             text-align: left !important;
