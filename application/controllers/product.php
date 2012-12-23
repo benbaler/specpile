@@ -394,7 +394,7 @@ class Product extends CI_Controller {
 		echo '</div>';
 
 ?>
-		    <div class="row">
+<!-- 		    <div class="row">
   <div class="twelve mobile-four columns">
 
     <div id="disqus_thread"></div>
@@ -412,35 +412,14 @@ class Product extends CI_Controller {
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
-</div>
+</div> -->
 
-		<!-- <div class="row">
+		<div class="row">
 		<div class="twelve columns">
-		<div class="fb-comments" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="470" data-num-posts="5"></div>
+		<div class="fb-comments" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="430" data-num-posts="5"></div>
 		</div>
-		</div> -->
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-		<script>
-			// $(function() {
-			// 	$('[rating]').each(function(){
-			// 		var rating = $(this).attr('rating');
-			// 		var color = $(this).attr('color');
-			// 		console.log(color);
-			// 		var text = $(this).html();
-			// 		//console.log(rating);
-			// 		$(this).html('').append('<div class="progressbar"></div>');
-			// 		$('.progressbar',this).progressbar({
-			//             value: Math.round( rating * 10 ) / 10
-			//         }).children('.ui-progressbar-value').css('background', color).html(text).css({
-			//         	'text-align':'center',
-			//         	'vertical-align': 'middle !important',
-			//         	'height': '100%'
-			//         });
-			// 	});
-		 //    });
-		</script>
+		</div>
+		
 
 		<?php
 

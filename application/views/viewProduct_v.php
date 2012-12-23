@@ -99,8 +99,8 @@ window.productData = <?= json_encode($product) ?>;
 </div>
 </div>
 
-    
-    <div class="row">
+
+<!--     <div class="row">
   <div class="twelve mobile-four columns">
     
     <div id="disqus_thread"></div>
@@ -118,10 +118,10 @@ window.productData = <?= json_encode($product) ?>;
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
-</div>
+  </div> -->
 
-<!-- <div class="row">
-  <div class="twelve columns">
-<div class="fb-comments" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="470" data-num-posts="5"></div>
-</div>
-</div> -->
+  <div class="row">
+    <div class="twelve columns">
+      <div class="fb-comments" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="430" data-num-posts="5"></div>
+    </div>
+  </div>
