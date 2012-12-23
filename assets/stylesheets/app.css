@@ -275,7 +275,9 @@
          }
 
          .specs-option div:nth-child(n+1){
-            background-color: whitesmoke !important;
+            /*background-color: whitesmoke !important;*/
+            border-bottom: 1px solid whitesmoke;
+
             line-height: 25px;
          }
 
@@ -284,6 +286,7 @@
             background: -o-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
             background: -ms-linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
             background: linear-gradient(top, #E0E0E0 0%,whitesmoke 70%);
+            height:45px !important;
 
             border: 0px !important;
 
