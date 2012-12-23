@@ -330,29 +330,45 @@ class Product extends CI_Controller {
 
 					if ( isset( $product1['features'][$feature][$spec] ) ) {
 						if ( !is_array( $product1['features'][$feature][$spec] ) ) {
-							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ).';">'.ucwords( $product1['features'][$feature][$spec] ).'</div>';
+							$color = $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) );
+							$rating = round($this->_rating( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) )).'%';
+							// die($rating);
+							$o1 = '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product1['features'][$feature][$spec] ).'</div></div>';
 							// $options1 = array( $product1['features'][$feature][$spec] );
 						} else {
 							$options1 = $product1['features'][$feature][$spec];
 							//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product1['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product1['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
-						echo '<div class="four mobile-two columns">-</div>';
+						$o1 = '<div class="four mobile-two columns">-</div>';
 					}
 
 					if ( isset( $product2['features'][$feature][$spec] ) ) {
 						if ( !is_array( $product2['features'][$feature][$spec] ) ) {
-							echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ).';">'.ucwords( $product2['features'][$feature][$spec] ).'</div>';
+							$color = $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) );
+							$rating = round($this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) )).'%';
+							// die($rating);
+							$o2 = '<div class="four mobile-two columns"><div style="width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product2['features'][$feature][$spec] ).'</div></div>';
 							// $options2 = array( $product2['features'][$feature][$spec] );
 						} else {
 							$options2 = $product2['features'][$feature][$spec];
 							//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product2['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product2['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
-						echo '<div class="four mobile-two columns">-</div>';
+						$o2 = '<div class="four mobile-two columns">-</div>';
 					}
 
+					if(isset($o1)){
+						echo $o1;
+						unset($o1);
+					}
+						
 					$this->_options( $options, $options1, $options2 );
+
+					if(isset($o2)){
+						echo $o2;
+						unset($o2);
+					}
 
 					echo '</div>';
 					echo '</div>';
@@ -403,9 +419,39 @@ class Product extends CI_Controller {
 		<div class="fb-comments" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="470" data-num-posts="5"></div>
 		</div>
 		</div> -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+		<script>
+			// $(function() {
+			// 	$('[rating]').each(function(){
+			// 		var rating = $(this).attr('rating');
+			// 		var color = $(this).attr('color');
+			// 		console.log(color);
+			// 		var text = $(this).html();
+			// 		//console.log(rating);
+			// 		$(this).html('').append('<div class="progressbar"></div>');
+			// 		$('.progressbar',this).progressbar({
+			//             value: Math.round( rating * 10 ) / 10
+			//         }).children('.ui-progressbar-value').css('background', color).html(text).css({
+			//         	'text-align':'center',
+			//         	'vertical-align': 'middle !important',
+			//         	'height': '100%'
+			//         });
+			// 	});
+		 //    });
+		</script>
+
 		<?php
 
 		echo $this->load->view( 'footer_v' , '', TRUE );
+	}
+
+	private function _rating( $p_pos, $p_count ) {
+		$p_count = $p_count == 1 ? 2 : $p_count;
+		$percentage = $p_pos * ( 1/( $p_count-1 ) );
+
+		return $percentage > 0.2 ? $percentage * 100 : 20;
 	}
 
 	private function _color( $p_pos, $p_count ) {
@@ -447,8 +493,8 @@ class Product extends CI_Controller {
 					}
 				}
 			}
-			if ( count( $options1 ) > 0 ) echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $options1 )-1, count( $options ) ).';"">'.implode('',$o1).'</div>';
-			if ( count( $options2 ) > 0 ) echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $options2 )-1, count( $options ) ).';"">'.implode('',$o2).'</div>';
+			if ( count( $options1 ) > 0 ) echo '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$this->_rating( count( $options1 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options1 )-1, count( $options ) ).';">'.implode('',$o1).'</div></div>';
+			if ( count( $options2 ) > 0 ) echo '<div class="four mobile-two columns"><div style="width:'.$this->_rating( count( $options2 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options2 )-1, count( $options ) ).';">'.implode('',$o2).'</div></div>';
 		//}
 	}
 

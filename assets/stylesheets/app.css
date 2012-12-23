@@ -298,7 +298,7 @@
 
          .product-compare .four{
             background-color: whitesmoke;
-            text-align: center;
+            /*text-align: center;*/
          }
 
          .product-compare .row .four:first-child{
