@@ -4,7 +4,7 @@
 </div>
 </div> -->
 
-<div class="row">
+<div class="row hide-for-medium-down">
 	<div class="twelve columns">
 <div class="row">
 	<div class="two centered columns">

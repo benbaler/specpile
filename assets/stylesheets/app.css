@@ -332,8 +332,8 @@
         }
         .twitter{
             position:relative;
-            top: 4px;
-            left:10px;
+            top: 6px;
+            left:20px;
         }
 
         .ui-autocomplete{
@@ -341,6 +341,12 @@
         }
         .button{
             z-index: 1;
+        }
+        .fb-like{
+            position:relative;
+            top:2px;
+            /*left:20px;*/
+            margin-left:20px;
         }
       /*.wall{
          clear: both;

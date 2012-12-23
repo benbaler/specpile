@@ -9,6 +9,8 @@
 
 			<ul class="left">
 				<!-- <li class="divider"></li> -->
+		
+				<!-- <li class="show-for-medium-down"><a href="https://play.google.com/store/apps/details?id=com.ben.com" target="_blank"><img src="/assets/images/android.png"/></a></li> -->
 				<li><div class="fb-like" data-href="https://www.facebook.com/specpile" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
 				<li><div class="twitter"><a href="https://twitter.com/specpile" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @specpile</a></div></li>
 			</ul>
