@@ -570,22 +570,22 @@ class Api extends REST_Controller {
 
                     if ( isset( $product1['features'][$feature][$spec] ) ) {
                         if ( !is_array( $product1['features'][$feature][$spec] ) ) {
-                            $data['features'][$feature][$spec][] = array( 'option' => $product1['features'][$feature][$spec], 'color' => $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ) );
+                            $data['features'][$feature][$spec][] = array( 'option' => $product1['features'][$feature][$spec], 'color' => $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ), 'rating' => $this->_rating( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ) );
                         } else {
                             $options1 = $product1['features'][$feature][$spec];
                         }
                     } else {
-                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke', 'rating' => 20 );
                     }
 
                     if ( isset( $product2['features'][$feature][$spec] ) ) {
                         if ( !is_array( $product2['features'][$feature][$spec] ) ) {
-                            $data['features'][$feature][$spec][] = array( 'option' => $product2['features'][$feature][$spec], 'color' => $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ) );
+                            $data['features'][$feature][$spec][] = array( 'option' => $product2['features'][$feature][$spec], 'color' => $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ), 'rating' => $this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ) );
                         } else {
                             $options2 = $product2['features'][$feature][$spec];
                         }
                     } else {
-                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                        $data['features'][$feature][$spec][] = array( 'option' => '-', 'color' => 'whitesmoke', 'rating' => 20 );
                     }
 
                     $this->_options( $options, $options1, $options2, $data['features'][$feature][$spec] );
@@ -598,6 +598,14 @@ class Api extends REST_Controller {
         return $data;
 
     }
+
+    private function _rating( $p_pos, $p_count ) {
+        $p_count = $p_count == 1 ? 2 : $p_count;
+        $percentage = $p_pos * ( 1/( $p_count-1 ) );
+
+        return $percentage > 0.2 ? round($percentage,2) * 100 : 20;
+    }
+
 
     private function _color( $p_pos, $p_count ) {
         $p_count = $p_count == 1 ? 2 : $p_count;
@@ -621,15 +629,15 @@ class Api extends REST_Controller {
         foreach ( $options as $key => $option ) {
             if ( in_array( $option, $options1 ) || in_array( $option, $options2 ) ) {
                 if ( in_array( $option, $options1 ) ) {
-                    $o1[] =  array( 'option' => $option, 'color' => $this->_color( count( $options1 )-1, count( $options ) ) );
+                    $o1[] =  array( 'option' => $option, 'color' => $this->_color( count( $options1 )-1, count( $options ) ) , 'rating' => $this->_rating( count( $options1 )-1, count( $options ) ) );
                 } else {
-                    $o1[] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                    $o1[] = array( 'option' => '-', 'color' => 'whitesmoke', 'rating' => '20' );
                 }
 
                 if ( in_array( $option, $options2 ) ) {
-                    $o2[] =  array( 'option' => $option, 'color' => $this->_color( count( $options2 )-1, count( $options ) ) );
+                    $o2[] =  array( 'option' => $option, 'color' => $this->_color( count( $options2 )-1, count( $options ) ) , 'rating' => $this->_rating( count( $options2 )-1, count( $options ) ) );
                 } else {
-                    $o2[] = array( 'option' => '-', 'color' => 'whitesmoke' );
+                    $o2[] = array( 'option' => '-', 'color' => 'whitesmoke', 'rating' => '20'  );
                 }
             }
         }

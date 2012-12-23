@@ -430,7 +430,7 @@ class Product extends CI_Controller {
 		$p_count = $p_count == 1 ? 2 : $p_count;
 		$percentage = $p_pos * ( 1/( $p_count-1 ) );
 
-		return $percentage > 0.2 ? $percentage * 100 : 20;
+		return $percentage > 0.2 ? round($percentage,2) * 100 : 20;
 	}
 
 	private function _color( $p_pos, $p_count ) {
