@@ -405,6 +405,15 @@ class Home extends CI_Controller {
 	
 	}
 
+	public function bing($p_query)
+	{
+		$this->load->model('bing_m');
+		$images = $this->bing_m->getPhotosByText(urldecode($p_query),10);
+		foreach ($images as $image) {
+			echo '<img src="'.$image.'"/>';
+		}
+	}
+
 }
 
 /* End of file page.php */

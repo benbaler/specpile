@@ -11,7 +11,7 @@ class Bing_m extends CI_Model {
 		$query = urlencode("'{$p_query}'");
 		$serviceOp = 'Image'; //'Web';
 
-		$requestUri = "{$this->rootUri}/$serviceOp?\$format=json&Query=$query&\$top=$p_limit&ImageFilters=%27Size%3aSmall%27";
+		$requestUri = "{$this->rootUri}/$serviceOp?\$format=json&Query=$query&\$top=$p_limit&ImageFilters=%27Size%3aLarge%27";
 
 		$auth = base64_encode( "{$this->acctKey}:{$this->acctKey}" );
 
@@ -30,12 +30,13 @@ class Bing_m extends CI_Model {
 		$resultStr = array();
 
 		foreach ( $jsonObj->d->results as $value ) {
+			$resultStr[] = $value->MediaUrl;
 			switch ( $value->__metadata->type ) {
 			//case 'WebResult': $resultStr .= "<a href=\"{$value->Url}\">{$value->Title}</a><p>{$value->Description}</p>";
 			//	break;
 			case 'ImageResult': 
 				//$resultStr .= "<h4>{$value->Title} ({$value->Width}x{$value->Height}) " . "{$value->FileSize} bytes)</h4>" . "<a href=\"{$value->MediaUrl}\">" . "<img src=\"{$value->Thumbnail->MediaUrl}\"></a><br />";
-				$resultStr[] = $value->Thumbnail->MediaUrl;
+				//$resultStr[] = $value->Thumbnail->MediaUrl;
 				break;
 			}
 		}
