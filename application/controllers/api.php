@@ -114,8 +114,12 @@ class Api extends REST_Controller {
         $this->load->model( 'icecat_m' );
 
         $category = $this->get( 'category' ) ? array( $this->get( 'category' ) ) : array( 'smartphones', 'tablets', 'cameras' );
-
+        
         $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'term' ) ) ) , 20, $category );
+        // echo $this->get('term');
+        // echo str_replace( '+', '.*', urldecode($this->get( 'term' ) ) );
+        // $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '+', '\+', $this->get( 'term' ) ) ) , 20, $category );
+        // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace($this->get( 'term' )) , 20, $category );
 
         if ( $products ) {
             $names = array();
@@ -149,6 +153,7 @@ class Api extends REST_Controller {
         $this->load->model( 'icecat_m' );
 
         $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 5000 );
+        // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace( $this->get( 'query' ) ), 5000 );
 
         if ( $products ) {
             $results = array();
@@ -645,6 +650,21 @@ class Api extends REST_Controller {
             $arr[] = $o1;
         if ( count( $options2 ) > 0 )
             $arr[] = $o2;
+    }
+
+    private function _str_replace($p_str)
+    {
+        // $from = array(
+        //     '(', ')', '+','"'
+        // );
+
+        // $to = array(
+        //     '.*', '.*', '.*', '\"'
+        // );
+
+        // // die(str_replace($from, $to, html_entity_decode(urldecode($p_str))));
+        // return str_replace($from, $to, html_entity_decode(urldecode($p_str)));
+        return html_entity_decode(urldecode($p_str));
     }
 }
 

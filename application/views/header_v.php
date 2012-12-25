@@ -31,6 +31,8 @@
 	<!-- <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
 	<!-- <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'> -->
 	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'> -->
 
 	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
 

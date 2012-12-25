@@ -217,17 +217,11 @@
            }
          }
 
-         .logo-png:hover {
+         .logo-png:hover, .mobile-logo-png:hover {
            -webkit-animation: wiggle .5s ease-in-out alternate;
            -moz-animation: wiggle .5s ease-in-out alternate;
-           -ms-animation: wiggle .5s ease-in-out alternate
-         }
-
-         .logo-png:hover{
-           opacity: .8;
-           -ms-filter: "alpha(opacity=80)";
-           filter: alpha(opacity=80)
-         }
+           -ms-animation: wiggle .5s ease-in-out alternate;
+        }
 
          .logo:hover{
             transform:rotate(3deg) scale(0.9);
@@ -243,6 +237,11 @@
             left: -10px;*/
          }
 
+         .mobile-logo-png{
+            height: 45px;
+            width: 45px;
+         }
+
          body, h1, h2, h3, h4, h5, a{
             /*font-family: 'Kite One', sans-serif;*/
             /*font-family: 'Sanchez', serif;*/
@@ -250,11 +249,16 @@
             /*font-family: 'Trocchi', serif;*/
 
             font-family: 'Varela', sans-serif;
+            /*font-family: 'Droid Sans', sans-serif;*/
+            /*font-family: 'Nunito', sans-serif;*/
+            /*letter-spacing: 1px;*/
+            /*word-spacing: 1px;*/
          }
 
          body{
             /*background: url('/assets/images/wall.png') no-repeat center center fixed; */
-            background-color: #585858;
+            /*background-color: #585858;*/
+            background: url('/assets/images/noise-f1.gif') repeat; 
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;

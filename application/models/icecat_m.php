@@ -158,6 +158,11 @@ class Icecat_m extends CI_Model {
 		return '/'.$imgUrl;
 	}
 
+	public function getProducts()
+	{
+		return $this->mongo_db->get($this->collection);
+	}
+
 
 	private function _get( $p_values, $p_key = '_id' ) {
 		if ( is_array( $p_values ) ) {

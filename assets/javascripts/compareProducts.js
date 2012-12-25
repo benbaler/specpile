@@ -65,7 +65,7 @@ head.js('/assets/javascripts/libs/jquery.js',
                 var c = $('#category option:selected').val();
 
                 if(p1 && p2){
-                    location.href = '/product/compare/'+c+'/'+p1+'/'+p2;
+                    location.href = '/product/compare/'+c+'/'+encodeURIComponent(p1)+'/'+encodeURIComponent(p2);
                 }
                 return false;
             });

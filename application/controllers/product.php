@@ -144,8 +144,8 @@ class Product extends CI_Controller {
 		if ( $this->uri->segment( 3 ) && $this->uri->segment( 4 ) && $this->uri->segment( 5 ) ) {
 			//$chr = array('/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}'/*, '\\'*/);
 			
-			$product1 = str_replace('','',urldecode($this->uri->segment( 4 )));
-			$product2 = str_replace('','',urldecode($this->uri->segment( 5 )));
+			$product1 = urldecode($this->uri->segment( 4 ));
+			$product2 = urldecode($this->uri->segment( 5 ));
 			
 			$p1 = $this->icecat_m->getProductByNameAndCategory( $product1, array( $this->uri->segment( 3 ) ) );
 			$p2 = $this->icecat_m->getProductByNameAndCategory( $product2, array( $this->uri->segment( 3 ) ) );

@@ -414,6 +414,25 @@ class Home extends CI_Controller {
 		}
 	}
 
+	public function test9()
+	{
+		ini_set('memory_limit', '1024M');
+		$this->load->model('icecat_m');
+		$products = $this->icecat_m->getProducts('icecat_products');
+		foreach ($products as $product) {
+			$name = $this->_str_replace($product['name']);
+			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('name' => $name))->update('icecat_products');
+		}
+	}
+
+	private function _str_replace($p_str){
+		$from = array('+', '(', ')', '/', ':', ';', '.','"');
+		$to = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+
+		$str = explode(',',str_replace($from, $to, $p_str));
+
+		return str_replace('/\s+/', ' ', word_limiter($str[0],7,''));
+	}
 }
 
 /* End of file page.php */
