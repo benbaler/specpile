@@ -19,6 +19,10 @@
           </select>
         </div>
 
+        <div class="four mobile-four columns show-for-medium-down">
+          &nbsp;
+        </div>
+
         <div class="four mobile-four columns">
           <input type="text" name="product1" id="product1" placeholder="Type First Product"/>
         </div>
