@@ -142,9 +142,13 @@ class Product extends CI_Controller {
 		$this->load->model( array( 'icecat_m' ) );
 
 		if ( $this->uri->segment( 3 ) && $this->uri->segment( 4 ) && $this->uri->segment( 5 ) ) {
-
-			$p1 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->uri->segment( 4 ) ), array( $this->uri->segment( 3 ) ) );
-			$p2 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->uri->segment( 5 ) ), array( $this->uri->segment( 3 ) ) );
+			//$chr = array('/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}'/*, '\\'*/);
+			
+			$product1 = str_replace('','',urldecode($this->uri->segment( 4 )));
+			$product2 = str_replace('','',urldecode($this->uri->segment( 5 )));
+			
+			$p1 = $this->icecat_m->getProductByNameAndCategory( $product1, array( $this->uri->segment( 3 ) ) );
+			$p2 = $this->icecat_m->getProductByNameAndCategory( $product2, array( $this->uri->segment( 3 ) ) );
 
 			// var_dump($p1,$p2);
 			if ( !$p1 || !$p2 ) {
@@ -230,6 +234,10 @@ class Product extends CI_Controller {
             <option value="tablets" <?php echo $category == 'tablets' ? 'SELECTED' : ''?>>Tablets</option>
             <option value="cameras" <?php echo $category == 'cameras' ? 'SELECTED' : ''?>>Cameras</option>
           </select>
+        </div>
+
+        <div class="four mobile-four columns show-for-medium-down">
+          &nbsp;
         </div>
 
         <div class="four mobile-four columns">
