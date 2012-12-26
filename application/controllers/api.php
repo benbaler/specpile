@@ -81,21 +81,6 @@ class Api extends REST_Controller {
         $product = $this->icecat_m->getProductById( $this->get( 'id' ) );
 
         if ( $product ) {
-
-            // $product['name'] = ucwords($product['name']);
-            // $product['company'] = ucwords($product['company']);
-            // $product['category'] = ucwords($product['category']);
-
-            $feaures = array();
-
-            foreach($product['features'] as $specs){
-                foreach ($specs as $spec => $option) {
-                    $features[ucwords($spec)] = ucwords($option);
-                }
-            }
-
-            //$product['features'] = $features;
-
             $this->response( $product, 200 );
         }
         else {
