@@ -82,7 +82,9 @@ class Api extends REST_Controller {
 
         if ( $product ) {
             $product['name'] = ucwords($product['name']);
-            
+            $product['company'] = ucwords($product['company']);
+            $product['category'] = ucwords($product['category']);
+
             $this->response( $product, 200 );
         }
         else {
