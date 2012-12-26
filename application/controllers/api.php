@@ -85,16 +85,16 @@ class Api extends REST_Controller {
             $product['company'] = ucwords($product['company']);
             $product['category'] = ucwords($product['category']);
 
-            $features = array();
+            // $features = array();
 
-            foreach ($product['features'] as $key => $specs) {
-                    $features[ucwords($key)] = array();
-                foreach ($specs as $spec => $option) {
-                    $features[ucwords($key)][ucwords($spec)] = ucwords($option);
-                }
-            }
+            // foreach ($product['features'] as $key => $specs) {
+            //         $features[ucwords($key)] = array();
+            //     foreach ($specs as $spec => $option) {
+            //         $features[ucwords($key)][ucwords($spec)] = ucwords($option);
+            //     }
+            // }
 
-            $product['features'] = $features;
+            // $product['features'] = $features;
 
             $this->response( $product, 200 );
         }
