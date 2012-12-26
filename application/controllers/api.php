@@ -81,6 +81,21 @@ class Api extends REST_Controller {
         $product = $this->icecat_m->getProductById( $this->get( 'id' ) );
 
         if ( $product ) {
+
+            $product['name'] = ucwords($product['name']);
+            $product['company'] = ucwords($product['company']);
+            $product['category'] = ucwords($product['category']);
+
+            $feaures = array();
+
+            foreach($product['features'] as $specs){
+                foreach ($specs as $spec => $option) {
+                    $features[ucwords($spec)] = ucwords($option);
+                }
+            }
+
+            $product['features'] = $features;
+
             $this->response( $product, 200 );
         }
         else {
@@ -162,7 +177,7 @@ class Api extends REST_Controller {
                 $flag = false;
 
                 foreach ( $results as $p ) {
-                    if ( $p['name'] == ucwords( character_limiter( $product['name'], 15 ) ) ) {
+                    if ( $p['name'] == ucwords( character_limiter( html_entity_decode($product['name'], 15 )) ) ) {
                         $flag = true;
                     }
                 }
@@ -170,7 +185,7 @@ class Api extends REST_Controller {
                 if ( $flag == false ) {
                     $results[] = array(
                         '_id' => $product['_id']->__toString(),
-                        'name' => ucwords( character_limiter( $product['name'], 15 ) ),
+                        'name' => ucwords( character_limiter( html_entity_decode($product['name'], 15 )) ),
                         'category_name' => ucwords( $product['category'] ),
                         'brand_name' => ucwords( $product['company'] ),
                         'image' => $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] )
