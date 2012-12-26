@@ -177,7 +177,7 @@ class Api extends REST_Controller {
                 $flag = false;
 
                 foreach ( $results as $p ) {
-                    if ( $p['name'] == ucwords( character_limiter( ($product['name'], 15 )) ) ) {
+                    if ( $p['name'] == ucwords( character_limiter( $product['name'], 15 ) ) ) {
                         $flag = true;
                     }
                 }
@@ -185,7 +185,7 @@ class Api extends REST_Controller {
                 if ( $flag == false ) {
                     $results[] = array(
                         '_id' => $product['_id']->__toString(),
-                        'name' => ucwords( character_limiter( ($product['name'], 15 )) ),
+                        'name' => ucwords( character_limiter( $product['name'], 15 ) ),
                         'category_name' => ucwords( $product['category'] ),
                         'brand_name' => ucwords( $product['company'] ),
                         'image' => $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] )
