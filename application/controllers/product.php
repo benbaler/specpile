@@ -236,7 +236,7 @@ class Product extends CI_Controller {
           </select>
         </div>
 
-        <div class="four mobile-four columns show-for-medium-down">
+        <div class="four mobile-four columns show-for-small">
           &nbsp;
         </div>
 
