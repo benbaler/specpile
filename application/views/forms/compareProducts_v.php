@@ -19,7 +19,7 @@
           </select>
         </div>
 
-        <div class="four mobile-four columns show-for-medium-down">
+        <div class="two mobile-four columns show-for-small">
           &nbsp;
         </div>
 
