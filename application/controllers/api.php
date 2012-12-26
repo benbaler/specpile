@@ -94,7 +94,7 @@ class Api extends REST_Controller {
                 }
             }
 
-            $product['features'] = $features;
+            //$product['features'] = $features;
 
             $this->response( $product, 200 );
         }
