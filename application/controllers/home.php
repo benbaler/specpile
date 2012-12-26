@@ -26,7 +26,7 @@ class Home extends CI_Controller {
 		$data = array(
 			'app' => 'home',
 			'categories' => $this->categories_m->getListOfNames(),
-			'title' => 'Specpile',
+			'title' => 'Specpile | Search and Compare Products Specifications',
 			//'images' => $images
 		);
 
