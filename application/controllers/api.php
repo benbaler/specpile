@@ -85,6 +85,16 @@ class Api extends REST_Controller {
             $product['company'] = ucwords($product['company']);
             $product['category'] = ucwords($product['category']);
 
+            $features = array();
+
+            foreach ($product['features'] as $specs) {
+                foreach ($specs as $spec => $option) {
+                    $features[ucwords($spec)] = ucwords($option);
+                }
+            }
+
+            $product['features'] = $features;
+
             $this->response( $product, 200 );
         }
         else {
