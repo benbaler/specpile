@@ -81,6 +81,8 @@ class Api extends REST_Controller {
         $product = $this->icecat_m->getProductById( $this->get( 'id' ) );
 
         if ( $product ) {
+            $product['name'] = ucwords($product['name']);
+            
             $this->response( $product, 200 );
         }
         else {
