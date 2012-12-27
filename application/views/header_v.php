@@ -9,19 +9,8 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
                   website: http://ogp.me/ns/website#">
 
-	<meta name="viewport" content="width=device-width" />
-	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
-
-	<meta name="description" content="Specpile is the place to search and compare products by specifications">
-	<meta name="keywords" content="specs, specifications, products specs, products details, products catalog, products compare, iphone vs android, iphone vs galaxy s3, smartphones specs, cell phones specs, cameras specs, tablets specs, specpile">
-
-	<title><?= $title ?></title>
-
-	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
-	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
-
 	<meta property="fb:app_id" content="192299124240358"> 
-	
+
 	<meta property="og:title" content="<?= $title ?>"/>
     <meta property="og:type" content="website"/>
 
@@ -36,6 +25,18 @@
     <meta property="og:description"
           content="<?= $desc ?>"/>
 	<?php endif; ?>
+	
+	<meta name="viewport" content="width=device-width" />
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
+
+	<meta name="description" content="Specpile is the place to search and compare products by specifications">
+	<meta name="keywords" content="specs, specifications, products specs, products details, products catalog, products compare, iphone vs android, iphone vs galaxy s3, smartphones specs, cell phones specs, cameras specs, tablets specs, specpile">
+
+	<title><?= $title ?></title>
+
+	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
+	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
+
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
