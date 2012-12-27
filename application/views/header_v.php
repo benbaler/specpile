@@ -20,6 +20,8 @@
 	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
 	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
 
+	<meta property="fb:app_id" content="192299124240358"> 
+	
 	<meta property="og:title" content="<?= $title ?>"/>
     <meta property="og:type" content="website"/>
 
