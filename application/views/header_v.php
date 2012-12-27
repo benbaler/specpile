@@ -5,7 +5,10 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 
 <html>
-<head>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
+                  website: http://ogp.me/ns/website#">
+
 	<meta name="viewport" content="width=device-width" />
 	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
 
@@ -17,7 +20,20 @@
 	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
 	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
 
-	
+	<meta property="og:title" content="<?= $title ?>"/>
+    <meta property="og:type" content="website"/>
+
+    <?php if(isset($images)) : ?>
+    <?php foreach ($images as $image) : ?>
+	    <meta property="og:image" content="<?= base_url($image) ?>"/>
+	<?php endforeach; ?>
+    <?php endif; ?>
+    <meta property="og:site_name" content="Specpile"/>
+
+    <?php if(isset($desc)) : ?>
+    <meta property="og:description"
+          content="<?= $desc ?>"/>
+	<?php endif; ?>
 	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
 	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">

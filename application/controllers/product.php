@@ -205,7 +205,10 @@ class Product extends CI_Controller {
 
 		$data = array(
 			'app' => 'compareProducts',
-			'title' => ucwords( $product1['company'] ).' '.ucwords( $product1['name'] ).' vs '.ucwords( $product2['company'] ).' '.ucwords( $product2['name'] )
+			'title' => ucwords( $product1['company'] ).' '.ucwords( $product1['name'] ).' vs '.ucwords( $product2['company'] ).' '.ucwords( $product2['name'] ),
+			'images' => array($this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] ),
+				$this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] )),
+			//'desc' => ucwords($product1['company'].' '.$product1['name'].' vs '.$product2['company'].' '.$product2['name'])
 		);
 
 		echo $this->load->view( 'header_v', $data, TRUE );
