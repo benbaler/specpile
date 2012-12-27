@@ -30,7 +30,7 @@ class Linkman extends CI_Controller {
 		//config
 		$name = "specpile";
 		$email = "team@specpile.com";
-		$title = "Specpile - Search and Compare Products Specifications";
+		$title = "Specpile Search & Compare Products Specifications";
 		$site_url = "http://specpile.com";
 		$recurl = "http://specpile.com/linkman";
 		$description = "Specpile is the place for searching and comparing products by specifications like smart phones, tablets and digital cameras";
