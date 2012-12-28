@@ -163,7 +163,7 @@ class Product extends CI_Controller {
 		} else {
 			$data = array(
 				'app' => 'compareProducts',
-				'title' => 'Compare products'
+				'title' => 'Specpile | Compare Products Specifications'
 			);
 
 			$user = $this->_user();
