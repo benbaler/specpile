@@ -36,9 +36,9 @@
 			<li><a href="/">Search</a></li>
 			<li><a href="/product/compare">Compare</a></li>
 
-			<li><a href="/user/signup">Signup</a></li>
+			<!-- <li><a href="/user/signup">Signup</a></li> -->
 			<!-- <li class="divider"></li> -->
-			<li><a href="/user/login">Login</a></li>
+			<!-- <li><a href="/user/login">Login</a></li> -->
 
 		</ul>
 

@@ -74,7 +74,8 @@ class Product extends CI_Controller {
 		$data = array(
 			'app' => 'viewProduct',
 			'product' => $product,
-			'title' => ucwords( $product['company'] ).' '.ucwords( $product['name'] )
+			'title' => ucwords( $product['company'] ).' '.ucwords( $product['name'] ).' Specifications',
+			'images' => array($product['image'])
 		);
 
 		$user = $this->_user();
