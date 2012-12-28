@@ -6,7 +6,7 @@ class Linkman extends CI_Controller {
 		echo file_get_contents( 'temp/links.html' );
 	}
 
-	public function backlinks() {
+	public function backlinks($p_url) {
 ?>
 			<form method="post" action="">
 			<input type="text" name="url">
@@ -15,13 +15,13 @@ class Linkman extends CI_Controller {
 
 			<?php
 		//return if no post or invalide url
-		if ( !isset( $_POST['url'] ) || !filter_var( $_POST['url'], FILTER_VALIDATE_URL ) ) {
+		if ( (!isset( $_POST['url'] ) || !filter_var( $_POST['url'], FILTER_VALIDATE_URL )) && !isset($p_url)) {
 			return;
 		}
 
 		//url
-		$url = $_POST['url'];
-		$referer = $_POST['url'];
+		$url = isset($_POST['url']) ? $_POST['url'] : $p_url;
+		$referer = isset($_POST['url']) ? $_POST['url'] : $p_url;
 
 		$post_to = "";
 		$link = "";
@@ -171,6 +171,19 @@ if(isset($match[1])){
 
 		return;
 		//file_put_contents('temp/links.html', $this->input->post('affiliate'), FILE_APPEND);
+	}
+
+	public function hotbot($p_page)
+	{
+			$this->load->model(array('scrap_m', 'icecat_m'));
+
+			$html = file_get_contents('http://www.hotbot.com/search/web?pn='.$p_page.'&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22');
+			
+			$links = $this->scrap_m->links($html);
+
+			foreach($links as $link){
+				$this->backlinks($link);
+			}
 	}
 
 }
