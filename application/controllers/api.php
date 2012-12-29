@@ -167,7 +167,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( 'icecat_m' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 5000 );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 500 );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace( $this->get( 'query' ) ), 5000 );
 
         if ( $products ) {

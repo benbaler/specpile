@@ -15,7 +15,7 @@ class Product extends CI_Controller {
 	}
 
 	public function cameras( $offest = 0 ) {
-		// ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '1024M');
 		$this->_sitemap( 'cameras', $offest );
 	}
 
