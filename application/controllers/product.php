@@ -309,7 +309,7 @@ class Product extends CI_Controller {
 		echo '<div class="four mobile-four columns">Model</div>';
 
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product1['name'] ).'</a></div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product2['name'] ).'</a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product2['_id']->__toString().'">'.ucwords( $product2['name'] ).'</a></div>';
 		echo '</div>';
 
 		// image
@@ -317,7 +317,7 @@ class Product extends CI_Controller {
 		echo '<div class="four mobile-four columns">Image</div>';
 
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product1['image'].'" class="product-large-image"/></a></div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product2['image'].'" class="product-large-image"/></a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product2['_id']->__toString().'"><img src="'.$product2['image'].'" class="product-large-image"/></a></div>';
 		echo '</div>';
 
 		echo '</div>';
