@@ -19,7 +19,7 @@ class Home extends CI_Controller {
 
 		$arr = array();
 		foreach ($searches as $search) {
-			if(count($arr) == 10) break;
+			if(count($arr) == 8) break;
 
 			$arr[] = character_limiter($search['query'],15,'');
 			$arr = array_unique($arr,SORT_REGULAR);

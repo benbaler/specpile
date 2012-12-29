@@ -173,7 +173,7 @@ class Product extends CI_Controller {
 
 			$arr = array();
 			foreach ($compares as $compare) {
-				if(count($arr) == 10) break;
+				if(count($arr) == 6) break;
 
 				$arr[] = array(
 					'product1' => $compare['product1'],//character_limiter($compare['product1'],15,''),
