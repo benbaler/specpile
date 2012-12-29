@@ -11,7 +11,7 @@ class Bing_m extends CI_Model {
 		$query = urlencode("'{$p_query}'");
 		$serviceOp = 'Image'; //'Web';
 
-		$requestUri = "{$this->rootUri}/$serviceOp?\$format=json&Query=$query&\$top=$p_limit&ImageFilters=%27Size%3aLarge%27";
+		$requestUri = "{$this->rootUri}/$serviceOp?\$format=json&Query=$query&\$top=$p_limit&ImageFilters=%27Size%3aSmall%27";
 
 		$auth = base64_encode( "{$this->acctKey}:{$this->acctKey}" );
 
