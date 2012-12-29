@@ -56,5 +56,11 @@ head.js('/assets/javascripts/libs/jquery.js',
                 return false;
             });
 
+            $('.latest-search').click(function(){
+                var term = $(this).attr('data-term');
+                $('#term').val(term);
+                $('#search').trigger('click');
+            });
+
         });
     });

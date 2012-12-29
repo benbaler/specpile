@@ -146,7 +146,7 @@ class Product extends CI_Controller {
 	}
 
 	public function compare() {
-		$this->load->model( array( 'icecat_m' ) );
+		$this->load->model( array( 'icecat_m', 'compare_m' ) );
 
 		if ( $this->uri->segment( 3 ) && $this->uri->segment( 4 ) && $this->uri->segment( 5 ) ) {
 			//$chr = array('/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}'/*, '\\'*/);
@@ -163,13 +163,32 @@ class Product extends CI_Controller {
 				die();
 			}
 
+			$this->compare_m->addCompare($p1['name'], $p1['image'], $p2['name'], $p2['image'], $this->uri->segment( 3 ));
 
 			$this->_compare( $p1['_id']->__toString(), $p2['_id']->__toString(), $this->uri->segment( 3 ) );
 
 		} else {
+
+			$compares = array_slice(array_reverse($this->compare_m->getAll()),0,10);
+
+			$arr = array();
+			foreach ($compares as $compare) {
+				if(count($arr) == 10) break;
+
+				$arr[] = array(
+					'product1' => $compare['product1'],//character_limiter($compare['product1'],15,''),
+					'product1_image' => $compare['product1_image'],//character_limiter($compare['product1'],15,''),
+					'product2' => $compare['product2'],//character_limiter($compare['product2'],15,''),
+					'product2_image' => $compare['product2_image'],//character_limiter($compare['product2'],15,''),
+					'category' => $compare['category']
+				);
+				$arr = array_unique($arr,SORT_REGULAR);
+			}
+
 			$data = array(
 				'app' => 'compareProducts',
-				'title' => 'Search and Compare Products Specifications | Specpile'
+				'title' => 'Search and Compare Products Specifications | Specpile',
+				'compares' => $arr
 			);
 
 			$user = $this->_user();

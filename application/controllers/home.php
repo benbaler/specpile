@@ -13,11 +13,22 @@ if ( !defined( 'BASEPATH' ) )
 class Home extends CI_Controller {
 
 	public function index() {
-		$this->load->model( array('icecat_m') );
+		$this->load->model( array('icecat_m', 'search_m') );
+
+		$searches = array_slice(array_reverse($this->search_m->getAll()),0,10);
+
+		$arr = array();
+		foreach ($searches as $search) {
+			if(count($arr) == 10) break;
+
+			$arr[] = character_limiter($search['query'],15,'');
+			$arr = array_unique($arr,SORT_REGULAR);
+		}
 
 		$data = array(
 			'app' => 'app',
-			'title' => 'Search and Compare Products Specifications | Specpile'
+			'title' => 'Search and Compare Products Specifications | Specpile',
+			'searches' => $arr
 		);
 
 		$this->load->view( 'header_v', $data );

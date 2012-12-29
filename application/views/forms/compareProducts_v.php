@@ -45,6 +45,22 @@
 
 <div class="row">
   <div class="twelve mobile-four columns">
-    <div  style="text-align: center;"><a href="/product/compare/smartphones/iphone%205/galaxy%20s%20iii"><img src="/assets/images/iphone5-galaxy-s3.jpg"/></a><div>
+    <h4>Latest Compares</h4>
   </div>
 </div>
+
+<div class="row">
+  <div class="twelve mobile-four columns">
+   <ul id="latest-panel" class="block-grid two-up mobile-one-up" style="text-align: center">
+   <?php foreach ($compares as $compare) : ?>
+    <li><a href="/product/compare/<?= $compare['category'] ?>/<?= urlencode($compare['product1']) ?>/<?= urlencode($compare['product2']) ?>"><?= $compare['product1'].'<img src="'.$compare['product1_image'].'" style="vertical-align:middle;"/>vs<img src="'.$compare['product2_image'].'" style="vertical-align:middle;"/>'.$compare['product2'] ?></a>&nbsp;&nbsp;&nbsp;&nbsp;</li> 
+  <?php endforeach; ?>
+  </ul>
+</div>
+</div>   
+
+<!-- <div class="row">
+  <div class="twelve mobile-four columns">
+    <div  style="text-align: center;"><a href="/product/compare/smartphones/iphone%205/galaxy%20s%20iii"><img src="/assets/images/iphone5-galaxy-s3.jpg"/></a><div>
+    </div>
+  </div> -->

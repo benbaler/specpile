@@ -165,7 +165,7 @@ class Api extends REST_Controller {
     }
 
     public function search_get() {
-        $this->load->model( 'icecat_m' );
+        $this->load->model( array('icecat_m','search_m') );
 
         $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 500 );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace( $this->get( 'query' ) ), 5000 );
@@ -192,6 +192,8 @@ class Api extends REST_Controller {
                     );
                 }
             }
+
+            $this->search_m->addSearch(urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ));
 
             $results = array_slice( $results, 0, 100 );
 
