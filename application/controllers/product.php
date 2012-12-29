@@ -308,16 +308,16 @@ class Product extends CI_Controller {
 		echo '<div class="row">';
 		echo '<div class="four mobile-four columns">Model</div>';
 
-		echo '<div class="four mobile-two columns" style="background-color:white;">'.ucwords( $product1['name'] ).'</div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;">'.ucwords( $product2['name'] ).'</div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product1['name'] ).'</a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product2['name'] ).'</a></div>';
 		echo '</div>';
 
 		// image
 		echo '<div class="row">';
 		echo '<div class="four mobile-four columns">Image</div>';
 
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product1['image'].'" class="product-large-image"/></div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product2['image'].'" class="product-large-image"/></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product1['image'].'" class="product-large-image"/></a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product2['image'].'" class="product-large-image"/></a></div>';
 		echo '</div>';
 
 		echo '</div>';
@@ -438,7 +438,7 @@ class Product extends CI_Controller {
 </div> -->
 
 		<div class="row">
-		<div class="twelve columns">
+		<div class="twelve columns" style="text-align:center;">
 		<div class="fb-comments" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="430" data-num-posts="5"></div>
 		</div>
 		</div>

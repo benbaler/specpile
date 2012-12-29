@@ -121,7 +121,7 @@ window.productData = <?= json_encode($product) ?>;
   </div> -->
 
   <div class="row">
-    <div class="twelve columns">
+    <div class="twelve columns" style="text-align:center;">
       <div class="fb-comments" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="430" data-num-posts="5"></div>
     </div>
   </div>
