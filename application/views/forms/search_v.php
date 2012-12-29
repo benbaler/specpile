@@ -1,7 +1,3 @@
-<script>
-window.categories = <?= json_encode($categories); ?>;
-</script>
-
 <div class="row">
   <div class="twelve mobile-four columns">
     <h4>Search</h4>
@@ -12,17 +8,6 @@ window.categories = <?= json_encode($categories); ?>;
   <div class="twelve mobile-four columns">
     <form class="custom collapse" id="search-form" onsubmit="return false;">
       <div class="row collapse">
-
-    <!-- <div class="two mobile-four columns">
-      <div class="row">
-        <div class="twelve mobile-four columns">
-
-        <input type="text" name="category" id="categories" placeholder="Select Category"/>
-
-      </div>
-    </div>
-  </div> -->
-
 
   <div class="ten mobile-three columns">
     <input type="text" name="term" id="term" placeholder="Search Product e.g. iPhone 5"/>

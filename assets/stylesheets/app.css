@@ -71,9 +71,16 @@
             /*border-bottom: 3px solid #E0E0E0;*/
          }
 
-         .productImg{
-            max-width: 120px;
-            max-height: 120px; 
+         .product-large-image{
+            /*max-width: 120px;
+            max-height: 120px; */
+            /*width-max: 300px !important;
+            width-min: 300px !important;
+            width: 300px !important;*/
+            /*height-min: 300px !important;
+            height-max: 300px !important;*/
+            height: 75px !important;
+            width: auto !important;
          }
 
          .search-result .twelve{

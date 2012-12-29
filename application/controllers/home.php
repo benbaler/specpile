@@ -13,26 +13,15 @@ if ( !defined( 'BASEPATH' ) )
 class Home extends CI_Controller {
 
 	public function index() {
-		$this->load->model( array('categories_m','icecat_m') );
-		// $products = $this->icecat_m->getProductsByQueryAndLimit('', 500);
-
-		// $images = array();
-		// foreach ($products as $product) {
-		// 	if($product['image']){
-		// 		$images[] = $product['image'];
-		// 	}
-		// }
+		$this->load->model( array('icecat_m') );
 
 		$data = array(
-			'app' => 'home',
-			'categories' => $this->categories_m->getListOfNames(),
-			'title' => 'Specpile | Search and Compare Products Specifications',
-			//'images' => $images
+			'app' => 'app',
+			'title' => 'Search and Compare Products Specifications | Specpile'
 		);
 
 		$this->load->view( 'header_v', $data );
 		$this->load->view( 'topbar_v', $this->_user() );
-		// $this->load->view( 'elements/wall_v', $data );
 		$this->load->view( 'elements/welcomeMsg_v' );
 		$this->load->view( 'forms/search_v' );
 		$this->load->view( 'elements/results_v' );

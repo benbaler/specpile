@@ -49,7 +49,11 @@ class Icecat_m extends CI_Model {
 
 		$product = current( $this->_get( $p_id ) );
 		if ( $product ) {
+
+			// TODO: fix this!
 			return $product;
+
+
 			$specsView = array();
 			$i = 1;
 			foreach ( $product['features'] as $feature => $specs ) {

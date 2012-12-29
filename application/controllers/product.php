@@ -65,11 +65,17 @@ class Product extends CI_Controller {
 	}
 
 	public function view( $p_id ) {
-		$this->load->model( array( 'icecat_m' ) );
+		$this->load->model( array( 'icecat_m', 'bing_m' ) );
 
 		$product = $this->icecat_m->getProductViewById( $p_id );
+		
+		if(count($product) == 0){
+			show_404();
+		}
 
 		$product['image'] = $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] );
+		//$product['image'] = $this->bing_m->getImage($product['_id']->__toString(), $product['name'], $product['company'], $product['image']);
+
 
 		$data = array(
 			'app' => 'viewProduct',
@@ -163,7 +169,7 @@ class Product extends CI_Controller {
 		} else {
 			$data = array(
 				'app' => 'compareProducts',
-				'title' => 'Specpile | Compare Products Specifications'
+				'title' => 'Search and Compare Products Specifications | Specpile'
 			);
 
 			$user = $this->_user();
@@ -189,7 +195,7 @@ class Product extends CI_Controller {
 		ini_set( 'memory_limit', '1024M' );
 
 
-		$this->load->model( 'icecat_m' );
+		$this->load->model( array('icecat_m', 'bing_m') );
 
 
 		if ( file_exists( 'temp/'.$category.'/template.html' ) ) {
@@ -204,11 +210,16 @@ class Product extends CI_Controller {
 		$product1 = $this->icecat_m->getProductById( $p_id1/*'50c7a3f89aa8dfec1d0038ee'*/ );
 		$product2 = $this->icecat_m->getProductById( $p_id2/*'50c7a3ed9aa8dfec1d003368'*/ );
 
+		$product1['image'] = $this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] );
+		//$product1['image'] = $this->bing_m->getImage($product1['_id']->__toString(), $product1['name'], $product1['company'], $product1['image']);
+
+		$product2['image'] = $this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] );
+		//$product2['image'] = $this->bing_m->getImage($product2['_id']->__toString(), $product2['name'], $product2['company'], $product2['image']);
+
 		$data = array(
 			'app' => 'compareProducts',
 			'title' => ucwords( $product1['company'] ).' '.ucwords( $product1['name'] ).' vs '.ucwords( $product2['company'] ).' '.ucwords( $product2['name'] ),
-			'images' => array($this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] ),
-				$this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] )),
+			'images' => array($product1['image'], $product2['image']),
 			//'desc' => ucwords($product1['company'].' '.$product1['name'].' vs '.$product2['company'].' '.$product2['name'])
 		);
 
@@ -305,8 +316,8 @@ class Product extends CI_Controller {
 		echo '<div class="row">';
 		echo '<div class="four mobile-four columns">Image</div>';
 
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] ).'"/></div>';
-		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] ).'"/></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product1['image'].'" class="product-large-image"/></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><img src="'.$product2['image'].'" class="product-large-image"/></div>';
 		echo '</div>';
 
 		echo '</div>';

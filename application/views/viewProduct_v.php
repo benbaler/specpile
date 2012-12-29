@@ -57,7 +57,7 @@ window.productData = <?= json_encode($product) ?>;
   <div class="twelve mobile-four columns">
     <ul class="inline-list">
       <?php foreach(array($product['image']) as $url): ?>
-      <li><img src="<?= $url ?>" class="productImg"/></li>
+      <li><img src="<?= $url ?>" class="product-large-image"/></li>
     <?php endforeach; ?>
   </ul>
 </div>
