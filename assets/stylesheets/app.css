@@ -287,9 +287,12 @@
 
          .specs-option div:nth-child(n+1){
             /*background-color: whitesmoke !important;*/
-            border-bottom: 1px solid whitesmoke;
+            /*border-bottom: 1px solid whitesmoke;*/
 
             line-height: 25px;
+         }
+         .specs-option{
+            border-bottom: 1px solid whitesmoke;
          }
 
          .specs-feature div{
@@ -311,10 +314,15 @@
          }
 
          .product-compare .four{
-            border-bottom: 1px solid whitesmoke;
+            /*border-bottom: 1px solid whitesmoke;*/
             margin:0px;
             padding:0px;
             text-align: center;
+         }
+
+         .spec-row{
+            border-bottom: 1px solid whitesmoke;
+            border-left: 1px solid whitesmoke;
          }
 
          .product-compare .four div{

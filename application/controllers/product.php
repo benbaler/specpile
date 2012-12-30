@@ -318,7 +318,7 @@ class Product extends CI_Controller {
 		echo '<div class="eleven mobile-four columns offset-by-one">';
 
 		// company
-		echo '<div class="row">';
+		echo '<div class="row spec-row">';
 		echo '<div class="four mobile-four columns">Brand</div>';
 
 		echo '<div class="four mobile-two columns" style="background-color:white;">'.ucwords( $product1['company'] ).'</div>';
@@ -326,7 +326,7 @@ class Product extends CI_Controller {
 		echo '</div>';
 
 		// model
-		echo '<div class="row">';
+		echo '<div class="row spec-row">';
 		echo '<div class="four mobile-four columns">Model</div>';
 
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product1['name'] ).'</a></div>';
@@ -334,7 +334,7 @@ class Product extends CI_Controller {
 		echo '</div>';
 
 		// image
-		echo '<div class="row">';
+		echo '<div class="row spec-row">';
 		echo '<div class="four mobile-four columns">Image</div>';
 
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product1['image'].'" class="product-large-image"/></a></div>';
@@ -367,7 +367,7 @@ class Product extends CI_Controller {
 					echo '<div class="row">';
 					echo '<div class="eleven mobile-four columns offset-by-one">';
 
-					echo '<div class="row">';
+					echo '<div class="row spec-row">';
 					echo '<div class="four mobile-four columns">'.ucwords( $spec ).'</div>';
 
 					$options1 = $options2 = array();
