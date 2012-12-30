@@ -374,6 +374,13 @@
             /*left:20px;*/
             margin-left:20px;
         }
+
+        .twitter-share-button{
+            position: relative;
+            top:6px;
+            left:5px;
+        }
+
       /*.wall{
          clear: both;
          position: absolute;
