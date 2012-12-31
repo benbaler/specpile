@@ -185,7 +185,7 @@ if(isset($match[1])){
 			$links = $this->scrap_m->links( $html );
 
 			foreach ( $links as $link ) {
-				$this->backlinks( 'http://google.com'.$link );
+				$this->backlinks( str_replace('/url?q=','',$link) );
 			}
 		}
 	}
