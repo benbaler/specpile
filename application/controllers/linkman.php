@@ -7,9 +7,9 @@ class Linkman extends CI_Controller {
 	}
 
 	public function backlinks( $p_url ) {
-		if(!function_exists('curl_init')){
-			die('curl is not exists');
-		}
+		// if(!function_exists('curl_init')){
+		//  die('curl is not exists');
+		// }
 ?>
 			<form method="post" action="">
 			<input type="text" name="url">
@@ -39,38 +39,40 @@ class Linkman extends CI_Controller {
 		$description = "Specpile is the place for searching and comparing products by specifications like smart phones, tablets and digital cameras";
 
 		// headers
-		$header[] = "Host: ".parse_url( $url, PHP_URL_HOST );
-		$header[] = "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; he; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
-		$header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-		$header[] = "Accept-Language: he,en-us;q=0.7,en;q=0.3";
-		$header[] = "Accept-Encoding: gzip,deflate";
-		$header[] = "Accept-Charset: windows-1255,utf-8;q=0.7,*;q=0.7";
-		$header[] = "Keep-Alive: 115";
-		$header[] = "Connection: keep-alive";
+		// $header[] = "Host: ".parse_url( $url, PHP_URL_HOST );
+		// $header[] = "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; he; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+		// $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+		// $header[] = "Accept-Language: he,en-us;q=0.7,en;q=0.3";
+		// $header[] = "Accept-Encoding: gzip,deflate";
+		// $header[] = "Accept-Charset: windows-1255,utf-8;q=0.7,*;q=0.7";
+		// $header[] = "Keep-Alive: 115";
+		// $header[] = "Connection: keep-alive";
+		$header[] = "Content-type: application/x-www-form-urlencoded";
 
 		//parse url
 		preg_match( "/^(.*\/)(.*)$/", $url, $match );
 		if ( isset( $match[1] ) ) {
-			$match[1] = $url = str_replace('/url?q=','',$match[1]);
+			$match[1] = $url = str_replace( '/url?q=', '', $match[1] );
 			echo $match[1]."<br/>";
 			$post_to = $match[1];
 		}
 
-		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, $url );
-		curl_setopt( $ch, CURLOPT_REFERER, $referer );
-		curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
-		curl_setopt( $ch, CURLOPT_FAILONERROR, false );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
-		curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_VERBOSE, 0 );
+		// $ch = curl_init();
+		// curl_setopt( $ch, CURLOPT_URL, $url );
+		// curl_setopt( $ch, CURLOPT_REFERER, $referer );
+		// curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
+		// curl_setopt( $ch, CURLOPT_FAILONERROR, false );
+		// curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
+		// curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
+		// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		// curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
+		// curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
+		// curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
+		// curl_setopt( $ch, CURLOPT_VERBOSE, 0 );
 
-		$content=curl_exec( $ch );
-		echo strip_tags($content);
+		// $content=curl_exec( $ch );
+		// echo strip_tags($content);
+		$content = $this->getContents( $url, $header );
 
 		//grab link
 		preg_match( "/<textarea.*>(.*)<\/textarea>/U", $content, $match );
@@ -120,23 +122,30 @@ if(isset($match[1])){
 		$fields['recurl'] = $recurl;
 		$fields['description'] = $description;
 
-		curl_setopt( $ch, CURLOPT_URL, $post_to );
-		curl_setopt( $ch, CURLOPT_REFERER, $referer );
-		curl_setopt( $ch, CURLOPT_POST, true );
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $fields );
-		curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
-		curl_setopt( $ch, CURLOPT_FAILONERROR, false );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
-		curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+		// curl_setopt( $ch, CURLOPT_URL, $post_to );
+		// curl_setopt( $ch, CURLOPT_REFERER, $referer );
+		// curl_setopt( $ch, CURLOPT_POST, true );
+		// curl_setopt( $ch, CURLOPT_POSTFIELDS, $fields );
+		// curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
+		// curl_setopt( $ch, CURLOPT_FAILONERROR, false );
+		// curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
+		// curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
+		// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		// curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
+		// curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
+		// curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
+		// curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
 
-		$content=curl_exec( $ch );
-		echo strip_tags($content);
+		// $content=curl_exec( $ch );
+		// echo strip_tags($content);
+		$content = $this->getContents( $post_to, $header, $fields );
 
+		preg_match( '/PHPSESSID=(.*)" method/', $content, $match );
+		if ( isset( $match[1] ) ) {
+			echo $match[1]."<br/>";
+			//check XSS
+			$phpsessid = $match[1];
+		}
 		//grab captcha
 		preg_match( "/<b>([0-9]{5})<\/b>/", $content, $match );
 		if ( isset( $match[1] ) ) {
@@ -145,6 +154,7 @@ if(isset($match[1])){
 			$captcha = $match[1];
 		}
 
+
 		if ( $captcha == "" ) {
 			echo "could not find captcha!<br/>";
 		}
@@ -152,69 +162,80 @@ if(isset($match[1])){
 		else {
 			$fields['secnumber'] = $captcha;
 
-			curl_setopt( $ch, CURLOPT_URL, $post_to );
-			curl_setopt( $ch, CURLOPT_REFERER, $referer );
-			curl_setopt( $ch, CURLOPT_POST, true );
-			curl_setopt( $ch, CURLOPT_POSTFIELDS, $fields );
-			curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
-			curl_setopt( $ch, CURLOPT_FAILONERROR, false );
-			curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
-			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
-			curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
-			curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
-			curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+			// curl_setopt( $ch, CURLOPT_URL, $post_to );
+			// curl_setopt( $ch, CURLOPT_REFERER, $referer );
+			// curl_setopt( $ch, CURLOPT_POST, true );
+			// curl_setopt( $ch, CURLOPT_POSTFIELDS, $fields );
+			// curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
+			// curl_setopt( $ch, CURLOPT_FAILONERROR, false );
+			// curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
+			// curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
+			// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+			// curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
+			// curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
+			// curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
+			// curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
 
-			$content=curl_exec( $ch );
+			// $content=curl_exec( $ch );
+			$content = $this->getContents( $post_to.'?PHPSESSID='.$phpsessid, $header, $fields );
 
 			if ( preg_match( "/<b>Your link has been added!<\/b>/", $content ) ) {
 				echo "link added!<br/>";
 			}
 			else "link not added!<br/>";
 		}
-		
-		echo strip_tags($content).'<br/><br/>';
+
+		echo ( $content ).'<br/><br/>';
 
 		return;
 		//file_put_contents('temp/links.html', $this->input->post('affiliate'), FILE_APPEND);
 	}
 
-	public function hotbot( $p_from = 1, $p_amount = 10) {
+	public function hotbot( $p_from = 1, $p_amount = 10 ) {
 		$this->load->model( array( 'scrap_m', 'icecat_m' ) );
 
 		for ( $i=$p_from; $i < $p_from+$p_amount ; $i++ ) {
 			// $html = file_get_contents( 'http://www.hotbot.com/search/web?pn='.$i.'&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22' );
-			$html = file_get_contents( 'http://www.google.com/search?q=%22Powered+by+PHP+Link+manager+from+php+scripts%22&start='.($i*10) );
+			$html = file_get_contents( 'http://www.google.com/search?q=%22Powered+by+PHP+Link+manager+from+php+scripts%22&start='.( $i*10 ) );
 
 			$links = $this->scrap_m->links( $html );
 
 			foreach ( $links as $link ) {
-				$this->backlinks( str_replace('/url?q=','',$link) );
+				$this->backlinks( str_replace( '/url?q=', '', $link ) );
 			}
 		}
 	}
 
-	public function curl()
-	{
-		$header = array();
-		$header[] = "Host: ".parse_url( 'http://bing.com', PHP_URL_HOST );
-		$header[] = "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; he; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
-		$header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-		$header[] = "Accept-Language: he,en-us;q=0.7,en;q=0.3";
-		$header[] = "Accept-Encoding: gzip,deflate";
-		$header[] = "Accept-Charset: windows-1255,utf-8;q=0.7,*;q=0.7";
-		$header[] = "Keep-Alive: 115";
-		$header[] = "Connection: keep-alive";
+	public function curl() {
+		// $header[] = "Host: ".parse_url( 'http://google.com', PHP_URL_HOST );
+		// $header[] = "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; he; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+		// $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+		// $header[] = "Accept-Language: he,en-us;q=0.7,en;q=0.3";
+		// $header[] = "Accept-Encoding: gzip,deflate";
+		// $header[] = "Accept-Charset: windows-1255,utf-8;q=0.7,*;q=0.7";
+		// $header[] = "Keep-Alive: 115";
+		// $header[] = "Connection: keep-alive";
+		$header[] = "Content-type: application/x-www-form-urlencoded";
 
-		$ch = curl_init();
-		curl_setopt( $ch, CURLOPT_URL, 'http://bing.com' );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
+		echo $this->getContents( 'http://google.com', $header );
+	}
 
-		$content=curl_exec( $ch );
-		echo curl_error($ch);
-		echo $content;
+	public function getContents( $p_url, $p_header = array(), $p_post = array( 'foo' => 'var' ) ) {
+		$postdata = http_build_query(
+			$p_post
+		);
+
+		$opts = array( 'http' =>
+			array(
+				'method'  => 'POST',
+				'header'  => $p_header,
+				'content' => $postdata
+			)
+		);
+
+		$context  = stream_context_create( $opts );
+
+		return file_get_contents( $p_url, false, $context );
 	}
 
 }
