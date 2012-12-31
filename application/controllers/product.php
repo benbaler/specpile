@@ -170,7 +170,7 @@ class Product extends CI_Controller {
 
 		} else {
 
-			$compares = array_slice(array_reverse($this->compare_m->getAll()),0,10);
+			$compares = array_slice(array_reverse($this->compare_m->getAll()),0,100);
 
 			$arr = array();
 			foreach ($compares as $compare) {

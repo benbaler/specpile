@@ -15,7 +15,7 @@ class Home extends CI_Controller {
 	public function index() {
 		$this->load->model( array('icecat_m', 'search_m') );
 
-		$searches = array_slice(array_reverse($this->search_m->getAll()),0,50);
+		$searches = array_slice(array_reverse($this->search_m->getAll()),0,100);
 
 		$arr = array();
 		foreach ($searches as $search) {
