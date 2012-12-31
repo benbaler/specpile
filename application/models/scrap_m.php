@@ -12,7 +12,7 @@ class Scrap_m extends CI_Model {
 			foreach ($lis as $li) {
 				$as = $li->getElementsByTagName('a');
 				if($as->length){
-					$href = $a->item(0)->getAttribute('href');
+					$href = $as->item(0)->getAttribute('href');
 					$arr[] = $href;
 					// foreach ($as as $a) {
 					// 	$href = $a->getAttribute('href');

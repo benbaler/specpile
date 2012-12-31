@@ -179,7 +179,7 @@ if(isset($match[1])){
 
 		for ( $i=$p_from; $i < $p_from+$p_amount ; $i++ ) {
 			// $html = file_get_contents( 'http://www.hotbot.com/search/web?pn='.$i.'&q=%22Powered+by+PHP+Link+manager+from+php+scripts%22' );
-			$html = file_get_contents( 'http://www.google.com/search?q=%22Powered+by+PHP+Link+manager+from+php+scripts%22&start='.($i+10) );
+			$html = file_get_contents( 'http://www.google.com/search?q=%22Powered+by+PHP+Link+manager+from+php+scripts%22&start='.($i*10) );
 
 			$links = $this->scrap_m->links( $html );
 
