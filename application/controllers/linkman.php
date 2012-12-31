@@ -48,6 +48,7 @@ class Linkman extends CI_Controller {
 		//parse url
 		preg_match( "/^(.*\/)(.*)$/", $url, $match );
 		if ( isset( $match[1] ) ) {
+			$match[1] = str_replace('/url?q=','',$match[1]);
 			echo $match[1]."<br/>";
 			$post_to = $match[1];
 		}
