@@ -7,6 +7,9 @@ class Linkman extends CI_Controller {
 	}
 
 	public function backlinks( $p_url ) {
+		if(!function_exists('curl_init')){
+			die('curl is not exists');
+		}
 ?>
 			<form method="post" action="">
 			<input type="text" name="url">
