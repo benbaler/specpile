@@ -209,16 +209,8 @@ if(isset($match[1])){
 
 		$ch = curl_init();
 		curl_setopt( $ch, CURLOPT_URL, 'http://bing.com' );
-		curl_setopt( $ch, CURLOPT_REFERER, 'http://bing.com' );
-		curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
-		curl_setopt( $ch, CURLOPT_FAILONERROR, false );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
-		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
 		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
-		curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
-		curl_setopt( $ch, CURLOPT_VERBOSE, 0 );
 
 		$content=curl_exec( $ch );
 		echo $content;
