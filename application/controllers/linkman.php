@@ -213,6 +213,7 @@ if(isset($match[1])){
 		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
 
 		$content=curl_exec( $ch );
+		echo curl_error($ch);
 		echo $content;
 	}
 
