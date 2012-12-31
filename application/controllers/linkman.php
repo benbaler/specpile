@@ -195,6 +195,35 @@ if(isset($match[1])){
 		}
 	}
 
+	public function curl()
+	{
+		$header = array();
+		$header[] = "Host: ".parse_url( 'http://bing.com', PHP_URL_HOST );
+		$header[] = "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; he; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+		$header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+		$header[] = "Accept-Language: he,en-us;q=0.7,en;q=0.3";
+		$header[] = "Accept-Encoding: gzip,deflate";
+		$header[] = "Accept-Charset: windows-1255,utf-8;q=0.7,*;q=0.7";
+		$header[] = "Keep-Alive: 115";
+		$header[] = "Connection: keep-alive";
+
+		$ch = curl_init();
+		curl_setopt( $ch, CURLOPT_URL, 'http://bing.com' );
+		curl_setopt( $ch, CURLOPT_REFERER, 'http://bing.com' );
+		curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
+		curl_setopt( $ch, CURLOPT_FAILONERROR, false );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYHOST, 0 );
+		curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, 0 );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, $header );
+		curl_setopt( $ch, CURLOPT_COOKIEJAR, 'cookies.txt' );
+		curl_setopt( $ch, CURLOPT_COOKIEFILE, 'cookies.txt' );
+		curl_setopt( $ch, CURLOPT_VERBOSE, 0 );
+
+		$content=curl_exec( $ch );
+		echo $content;
+	}
+
 }
 
 /* End of file linkman.php */
