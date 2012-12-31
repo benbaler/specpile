@@ -6,15 +6,18 @@ class Scrap_m extends CI_Model {
 		$xpath = $this->xpath($p_html);
 
 		$arr = array();
-		$lis = $xpath->query("//*[@class='result']");
+		// $lis = $xpath->query("//*[@class='result']");
+		$lis = $xpath->query("//*[@class='g']");
 		if(!is_null($lis)){
 			foreach ($lis as $li) {
 				$as = $li->getElementsByTagName('a');
 				if($as->length){
-					foreach ($as as $a) {
-						$href = $a->getAttribute('href');
-						$arr[] = $href;
-					}
+					$href = $a->item(0)->getAttribute('href');
+					$arr[] = $href;
+					// foreach ($as as $a) {
+					// 	$href = $a->getAttribute('href');
+					// 	$arr[] = $href;
+					// }
 				}
 			}
 		}
