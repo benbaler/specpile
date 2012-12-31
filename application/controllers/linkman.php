@@ -67,6 +67,7 @@ class Linkman extends CI_Controller {
 		curl_setopt( $ch, CURLOPT_VERBOSE, 0 );
 
 		$content=curl_exec( $ch );
+		echo strip_tags($content);
 
 		//grab link
 		preg_match( "/<textarea.*>(.*)<\/textarea>/U", $content, $match );
@@ -131,6 +132,7 @@ if(isset($match[1])){
 		curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
 
 		$content=curl_exec( $ch );
+		echo strip_tags($content);
 
 		//grab captcha
 		preg_match( "/<b>([0-9]{5})<\/b>/", $content, $match );
