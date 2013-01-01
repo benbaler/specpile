@@ -39,6 +39,8 @@ website: http://ogp.me/ns/website#">
 <script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>
 <script src="/assets/javascripts/<?= $app ?>.js" type="text/javascript"></script>
 
+<meta name="google-translate-customization" content="179884778e6bd6e3-c81f9a5c01d3555f-g454c1036cd186837-c"></meta>
+
 </head>
 <body>
 

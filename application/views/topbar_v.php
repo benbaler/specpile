@@ -24,7 +24,6 @@
 			<li><a href="/product/compare">Compare</a></li>
 		</ul>
 	<?php endif; ?>
-</ul>
 </section>
 </nav>
 </div>
