@@ -1,4 +1,7 @@
     <style>
+    img{
+      border:0px;
+    }
     .img{
       position: absolute;
       left: 1;
