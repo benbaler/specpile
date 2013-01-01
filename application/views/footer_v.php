@@ -9,13 +9,15 @@
 </div>
 
 <div class="row">
-	<div class="twelve columns last-column">
+	<div class="twelve columns last-column centered">
 		<div class="row">
-			<div class="two columns centered">
-				<a href="mailto:team@specpile.com"><h6 class="subheader" style="font-size: 10px; color:#E0E0E0;">team@specpile.com</h6>
-				</div>
-			</div>	
-		</div>
+		<div class="two columns mobile-four centered">
+		<ul class="inline-list">
+			<li><a href="mailto:team@specpile.com" target="_blank">contact</a></li>
+			<li><a href="http://blog.specpile.com" target="_blank">blog</a></li>
+		</ul>
+	</div>
+	</div>
 	</div>
 	
 </body>
