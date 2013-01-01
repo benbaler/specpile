@@ -1,42 +1,3 @@
-<style>
-#addNewSpecField{
-	display: none;
-}
-</style>
-
-
-<script>
-window.productData = <?= json_encode($product) ?>;
-</script>
-
-
-<script type="text/template" id="spec-template">
-<div class="row viewSpec">
-
-<div class="six mobile-two columns offset-by-one">
-<span class="inline"><b><%= name %></b></span>
-</div>
-
-<div class="five mobile-two columns pull-five">
-<div class="row collapse">
-
-<div class="eight mobile-three columns">
-<span>
-<% _.each(options, function(option,i) { if(option.selected == true){ %><%= option.name %><% } }); %>
-</span>
-</div>
-
-<div class="four mobile-one columns">
-<button class="postfix button expand hide">Save</button>
-</div>
-
-</div>
-</div>
-
-</div> 
-</script>
-
-
 <div class="row">
   <div class="twelve mobile-four columns">
     <h4>Product</h4>
@@ -65,9 +26,7 @@ window.productData = <?= json_encode($product) ?>;
     <h4>Specification <div class="fb-like" data-href="<?= 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div><a href="https://twitter.com/share" class="twitter-share-button" data-via="specpile">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></h4>
   </div>
-
 </div>
-
 
 <div class="row specs-view">
   <div class="twelve columns">

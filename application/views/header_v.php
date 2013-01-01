@@ -7,57 +7,38 @@
 <html>
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# 
-                  website: http://ogp.me/ns/website#">
+website: http://ogp.me/ns/website#">
 
-	<meta property="fb:app_id" content="192299124240358"> 
+<meta name="description" content="Specpile is the place to search and compare products by specifications">
+<meta name="keywords" content="specs, specifications, products specs, products details, products catalog, products compare, iphone vs android, iphone vs galaxy s3, smartphones specs, cell phones specs, cameras specs, tablets specs, specpile">
 
-	<meta property="og:title" content="<?= $title ?>"/>
-    <meta property="og:type" content="website"/>
+<meta property="fb:app_id" content="192299124240358"> 
+<meta property="og:title" content="<?= $title ?>"/>
+<meta property="og:type" content="website"/>
+<?php if(isset($images)) : ?>
+	<?php foreach ($images as $image) : ?>
+	<meta property="og:image" content="<?= base_url($image) ?>"/>
+<?php endforeach; ?>
+<?php endif; ?>
+<meta property="og:site_name" content="Specpile"/>
+<?php if(isset($desc)) : ?>
+	<meta property="og:description" content="<?= $desc ?>"/>
+<?php endif; ?>
+<meta name="viewport" content="width=device-width" />
 
-    <?php if(isset($images)) : ?>
-    <?php foreach ($images as $image) : ?>
-	    <meta property="og:image" content="<?= base_url($image) ?>"/>
-	<?php endforeach; ?>
-    <?php endif; ?>
-    <meta property="og:site_name" content="Specpile"/>
+<title><?= $title ?></title>
 
-    <?php if(isset($desc)) : ?>
-    <meta property="og:description"
-          content="<?= $desc ?>"/>
-	<?php endif; ?>
-	
-	<meta name="viewport" content="width=device-width" />
-	<!-- <meta name="apple-mobile-web-app-capable" content="yes" /> -->
+<link href="/assets/images/favicon.ico" rel="shortcut icon" />
+<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
 
-	<meta name="description" content="Specpile is the place to search and compare products by specifications">
-	<meta name="keywords" content="specs, specifications, products specs, products details, products catalog, products compare, iphone vs android, iphone vs galaxy s3, smartphones specs, cell phones specs, cameras specs, tablets specs, specpile">
+<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
+<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
+<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
 
-	<title><?= $title ?></title>
+<script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>
+<script src="/assets/javascripts/<?= $app ?>.js" type="text/javascript"></script>
 
-	<link href="/assets/images/favicon.ico" rel="shortcut icon" />
-	<link rel="apple-touch-icon" href="/assets/images/apple.jpg"/>
-
-	<link href="/assets/stylesheets/foundation.css" rel="stylesheet" type="text/css">
-	<link href="/assets/stylesheets/general_foundicons.css" rel="stylesheet" type="text/css">
-	<link href="/assets/stylesheets/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css">
-
-	<!-- <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'> -->
-	<link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-	<!-- <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Trocchi' rel='stylesheet' type='text/css'> -->
-	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
-	<!-- <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'> -->
-	<!-- <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'> -->
-
-	<link href="/assets/stylesheets/app.css" rel="stylesheet" type="text/css">
-
-	<!-- <script src="/assets/javascripts/libs/foundation.min.js" type="text/javascript"></script> -->
-	<script src="/assets/javascripts/libs/head.js" type="text/javascript"></script>
-	<script src="/assets/javascripts/<?= $app ?>.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -74,40 +55,16 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 
-	// var __wtw_lucky_ref_id = 1074448;
-	// var __wtw_lucky_setup_key = {};
-	// __wtw_lucky_setup_key.id = '10273';
-	// __wtw_lucky_setup_key.key = 'T3uAYaKnLEqCrNXtXdE9QtnRtRQZvNdF';
+	</script>   
 
-	// (function() {
-	// 	var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
-	// 	wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://ca350285') + '.luckyorange.com/w.js';
-	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
-	// })();
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=192299124240358";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
 
-</script>   
-
-<script type="text/javascript" id="inspectletjs">
-// var __insp = __insp || [];
-// __insp.push(['wid', 597502060]);
-// (function() {
-// 	function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://www.inspectlet.com/inspect/597502060.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
-// 	if (window.attachEvent){
-// 		window.attachEvent('onload', __ldinsp);
-// 	}else{
-// 		window.addEventListener('load', __ldinsp, false);
-// 	}
-// })();
-</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) return;
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=192299124240358";
-	fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

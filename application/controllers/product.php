@@ -74,9 +74,7 @@ class Product extends CI_Controller {
 		}
 
 		$product['image'] = $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] );
-		//$product['image'] = $this->bing_m->getImage($product['_id']->__toString(), $product['name'], $product['company'], $product['image']);
-
-
+	
 		$data = array(
 			'app' => 'viewProduct',
 			'product' => $product,
@@ -90,22 +88,6 @@ class Product extends CI_Controller {
 		$this->load->view( 'topbar_v', $user );
 		$this->load->view( 'viewProduct_v', $data );
 		$this->load->view( 'footer_v' );
-
-		// $this->load->model(array('categories_m','products_m'));
-
-		// $product = $this->products_m->getProductViewById($p_id);
-
-		// $data = array(
-		//  'app' => 'editProduct',
-		//  'product' => $product
-		// );
-
-		// $user = $this->_user();
-
-		// $this->load->view('header_v', $data);
-		// $this->load->view('topbar_v', $user);
-		// $this->load->view('viewProduct_v', $data);
-		// $this->load->view('footer_v');
 	}
 
 	public function add() {
@@ -149,7 +131,6 @@ class Product extends CI_Controller {
 		$this->load->model( array( 'icecat_m', 'compare_m' ) );
 
 		if ( $this->uri->segment( 3 ) && $this->uri->segment( 4 ) && $this->uri->segment( 5 ) ) {
-			//$chr = array('/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}'/*, '\\'*/);
 			
 			$product1 = urldecode($this->uri->segment( 4 ));
 			$product2 = urldecode($this->uri->segment( 5 ));
@@ -157,7 +138,6 @@ class Product extends CI_Controller {
 			$p1 = $this->icecat_m->getProductByNameAndCategory( $product1, array( $this->uri->segment( 3 ) ) );
 			$p2 = $this->icecat_m->getProductByNameAndCategory( $product2, array( $this->uri->segment( 3 ) ) );
 
-			// var_dump($p1,$p2);
 			if ( !$p1 || !$p2 ) {
 				echo 'no products found please go back and try again!';
 				die();
@@ -231,22 +211,17 @@ class Product extends CI_Controller {
 		$product2 = $this->icecat_m->getProductById( $p_id2/*'50c7a3ed9aa8dfec1d003368'*/ );
 
 		$product1['image'] = $this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] );
-		//$product1['image'] = $this->bing_m->getImage($product1['_id']->__toString(), $product1['name'], $product1['company'], $product1['image']);
-
+		
 		$product2['image'] = $this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] );
-		//$product2['image'] = $this->bing_m->getImage($product2['_id']->__toString(), $product2['name'], $product2['company'], $product2['image']);
-
+		
 		$data = array(
 			'app' => 'compareProducts',
 			'title' => ucwords( $product1['company'] ).' '.ucwords( $product1['name'] ).' vs '.ucwords( $product2['company'] ).' '.ucwords( $product2['name'] ),
 			'images' => array($product1['image'], $product2['image']),
-			//'desc' => ucwords($product1['company'].' '.$product1['name'].' vs '.$product2['company'].' '.$product2['name'])
 		);
 
 		echo $this->load->view( 'header_v', $data, TRUE );
 		echo $this->load->view( 'topbar_v', $this->_user(), TRUE );
-
-		//echo $this->load->view('forms/compareProducts_v', TRUE);
 
 ?>
 
@@ -299,16 +274,6 @@ class Product extends CI_Controller {
 <?php
 
 
-		// var_dump('<pre>', $arr, '</pre>');
-		// var_dump('<pre>', $product1, '</pre>');
-		// var_dump('<pre>', $product2, '</pre>');
-
-		// echo '<div class="row">';
-		// echo '<div class="twelve columns">';
-		// echo '<h4>Compare</h4>';
-		// echo '</div>';
-		// echo '</div>';
-
 		echo '<div class="row product-compare">';
 		echo '<div class="twelve columns">';
 
@@ -353,16 +318,7 @@ class Product extends CI_Controller {
 			foreach ( $specs as $spec => $options ) {
 				usort( $options, array( $this, '_compareRef' ) );
 
-				// foreach($options as $option){
-				//  echo $option.'<br/>';
-				// }
-				//die();
-				//natsort($options);
-				//asort( $options );
-
 				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
-					// echo '<div class="row">';
-					// echo '<div class="twelve columns">';
 
 					echo '<div class="row">';
 					echo '<div class="eleven mobile-four columns offset-by-one">';
@@ -376,12 +332,11 @@ class Product extends CI_Controller {
 						if ( !is_array( $product1['features'][$feature][$spec] ) ) {
 							$color = $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) );
 							$rating = round($this->_rating( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) )).'%';
-							// die($rating);
+							
 							$o1 = '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product1['features'][$feature][$spec] ).'</div></div>';
-							// $options1 = array( $product1['features'][$feature][$spec] );
+							
 						} else {
 							$options1 = $product1['features'][$feature][$spec];
-							//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product1['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product1['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
 						$o1 = '<div class="four mobile-two columns">-</div>';
@@ -391,12 +346,11 @@ class Product extends CI_Controller {
 						if ( !is_array( $product2['features'][$feature][$spec] ) ) {
 							$color = $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) );
 							$rating = round($this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) )).'%';
-							// die($rating);
+							
 							$o2 = '<div class="four mobile-two columns"><div style="text-align:left;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product2['features'][$feature][$spec] ).'</div></div>';
-							// $options2 = array( $product2['features'][$feature][$spec] );
+			
 						} else {
 							$options2 = $product2['features'][$feature][$spec];
-							//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( count( $product2['features'][$feature][$spec] )-1, count( $options ) ).';">'.ucwords(implode( '<br/>', $product2['features'][$feature][$spec] )).'</div>';
 						}
 					} else {
 						$o2 = '<div class="four mobile-two columns">-</div>';
@@ -418,13 +372,6 @@ class Product extends CI_Controller {
 					echo '</div>';
 					echo '</div>';
 				}
-
-
-
-				// foreach ( $options as $option ) {
-
-				//  echo '<option>'.( $option === TRUE ? 'yes' : ( $option === FALSE ? 'no' : $option ) ) .'</option>';
-				// }
 			}
 
 			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
@@ -438,25 +385,6 @@ class Product extends CI_Controller {
 		echo '</div>';
 
 ?>
-<!-- 		    <div class="row">
-  <div class="twelve mobile-four columns">
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'specpile'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
-</div> -->
 
 		<div class="row">
 		<div class="twelve columns" style="text-align:center;">
@@ -464,7 +392,6 @@ class Product extends CI_Controller {
 		</div>
 		</div>
 		
-
 		<?php
 
 		echo $this->load->view( 'footer_v' , '', TRUE );
@@ -481,13 +408,11 @@ class Product extends CI_Controller {
 		$p_count = $p_count == 1 ? 2 : $p_count;
 		$percentage = $p_pos * ( 1/( $p_count-1 ) );
 
-		// echo $percentage.'<br/>';
-
-		if ( $percentage < 0.5 ) {
-			// echo floor( 255 * $percentage * 2 ).'<br/>';
+	if ( $percentage < 0.5 ) {
+		
 			$color = 'rgb(255,'.floor( 255 * $percentage * 2 ).',0)';
 		}else {
-			// echo floor( 255 * ( $percentage * 2 - 1 ) ).'<br/>';
+			
 			$color = 'rgb('.( 255 - floor( 255 * ( $percentage * 2 - 1 ) ) ).',255,0)';
 		}
 
@@ -495,30 +420,24 @@ class Product extends CI_Controller {
 	}
 
 	private function _options( $options, $options1, $options2 ) {
-		//if ( count( $options1 ) > 1 && count( $options2 ) > 1 ) {
 			$o1 = $o2 = array();
 			foreach ( $options as $key => $option ) {
 				if ( in_array( $option, $options1 ) || in_array( $option, $options2 ) ) {
 					if ( in_array( $option, $options1 ) ) {
 						$o1[] = '<div style="margin:0px;padding:0px;">'.ucwords($option).'</div>';
-						//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( $key, count( $options ) ).';">'.ucwords($option).'</div>';
 					} else {
 						$o1[] = '<div>-</div>';
-						//echo '<div class="four mobile-two columns"><br/></div>';
 					}
 
 					if ( in_array( $option, $options2 ) ) {
 						$o2[] = '<div style="margin:0px;padding:0px;">'.ucwords($option).'</div>';
-						//echo '<div class="four mobile-two columns" style="background-color:'.$this->_color( $key, count( $options ) ).';">'.ucwords($option).'</div>';
 					} else {
 						$o2[] = '<div>-</div>';
-						//echo '<div class="four mobile-two columns"><br/></div>';
 					}
 				}
 			}
 			if ( count( $options1 ) > 0 ) echo '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$this->_rating( count( $options1 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options1 )-1, count( $options ) ).';">'.implode('',$o1).'</div></div>';
 			if ( count( $options2 ) > 0 ) echo '<div class="four mobile-two columns"><div style="text-align:left;width:'.$this->_rating( count( $options2 )-1, count( $options ) ).'%;background-color:'.$this->_color( count( $options2 )-1, count( $options ) ).';">'.implode('',$o2).'</div></div>';
-		//}
 	}
 
 	private function _compareRef( $a, $b ) {

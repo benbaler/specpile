@@ -57,10 +57,4 @@
   <?php endforeach; ?>
   </ul>
 </div>
-</div>   
-
-<!-- <div class="row">
-  <div class="twelve mobile-four columns">
-    <div  style="text-align: center;"><a href="/product/compare/smartphones/iphone%205/galaxy%20s%20iii"><img src="/assets/images/iphone5-galaxy-s3.jpg"/></a><div>
-    </div>
-  </div> -->
+</div>
