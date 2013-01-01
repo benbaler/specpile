@@ -6,7 +6,7 @@
 				<h1 class="subheader"><a href="/" style="color:black"><b>Search</b></a> and <a href="/product/compare" style="color:black"><b>Compare</b></a> <b>Specifications</b> of <a href="/product/smartphones"><b>Smart Phones</b></a>, <a href="/product/tablets"><b>Tablets</b></a> and <a href="/product/cameras"><b>Digital Cameras</b></a></h1>
 			</div>
 			<div class="five columns">
-				<iframe src="/home/slide" scrolling="no" width="300" height="600" frameborder="0"></iframe>
+				<a href="https://play.google.com/store/apps/details?id=com.ben.com" target="_blank"><iframe src="/home/slide" scrolling="no" width="300" height="600" frameborder="0"></iframe></a>
 			</div>
 		</div>
 	</div>
