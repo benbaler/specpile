@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="twelve columns last-column centered">
 		<div class="row">
-			<div class="four columns mobile-four centered">
+			<div class="two columns mobile-four centered">
 				<ul class="inline-list">
 					<li><a href="mailto:team@specpile.com" target="_blank">contact</a></li>
 					<li><a href="http://blog.specpile.com" target="_blank">blog</a></li>
