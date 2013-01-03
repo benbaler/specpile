@@ -257,3 +257,9 @@ h1 b{
 h1 a{
     text-decoration:underline;
 }
+
+.g-plusone-div{
+    position:relative;
+    top:6px;
+    left:25px;
+}

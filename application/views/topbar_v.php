@@ -9,6 +9,7 @@
 			<ul class="left">
 				<li><div class="fb-like" data-href="https://www.facebook.com/specpile" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div></li>
 				<li><div class="twitter"><a href="https://twitter.com/specpile" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @specpile</a></div></li>
+				<li><div class="g-plusone-div"><div class="g-plusone" data-size="medium"></div></div></li>
 			</ul>
 
 			<ul class="right">
