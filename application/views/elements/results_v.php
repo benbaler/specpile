@@ -6,7 +6,7 @@
 
 <div class="row">
 	<div class="twelve columns">
-		<ul id="results-panel" class="block-grid four-up mobile-two-up">
+		<ul id="results-panel" class="block-grid four-up mobile-one-up">
 			<li>Search to get results!</li>
 		</ul>
 	</div>
