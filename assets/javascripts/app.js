@@ -7,11 +7,18 @@ head.js('/assets/javascripts/libs/jquery.js',
         $(document).ready(function(){
             $(document).foundationTopBar();
             $('#uvTab').addClass('hide-for-medium-down');
+            
+            var delay = (function(){
+              var timer = 0;
+              return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+              };
+            })();
 
             $('#term').autocomplete({
                 source: [],
-                minLength: 1,
-                delay: 500
+                delay: 0
                 }).data( "autocomplete" )._renderItem = function( ul, item ) {
                     var term = this.term.split(' ').join('|');
                     var re = new RegExp("(" + term + ")", "gi") ;
@@ -23,17 +30,26 @@ head.js('/assets/javascripts/libs/jquery.js',
                         .appendTo( ul );
                 }
 
-            $("#term").on('keyup', function(){
-                var term = $(this).val();
+            $("#term").on('keydown', function(event){
+                if(event.keyCode == '13' || event.keyCode == '38' || event.keyCode == '40' || event.keyCode == '9' || event.keyCode == '27')
+                    return;
 
-                $.get('/api/products/term/'+encodeURIComponent(term), function(data) {
-                    results = [];
-                    $.each(data, function(i,val){
-                        results.push(val);
+                var self = this;
+
+                delay(function(){
+                    var term = $(self).val();
+
+                    $.get('/api/products/term/'+encodeURIComponent(term), function(data) {
+                        results = [];
+                        $.each(data, function(i,val){
+                            results.push(val);
+                        });
+
+                        $(self).autocomplete("option", "source", results);
+                        $(self).autocomplete("search");
                     });
+                }, 300 );
 
-                    $("#term").autocomplete("option", "source", results);
-                });
             });
 
             $('#search-form').submit(function(){

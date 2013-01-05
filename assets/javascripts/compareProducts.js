@@ -7,10 +7,16 @@ head.js('/assets/javascripts/libs/jquery.js',
             $(document).foundationTopBar();
             $('#uvTab').addClass('hide-for-medium-down');
 
+            var delay = (function(){
+              var timer = 0;
+              return function(callback, ms){
+                clearTimeout (timer);
+                timer = setTimeout(callback, ms);
+              };
+            })();
+
             $('#product1').autocomplete({
-                source: [],
-                minLength: 1,
-                delay: 500
+                source: []
                 }).data( "autocomplete" )._renderItem = function( ul, item ) {
                     var term = this.term.split(' ').join('|');
                     var re = new RegExp("(" + term + ")", "gi") ;
@@ -23,8 +29,7 @@ head.js('/assets/javascripts/libs/jquery.js',
                 }
 
                 $('#product2').autocomplete({
-                source: [],
-                minLength: 1
+                source: []
                 }).data( "autocomplete" )._renderItem = function( ul, item ) {
                     var term = this.term.split(' ').join('|');
                     var re = new RegExp("(" + term + ")", "gi") ;
@@ -36,18 +41,27 @@ head.js('/assets/javascripts/libs/jquery.js',
                         .appendTo( ul );
                 }
 
-            $("#product1, #product2").on('keyup', function(){
-                var term = $(this).val();
-                var category = $('#category option:selected').val();
+            $("#product1, #product2").on('keyup', function(event){
+                if(event.keyCode == '13' || event.keyCode == '38' || event.keyCode == '40' || event.keyCode == '9' || event.keyCode == '27')
+                    return;
+                
+                var self = this;
 
-                $.get('/api/products/category/'+category+'/term/'+encodeURIComponent(term), function(data) {
-                    results = [];
-                    $.each(data, function(i,val){
-                        results.push(val);
+                delay(function(){
+                    var term = $(self).val();
+
+                    var category = $('#category option:selected').val();
+
+                    $.get('/api/products/category/'+category+'/term/'+encodeURIComponent(term), function(data) {
+                        results = [];
+                        $.each(data, function(i,val){
+                            results.push(val);
+                        });
+
+                        $(self).autocomplete("option", "source", results);
+                        $(self).autocomplete("search");
                     });
-
-                    $("#product1, #product2").autocomplete("option", "source", results);
-                });
+                }, 300 );
             });
 
             $('#category').change(function(){
