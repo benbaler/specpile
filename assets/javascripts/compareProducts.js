@@ -1,11 +1,13 @@
 head.js('/assets/javascripts/libs/jquery.js',
     '/assets/javascripts/libs/jquery.ui.js',
     '/assets/javascripts/libs/jquery.foundation.topbar.js',
+    '/assets/javascripts/libs/jquery.foundation.placeholder.js',
     '/assets/javascripts/libs/modernizr.foundation.js',
     function() {
         $(document).ready(function(){
             $(document).foundationTopBar();
             $('#uvTab').addClass('hide-for-medium-down');
+            $('input, textarea').placeholder();
 
             var delay = (function(){
               var timer = 0;
@@ -44,7 +46,7 @@ head.js('/assets/javascripts/libs/jquery.js',
             $("#product1, #product2").on('keyup', function(event){
                 if(event.keyCode == '13' || event.keyCode == '38' || event.keyCode == '40' || event.keyCode == '9' || event.keyCode == '27')
                     return;
-                
+
                 var self = this;
 
                 delay(function(){

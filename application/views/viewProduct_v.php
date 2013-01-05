@@ -51,7 +51,7 @@
         </div>
 
         <div class="ten mobile-four columns">
-          <input type="text" name="product2" id="product2" placeholder="Type Second Product"/>
+          <input type="text" name="product2" id="product2" placeholder="Type Product From <?= ucwords($product['category']) ?>"/>
         </div>
 
         <div class="two mobile-four columns">
