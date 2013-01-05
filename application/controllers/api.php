@@ -130,7 +130,7 @@ class Api extends REST_Controller {
 
         $category = $this->get( 'category' ) ? array( $this->get( 'category' ) ) : array( 'smartphones', 'tablets', 'cameras' );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( ( str_replace( ' ', '.*', $this->get( 'term' ) ) ) , 20, $category );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( ( str_replace( ' ', '.*', $this->get( 'term' ) ) ) , 50, $category );
         // echo $this->get('term');
         // echo str_replace( '+', '.*', urldecode($this->get( 'term' ) ) );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '+', '\+', $this->get( 'term' ) ) ) , 20, $category );
@@ -167,7 +167,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( array('icecat_m','search_m') );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( ' ', '.*', $this->get( 'query' ) ) ), 500 );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( ' ', '.*', $this->get( 'query' ) ) ), 200 );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace( $this->get( 'query' ) ), 5000 );
 
         if ( $products ) {
