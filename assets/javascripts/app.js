@@ -68,6 +68,8 @@ head.js('/assets/javascripts/libs/jquery.js',
                         });
 
                         panel.html(str);
+                        $("#term").autocomplete("close");
+                        $("html, body").animate({ scrollTop: $('#results-header').offset().top }, 1000);
                     }).error(function() {
                         panel.html("<li>No results for '"+term+"'</li>");
                     });

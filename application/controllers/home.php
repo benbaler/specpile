@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 
 		$data = array(
 			'app' => 'app',
-			'title' => 'Search Products Specifications | Specpile',
+			'title' => 'Search Products Specs | Specpile',
 			'searches' => $arr
 		);
 
