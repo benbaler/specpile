@@ -6,6 +6,21 @@ class Product extends CI_Controller {
 		parent::__construct();
 	}
 
+	public function buy()
+	{
+		$data = array(
+			'app' => 'viewProduct',
+			'title' => 'Buy Now'
+		);
+
+		$user = $this->_user();
+
+		$this->load->view( 'header_v', $data );
+		$this->load->view( 'topbar_v', $user );
+		$this->load->view( 'elements/buy_v');
+		$this->load->view( 'footer_v' );
+	}
+
 	public function smartphones( $offest = 0 ) {
 		$this->_sitemap( 'smartphones', $offest );
 	}
@@ -305,6 +320,14 @@ class Product extends CI_Controller {
 
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product1['image'].'" class="product-large-image"/></a></div>';
 		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product2['_id']->__toString().'"><img src="'.$product2['image'].'" class="product-large-image"/></a></div>';
+		echo '</div>';
+
+		// buy now
+		echo '<div class="row spec-row">';
+		echo '<div class="four mobile-four columns">Buy</div>';
+
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/buy" class="success button">Buy Now</a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/buy" class="success button">Buy Now</a></div>';
 		echo '</div>';
 
 		echo '</div>';
