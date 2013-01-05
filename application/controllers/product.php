@@ -183,7 +183,7 @@ class Product extends CI_Controller {
 
 			$data = array(
 				'app' => 'compareProducts',
-				'title' => 'Search and Compare Products Specifications | Specpile',
+				'title' => 'Compare Products Specifications | Specpile',
 				'compares' => $arr
 			);
 
