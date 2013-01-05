@@ -9,7 +9,8 @@ head.js('/assets/javascripts/libs/jquery.js',
 
             $('#product1').autocomplete({
                 source: [],
-                minLength: 1
+                minLength: 1,
+                delay: 500
                 }).data( "autocomplete" )._renderItem = function( ul, item ) {
                     var term = this.term.split(' ').join('|');
                     var re = new RegExp("(" + term + ")", "gi") ;

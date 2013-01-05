@@ -129,8 +129,8 @@ class Api extends REST_Controller {
         $this->load->model( 'icecat_m' );
 
         $category = $this->get( 'category' ) ? array( $this->get( 'category' ) ) : array( 'smartphones', 'tablets', 'cameras' );
-        
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'term' ) ) ) , 20, $category );
+
+        $products = $this->icecat_m->getProductsByQueryAndLimit( ( str_replace( ' ', '.*', $this->get( 'term' ) ) ) , 20, $category );
         // echo $this->get('term');
         // echo str_replace( '+', '.*', urldecode($this->get( 'term' ) ) );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '+', '\+', $this->get( 'term' ) ) ) , 20, $category );
@@ -151,7 +151,7 @@ class Api extends REST_Controller {
             foreach ( $products as $product ) {
                 if ( in_array( $product['_id']->__toString(), $keys ) ) {
                     $results[] = array(
-                        'label' => $product['name'],
+                        'label' => str_replace(' ', ' ',$product['company_name']),
                         'image' => $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] )
                     );
                 }
@@ -167,7 +167,7 @@ class Api extends REST_Controller {
     public function search_get() {
         $this->load->model( array('icecat_m','search_m') );
 
-        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( '/\s+/', '.*', $this->get( 'query' ) ) ), 500 );
+        $products = $this->icecat_m->getProductsByQueryAndLimit( urldecode( str_replace( ' ', '.*', $this->get( 'query' ) ) ), 500 );
         // $products = $this->icecat_m->getProductsByQueryAndLimit( $this->_str_replace( $this->get( 'query' ) ), 5000 );
 
         if ( $products ) {

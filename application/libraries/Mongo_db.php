@@ -481,7 +481,7 @@ class Mongo_db {
 		$field = (string) trim($field);
 		$this->_where_init($field);
 		$value = (string) trim($value);
-		$value = quotemeta($value);
+		//$value = quotemeta($value);
 		
 		if ($enable_start_wildcard !== TRUE)
 		{
@@ -492,8 +492,8 @@ class Mongo_db {
 		{
 			$value .= "$";
 		}
-		
 		$regex = "/$value/$flags";
+		// var_dump($regex);
 		$this->wheres[$field] = new MongoRegex($regex);
 		return ($this);
 	}

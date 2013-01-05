@@ -26,8 +26,6 @@ website: http://ogp.me/ns/website#">
 <?php endif; ?>
 <meta name="viewport" content="width=device-width" />
 
-<meta name="verifyownership" content="39d65152ff7a67c2d72e66b339fee7e1" />
-
 <title><?= $title ?></title>
 
 <link href="/assets/images/favicon.ico" rel="shortcut icon" />

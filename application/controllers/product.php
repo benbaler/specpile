@@ -143,8 +143,8 @@ class Product extends CI_Controller {
 				die();
 			}
 
-			$this->compare_m->addCompare($p1['name'], $this->icecat_m->getImageByIdAndUrl( $p1['_id']->__toString(), $p1['image'] )
-				, $p2['name'], $this->icecat_m->getImageByIdAndUrl( $p2['_id']->__toString(), $p2['image'] ), $this->uri->segment( 3 ));
+			$this->compare_m->addCompare($p1['company_name'], $this->icecat_m->getImageByIdAndUrl( $p1['_id']->__toString(), $p1['image'] )
+				, $p2['company_name'], $this->icecat_m->getImageByIdAndUrl( $p2['_id']->__toString(), $p2['image'] ), $this->uri->segment( 3 ));
 
 			$this->_compare( $p1['_id']->__toString(), $p2['_id']->__toString(), $this->uri->segment( 3 ) );
 
@@ -253,11 +253,11 @@ class Product extends CI_Controller {
         </div>
 
         <div class="four mobile-four columns">
-          <input type="text" name="product1" id="product1" value="<?php echo $product1['name'] ?>" placeholder="Type First Product"/>
+          <input type="text" name="product1" id="product1" value="<?php echo $product1['company_name'] ?>" placeholder="Type First Product"/>
         </div>
 
         <div class="four mobile-four columns">
-          <input type="text" name="product2" id="product2" value="<?php echo $product2['name'] ?>" placeholder="Type Second Product"/>
+          <input type="text" name="product2" id="product2" value="<?php echo $product2['company_name'] ?>" placeholder="Type Second Product"/>
         </div>
 
         <div class="two mobile-four columns">

@@ -433,6 +433,18 @@ class Home extends CI_Controller {
 
 		return str_replace('/\s+/', ' ', word_limiter($str[0],7,''));
 	}
+
+	public function company_name()
+	{
+		ini_set('memory_limit', '1024M');
+		$this->load->model('icecat_m');
+		$products = $this->icecat_m->getProducts('icecat_products');
+		foreach ($products as $product) {
+			$name = $this->_str_replace($product['name']);
+			$company_name = $product['company'].' '.$name;
+			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('company_name' => $company_name))->update('icecat_products');
+		}
+	}
 }
 
 /* End of file page.php */
