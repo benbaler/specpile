@@ -76,7 +76,7 @@ class Product extends CI_Controller {
 		$product['image'] = $this->icecat_m->getImageByIdAndUrl( $product['_id']->__toString(), $product['image'] );
 	
 		$data = array(
-			'app' => 'viewProduct',
+			'app' => 'compareProducts',
 			'product' => $product,
 			'title' => ucwords( $product['company'] ).' '.ucwords( $product['name'] ).' Specifications',
 			'images' => array($product['image'])
