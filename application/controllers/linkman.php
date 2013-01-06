@@ -3,6 +3,7 @@
 class Linkman extends CI_Controller {
 
 	public function index() {
+		die('links not available!');
 		echo file_get_contents( 'temp/links.html' );
 	}
 
