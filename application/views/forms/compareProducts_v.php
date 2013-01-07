@@ -51,10 +51,40 @@
 
 <div class="row">
   <div class="twelve mobile-four columns">
-   <ul id="latest-panel" class="block-grid two-up mobile-one-up" style="text-align: center">
-   <?php foreach ($compares as $compare) : ?>
-    <li><a href="/product/compare/<?= $compare['category'] ?>/<?= urlencode($compare['product1']) ?>/<?= urlencode($compare['product2']) ?>"><?= $compare['product1'].'<img src="'.$compare['product1_image'].'" style="vertical-align:middle;"/>vs<img src="'.$compare['product2_image'].'" style="vertical-align:middle;"/>'.$compare['product2'] ?></a>&nbsp;&nbsp;&nbsp;&nbsp;</li> 
+   <ul id="latest-panel" class="block-grid two-up mobile-one-up">
+     <?php foreach ($compares as $compare) : ?>
+     <li>
+      <a href="/product/compare/<?= $compare['category'] ?>/<?= urlencode($compare['product1']) ?>/<?= urlencode($compare['product2']) ?>">
+        <div class="row">
+          <div class="one columns hide-for-small">
+            &nbsp;
+          </div>
+          <div class="two mobile-one columns" style="text-align:right;padding:0;margin:0;">
+            <?= $compare['product1'] ?>
+          </div>
+          <div class="six mobile-two columns">
+            <div class="row">
+              <div class="five mobile-one columns" style="text-align:right;padding:0;margin:0;">
+                <img src="<?= $compare['product1_image'] ?>"/>
+              </div>
+              <div class="two mobile-two columns" style="text-align:center;vertical-align:middle;">
+                <h4 class="full-circle">vs</h4>
+              </div>
+              <div class="five mobile-one columns" style="text-align:left;padding:0;margin:0;">
+                <img src="<?= $compare['product2_image'] ?>"/>
+              </div>
+            </div>
+          </div>
+          <div class="two mobile-one columns" style="text-align:left;padding:0;margin:0;">
+            <?= $compare['product2'] ?>
+          </div>
+          <div class="one columns hide-for-small">
+            &nbsp;
+          </div>
+        </div>
+      </a>
+    </li> 
   <?php endforeach; ?>
-  </ul>
+</ul>
 </div>
 </div>

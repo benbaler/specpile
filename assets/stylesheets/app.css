@@ -18,11 +18,11 @@
 }
 
 .productImg:hover{
-   transform:rotate(5deg) scale(1.2);
-   -ms-transform:rotate(5deg) scale(1.2); /* IE 9 */
-   -moz-transform:rotate(5deg) scale(1.2); /* Firefox */
-   -webkit-transform:rotate(5deg) scale(1.2); /* Safari and Chrome */
-   -o-transform:rotate(5deg) scale(1.2); /* Opera */
+ transform:rotate(5deg) scale(1.2);
+ -ms-transform:rotate(5deg) scale(1.2); /* IE 9 */
+ -moz-transform:rotate(5deg) scale(1.2); /* Firefox */
+ -webkit-transform:rotate(5deg) scale(1.2); /* Safari and Chrome */
+ -o-transform:rotate(5deg) scale(1.2); /* Opera */
 }
 
 #results-panel{
@@ -87,45 +87,45 @@
 }
 
 @-webkit-keyframes wiggle {
-   0% {
-     -webkit-transform: rotate3d(0,0,0,0deg)
- }
+ 0% {
+   -webkit-transform: rotate3d(0,0,0,0deg)
+}
 
- 25% {
-     -webkit-transform: rotate3d(0,0,0,10deg)
- }
+25% {
+   -webkit-transform: rotate3d(0,0,0,10deg)
+}
 
- 75% {
-     -webkit-transform: rotate3d(0,0,0,-10deg)
- }
+75% {
+   -webkit-transform: rotate3d(0,0,0,-10deg)
+}
 
- 100% {
-     -webkit-transform: rotate3d(0,0,0,0deg)
- }
+100% {
+   -webkit-transform: rotate3d(0,0,0,0deg)
+}
 }
 
 @-moz-keyframes wiggle {
-   0% {
-     -moz-transform: rotate(0deg)
- }
+ 0% {
+   -moz-transform: rotate(0deg)
+}
 
- 25% {
-     -moz-transform: rotate(10deg)
- }
+25% {
+   -moz-transform: rotate(10deg)
+}
 
- 75% {
-     -moz-transform: rotate(-10deg)
- }
+75% {
+   -moz-transform: rotate(-10deg)
+}
 
- 100% {
-     -moz-transform: rotate(0deg)
- }
+100% {
+   -moz-transform: rotate(0deg)
+}
 }
 
 .logo-png:hover, .mobile-logo-png:hover {
-   -webkit-animation: wiggle .5s ease-in-out alternate;
-   -moz-animation: wiggle .5s ease-in-out alternate;
-   -ms-animation: wiggle .5s ease-in-out alternate;
+ -webkit-animation: wiggle .5s ease-in-out alternate;
+ -moz-animation: wiggle .5s ease-in-out alternate;
+ -ms-animation: wiggle .5s ease-in-out alternate;
 }
 
 .logo:hover{
@@ -221,9 +221,9 @@ body{
 }
 
 select{
- background: transparent;
- height: 32px;
- font-size: 14px;
+   background: transparent;
+   height: 32px;
+   font-size: 14px;
 }
 
 .twitter{
@@ -262,4 +262,17 @@ h1 a{
     position:relative;
     top:6px;
     left:25px;
+}
+
+.full-circle {
+   /*background-color: rgba(204, 0, 102, 0);*/
+   /*border: 3px solid #333;*/
+   /*padding:10px;
+   margin:10px;*/
+   vertical-align: middle;
+   text-align:center;
+   /*height: 150px;*/
+   /*-moz-border-radius:75px;*/
+   /*-webkit-border-radius: 75px;*/
+   /*width: 150px;*/
 }

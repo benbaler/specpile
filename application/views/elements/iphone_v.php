@@ -49,7 +49,7 @@
       }
       </script>
 
-      <a href="https://play.google.com/store/apps/details?id=com.ben.com" target="_blank">
+      <a href="https://itunes.apple.com/il/app/specpile-search-compare-products/id590381093?mt=8" target="_blank">
         <img class="img" src="/assets/images/iphone.png">
         <div class="mask">
           <div class="canvas">
