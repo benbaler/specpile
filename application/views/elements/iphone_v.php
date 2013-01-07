@@ -55,7 +55,7 @@
           <div class="canvas">
             <div class="page"><img src="/assets/images/1.jpg"/></div>
             <div class="page"><img src="/assets/images/2.jpg"/></div>
-            <div class="page"><img src="/assets/images/5.png"/></div>
+            <div class="page"><img src="/assets/images/6.png"/></div>
             <div class="page"><img src="/assets/images/3.jpg"/></div>
             <div class="page"><img src="/assets/images/4.jpg"/></div>
           </div>
