@@ -526,12 +526,15 @@ class Api extends REST_Controller {
 
 
     public function compare_get() {
-        $this->load->model( array( 'icecat_m' ) );
+        $this->load->model( array( 'icecat_m', 'compare_m' ) );
 
         $p1 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->get( 'product1' ) ), array( $this->get( 'category' ) ) );
         $p2 = $this->icecat_m->getProductByNameAndCategory( urldecode( $this->get( 'product2' ) ), array( $this->get( 'category' ) ) );
 
         if ( $p1 && $p2 ) {
+            $this->compare_m->addCompare($p1['company_name'], $this->icecat_m->getImageByIdAndUrl( $p1['_id']->__toString(), $p1['image'] )
+                , $p2['company_name'], $this->icecat_m->getImageByIdAndUrl( $p2['_id']->__toString(), $p2['image'] ), $this->get( 'category' ));
+
             $arr = $this->_compare( $p1['_id']->__toString(), $p2['_id']->__toString(), $this->get( 'category' ) );
             //$arr = array($p1,$p2);
             $this->response( $arr, 200 );

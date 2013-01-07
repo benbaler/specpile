@@ -421,6 +421,269 @@ class Product extends CI_Controller {
 		echo $this->load->view( 'footer_v' , '', TRUE );
 	}
 
+
+
+
+	private function _compare2( $p_id1, $p_id2, $category = 'smartphones' ) {
+		ini_set( 'memory_limit', '1024M' );
+
+
+		$this->load->model( array( 'icecat_m', 'bing_m' ) );
+
+
+		if ( file_exists( 'temp/'.$category.'/template.html' ) ) {
+			$arr = unserialize( file_get_contents( 'temp/'.$category.'/template.html' ) );
+		}
+
+		if ( !isset( $arr ) ) {
+			$arr = $this->icecat_m->getTemplateByCategory( $category );
+			file_put_contents( 'temp/'.$category.'/template.html', serialize( $arr ) );
+		}
+
+		$product1 = $this->icecat_m->getProductById( $p_id1/*'50c7a3f89aa8dfec1d0038ee'*/ );
+		$product2 = $this->icecat_m->getProductById( $p_id2/*'50c7a3ed9aa8dfec1d003368'*/ );
+
+		$product1['image'] = $this->icecat_m->getImageByIdAndUrl( $product1['_id']->__toString(), $product1['image'] );
+
+		$product2['image'] = $this->icecat_m->getImageByIdAndUrl( $product2['_id']->__toString(), $product2['image'] );
+
+		$data = array(
+			'app' => 'compareProducts',
+			'title' => ucwords( $product1['company'] ).' '.ucwords( $product1['name'] ).' vs '.ucwords( $product2['company'] ).' '.ucwords( $product2['name'] ),
+			'images' => array( $product1['image'], $product2['image'] ),
+		);
+
+		echo $this->load->view( 'header_v', $data, TRUE );
+		echo $this->load->view( 'topbar_v', $this->_user(), TRUE );
+
+?>
+
+		<div class="row">
+  <div class="twelve mobile-four columns">
+    <h4>Compare <div class="fb-like" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></div><a href="https://twitter.com/share" class="twitter-share-button" data-via="specpile">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="hide-for-small" style="display:inline; float:right;" id="google_translate_element"></div></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve mobile-four columns">
+
+    <form class="custom collapse" id="compareProducts-form" onsubmit="return false;">
+
+      <div class="row">
+
+        <div class="two mobile-four columns">
+          <select name="company" id="category">
+            <option value="smartphones" <?php echo $category == 'smartphones' ? 'SELECTED' : ''?>>Smartphones</option>
+            <option value="tablets" <?php echo $category == 'tablets' ? 'SELECTED' : ''?>>Tablets</option>
+            <option value="cameras" <?php echo $category == 'cameras' ? 'SELECTED' : ''?>>Cameras</option>
+          </select>
+        </div>
+
+        <div class="four mobile-four columns show-for-small">
+          &nbsp;
+        </div>
+
+        <div class="four mobile-four columns">
+          <input type="text" name="product1" id="product1" value="<?php echo $product1['company_name'] ?>" placeholder="Type First Product"/>
+        </div>
+
+        <div class="four mobile-four columns">
+          <input type="text" name="product2" id="product2" value="<?php echo $product2['company_name'] ?>" placeholder="Type Second Product"/>
+        </div>
+
+        <div class="two mobile-four columns">
+          <input class="postfix button expand" type="submit" value="Compare"/>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+</div>
+
+<?php
+
+
+		echo '<div class="row product-compare">';
+		echo '<div class="twelve columns">';
+
+		echo '<div class="row"><div class="twelve mobile-four columns feature-compare"><b>'.ucwords( $category ).'</b></div></div>';
+
+		echo '<div class="row">';
+		echo '<div class="eleven mobile-four columns offset-by-one">';
+
+		// company
+		echo '<div class="row spec-row">';
+		echo '<div class="four mobile-four columns">Brand</div>';
+
+		echo '<div class="four mobile-two columns" style="background-color:white;">'.ucwords( $product1['company'] ).'</div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;">'.ucwords( $product2['company'] ).'</div>';
+		echo '</div>';
+
+		// model
+		echo '<div class="row spec-row">';
+		echo '<div class="four mobile-four columns">Model</div>';
+
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'">'.ucwords( $product1['name'] ).'</a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product2['_id']->__toString().'">'.ucwords( $product2['name'] ).'</a></div>';
+		echo '</div>';
+
+		// image
+		echo '<div class="row spec-row">';
+		echo '<div class="four mobile-four columns">Image</div>';
+
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product1['_id']->__toString().'"><img src="'.$product1['image'].'" class="product-large-image"/></a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/view/'.$product2['_id']->__toString().'"><img src="'.$product2['image'].'" class="product-large-image"/></a></div>';
+		echo '</div>';
+
+		// buy now
+		echo '<div class="row spec-row">';
+		echo '<div class="four mobile-four columns">Buy</div>';
+
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/buy" class="success button">Buy Now</a></div>';
+		echo '<div class="four mobile-two columns" style="background-color:white;"><a href="/product/buy" class="success button">Buy Now</a></div>';
+		echo '</div>';
+
+		echo '</div>';
+		echo '</div>';
+		echo '<br/><br/>';
+
+		foreach ( $arr as $feature => $specs ) {
+			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
+				echo '<div class="row"><div class="twelve mobile-four columns feature-compare"><b>'.ucwords( $feature ).'</b></div></div>';
+			}
+
+			foreach ( $specs as $spec => $options ) {
+				usort( $options, array( $this, '_compareRef' ) );
+
+				if ( isset( $product1['features'][$feature][$spec] ) || isset( $product2['features'][$feature][$spec] ) ) {
+
+					echo '<div class="row">';
+					echo '<div class="eleven mobile-four columns offset-by-one">';
+
+					echo '<div class="row spec-row">';
+					echo '<div class="four mobile-four columns">'.ucwords( $spec ).'</div>';
+
+					$options1 = $options2 = array();
+
+					if ( isset( $product1['features'][$feature][$spec] ) ) {
+						if ( !is_array( $product1['features'][$feature][$spec] ) ) {
+							$color = $this->_color( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) );
+							$rating = round( $this->_rating( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ) ).'%';
+
+							$o1_option = ucwords( $product1['features'][$feature][$spec] );
+							$o1_rating = ( $this->_rating( array_search( $product1['features'][$feature][$spec], $options ), count( $options ) ) );
+							$o1 = '<div class="four mobile-two columns"><div style="float:right;text-align:right;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product1['features'][$feature][$spec] ).'</div></div>';
+
+						} else {
+							$options1 = $product1['features'][$feature][$spec];
+						}
+					} else {
+						$o1_option = '-';
+						$o1_rating = 0;
+						$o1 = '<div class="four mobile-two columns">-</div>';
+					}
+
+					if ( isset( $product2['features'][$feature][$spec] ) ) {
+						if ( !is_array( $product2['features'][$feature][$spec] ) ) {
+							$color = $this->_color( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) );
+							$rating = round( $this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ) ).'%';
+
+							$o2_option = ucwords( $product2['features'][$feature][$spec] );
+							$o2_rating = ( $this->_rating( array_search( $product2['features'][$feature][$spec], $options ), count( $options ) ) );
+							$o2 = '<div class="four mobile-two columns"><div style="text-align:left;width:'.$rating.'; background-color:'.$color.';">'.ucwords( $product2['features'][$feature][$spec] ).'</div></div>';
+
+						} else {
+							$options2 = $product2['features'][$feature][$spec];
+						}
+					} else {
+						$o2_option = '-';
+						$o2_rating = 0;
+						$o2 = '<div class="four mobile-two columns">-</div>';
+					}
+
+					if ( isset( $o1 ) && isset( $o2 ) ) {
+						if ( $o1_rating > $o2_rating ) {
+							$o1 = '<div class="four mobile-two columns"><div style="font-weight:bold;background-color:whitesmoke;">'.$o1_option.'</div></div>';
+							$o2 = '<div class="four mobile-two columns"><div style="">'.$o2_option.'</div></div>';
+							// unset($o1);
+						}
+						elseif ( $o1_rating < $o2_rating ) {
+							$o1 = '<div class="four mobile-two columns"><div style="">'.$o1_option.'</div></div>';
+							$o2 = '<div class="four mobile-two columns"><div style="font-weight:bold;background-color:whitesmoke;">'.$o2_option.'</div></div>';
+							// unset($o2);
+						}
+						else{
+							$o1 = '<div class="four mobile-two columns"><div style="">'.$o1_option.'</div></div>';
+							$o2 = '<div class="four mobile-two columns"><div style="">'.$o2_option.'</div></div>';
+						}
+					} else {
+						if ( isset( $o1 ) ) {
+							if(is_array($options2)){
+								$o1 = '<div class="four mobile-two columns"><div style="">'.$o1_option.'</div></div>';
+							}
+							else{
+								$o1 = '<div class="four mobile-two columns"><div style="font-weight:bold;background-color:whitesmoke;">'.$o1_option.'</div></div>';
+							}
+						}
+						if ( isset( $o2 ) ) {
+							if(is_array($options1)){
+								$o2 = '<div class="four mobile-two columns"><div style="">'.$o2_option.'</div></div>';
+							}
+							else{
+								$o2 = '<div class="four mobile-two columns"><div style="font-weight:bold;background-color:whitesmoke;">'.$o2_option.'</div></div>';
+							}
+						}
+					}
+
+					if ( isset( $o1 ) ) {
+						echo $o1;
+						unset( $o1 );
+					}
+
+					$this->_options( $options, $options1, $options2 );
+
+					if ( isset( $o2 ) ) {
+						echo $o2;
+						unset( $o2 );
+					}
+
+					echo '</div>';
+					echo '</div>';
+					echo '</div>';
+				}
+			}
+
+			if ( isset( $product1['features'][$feature] ) || isset( $product2['features'][$feature] ) ) {
+
+				echo '<br/><br/>';
+			}
+
+		}
+
+		echo '</div>';
+		echo '</div>';
+
+?>
+
+		<div class="row">
+		<div class="twelve columns" style="text-align:center;">
+		<div class="fb-comments" data-href="<?php echo 'http://specpile.com'.$_SERVER['REQUEST_URI'] ?>" data-width="430" data-num-posts="5"></div>
+		</div>
+		</div>
+
+		<?php
+
+		echo $this->load->view( 'footer_v' , '', TRUE );
+	}
+
+
+
+
 	private function _rating( $p_pos, $p_count ) {
 		$p_count = $p_count == 1 ? 2 : $p_count;
 		$percentage = $p_pos * ( 1/( $p_count-1 ) );
