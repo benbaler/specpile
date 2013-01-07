@@ -53,7 +53,7 @@
   <div class="twelve mobile-four columns">
    <ul id="latest-panel" class="block-grid two-up mobile-one-up">
      <?php foreach ($compares as $compare) : ?>
-     <li>
+     <li style="border-top: 1px whitesmoke solid;">
       <a href="/product/compare/<?= $compare['category'] ?>/<?= urlencode($compare['product1']) ?>/<?= urlencode($compare['product2']) ?>">
         <div class="row">
           <div class="one columns hide-for-small">
