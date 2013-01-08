@@ -8,7 +8,7 @@
 </div> -->
 
 <div class="row">
-	<div class="twelve columns last-column centered">
+	<div class="twelve columns centered">
 		<div class="row">
 			<div class="two columns mobile-four centered">
 				<ul class="inline-list">
@@ -18,6 +18,17 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="row hide-for-medium-down">
+	<div class="twelve columns" style="text-align:center;">
+		<span class="fb-like" data-href="https://www.facebook.com/specpile" data-send="true" data-width="50" data-show-faces="false" layout="button_count"></span>
+		<span class="twitter"><a href="https://twitter.com/specpile" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @specpile</a></span>
+		<span class="g-plusone-div"><div class="g-plusone" data-size="medium"></div></span>
+		<div>&nbsp;</div>
+	</div>
+</div>
+
 	
 	<script type="text/javascript">
 	function googleTranslateElementInit() {
