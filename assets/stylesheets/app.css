@@ -122,7 +122,7 @@
 }
 }
 
-.logo-png:hover, .mobile-logo-png:hover {
+.logo-png:hover, .mobile-logo-png:hover, .logo-png-large:hover{
  -webkit-animation: wiggle .5s ease-in-out alternate;
  -moz-animation: wiggle .5s ease-in-out alternate;
  -ms-animation: wiggle .5s ease-in-out alternate;
@@ -275,4 +275,24 @@ h1 a{
    /*-moz-border-radius:75px;*/
    /*-webkit-border-radius: 75px;*/
    /*width: 150px;*/
+}
+
+.msg{
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #E3E3E3));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #E3E3E3 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to top, #FFFFFF 0%, #E3E3E3 100%);
 }

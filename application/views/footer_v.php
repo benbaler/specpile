@@ -1,11 +1,11 @@
-<div class="row hide-for-medium-down">
+<!-- <div class="row hide-for-medium-down">
 	<div class="twelve columns centered">
 		<ul class="block-grid two-up mobile-two-up">
 			<li style="text-align:right;"><a href="https://play.google.com/store/apps/details?id=com.ben.com" target="_blank"><img src="/assets/images/android.png" width="118"/></a></li>
 			<li><a href="https://itunes.apple.com/il/app/specpile-search-compare-products/id590381093?mt=8" target="_blank"><img src="/assets/images/Download_on_the_App_Store_Badge_US-UK_135x40.png"/></a></li>
 		</ul>
 	</div>
-</div>
+</div> -->
 
 <div class="row">
 	<div class="twelve columns last-column centered">
