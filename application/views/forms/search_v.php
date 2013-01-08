@@ -28,7 +28,7 @@
 
 <div class="row">
   <div class="twelve mobile-four columns">
-    <ul id="latest-panel" class="block-grid eight-up mobile-four-up" style="text-align: center">
+    <ul id="latest-panel" class="block-grid eight-up mobile-four-up latest-panel">
       <?php foreach ($searches as $search) : ?>
       <li><a href="#" class="latest-search" data-term="<?= $search ?>"><?= $search ?></a>&nbsp;</li>
     <?php endforeach; ?>
