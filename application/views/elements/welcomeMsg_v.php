@@ -2,7 +2,7 @@
 	<div class="twelve mobile-four columns">
 		<div class="row msg">
 			<div class="six columns offset-by-one">
-				<a href="/"><img src="/assets/images/logo2.png" class="logo-png-large"/></a>
+				<a href="/"><img src="/assets/images/logo3.png" class="logo-png-large"/></a>
 				<h1 class="subheader"><a href="/" style="color:black"><b>Search</b></a> & <a href="/product/compare" style="color:black"><b>Compare</b></a> <b>Specifications</b> of <a href="/product/smartphones"><b>Smart Phones</b></a>, <a href="/product/tablets"><b>Tablets</b></a> & <a href="/product/cameras"><b>Digital Cameras</b></a></h1>
 				<div style="text-align:center;">
 					<a href="https://play.google.com/store/apps/details?id=com.ben.com" target="_blank"><img src="/assets/images/android.png" width="118"/></a>
