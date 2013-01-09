@@ -68,7 +68,7 @@
                 <img src="<?= $compare['product1_image'] ?>"/>
               </div>
               <div class="two mobile-two columns" style="text-align:center;vertical-align:middle;">
-                <h4 class="full-circle">vs</h4>
+                <h6 class="full-circle">vs</h6>
               </div>
               <div class="five mobile-one columns" style="text-align:left;padding:0;margin:0;">
                 <img src="<?= $compare['product2_image'] ?>"/>
