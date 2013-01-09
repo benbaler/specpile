@@ -421,17 +421,19 @@ class Home extends CI_Controller {
 		$products = $this->icecat_m->getProducts('icecat_products');
 		foreach ($products as $product) {
 			$name = $this->_str_replace($product['name']);
-			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('name' => $name))->update('icecat_products');
+			$company_name = $this->_str_replace($product['company_name']);
+			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('name' => $name, 'company_name' => $company_name))->update('icecat_products');
 		}
 	}
 
 	private function _str_replace($p_str){
-		$from = array('+', '(', ')', '/', ':', ';', '.','"');
-		$to = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+		// $from = array('+', '(', ')', '/', ':', ';', '.','"');
+		// $to = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
 
-		$str = explode(',',str_replace($from, $to, $p_str));
+		// $str = explode(',',str_replace($from, $to, $p_str));
 
-		return str_replace('/\s+/', ' ', word_limiter($str[0],7,''));
+		// return str_replace('/\s+/', ' ', word_limiter($str[0],7,''));
+		return preg_replace('/\s+/', ' ',$p_str);
 	}
 
 	public function company_name()
@@ -445,6 +447,8 @@ class Home extends CI_Controller {
 			$this->mongo_db->where(array('_id' => $product['_id']))->set(array('company_name' => $company_name))->update('icecat_products');
 		}
 	}
+
+
 }
 
 /* End of file page.php */
