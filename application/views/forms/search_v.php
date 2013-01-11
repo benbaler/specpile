@@ -1,6 +1,6 @@
 <div class="row">
   <div class="twelve mobile-four columns">
-    <h4>Search</h4>
+    <h4>Search <small>for smart phones, tablets or digital cameras</small></h4>
   </div>
 </div>
 

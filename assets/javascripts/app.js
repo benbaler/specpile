@@ -71,7 +71,7 @@ head.js('/assets/javascripts/libs/jquery.js',
                         $("#term").autocomplete("close");
                         $("html, body").animate({ scrollTop: $('#results-header').offset().top }, 1000);
                     }).error(function() {
-                        panel.html("<li>No results for '"+term+"'<br/>you can only search for: <b>smart phones</b>, <b>tablets</b> or <b>digital cameras</b></li>");
+                        panel.html("<li>No results for '"+term+"'<br/>you can only search for <b>smart phones</b>, <b>tablets</b> or <b>digital cameras</b></li>");
                     });
                 }
                 return false;
